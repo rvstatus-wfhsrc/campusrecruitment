@@ -1,0 +1,79 @@
+/* justify content right class */
+.jcr {
+	justify-content:right !important;
+}
+
+/* font size class start */
+.fs20 {
+    font-size: 20px !important;
+}
+/* font size class end*/
+
+/* width design class start*/
+.w43 {
+	width: 43% !important;
+}
+.w95 {
+	width: 95% !important;
+}
+/* width design class end*/
+
+/* for setting mandatory star(*) symbol in form class start */
+.required:after { 
+	content:'*'; 
+	color:red; 
+	padding-left:5px;
+}
+/* for setting mandatory star(*) symbol in form class end */
+
+/* display design class start */
+.inb {
+	display: inline-block !important;
+}
+/* display design class end */
+
+/* error or validation message class start */
+.error {
+    display: inline-block;
+    font-size: 13px;
+    color: #9C0000;
+}
+/* error or validation message class end */
+
+/* margin top class start */
+.mt3 {
+	margin-top: 3px !important;
+}
+/* margin bottom class end */
+
+/* edit button class start */
+.editBtn {
+	height: 30px;
+    font-size: 12px;
+}
+/* edit button class end */
+
+/* vertical align class start */
+.vat {
+	vertical-align: top;
+}
+/* vertical align class end */
+
+/* text align design class start */
+.tac {
+	text-align: center;
+}
+/* text align design class end */
+
+/* dot between the two sub heading class start */
+.dot{
+    padding: 0 4px;
+	font-size: 16px;
+}
+/* dot between the two sub heading class end */
+
+/* details screen view color class start */
+.detailScrClr {
+	color: #0098fd;
+}
+/* details screen view color class end */
