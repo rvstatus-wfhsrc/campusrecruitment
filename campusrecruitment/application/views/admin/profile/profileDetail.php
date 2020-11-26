@@ -67,28 +67,27 @@
 	    <div class="dispNone">
 			<ol class="breadcrumb mb-1 ml-4 w95">
 				<li class="breadcrumb-item"><i class="fa fa-user fa-btn mt3"></i>Profile<span class ="dot detailScrClr">&bull;</span><span class="detailScrClr">Detail</span></li>
-	    		<!-- it will be use after finishing edit screen -->
-	    		<!-- @if(Session::has('message'))
-	            	<div class="alert alert-{{session('message')['type']}} fmsg tac">{{ Session::get('message')['text'] }}</div>
-	        	@endif -->
+	    		<?php if($this->session->flashdata('message')) { ?>
+	            	<div class="alert alert-<?php echo $this->session->flashdata('type'); ?> fmsg tac"><?php echo $this->session->flashdata('message'); ?> </div>
+	        	<?php } ?>
 	    	</ol>
 		</div>
-		<?php echo form_open('LoginController/loginUser',['method' => 'POST','id' => 'profileDetailForm','name' => 'profileDetailForm']); ?>
+		<?php echo form_open('AdminController/profileEdit',['method' => 'POST','id' => 'profileDetailForm','name' => 'profileDetailForm']); ?>
 			<div class="ml-4 mb-1 dispNone">
 				<a class="btn bg-warning text-white editBtn" href="javascript:;" onclick="fnProfileEdit()">
 					<i class="fa fa-edit fa-btn"></i>Edit
 				</a>
 			</div>
-			<div class="box ml-4 mb-4 dispNone">
+			<div class="box ml-4 mb-4">
 				<div class="container content">
 					<div>
 						<!-- image -->
 						<div style="width: 100%">
 							<?php if(!empty($profileDetail->image)) { ?>
-								<!-- <div class="image">
-									<img src="{{ 'data:image/jpg;base64,'.base64_encode( $user->image )}}" >
+								<div class="image">
+									<img src="<?php echo 'data:image/jpg;base64,'.base64_encode($profileDetail->image); ?>" >
 									<div class="tac"><a href="javascript:;" onclick="fnRemoveImage()" title="Remove Image" ><i class="fa fa-trash"></i></a></div>
-								</div> -->
+								</div>
 							<?php } ?>
 						</div>
 					</div>
@@ -106,7 +105,7 @@
 						<!-- gender -->
 						<div class="leftSide">Gender : </div>
 						<div class="rightSide">
-							 <?php $profileDetail->gender == 1? 'Male' : 'Female' ?>
+							 <?php echo $profileDetail->gender == 1? 'Male' : 'Female'; ?>
 						</div>
 					</div>
 					<div>
@@ -147,7 +146,7 @@
 				</div>
 			</div>
 		<?php echo form_close();?>
-	 <!-- <script type="text/javascript" src="{{ URL::asset('resources/assets/js/jquery.min.js') }}"></script>
-	    <script type="text/javascript" src="{{ URL::asset('resources/assets/js/profile/profileDetail.js') }}"></script> -->
+	 	<script type="text/javascript" src="<?php echo base_url(); ?>assets/js/jquery.min.js"></script>
+	    <script type="text/javascript" src="<?php echo base_url(); ?>assets/js/profile/detail.js"></script>
 	</body>
 </html>

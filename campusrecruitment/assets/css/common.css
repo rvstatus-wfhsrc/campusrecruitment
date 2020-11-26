@@ -10,6 +10,12 @@
 /* font size class end*/
 
 /* width design class start*/
+.autowidth {
+	width: auto;
+}
+.w30 {
+	width: 30% !important;
+}
 .w43 {
 	width: 43% !important;
 }
@@ -77,3 +83,15 @@
 	color: #0098fd;
 }
 /* details screen view color class end */
+
+/* edit screen view color class start */
+.editScrClr {
+	color: red;
+}
+/* edit screen view color class end */
+
+/* padding class start*/
+.pr20 {
+	padding-right: 20px !important;
+}
+/* padding class end*/
