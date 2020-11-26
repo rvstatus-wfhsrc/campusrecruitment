@@ -31,8 +31,16 @@ class LoginController extends CI_Controller {
 	// login process
 	function loginUser() {
 		// login validation
-		$this->form_validation->set_rules('userName', 'User Name', 'required');
-		$this->form_validation->set_rules('password', 'Password', 'required|min_length[6]',array('min_length' => 'The Password must be at least 6 characters.'));
+		$this->form_validation->set_rules( 'userName', $this->lang->line("lbl_userName"), 'required',
+												array(
+													'required' => $this->lang->line("required")
+												)
+											);
+		$this->form_validation->set_rules( 'password', $this->lang->line("lbl_password"), 'required|min_length[6]',
+												array(
+													'min_length' => $this->lang->line("min_length")
+												)
+											);
 		if($this->form_validation->run() == false){
 			$this->layouts->view('login/login');	
 		} else {
@@ -63,7 +71,7 @@ class LoginController extends CI_Controller {
 		        }
 		    // if data not matched
 		    } else {
-		    	$data['error']="These credentials do not match our records.";
+		    	$data['error']=$this->lang->line("credentials_do_not_match");
 		        $this->layouts->view('login/login',@$data);
     		}
 		}

@@ -25,7 +25,9 @@
                             <?php echo form_open('LoginController/loginUser',['method' => 'POST','class' => 'form-horizontal','id' => 'loginForm','name' => 'loginForm']); ?>
                                 <!-- user name -->
                                 <div class="form-group form-inline">
-                                    <?php echo form_label('User Name','userName',['class' => "col-md-4 control-label required"]); ?>
+                                    <?php //echo form_label('User Name','userName',['class' => "col-md-4 control-label required"]); 
+                                        echo lang('lbl_userName', 'userName', array('class' => 'col-md-4 control-label required'));
+                                    ?>
                                     <div class="col-md-8">
                                 		<?php
                                             $data = array(
@@ -44,7 +46,10 @@
                                 </div>
                                 <!-- password -->
                                 <div class="form-group form-inline">
-                                    <?php echo form_label('Password','password',['class' => "col-md-4 control-label required"]); ?>
+                                    <?php // echo form_label('Password','password',['class' => "col-md-4 control-label required"]);
+                                        echo lang('lbl_password', 'password', array('class' => 'col-md-4 control-label required'));
+                                        
+                                    ?>
                                     <div class="col-md-8">
                                         <?php
                                             $data= array(
