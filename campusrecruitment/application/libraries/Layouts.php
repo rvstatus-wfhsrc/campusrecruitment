@@ -29,6 +29,7 @@ class Layouts {
 
     function view($view, $data = null, $return = false) {
         // Render template
+        $data['siteLangArry'] = array('1' => 'English', '2' => 'Japanese');
         $data['content_for_layout'] = $this->obj->load->view($view, $data, true);
         $data['title_for_layout'] = $this->title;
 

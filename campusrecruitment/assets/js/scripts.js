@@ -25,3 +25,18 @@
         $("body").toggleClass("sb-sidenav-toggled");
     });
 })(jQuery);
+$(document).ready(function(){
+    $('.siteLang').click(function(){
+        var siteLang = $(this).attr('data-key');
+        $.ajax({
+            url:'../siteLangUpdate',
+            method: 'POST',
+            data: {siteLang: siteLang},
+            dataType: 'json',
+            success: function(response) {
+                // alert(JSON.stringify(response));
+                return false;
+            }
+        });
+    });
+});

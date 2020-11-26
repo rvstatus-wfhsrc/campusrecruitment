@@ -82,4 +82,21 @@ class LoginController extends CI_Controller {
   		$this->session->sess_destroy();
 	    redirect('LoginController/login');
    	}
+	// Allowing accesses to student only
+	function siteLangUpdate() {
+		$userData = [
+			'siteLang'  => 'english',
+			'siteLangKey'  => 1,
+		];
+		$siteLang = $this->input->post();
+		if(isset($siteLang['siteLang']) && $siteLang['siteLang'] == 2){
+			$userData = [
+				'siteLang'  => 'japanese',
+				'siteLangKey'  => $siteLang['siteLang'],
+			];
+		}
+		$this->session->set_userdata($userData);
+		$success = TRUE;
+		echo json_encode($success);exit;
+	}
 }

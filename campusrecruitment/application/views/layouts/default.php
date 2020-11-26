@@ -50,6 +50,19 @@
                 </li>
             </ul>
         <?php } ?>
+        <!-- <div class="inb float-left ml-1">
+            <?php echo form_dropdown('siteLang', $siteLang, '', 'class="form-control inb mr-2"');?>
+        </div> -->
+        <ul class="navbar-nav my-md-0">
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" id="langDropDown" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-language" aria-hidden="true"></i></a>
+                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="langDropDown">
+                    <?php foreach ($siteLangArry as $key => $siteLang) { ?>
+                        <a class="dropdown-item siteLang <?php if($key == $this->session->userdata('siteLangKey')){ echo 'active'; } ?>" data-key="<?php echo $key; ?>" href=""><?php echo $siteLang; ?></a>
+                    <?php } ?>
+                </div>
+            </li>
+        </ul>
     </nav>
     <div id="layoutSidenav">
         <?php if($this->session->userdata('logged_in') == true) { ?>
