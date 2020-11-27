@@ -36,32 +36,38 @@
                                 <div class="form-group form-inline">
                                     <?php echo form_label('Name','name',['class' => "col-md-4 control-label required"]); ?>
                                     <div class="col-md-8">
-                                        <?php 
+                                        <?php
                                             $data= array(
                                                 'id' => 'name',
                                                 'name' => 'name',
                                                 'placeholder' => 'Enter Name',
                                                 'class' => 'input_box col-md-12 form-control w43 h-25',
-                                                'value' => $profileEdit->name
+                                                'value' => set_value('name',$profileEdit->name)
                                             );
                                             echo form_input($data);
                                         ?>
+                                        <div class="error">
+                                            <?php echo form_error('name'); ?>
+                                        </div>
                                     </div>
                                 </div>
                                 <!-- e-mail -->
                                 <div class="form-group form-inline">
                                     <?php echo form_label('E-Mail Address','email',['class' => "col-md-4 control-label required"]); ?>
                                     <div class="col-md-8">
-                                        <?php 
+                                        <?php
                                             $data= array(
                                                 'id' => 'email',
                                                 'name' => 'email',
                                                 'placeholder' => 'Enter E-Mail Address',
                                                 'class' => 'input_box col-md-12 form-control w43 h-25',
-                                                'value' => $profileEdit->email
+                                                'value' => set_value('email',$profileEdit->email)
                                             );
                                             echo form_input($data);
                                         ?>
+                                        <div class="error">
+                                            <?php echo form_error('email'); ?>
+                                        </div>
                                     </div>
                                 </div>
                                 <!-- gender -->
@@ -69,9 +75,14 @@
                                     <?php echo form_label('Gender','gender',['class' => "col-md-4 control-label required"]); ?>
                                     <div class="col-md-8">
                                         <input type="radio" name="gender" value="1" <?php echo set_value('gender', $profileEdit->gender) == 1 ? "checked" : ""; ?> />
+                                        <!-- <input type="radio" name="gender" value="1" <?php echo set_radio('gender', 1, $profileEdit->gender === 1) ?> /> -->
                                         <span class = "pr20">Male</span>
                                         <input type="radio" name="gender" value="2" <?php echo set_value('gender', $profileEdit->gender) == 2 ? "checked" : ""; ?> />
+                                        <!-- <input type="radio" name="gender" value="2" <?php echo set_radio('gender', 2, $profileEdit->gender === 2) ?> /> -->
                                         <span>Female</span>
+                                        <div class="error">
+                                            <?php echo form_error('gender'); ?>
+                                        </div>
                                     </div>
                                 </div>
                                 <!-- address -->
@@ -86,24 +97,30 @@
                                                 'class' => 'form-control w43',
                                                 'rows' => 3,
                                                 'cols' => 46,
-                                                'value' => $profileEdit->address
+                                                'value' => set_value('address',$profileEdit->address)
                                             );
                                             echo form_textarea($data);
                                         ?>
+                                        <div class="error">
+                                            <?php echo form_error('address'); ?>
+                                        </div>
                                     </div>
                                 </div>
                                 <!-- country -->
                                 <div class="form-group form-inline">
                                     <?php echo form_label('Country','country',['class' => "col-md-4 control-label required"]); ?>
                                     <div class="col-md-8">
-                                        <?php 
+                                        <?php
                                             $countryArray = array(
                                                 '0'  => 'Select Country',
                                                 '1'    => 'India',
                                                 '2'   => 'Japan'
                                             );
-                                            echo form_dropdown('country', $countryArray,$profileEdit->country,'class = "form-control autowidth h-25" id = "country" name = "country"');
+                                            echo form_dropdown('country', $countryArray,set_value('country', $profileEdit->country, false),'class = "form-control autowidth h-25" id = "country" name = "country"');
                                         ?>
+                                        <div class="error">
+                                            <?php echo form_error('country'); ?>
+                                        </div>
                                     </div>
                                 </div>
                                 <!-- state -->
@@ -116,8 +133,11 @@
                                                 '1'    => 'India',
                                                 '2'   => 'Japan'
                                             );
-                                            echo form_dropdown('state', $stateArray,$profileEdit->state,'class = "form-control autowidth h-25" id = "state" name = "state"');
+                                            echo form_dropdown('state', $stateArray,set_value('state', $profileEdit->state, false),'class = "form-control autowidth h-25" id = "state" name = "state"');
                                         ?>
+                                        <div class="error">
+                                            <?php echo form_error('state'); ?>
+                                        </div>
                                     </div>
                                 </div>
                                 <!-- city -->
@@ -130,8 +150,11 @@
                                                 '1'    => 'Tirunelveli',
                                                 '2'   => 'Tokyo'
                                             );
-                                            echo form_dropdown('city', $cityArray,$profileEdit->city,'class = "form-control autowidth h-25" id = "city" name = "city"');
+                                            echo form_dropdown('city', $cityArray,set_value('city', $profileEdit->city, false),'class = "form-control autowidth h-25" id = "city" name = "city"');
                                         ?>
+                                        <div class="error">
+                                            <?php echo form_error('city'); ?>
+                                        </div>
                                     </div>
                                 </div>
                                 <!-- pincode -->
@@ -144,10 +167,13 @@
                                                 'name' => 'pincode',
                                                 'placeholder' => 'Enter Pincode',
                                                 'class' => 'input_box col-md-12 form-control w30 h-25',
-                                                'value' => $profileEdit->pincode
+                                                'value' => set_value('pincode',$profileEdit->pincode)
                                             );
                                             echo form_input($data);
                                         ?>
+                                        <div class="error">
+                                            <?php echo form_error('pincode'); ?>
+                                        </div>
                                     </div>
                                 </div>
                                 <!-- contact -->
@@ -160,10 +186,13 @@
                                                 'name' => 'contact',
                                                 'placeholder' => 'Enter Contact',
                                                 'class' => 'input_box col-md-12 form-control w30 h-25',
-                                                'value' => $profileEdit->contact
+                                                'value' => set_value('contact',$profileEdit->contact)
                                             );
                                             echo form_input($data);
                                         ?>
+                                        <div class="error">
+                                            <?php echo form_error('contact'); ?>
+                                        </div>
                                     </div>
                                 </div>
                                 <!--image  -->
@@ -187,7 +216,7 @@
                 </div>
             </div>
         </div>
-        <script type="text/javascript" src="{{ URL::asset('resources/assets/js/jquery.min.js') }}"></script>
-        <!-- <script type="text/javascript" src="{{ URL::asset('resources/assets/js/profile/profileAddEdit.js') }}"></script> -->
+        <script type="text/javascript" src="<?php echo base_url(); ?>assets/js/jquery.min.js"></script>
+        <!--<script type="text/javascript" src="<?php echo base_url(); ?>assets/js/profile/edit.js"></script> -->
     </body>
 </html>

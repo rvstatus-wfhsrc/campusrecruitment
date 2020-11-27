@@ -27,6 +27,7 @@ class AdminController extends CI_Controller {
 		$this->load->helper('url');
 		$this->load->library('session');
 		$this->load->model('AdminModel');
+		$this->load->library('form_validation');
 	}
 
 	/**
@@ -83,20 +84,72 @@ class AdminController extends CI_Controller {
 
 	// To update the profile
 	public function profileUpdate() {
-		$userName = $this->session->userdata('userName');
-		$profileUpdateData = array(
-			'name' => $this->input->post('name'),
-			'email' => $this->input->post('email'),
-			'gender' => $this->input->post('gender'),
-			'address' => $this->input->post('address'),
-			'country' => $this->input->post('country'),
-			'state' => $this->input->post('state'),
-			'city' => $this->input->post('city'),
-			'pincode' => $this->input->post('pincode'),
-			'contact' => $this->input->post('contact'),
-			'updated_by' => $userName
-		);
-		$profileUpdateStatus = $this->AdminModel->profileUpdate($userName,$profileUpdateData);
-		redirect('AdminController/profile');
+		// login validation
+		$this->form_validation->set_rules( 'name', $this->lang->line("lbl_name"), 'required|regex:/^[A-Za-z\s\.]+$/|max:50',
+												array(
+													'regex' => 'Please enter only alphabetical letter.'
+												)
+											);
+		$this->form_validation->set_rules( 'email', $this->lang->line("lbl_email"), 'required|email|max:50|unique:users,email,'.$this->session->userdata('userName'),
+												array(
+													'reqiured' => $this->lang->line("reqiured"),
+													'email' => $this->lang->line("email"),
+													'unique' => $this->lang->line("unique")
+												)
+											);
+		$this->form_validation->set_rules( 'gender', $this->lang->line("lbl_gender"), 'required');
+		$this->form_validation->set_rules( 'address', $this->lang->line("lbl_address"), 'required');
+		$this->form_validation->set_rules( 'country', $this->lang->line("lbl_country"), 'required');
+		$this->form_validation->set_rules( 'state', $this->lang->line("lbl_state"), 'required');
+		$this->form_validation->set_rules( 'city', $this->lang->line("lbl_city"), 'required');
+		$this->form_validation->set_rules( 'pincode', $this->lang->line("lbl_pincode"), 'required');
+		$this->form_validation->set_rules( 'contact', $this->lang->line("lbl_contact"), 'required');
+		if($this->form_validation->run() == false) {
+			$userName = $this->session->userdata('userName');
+			$data['profileEdit'] = $this->AdminModel->profileEdit($userName);
+			$this->layouts->view('admin/profile/profileEdit',$data);
+		} else {
+			$userName = $this->session->userdata('userName');
+			$profileUpdateData = array(
+				'name' => $this->input->post('name'),
+				'email' => $this->input->post('email'),
+				'gender' => $this->input->post('gender'),
+				'address' => $this->input->post('address'),
+				'country' => $this->input->post('country'),
+				'state' => $this->input->post('state'),
+				'city' => $this->input->post('city'),
+				'pincode' => $this->input->post('pincode'),
+				'contact' => $this->input->post('contact'),
+				'updated_by' => $userName
+			);
+			$profileUpdateStatus = $this->AdminModel->profileUpdate($userName,$profileUpdateData);
+			redirect('AdminController/profile');
+		}
 	}
+// 	public function profileUpdateValidation() {
+// 		// login validation
+// 		$this->form_validation->set_rules( 'name', $this->lang->line("lbl_name"), 'required|regex:/^[A-Za-z\s\.]+$/|max:50',
+// 												array(
+// 													'regex' => 'Please enter only alphabetical letter.'
+// 												)
+// 											);
+// 		$this->form_validation->set_rules( 'email', $this->lang->line("lbl_email"), 'required|email|max:50|unique:users,email,'.$this->session->userdata('userName'),
+// 												array(
+// 													'reqiured' => $this->lang->line("reqiured"),
+// 													'email' => $this->lang->line("email"),
+// 													'unique' => $this->lang->line("unique")
+// 												)
+// 											);
+// 		$this->form_validation->set_rules( 'gender', $this->lang->line("lbl_gender"), 'required',
+// 												array(
+// 													'reqiured' => $this->lang->line("reqiured")
+// 												)
+// 											);
+// 		if($this->form_validation->run() == false) {
+// 			return response()->json($validator->messages(), 200);exit;
+//         } else {
+//             $success = true;
+//             echo json_encode($success);exit;
+//         }
+// 	}
 }
