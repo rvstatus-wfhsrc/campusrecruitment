@@ -116,17 +116,17 @@
 					<div>
 						<!-- city -->
 						<div class="leftSide">City : </div>
-						<div class="rightSide"><?php echo $profileDetail->city; ?></div>
+						<div class="rightSide"><?php echo $cityArray[$profileDetail->city]; ?></div>
 					</div>
 					<div>
 						<!-- state -->
 						<div class="leftSide">State : </div>
-						<div class="rightSide"><?php echo $profileDetail->state; ?></div>
+						<div class="rightSide"><?php echo $stateArray[$profileDetail->state]; ?></div>
 					</div>
 					<div>
 						<!-- country -->
 						<div class="leftSide">Country : </div>
-						<div class="rightSide"><?php echo $profileDetail->country; ?></div>
+						<div class="rightSide"><?php echo $countryArray[$profileDetail->country]; ?></div>
 					</div>
 					<div>
 						<!-- pincode -->
@@ -147,6 +147,6 @@
 			</div>
 		<?php echo form_close();?>
 	 	<script type="text/javascript" src="<?php echo base_url(); ?>assets/js/jquery.min.js"></script>
-	    <script type="text/javascript" src="<?php echo base_url(); ?>assets/js/profile/detail.js"></script>
+	    <script type="text/javascript" src="<?php echo base_url(); ?>assets/js/admin/profile/detail.js"></script>
 	</body>
 </html>

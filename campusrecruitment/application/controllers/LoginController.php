@@ -15,12 +15,6 @@ class LoginController extends CI_Controller {
 	}
 
 	public function index() {
-		$userData = [
-			'username'  => 'Magesh',
-			'email'     => 'magesh99@gmail.com',
-			'logged_in' => FALSE
-		];
-		$this->session->set_userdata($userData);
 		$this->layouts->view('login/login');
 	}
 
@@ -50,10 +44,12 @@ class LoginController extends CI_Controller {
 		    // if data matched
 		    if($loginProcessCheck->num_rows() > 0) {
 		        $data  = $loginProcessCheck->row_array();
+		        $id  = $data['id'];
 		        $userName  = $data['userName'];
 		        $password = $data['password'];
 		        $flag = $data['flag'];
 		        $logindata = array(
+		        	'id' => $id,
 		            'userName'  => $userName,
 		            'flag'     => $flag,
 		            'logged_in' => TRUE

@@ -25,9 +25,7 @@
                             <?php echo form_open('LoginController/loginUser',['method' => 'POST','class' => 'form-horizontal','id' => 'loginForm','name' => 'loginForm']); ?>
                                 <!-- user name -->
                                 <div class="form-group form-inline">
-                                    <?php //echo form_label('User Name','userName',['class' => "col-md-4 control-label required"]); 
-                                        echo lang('lbl_userName', 'userName', array('class' => 'col-md-4 control-label required'));
-                                    ?>
+                                    <?php echo lang('lbl_userName', 'userName', array('class' => 'col-md-4 control-label required')); ?>
                                     <div class="col-md-8">
                                 		<?php
                                             $data = array(
@@ -40,16 +38,12 @@
                                         ?>
                                         <div class="error">
                                             <?php echo form_error('userName'); ?>
-                                            <?php echo @$error; ?>
                                         </div>   
                                     </div>
                                 </div>
                                 <!-- password -->
                                 <div class="form-group form-inline">
-                                    <?php // echo form_label('Password','password',['class' => "col-md-4 control-label required"]);
-                                        echo lang('lbl_password', 'password', array('class' => 'col-md-4 control-label required'));
-                                        
-                                    ?>
+                                    <?php echo lang('lbl_password', 'password', array('class' => 'col-md-4 control-label required')); ?>
                                     <div class="col-md-8">
                                         <?php
                                             $data= array(
@@ -78,14 +72,6 @@
                             	<!-- login button -->
                                 <div class="form-group">
                                 	<div class="offset-md-4 col-md-6">
-    									<?php
-    										// $data = array(
-    										// 		'type' => 'submit',
-    										// 		'value'=> 'Login',
-    										// 		'class'=> 'submit btn bg-warning text-white'
-    										// 		);
-    										// echo form_submit($data);
-    									?>
                                         <button class="btn bg-warning text-white">
                                             <i class="fa fa-btn fa-sign-in"></i>Login
                                         </button>

@@ -37,7 +37,7 @@
         <!-- Navbar-->
         <?php if($this->session->userdata('logged_in') == false) { ?>
             <ul class="navbar-nav ml-auto my-md-0">
-                <li class="nav-item <?php echo ($this->uri->segment(2)=='login') || ($this->uri->segment(2)=='logout')?'active':''; ?>"><a class="nav-link" href="<?php echo site_url('LoginController/login')?>">Login</a></li>
+                <li class="nav-item <?php echo ($this->uri->segment(1)=='LoginController') || ($this->uri->segment(2)=='logout') || ($this->uri->segment(2)=='')?'active':''; ?>"><a class="nav-link" href="<?php echo site_url('LoginController/login')?>">Login</a></li>
                 <li class="nav-item <?php echo ($this->uri->segment(2)=='register')?'active':''; ?>"><a class="nav-link" href="<?php echo site_url('AdminController/register') ?>">Register</a></li>
             </ul>
         <?php } else { ?>
@@ -75,7 +75,7 @@
                                 <div class="sb-nav-link-icon"><i class="fa fa-tachometer"></i></div>
                                 Dashboard
                             </a>
-                            <a class="nav-link <?php echo ($this->uri->segment(3)=='profileDetail')?'active':''; ?>" href="<?php echo site_url('AdminController/profile/profileDetail') ?>">
+                            <a class="nav-link <?php echo ($this->uri->segment(1)=='AdminController')?'active':''; ?>" href="<?php echo site_url('AdminController/profile/profileDetail') ?>">
                                 <div class="sb-nav-link-icon"><i class="fa fa-user"></i></div>
                                 Profile
                             </a>

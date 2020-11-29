@@ -27,6 +27,7 @@ class AdminController extends CI_Controller {
 		$this->load->helper('url');
 		$this->load->library('session');
 		$this->load->model('AdminModel');
+		$this->load->model('CommonModel');
 		$this->load->library('form_validation');
 	}
 
@@ -39,6 +40,9 @@ class AdminController extends CI_Controller {
 	public function profile() {
 		$userName = $this->session->userdata('userName');
 		$data['profileDetail'] = $this->AdminModel->profileDetail($userName);
+		$data['countryArray'] = $this->CommonModel->country();
+		$data['stateArray'] = $this->CommonModel->state();
+		$data['cityArray'] = $this->CommonModel->city();
 		$this->layouts->view('admin/profile/profileDetail',$data);
 	}
 
@@ -79,36 +83,14 @@ class AdminController extends CI_Controller {
 	{
 		$userName = $this->session->userdata('userName');
 		$data['profileEdit'] = $this->AdminModel->profileEdit($userName);
+		$data['countryArray'] = $this->CommonModel->country();
+		$data['stateArray'] = $this->CommonModel->state();
+		$data['cityArray'] = $this->CommonModel->city();
 		$this->layouts->view('admin/profile/profileEdit',$data);
 	}
 
 	// To update the profile
 	public function profileUpdate() {
-		// login validation
-		$this->form_validation->set_rules( 'name', $this->lang->line("lbl_name"), 'required|regex:/^[A-Za-z\s\.]+$/|max:50',
-												array(
-													'regex' => 'Please enter only alphabetical letter.'
-												)
-											);
-		$this->form_validation->set_rules( 'email', $this->lang->line("lbl_email"), 'required|email|max:50|unique:users,email,'.$this->session->userdata('userName'),
-												array(
-													'reqiured' => $this->lang->line("reqiured"),
-													'email' => $this->lang->line("email"),
-													'unique' => $this->lang->line("unique")
-												)
-											);
-		$this->form_validation->set_rules( 'gender', $this->lang->line("lbl_gender"), 'required');
-		$this->form_validation->set_rules( 'address', $this->lang->line("lbl_address"), 'required');
-		$this->form_validation->set_rules( 'country', $this->lang->line("lbl_country"), 'required');
-		$this->form_validation->set_rules( 'state', $this->lang->line("lbl_state"), 'required');
-		$this->form_validation->set_rules( 'city', $this->lang->line("lbl_city"), 'required');
-		$this->form_validation->set_rules( 'pincode', $this->lang->line("lbl_pincode"), 'required');
-		$this->form_validation->set_rules( 'contact', $this->lang->line("lbl_contact"), 'required');
-		if($this->form_validation->run() == false) {
-			$userName = $this->session->userdata('userName');
-			$data['profileEdit'] = $this->AdminModel->profileEdit($userName);
-			$this->layouts->view('admin/profile/profileEdit',$data);
-		} else {
 			$userName = $this->session->userdata('userName');
 			$profileUpdateData = array(
 				'name' => $this->input->post('name'),
@@ -124,32 +106,52 @@ class AdminController extends CI_Controller {
 			);
 			$profileUpdateStatus = $this->AdminModel->profileUpdate($userName,$profileUpdateData);
 			redirect('AdminController/profile');
-		}
 	}
-// 	public function profileUpdateValidation() {
-// 		// login validation
-// 		$this->form_validation->set_rules( 'name', $this->lang->line("lbl_name"), 'required|regex:/^[A-Za-z\s\.]+$/|max:50',
-// 												array(
-// 													'regex' => 'Please enter only alphabetical letter.'
-// 												)
-// 											);
-// 		$this->form_validation->set_rules( 'email', $this->lang->line("lbl_email"), 'required|email|max:50|unique:users,email,'.$this->session->userdata('userName'),
-// 												array(
-// 													'reqiured' => $this->lang->line("reqiured"),
-// 													'email' => $this->lang->line("email"),
-// 													'unique' => $this->lang->line("unique")
-// 												)
-// 											);
-// 		$this->form_validation->set_rules( 'gender', $this->lang->line("lbl_gender"), 'required',
-// 												array(
-// 													'reqiured' => $this->lang->line("reqiured")
-// 												)
-// 											);
-// 		if($this->form_validation->run() == false) {
-// 			return response()->json($validator->messages(), 200);exit;
-//         } else {
-//             $success = true;
-//             echo json_encode($success);exit;
-//         }
-// 	}
+	public function profileUpdateValidation() {
+		// login validation
+		$id = $this->session->userdata('id');
+		$this->form_validation->set_rules( 'name', $this->lang->line("lbl_name"), 'required|regex_match[/^[A-Za-z\s\.]+$/]|max_length[50]',
+												array(
+													'regex_match' => 'Please enter only alphabetical letter.',
+													'max_length' => $this->lang->line("max_length")
+												)
+											);
+		$this->form_validation->set_rules( 'email', $this->lang->line("lbl_email"), 'required|valid_email|max_length[50]|callback_email_exist_check[users.email.'.$this->session->userdata('userName').']',
+												array(
+													'reqiured' => $this->lang->line("reqiured"),
+													'valid_email' => $this->lang->line("email")
+												)
+											);
+		$this->form_validation->set_rules( 'gender', $this->lang->line("lbl_gender"), 'required');
+		$this->form_validation->set_rules( 'address', $this->lang->line("lbl_address"), 'required');
+		$this->form_validation->set_rules( 'country', $this->lang->line("lbl_country"), 'required');
+		$this->form_validation->set_rules( 'state', $this->lang->line("lbl_state"), 'required');
+		$this->form_validation->set_rules( 'city', $this->lang->line("lbl_city"), 'required');
+		$this->form_validation->set_rules( 'pincode', $this->lang->line("lbl_pincode"), 'required|regex_match[/\b\d{6}\b/]',
+												array(
+													'regex_match' => 'The Pincode must be 6 digits.'
+												)
+											);
+		$this->form_validation->set_rules( 'contact', $this->lang->line("lbl_contact"), 'required|regex_match[/\b\d{10}\b/]',
+												array(
+													'regex_match' => 'The Contact must be 10 digits.'
+												)
+											);
+		if ($this->form_validation->run() == FALSE){
+            $json_response = $this->form_validation->error_array();
+            echo json_encode($json_response); exit();
+
+        }else{
+           echo json_encode(true); exit();
+
+        }
+	}
+	function email_exist_check($str, $fields)
+	{
+		list($table, $columnOne, $strTwo) = explode('.', $fields, 3); 
+		$query = $this->db->query("SELECT COUNT(id) AS count FROM $table WHERE ".$columnOne." = '".$str."' AND userName != '".$strTwo."'");
+		$row = $query->row();
+		$this->form_validation->set_message('email_exist_check', 'The E-Mail Address already exists.');
+		return ($row->count > 0) ? FALSE : TRUE;
+	}
 }

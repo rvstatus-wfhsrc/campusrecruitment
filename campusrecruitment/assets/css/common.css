@@ -43,6 +43,7 @@
     display: inline-block;
     font-size: 13px;
     color: #9C0000;
+    line-height: 0px !important;
 }
 /* error or validation message class end */
 

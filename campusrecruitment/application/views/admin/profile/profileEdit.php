@@ -34,7 +34,7 @@
                             <?php echo form_open('AdminController/profileUpdate',['method' => 'POST', 'class' => 'form-horizontal','id' => 'editForm','name' => 'editForm','enctype'=>'multipart/form-data']); ?>
                                 <!-- name -->
                                 <div class="form-group form-inline">
-                                    <?php echo form_label('Name','name',['class' => "col-md-4 control-label required"]); ?>
+                                    <?php echo lang('lbl_name', 'name', array('class' => 'col-md-4 control-label required')); ?>
                                     <div class="col-md-8">
                                         <?php
                                             $data= array(
@@ -53,7 +53,7 @@
                                 </div>
                                 <!-- e-mail -->
                                 <div class="form-group form-inline">
-                                    <?php echo form_label('E-Mail Address','email',['class' => "col-md-4 control-label required"]); ?>
+                                    <?php echo lang('lbl_email', 'email', array('class' => 'col-md-4 control-label required')); ?>
                                     <div class="col-md-8">
                                         <?php
                                             $data= array(
@@ -72,7 +72,7 @@
                                 </div>
                                 <!-- gender -->
                                 <div class="form-group form-inline">
-                                    <?php echo form_label('Gender','gender',['class' => "col-md-4 control-label required"]); ?>
+                                    <?php echo lang('lbl_gender', 'Gender', array('class' => 'col-md-4 control-label required')); ?>
                                     <div class="col-md-8">
                                         <input type="radio" name="gender" value="1" <?php echo set_value('gender', $profileEdit->gender) == 1 ? "checked" : ""; ?> />
                                         <!-- <input type="radio" name="gender" value="1" <?php echo set_radio('gender', 1, $profileEdit->gender === 1) ?> /> -->
@@ -87,7 +87,7 @@
                                 </div>
                                 <!-- address -->
                                 <div class="form-group form-inline">
-                                    <?php echo form_label('Address','address',['class' => "col-md-4 control-label required"]); ?>
+                                    <?php echo lang('lbl_address', 'address', array('class' => 'col-md-4 control-label required')); ?>
                                     <div class="col">
                                         <?php 
                                             $data = array(
@@ -108,15 +108,10 @@
                                 </div>
                                 <!-- country -->
                                 <div class="form-group form-inline">
-                                    <?php echo form_label('Country','country',['class' => "col-md-4 control-label required"]); ?>
+                                    <?php echo lang('lbl_country', 'country', array('class' => 'col-md-4 control-label required')); ?>
                                     <div class="col-md-8">
                                         <?php
-                                            $countryArray = array(
-                                                '0'  => 'Select Country',
-                                                '1'    => 'India',
-                                                '2'   => 'Japan'
-                                            );
-                                            echo form_dropdown('country', $countryArray,set_value('country', $profileEdit->country, false),'class = "form-control autowidth h-25" id = "country" name = "country"');
+                                            echo form_dropdown('country', $countryArray,set_value('country', $profileEdit->country, false),'class = "form-control autowidth h-25" id = "country" name = "country" placeholder = "Select Country"');
                                         ?>
                                         <div class="error">
                                             <?php echo form_error('country'); ?>
@@ -125,14 +120,9 @@
                                 </div>
                                 <!-- state -->
                                 <div class="form-group form-inline">
-                                    <?php echo form_label('State','state',['class' => "col-md-4 control-label required"]); ?>
+                                    <?php echo lang('lbl_state', 'state', array('class' => 'col-md-4 control-label required')); ?>
                                     <div class="col-md-8">
                                         <?php 
-                                            $stateArray = array(
-                                                '0'  => 'Select State',
-                                                '1'    => 'India',
-                                                '2'   => 'Japan'
-                                            );
                                             echo form_dropdown('state', $stateArray,set_value('state', $profileEdit->state, false),'class = "form-control autowidth h-25" id = "state" name = "state"');
                                         ?>
                                         <div class="error">
@@ -142,14 +132,9 @@
                                 </div>
                                 <!-- city -->
                                 <div class="form-group form-inline">
-                                    <?php echo form_label('City','city',['class' => "col-md-4 control-label required"]); ?>
+                                    <?php echo lang('lbl_city', 'city', array('class' => 'col-md-4 control-label required')); ?>
                                     <div class="col-md-8">
-                                        <?php 
-                                            $cityArray = array(
-                                                '0'  => 'Select City',
-                                                '1'    => 'Tirunelveli',
-                                                '2'   => 'Tokyo'
-                                            );
+                                        <?php
                                             echo form_dropdown('city', $cityArray,set_value('city', $profileEdit->city, false),'class = "form-control autowidth h-25" id = "city" name = "city"');
                                         ?>
                                         <div class="error">
@@ -159,7 +144,7 @@
                                 </div>
                                 <!-- pincode -->
                                 <div class="form-group form-inline">
-                                    <?php echo form_label('Pincode','pincode',['class' => "col-md-4 control-label required"]); ?>
+                                    <?php echo lang('lbl_pincode', 'pincode', array('class' => 'col-md-4 control-label required')); ?>
                                     <div class="col-md-8">
                                         <?php 
                                             $data= array(
@@ -178,7 +163,7 @@
                                 </div>
                                 <!-- contact -->
                                 <div class="form-group form-inline">
-                                    <?php echo form_label('Contact','contact',['class' => "col-md-4 control-label required"]); ?>
+                                    <?php echo lang('lbl_contact', 'contact', array('class' => 'col-md-4 control-label required')); ?>
                                     <div class="col-md-8">
                                         <?php 
                                             $data= array(
@@ -197,9 +182,10 @@
                                 </div>
                                 <!--image  -->
                                 <div class="form-group form-inline">
-                                    <?php echo form_label('Image','image',['class' => "col-md-4 control-label image"]); ?>                   
+                                    <?php echo lang('lbl_image', 'image', array('class' => 'col-md-4 control-label required')); ?>                   
                                     <div class="col-md-8">
                                         <?php echo "<input type='file' name='image' id='image' accept='image/*' class='w43 imageName' />"; ?>
+                                        <span class="formatError"></span>
                                     </div>
                                 </div>
                                 <!-- register button -->
@@ -217,6 +203,6 @@
             </div>
         </div>
         <script type="text/javascript" src="<?php echo base_url(); ?>assets/js/jquery.min.js"></script>
-        <!--<script type="text/javascript" src="<?php echo base_url(); ?>assets/js/profile/edit.js"></script> -->
+        <script type="text/javascript" src="<?php echo base_url(); ?>assets/js/admin/profile/edit.js"></script>
     </body>
 </html>
