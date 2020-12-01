@@ -81,13 +81,13 @@
                             </a>
                             <div class="sb-sidenav-menu-heading">Settings</div>
                             <a class="nav-link <?php echo ($this->uri->segment(1)=='CompanyController')?'active':''; ?>" data-toggle="collapse" data-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
-                                <div class="sb-nav-link-icon"><i class="fa fa-columns"></i></div>
-                                Company
+                                <div class="sb-nav-link-icon"><i class="fa fa-building"></i></div>
+                                <?php echo lang('lbl_company'); ?>
                                 <div class="sb-sidenav-collapse-arrow"><i class="fa fa-angle-down"></i></div>
                             </a>
                             <div class="collapse <?php echo ($this->uri->segment(1)!=null && $this->uri->segment(1)=='CompanyController')?'show':''; ?>" id="collapseLayouts" aria-labelledby="headingOne" data-parent="#sidenavAccordion">
                                 <nav class="sb-sidenav-menu-nested nav">
-                                    <a class="nav-link <?php echo ($this->uri->segment(3)=='companyHistory')?'active':''; ?>" href="<?php echo site_url('CompanyController/companyHistory') ?>">History</a>
+                                    <a class="nav-link <?php echo ($this->uri->segment(1)=='CompanyController')?'active':''; ?>" href="<?php echo site_url('CompanyController/companyHistory') ?>"><?php echo lang('lbl_history'); ?></a>
                                 </nav>
                             </div>
                         </div>

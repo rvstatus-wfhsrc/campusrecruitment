@@ -12,9 +12,21 @@ class CompanyModel extends CI_Model {
 	function companyHistory() {
 		$filterVal = $this->input->post('filterVal');
 		$hiddenSearch = $this->input->post('hiddenSearch');
-		$this->db->select('id,companyName,incharge,contact,email,delFlag');
+		$this->db->select('id,companyName,incharge,contact,email,entryDate,address,delFlag');
 		// search process
 		$this->db->like('companyName',trim($hiddenSearch));
+		// sorting process
+		$sortOptn = $this->input->post('sortOptn');
+		$sortVal = $this->input->post('sortVal');
+		if ($sortVal == 1) {
+			$this->db->order_by('companyName', $sortOptn);
+		} else if ($sortVal == 2) {
+			$this->db->order_by('incharge', $sortOptn);
+		} else if ($sortVal == 3) {
+			$this->db->order_by('entryDate', $sortOptn);
+		} else {
+			$this->db->order_by('companyName', 'ASC');
+		}
 		// filter process
 		if ($filterVal == 2) {
             $this->db->where(array('delFlag' => 0));

@@ -179,9 +179,9 @@
 	appearance: none !important; 
 }
 .sort_asc {
-	background-image:url(../images/upArrowNew1.png) !important;
+	background-image:url(../images/upArrow.png) !important;
 }
 .sort_desc {
-	background-image:url(../images/downArrowNew1.png) !important;
+	background-image:url(../images/downArrow.png) !important;
 }
 /* sorting arrow class end */

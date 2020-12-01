@@ -1,15 +1,15 @@
 $(document).ready(function() {
-	// var cc = 0;
-	// $('#sortProcess').click(function () {
-	// 		cc++;
-	// 		if (cc == 2) {
-	// 			$(this).change();
-	// 			cc = 0;
-	// 		}         
-	// }).change (function () {
-	// 	 fnSortProcess();
-	// 		cc = -1;
-	// });
+	var cc = 0;
+	$('#sortProcess').click(function () {
+			cc++;
+			if (cc == 2) {
+				$(this).change();
+				cc = 0;
+			}         
+	}).change (function () {
+		 fnSortProcess();
+			cc = -1;
+	});
 	$('#historyForm').keydown(function (e) {
 	    if (e.keyCode == 13) {
 	    	// $("#page").val(1);
@@ -38,27 +38,27 @@ function fnCompanyFilter(filterValue) {
 function fnCompanySearch() {
 	// $("#page").val(1);
 	$("#hiddenSearch").val($("#search").val());
-	$("#historyForm").attr("action", "companyHistory";
+	$("#historyForm").attr("action", "companyHistory");
 	$('#historyForm').submit();
 }
 // sorting process
-// function fnSortProcess(){
+function fnSortProcess(){
 	// $("#page").val(1);
-// 	$("#search").val($("#hiddenSearch").val());
-// 	var alreadySortOptn = $("#sortOptn").val();
-// 	var sortVal = $("#sortProcess").val();
-// 	$("#sortVal").val(sortVal);
-// 	var alreadySortVal = $("#sortVal").val();
-// 	if(sortVal == alreadySortVal) {
-// 		if(alreadySortOptn == "ASC" ) {
-// 			$("#sortOptn").val("DESC");
-// 		} else {
-// 			$("#sortOptn").val("ASC");
-// 		}
-// 	}
-// 	$("#historyForm").attr("action", "companyHistory");
-// 	$( "#historyForm" ).submit();
-// }
+	$("#search").val($("#hiddenSearch").val());
+	var alreadySortOptn = $("#sortOptn").val();
+	var sortVal = $("#sortProcess").val();
+	$("#sortVal").val(sortVal);
+	var alreadySortVal = $("#sortVal").val();
+	if(sortVal == alreadySortVal) {
+		if(alreadySortOptn == "ASC" ) {
+			$("#sortOptn").val("DESC");
+		} else {
+			$("#sortOptn").val("ASC");
+		}
+	}
+	$("#historyForm").attr("action", "companyHistory");
+	$( "#historyForm" ).submit();
+}
 // pagination process
 // function pageClick(pageval) {
 //     $('#page').val(pageval);

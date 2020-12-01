@@ -39,6 +39,7 @@ class CompanyController extends CI_Controller {
 	 */
 	public function companyHistory() {
 		// filter disable process
+		$data['hiddenSearch'] = $this->input->post('hiddenSearch');
 		$filterVal = $this->input->post('filterVal');
 		$sortOptn = $this->input->post('sortOptn');
         $data['disableAll'] = "";
@@ -52,13 +53,13 @@ class CompanyController extends CI_Controller {
             $data['disableAll'] = "disabled";
         }
         // sorting process style
-  //       $data['sortStyle'] = "sort_desc";
-  //       if(isset($sortOptn) && $sortOptn == "ASC") {
-  //           $data['sortStyle'] = "sort_asc";
-  //       } elseif(isset($sortOptn) && $sortOptn == "DESC") {
-  //           $data['sortStyle'] = "sort_desc";
-  //       }
-  //       $data['sortArray'] = array('1' => '','2' => '' );
+        $data['sortStyle'] = "sort_desc";
+        if(isset($sortOptn) && $sortOptn == "ASC") {
+            $data['sortStyle'] = "sort_asc";
+        } elseif(isset($sortOptn) && $sortOptn == "DESC") {
+            $data['sortStyle'] = "sort_desc";
+        }
+        $data['sortArray'] = array('1' => 'Company Name','2' => 'Incharge','3' => 'Entry Date');
 		$data['companyHistory'] = $this->CompanyModel->companyHistory();
 		$this->layouts->view('admin/company/history',$data);
 	}
@@ -75,5 +76,20 @@ class CompanyController extends CI_Controller {
     	$delFlag = $this->input->post('hiddenDelFlag');
         $companyStatus = $this->CompanyModel->companyStatus($id,$delFlag);
         return redirect('CompanyController/companyHistory');
+    }
+
+    /**
+	 * This companyAdd method are used to call the company add screen
+	 * @return to view [ addEdit ]
+	 * @author Kulasekaran.
+	 *
+	 */
+    public function companyAdd()
+    {
+        // $designationArray = CommonModel::designation();
+        // $countryArray = CommonModel::country();
+        // $stateArray = array();
+        // $cityArray = array();
+        $this->layouts->view('admin/company/addEdit');
     }
 }

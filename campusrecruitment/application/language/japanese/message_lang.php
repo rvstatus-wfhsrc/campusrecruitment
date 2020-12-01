@@ -14,4 +14,17 @@ $lang['lbl_pincode'] = 'ピンコード';
 $lang['lbl_contact'] = ' 電話';
 $lang['lbl_image'] = '画像';
 
+
+// company screen label
+$lang['lbl_incharge'] = '担当';
+$lang['lbl_companyName'] = '会社名';
+$lang['lbl_serialNumber'] = 'S.No';
+$lang['lbl_active'] = 'アクティブ';
+$lang['lbl_deactive'] = '非アクティブ';
+$lang['lbl_all'] = 'すべて';
+$lang['lbl_addCompany'] = '会社を追加';
+$lang['lbl_company'] = '会社';
+$lang['lbl_history'] = '歴史';
+$lang['lbl_entryDate'] = '申込日';
+
 ?>

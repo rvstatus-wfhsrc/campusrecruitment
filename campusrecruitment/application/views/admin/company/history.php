@@ -27,7 +27,7 @@
     <body>
         <div class="dispNone">
             <ol class="breadcrumb mb-1 ml-4 w96">
-                <li class="breadcrumb-item"><i class="fa fa-building-o fa-btn mt3"></i>Company<span class ="dot historyScrClr">&bull;</span><span class="historyScrClr">History</span></li>
+                <li class="breadcrumb-item"><i class="fa fa-building-o fa-btn mt3"></i><?php echo lang('lbl_company'); ?><span class ="dot historyScrClr">&bull;</span><span class="historyScrClr"><?php echo lang('lbl_history'); ?></span></li>
                 <!-- @if(Session::has('message'))
                     <div class="alert alert-{{session('message')['type']}} fmsg tac">{{ Session::get('message')['text'] }}</div>
                 @endif -->
@@ -36,21 +36,28 @@
         <div class="row">
             <div class="col-xl-12">
                 <div class="container-fluid dispNone">
-                    <a class="btn btn-success mb-1 disabled" href="<?php echo site_url('CompanyController/add') ?>">
-                        <i class="fa fa-btn fa-plus"></i>Add Company
+                    <a class="btn btn-success mb-1" href="<?php echo site_url('CompanyController/companyAdd') ?>">
+                        <i class="fa fa-btn fa-plus"></i><?php echo lang('lbl_addCompany'); ?>
                     </a>
                     <?php echo form_open('CompanyController/CompanyDetail',['method' => 'POST','id' => 'historyForm','name' => 'historyForm']); ?>
+                        <input type="hidden" id="base" value="<?php echo base_url(); ?>">
                         <input type="hidden" id="hiddenCompanyId" name="hiddenCompanyId">
                         <input type="hidden" id="hiddenDelFlag" name="hiddenDelFlag">
                         <!-- {{ Form::hidden('page', $request->page , array('id' => 'page')) }} -->
+                        <?php
+                            $searchText = '';
+                            if(isset($hiddenSearch)) {
+                                $searchText = $hiddenSearch;
+                            }
+                        ?>
                         <input type="hidden" id="hiddenSearch" name="hiddenSearch">
                         <!-- filtering process -->
-                        <div class="inb fs16 float-left w70">
-                            <a href="javascript:;" onclick="fnCompanyFilter(1)" id="filterVal1" class="fs16 btn btn-link <?php echo $disableAll ?>">All</a>
+                        <div class="inb fs16 float-left w56">
+                            <a href="javascript:;" onclick="fnCompanyFilter(1)" id="filterVal1" class="fs16 btn btn-link <?php echo $disableAll ?>"><?php echo lang('lbl_all'); ?></a>
                             <span> | </span>
-                            <a href="javascript:;" onclick="fnCompanyFilter(<?php echo '2';?>)" id="filterVal2" class="fs16 btn btn-link <?php echo $disableActive ?>">Active</a>
+                            <a href="javascript:;" onclick="fnCompanyFilter(<?php echo '2';?>)" id="filterVal2" class="fs16 btn btn-link <?php echo $disableActive ?>"><?php echo lang('lbl_active'); ?></a>
                             <span> | </span>
-                            <a href="javascript:;" onclick="fnCompanyFilter(3)" id="filterVal3" class="fs16 btn btn-link <?php echo $disableNonActive ?>">Deactive</a>
+                            <a href="javascript:;" onclick="fnCompanyFilter(3)" id="filterVal3" class="fs16 btn btn-link <?php echo $disableNonActive ?>"><?php echo lang('lbl_deactive'); ?></a>
                         </div>
                         <input type="hidden" id="filterVal" name="filterVal">
                         <!-- clear search -->
@@ -58,14 +65,13 @@
                           <a href="javascript:;" onclick="fnClearSearch()"><img style="width: 25px;" src="<?php echo base_url(); ?>assets/images/clearsearch.png" title="Clear Search"></a>
                         </div>
                         <!-- sorting process -->
-                        <!-- <div class="inb float-left"> -->
+                        <div class="inb float-left">
                             <?php
-                                // echo form_dropdown('sortProcess',$sortArray,set_value('sortProcess', 1, false),'class = "form-control autowidth h34 inb mr-2 CMN_sorting" id = "sortProcess" name = "sortProcess"');
-                                        ?>
-                            <!-- {{ Form::select('sortProcess', $sortArray,1,['class' => 'form-control h34 autowidth inb mr-2 CMN_sorting'.' ' .$request->sortStyle, 'id' => 'sortProcess']) }} -->
-                            <!-- <input type="hidden" id="sortVal" name="sortVal">
-                            <input type="hidden" id="sortOptn" name="sortOptn"> -->
-                        <!-- </div> -->
+                                echo form_dropdown('sortProcess',$sortArray,set_value('sortProcess', 1, false),'class = "form-control autowidth h34 inb mr-2 CMN_sorting"." " .$sortStyle id = "sortProcess" name = "sortProcess"');
+                            ?>
+                            <input type="hidden" id="sortVal" name="sortVal">
+                            <input type="hidden" id="sortOptn" name="sortOptn">
+                        </div>
                         <!-- searching process -->
                         <div class="input-group searchBtn">
                             <?php
@@ -73,7 +79,8 @@
                                     'id' => 'search',
                                     'name' => 'search',
                                     'placeholder' => 'Search Company Name',
-                                    'class' => 'input_box form-control h34'
+                                    'class' => 'input_box form-control h34',
+                                    'value' => $searchText
                                 );
                                 echo form_input($data);
                             ?>
@@ -87,18 +94,22 @@
                             <colgroup>
                                 <col width="1%">
                                 <col>
+                                <col width="12%">
+                                <col width="8%">
+                                <col width="15%">
+                                <col width="8%">
                                 <col width="20%">
-                                <col width="10%">
-                                <col width="18%">
                                 <col width="11%">
                             </colgroup>
                             <thead class="thead">
                                 <tr>
-                                    <th>S.No</th>
-                                    <th>Company Name</th>
-                                    <th>Contact Incharge</th>
-                					<th title="Sub Department Starting Time">Contact</th>
-                                    <th title="Sub Department Ending Time">E-Mail Address</th>
+                                    <th><?php echo lang('lbl_serialNumber'); ?></th>
+                                    <th><?php echo lang('lbl_companyName'); ?></th>
+                                    <th><?php echo lang('lbl_incharge'); ?></th>
+                					<th><?php echo lang('lbl_contact'); ?></th>
+                                    <th><?php echo lang('lbl_email'); ?></th>
+                                    <th><?php echo lang('lbl_entryDate'); ?></th>
+                                    <th><?php echo lang('lbl_address'); ?></th>
                                     <th></th>
                                 </tr>
                             </thead>
@@ -112,21 +123,23 @@
                                             <td class="vam"><?php echo $history->incharge; ?></td>
                                             <td class="tac vam"><?php echo $history->contact; ?></td>
                                             <td class="tac vam"><?php echo $history->email; ?></td>
+                                            <td class="tac vam"><?php echo $history->entryDate; ?></td>
+                                            <td class="tac vam"><?php echo $history->address; ?></td>
                                             <td class="tac vam">
                                                 <a href="javascript:;" onclick="fnCompanyDetail(<?php echo $history->id;?>)" class="m3">
                                                     <img style="width: 20px;"
                                                     src="<?php echo base_url(); ?>assets/images/details.png" title="details view">
                                                 </a>
                                                 <?php if($history->delFlag == 0) { ?>
-                                                    <a href="javascript:;" onclick="fnCompanyActiveOrDeactive(<?php echo $history->id;?> , <?php echo $history->delFlag;?>)">Active</a>
+                                                    <a href="javascript:;" onclick="fnCompanyActiveOrDeactive(<?php echo $history->id;?> , <?php echo $history->delFlag;?>)"><?php echo lang('lbl_active'); ?></a>
                                                 <?php } else { ?>
-                                                    <a href="javascript:;" onclick="fnCompanyActiveOrDeactive(<?php echo $history->id;?> , <?php echo $history->delFlag;?>)" style="color:red;">Deactive</a>
+                                                    <a href="javascript:;" onclick="fnCompanyActiveOrDeactive(<?php echo $history->id;?> , <?php echo $history->delFlag;?>)" style="color:red;"><?php echo lang('lbl_deactive'); ?></a>
                                                 <?php } ?>
                                             </td>
                                         </tr>
                                     <?php } ?>
                                 <?php } else { ?>
-                                    <tr><td colspan="6" class="tac noDataFoundClr" style="font-size: 16px;">No data found</td></tr>
+                                    <tr><td colspan="8" class="tac noDataFoundClr" style="font-size: 16px;">No data found</td></tr>
                                 <?php }
                             ?>
                         </table>
