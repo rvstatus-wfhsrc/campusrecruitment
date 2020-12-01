@@ -32,6 +32,7 @@ class LoginController extends CI_Controller {
 											);
 		$this->form_validation->set_rules( 'password', $this->lang->line("lbl_password"), 'required|min_length[6]',
 												array(
+													'required' => $this->lang->line("required"),
 													'min_length' => $this->lang->line("min_length")
 												)
 											);
@@ -75,7 +76,14 @@ class LoginController extends CI_Controller {
 
 	// logout process
   	public function logout() {
-  		$this->session->sess_destroy();
+  		$userData = [
+			'siteLang'  => $this->session->userdata('siteLang'),
+			'siteLangKey'  => $this->session->userdata('siteLangKey'),
+		];
+  		// $this->session->sess_destroy();
+  		$this->session->unset_userdata('flag');
+  		$this->session->unset_userdata('userName');
+  		$this->session->unset_userdata('logged_in');
 	    redirect('LoginController/login');
    	}
 	// Allowing accesses to student only

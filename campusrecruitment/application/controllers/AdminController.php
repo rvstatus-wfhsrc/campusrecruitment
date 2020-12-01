@@ -112,28 +112,52 @@ class AdminController extends CI_Controller {
 		$id = $this->session->userdata('id');
 		$this->form_validation->set_rules( 'name', $this->lang->line("lbl_name"), 'required|regex_match[/^[A-Za-z\s\.]+$/]|max_length[50]',
 												array(
+													'required' => $this->lang->line("required"),
 													'regex_match' => 'Please enter only alphabetical letter.',
 													'max_length' => $this->lang->line("max_length")
 												)
 											);
 		$this->form_validation->set_rules( 'email', $this->lang->line("lbl_email"), 'required|valid_email|max_length[50]|callback_email_exist_check[users.email.'.$this->session->userdata('userName').']',
 												array(
-													'reqiured' => $this->lang->line("reqiured"),
-													'valid_email' => $this->lang->line("email")
+													'required' => $this->lang->line("required"),
+													'valid_email' => $this->lang->line("email"),
+													'max_length' => $this->lang->line("max_length")
 												)
 											);
-		$this->form_validation->set_rules( 'gender', $this->lang->line("lbl_gender"), 'required');
-		$this->form_validation->set_rules( 'address', $this->lang->line("lbl_address"), 'required');
-		$this->form_validation->set_rules( 'country', $this->lang->line("lbl_country"), 'required');
-		$this->form_validation->set_rules( 'state', $this->lang->line("lbl_state"), 'required');
-		$this->form_validation->set_rules( 'city', $this->lang->line("lbl_city"), 'required');
+		$this->form_validation->set_rules( 'gender', $this->lang->line("lbl_gender"), 'required',
+												array(
+													'required' => $this->lang->line("required")
+												)
+											);
+		$this->form_validation->set_rules( 'address', $this->lang->line("lbl_address"), 'required',
+												array(
+													'required' => $this->lang->line("required")
+												)
+											);
+		$this->form_validation->set_rules( 'country', $this->lang->line("lbl_country"), 'required',
+												array(
+													'required' => $this->lang->line("required")
+												)
+											);
+		$this->form_validation->set_rules( 'state', $this->lang->line("lbl_state"), 'required',
+												array(
+													'required' => $this->lang->line("required")
+												)
+											);
+		$this->form_validation->set_rules( 'city', $this->lang->line("lbl_city"), 'required',
+												array(
+													'required' => $this->lang->line("required")
+												)
+											);
 		$this->form_validation->set_rules( 'pincode', $this->lang->line("lbl_pincode"), 'required|regex_match[/\b\d{6}\b/]',
 												array(
+													'required' => $this->lang->line("required"),
 													'regex_match' => 'The Pincode must be 6 digits.'
 												)
 											);
 		$this->form_validation->set_rules( 'contact', $this->lang->line("lbl_contact"), 'required|regex_match[/\b\d{10}\b/]',
 												array(
+													'required' => $this->lang->line("required"),
 													'regex_match' => 'The Contact must be 10 digits.'
 												)
 											);

@@ -27,9 +27,10 @@
 })(jQuery);
 $(document).ready(function(){
     $('.siteLang').click(function(){
+        var base_url = $('#base').val();
         var siteLang = $(this).attr('data-key');
         $.ajax({
-            url:'../siteLangUpdate',
+            url:base_url+'LoginController/siteLangUpdate',
             method: 'POST',
             data: {siteLang: siteLang},
             dataType: 'json',

@@ -38,6 +38,7 @@
                                         ?>
                                         <div class="error">
                                             <?php echo form_error('userName'); ?>
+                                            <?php echo @$error; ?>
                                         </div>   
                                     </div>
                                 </div>
@@ -78,6 +79,7 @@
                                         <a class="btn btn-link" href="{{ url('/password/reset') }}">Forgot Your Password ?</a>
                                     </div>
                                 </div>
+                                <input type="hidden" id="base" value="<?php echo base_url(); ?>">
                         	<?php echo form_close();?>
                         </div>
                         <div class="card-footer text-center">

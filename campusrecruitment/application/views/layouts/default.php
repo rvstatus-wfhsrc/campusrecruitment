@@ -87,7 +87,7 @@
                             </a>
                             <div class="collapse <?php echo ($this->uri->segment(1)!=null && $this->uri->segment(1)=='CompanyController')?'show':''; ?>" id="collapseLayouts" aria-labelledby="headingOne" data-parent="#sidenavAccordion">
                                 <nav class="sb-sidenav-menu-nested nav">
-                                    <a class="nav-link <?php echo ($this->uri->segment(3)=='companyHistory')?'active':''; ?>" href="<?php echo site_url('CompanyController/history/companyHistory') ?>">History</a>
+                                    <a class="nav-link <?php echo ($this->uri->segment(3)=='companyHistory')?'active':''; ?>" href="<?php echo site_url('CompanyController/companyHistory') ?>">History</a>
                                 </nav>
                             </div>
                         </div>

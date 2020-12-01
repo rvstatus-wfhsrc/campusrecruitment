@@ -19,10 +19,25 @@
 .w43 {
 	width: 43% !important;
 }
+.w56 {
+	width: 56% !important;
+}
+.w70 {
+	width: 70% !important;
+}
 .w95 {
 	width: 95% !important;
 }
+.w96 {
+	width: 96% !important;
+}
 /* width design class end*/
+
+/* height class start */
+.h34 {
+	height: 34px !important;
+}
+/* height class end */
 
 /* for setting mandatory star(*) symbol in form class start */
 .required:after { 
@@ -79,11 +94,11 @@
 }
 /* dot between the two sub heading class end */
 
-/* details screen view color class start */
-.detailScrClr {
-	color: #0098fd;
+/*add screen view color class start */
+.addScrClr {
+	color: #4a9976;
 }
-/* details screen view color class end */
+/*add screen view color class end */
 
 /* edit screen view color class start */
 .editScrClr {
@@ -91,8 +106,82 @@
 }
 /* edit screen view color class end */
 
+/* history screen view color class start */
+.historyScrClr {
+	color: #0098fd;
+}
+/* history screen view color class end */
+
+/* details screen view color class start */
+.detailScrClr {
+	color: #0098fd;
+}
+/* details screen view color class end */
+
+/* no data found color class start */
+.noDataFoundClr {
+	color: red;
+}
+/* no data found color class end */
+
 /* padding class start*/
 .pr20 {
 	padding-right: 20px !important;
 }
 /* padding class end*/
+
+/* table design start */
+/*setting table head background color and value center*/
+.thead {
+    text-align: center;
+    background: #7daedf;
+}
+/*setting the background color for odd row*/
+.odd {
+    background: #ffffff ;
+}
+
+/*setting the background color for Even row*/
+.even {
+    background: #ddeeff;
+}
+
+/* setting the table position and font values class start */
+.table-position {
+    font-family: 'Arial', sans-serif;
+    font-size: 15px;
+}
+/* setting the table position and font values class end */
+/*table design end*/
+
+/* search button class start */
+.searchBtn {
+    float: right;
+    width: 27%;        
+}
+/* search button class end */
+
+/* sorting arrow class start */
+.CMN_sorting {
+	width: 145px  !important;
+	/*width: 125px  !important;*/
+	/*height: 30px ! important;*/
+	line-height: 14px !important;
+	/*font-size: 12px !important;*/
+	padding: 0px !important;
+	padding-left: 10px !important; 
+	background-repeat: no-repeat; 
+	background-position:right;
+	background-color: white !important;
+	background-position: right; 
+	-webkit-appearance: none !important;
+	-moz-appearance: none !important;
+	appearance: none !important; 
+}
+.sort_asc {
+	background-image:url(../images/upArrowNew1.png) !important;
+}
+.sort_desc {
+	background-image:url(../images/downArrowNew1.png) !important;
+}
+/* sorting arrow class end */

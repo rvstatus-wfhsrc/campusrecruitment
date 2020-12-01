@@ -73,6 +73,7 @@
 	    	</ol>
 		</div>
 		<?php echo form_open('AdminController/profileEdit',['method' => 'POST','id' => 'profileDetailForm','name' => 'profileDetailForm']); ?>
+			<input type="hidden" id="base" value="<?php echo base_url(); ?>">
 			<div class="ml-4 mb-1 dispNone">
 				<a class="btn bg-warning text-white editBtn" href="javascript:;" onclick="fnProfileEdit()">
 					<i class="fa fa-edit fa-btn"></i>Edit
@@ -93,7 +94,7 @@
 					</div>
 					<div>
 						<!-- user name -->
-						<div class="leftSide">User Name : </div>
+						<div class="leftSide"><?php echo lang('lbl_userName', 'userName'); ?> : </div>
 						<div class="rightSide"><?php echo $profileDetail->userName; ?></div>
 					</div>
 					<div>
