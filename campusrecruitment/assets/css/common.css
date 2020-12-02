@@ -13,6 +13,9 @@
 .autowidth {
 	width: auto;
 }
+.w23 {
+	width: 23% !important;
+}
 .w30 {
 	width: 30% !important;
 }

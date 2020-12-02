@@ -26,5 +26,11 @@ $lang['lbl_addCompany'] = 'Add Company';
 $lang['lbl_company'] = 'Company';
 $lang['lbl_history'] = 'History';
 $lang['lbl_entryDate'] = 'Entry Date';
+$lang['lbl_website'] = 'Website';
+$lang['lbl_companyAdd'] = 'Company Add';
+$lang['lbl_companyEdit'] = 'Company Edit';
+$lang['lbl_add'] = 'Add';
+$lang['lbl_edit'] = 'Edit';
+$lang['lbl_register'] = 'Register';
 
 ?>

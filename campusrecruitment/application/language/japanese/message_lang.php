@@ -26,5 +26,11 @@ $lang['lbl_addCompany'] = '会社を追加';
 $lang['lbl_company'] = '会社';
 $lang['lbl_history'] = '歴史';
 $lang['lbl_entryDate'] = '申込日';
+$lang['lbl_website'] = 'ウェブサイト';
+$lang['lbl_companyAdd'] = '会社追加';
+$lang['lbl_companyEdit'] = '会社編集';
+$lang['lbl_add'] = '追加';
+$lang['lbl_edit'] = '編集';
+$lang['lbl_register'] = '登録';
 
 ?>

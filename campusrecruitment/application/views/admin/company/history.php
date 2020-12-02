@@ -55,7 +55,7 @@
                         <div class="inb fs16 float-left w56">
                             <a href="javascript:;" onclick="fnCompanyFilter(1)" id="filterVal1" class="fs16 btn btn-link <?php echo $disableAll ?>"><?php echo lang('lbl_all'); ?></a>
                             <span> | </span>
-                            <a href="javascript:;" onclick="fnCompanyFilter(<?php echo '2';?>)" id="filterVal2" class="fs16 btn btn-link <?php echo $disableActive ?>"><?php echo lang('lbl_active'); ?></a>
+                            <a href="javascript:;" onclick="fnCompanyFilter(2)" id="filterVal2" class="fs16 btn btn-link <?php echo $disableActive ?>"><?php echo lang('lbl_active'); ?></a>
                             <span> | </span>
                             <a href="javascript:;" onclick="fnCompanyFilter(3)" id="filterVal3" class="fs16 btn btn-link <?php echo $disableNonActive ?>"><?php echo lang('lbl_deactive'); ?></a>
                         </div>
@@ -97,7 +97,7 @@
                                 <col width="12%">
                                 <col width="8%">
                                 <col width="15%">
-                                <col width="8%">
+                                <col width="10%">
                                 <col width="20%">
                                 <col width="11%">
                             </colgroup>

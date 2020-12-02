@@ -51,4 +51,11 @@ class CompanyModel extends CI_Model {
 		}
 		return $companyStatus;	
 	}
+
+	// inserts the company details
+	function companyAdd($userName,$companyAddData) {
+		$this->db->where('userName', $userName);
+		$companyAddStatus = $this->db->insert('company', $companyAddData);
+		return $companyAddStatus;
+	}
 }
