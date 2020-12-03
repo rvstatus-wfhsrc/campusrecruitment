@@ -32,5 +32,6 @@ $lang['lbl_companyEdit'] = 'Company Edit';
 $lang['lbl_add'] = 'Add';
 $lang['lbl_edit'] = 'Edit';
 $lang['lbl_register'] = 'Register';
+$lang['lbl_detail'] = 'Detail';
 
 ?>

@@ -32,7 +32,8 @@
                                         		    'id' => 'userName',
             										'name' => 'userName',
             										'placeholder' => 'Enter User Name',
-            										'class' => 'input_box col-md-12 form-control w43 h-25'
+            										'class' => 'input_box col-md-12 form-control w43 h-25',
+                                                    'value' => set_value('userName','')
             								);
     										echo form_input($data);
                                         ?>
@@ -52,7 +53,8 @@
             										'id' => 'password',
             										'name' => 'password',
             										'placeholder' => 'Enter Password',
-            										'class' => 'input_box col-md-12 form-control w43 h-25'
+            										'class' => 'input_box col-md-12 form-control w43 h-25',
+                                                    'value' => set_value('password','')
     										);
     										echo form_input($data);
                                         ?>

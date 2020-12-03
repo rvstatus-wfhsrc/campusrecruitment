@@ -1,14 +1,36 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
+/**
+ * Company Model
+ *
+ * This Model are used to perform the companies related database process
+ * 
+ * @author Kulasekaran.
+ *
+ */
+
 class CompanyModel extends CI_Model {
+	/**
+	 * Company Model __construct
+	 *
+	 * This __construct are used to load the session and database
+	 * 
+	 * @author Kulasekaran.
+	 *
+	 */
 	function __construct() {
 		parent::__construct();
 		$this->load->database();
 		$this->load->library('session');
 	}
 
-	// retrieves company history
+	/**
+	 * This companyHistory method are used to retrieves the company data for the all company
+	 * @return the company history array
+	 * @author Kulasekaran.
+	 *
+	 */
 	function companyHistory() {
 		$filterVal = $this->input->post('filterVal');
 		$hiddenSearch = $this->input->post('hiddenSearch');
@@ -37,6 +59,12 @@ class CompanyModel extends CI_Model {
 		return $companyHistory->result();
 	}
 
+	/**
+	 * This companyStatus method are used to turns the company active or inactive for the specfic company
+	 * @return the company status
+	 * @author Kulasekaran.
+	 *
+	 */
 	function companyStatus($id,$delFlag)
 	{
 		$userName = $this->session->userdata('userName');
@@ -52,10 +80,28 @@ class CompanyModel extends CI_Model {
 		return $companyStatus;	
 	}
 
-	// inserts the company details
+	/**
+	 * This companyAdd method are used to insert company data for a new company
+	 * @return the status of query execution
+	 * @author Kulasekaran.
+	 *
+	 */
 	function companyAdd($userName,$companyAddData) {
 		$this->db->where('userName', $userName);
 		$companyAddStatus = $this->db->insert('company', $companyAddData);
 		return $companyAddStatus;
+	}
+
+	/**
+	 * This companyDetail method are used to retrieve the company details for the specfic company
+	 * @return the company detail array
+	 * @author Kulasekaran.
+	 *
+	 */
+		function companyDetail($companyId) {
+		$this->db->select('id,companyName,incharge,contact,email,entryDate,address,website,userName,delFlag');
+		$this->db->where(array('id' => $companyId));
+		$companyDetail = $this->db->get('company');
+		return $companyDetail->result()[0];
 	}
 }

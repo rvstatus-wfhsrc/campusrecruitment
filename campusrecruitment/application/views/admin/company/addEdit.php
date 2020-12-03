@@ -166,6 +166,9 @@
                                             );
                                             echo form_input($data);
                                         ?>
+                                        <div class="error">
+                                            <?php echo form_error('entryDate'); ?>
+                                        </div>
                                 </div>
                             </div>
                                 <!-- register button -->
@@ -184,8 +187,8 @@
             </div>
         </div>
         <script type="text/javascript" src="<?php echo base_url(); ?>assets/js/jquery.min.js"></script>
-        <script type="text/javascript" src="<?php echo base_url(); ?>assets/js/admin/company/addEdit.js"></script>
         <script type="text/javascript" src="<?php echo base_url(); ?>assets/js/lib/datepicker_jquery_1.9.1.js"></script>
         <script type="text/javascript" src="<?php echo base_url(); ?>assets/js/lib/bootstrap_datepicker_1.5.0.js"></script>
+        <script type="text/javascript" src="<?php echo base_url(); ?>assets/js/admin/company/addEdit.js"></script>
     </body>
 </html>

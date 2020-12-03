@@ -32,5 +32,6 @@ $lang['lbl_companyEdit'] = '会社編集';
 $lang['lbl_add'] = '追加';
 $lang['lbl_edit'] = '編集';
 $lang['lbl_register'] = '登録';
+$lang['lbl_detail'] = '詳細';
 
 ?>

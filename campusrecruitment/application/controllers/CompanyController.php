@@ -6,7 +6,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  *
  * This Controller are used to perform the companies related process
  * 
- * @author Ragav.
+ * @author Kulasekaran.
  *
  */
 
@@ -16,7 +16,7 @@ class CompanyController extends CI_Controller {
 	/**
 	 * Company Controller __construct
 	 *
-	 * This __construct are used to load the Layouts, url, session and CompanyModel
+	 * This __construct are used to load the Layouts, url, session, CommonModel, form validation and CompanyModel
 	 * 
 	 * @author Kulasekaran.
 	 *
@@ -32,7 +32,7 @@ class CompanyController extends CI_Controller {
 	}
 
 	/**
-	 * This companyHistory method are used to get the data form model for the specfic user (user whose login to website)
+	 * This companyHistory method are used to get the data form model for the specfic user
 	 * @return to view screen [ detail ]
 	 * @author Kulasekaran.
 	 *
@@ -140,6 +140,11 @@ class CompanyController extends CI_Controller {
 													'max_length' => $this->lang->line("max_length")
 												)
 											);
+		$this->form_validation->set_rules( 'entryDate', $this->lang->line("lbl_entryDate"), 'required',
+												array(
+													'required' => $this->lang->line("required")
+												)
+											);
 		if ($this->form_validation->run() == FALSE){
             $json_response = $this->form_validation->error_array();
             echo json_encode($json_response); exit();
@@ -159,7 +164,12 @@ class CompanyController extends CI_Controller {
 		return ($row->count > 0) ? FALSE : TRUE;
 	}
 
-	// To add the company details
+	/**
+	 * This companyAddForm method are used to get data from form and pass it to model for the specfic company
+	 * @return to view screen [ history ]
+	 * @author Kulasekaran.
+	 *
+	 */
 	public function companyAddForm() {
 			$userName = $this->session->userdata('userName');
 			//create company userName...
@@ -185,10 +195,28 @@ class CompanyController extends CI_Controller {
 				'website' => $this->input->post('website'),
 				'userName' => $companyUserName,
 				'password' => md5('company'),
+				'entryDate' => $this->input->post('entryDate'),
 				'created_by' => $userName
 			);
 			$companyAddStatus = $this->CompanyModel->companyAdd($userName,$companyAddData);
 			redirect('CompanyController/companyHistory');
+	}
+
+	/**
+	 * This company detail method are used to get the data from model for the specfic company
+	 * @return to view screen [ detail ]
+	 * @author kulasekaran.
+	 *
+	 */
+	public function companyDetail() {
+		$id = $this->input->post('hiddenCompanyId');
+		if ($id != null) {
+			$companydata = array('companyId' => $id);
+		    $this->session->set_userdata($companydata);
+		}
+		$companyId = $this->session->userdata('companyId');
+		$data['companyDetail'] = $this->CompanyModel->companyDetail($companyId);
+		$this->layouts->view('admin/company/detail',$data);
 	}
 
 }

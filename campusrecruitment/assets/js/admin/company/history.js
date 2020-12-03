@@ -22,9 +22,8 @@ $(document).ready(function() {
 
 // company detail process
 function fnCompanyDetail(id){
-	alert("Company Detail Screen is underprocess");
-	// $( "#hiddenCompanyId" ).val(id);
-	// $( "#historyForm" ).submit();
+	$( "#hiddenCompanyId" ).val(id);
+	$( "#historyForm" ).submit();
 }
 // filter process
 function fnCompanyFilter(filterValue) {

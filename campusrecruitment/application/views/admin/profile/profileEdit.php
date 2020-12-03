@@ -32,6 +32,7 @@
                         <div class="card-body">
                             <!-- register and update account process -->
                             <?php echo form_open('AdminController/profileUpdate',['method' => 'POST', 'class' => 'form-horizontal','id' => 'editForm','name' => 'editForm','enctype'=>'multipart/form-data']); ?>
+                                <input type="hidden" id="base" value="<?php echo base_url(); ?>">
                                 <!-- name -->
                                 <div class="form-group form-inline">
                                     <?php echo lang('lbl_name', 'name', array('class' => 'col-md-4 control-label required')); ?>

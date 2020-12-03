@@ -16,9 +16,9 @@ class AdminController extends CI_Controller {
 	/**
 	 * Admin Controller __construct
 	 *
-	 * This __construct are used to load the Layouts, url, session and AdminModel
+	 * This __construct are used to load the Layouts, url, session, CommonModel, form validation and AdminModel
 	 * 
-	 * @author Ragav.
+	 * @author Kulasekaran.
 	 *
 	 */
 	public function __construct() {
@@ -34,7 +34,7 @@ class AdminController extends CI_Controller {
 	/**
 	 * This profile methond are used to get the data form model for the specfic user (user whose login to website)
 	 * @return to view screen [ profileDetail ]
-	 * @author Ragav.
+	 * @author kulasekaran.
 	 *
 	 */
 	public function profile() {
@@ -52,7 +52,7 @@ class AdminController extends CI_Controller {
 	 * @throws any excetion are araise mention here
 	 * @param any parameter pass are mention here
 	 * @return to view screen [ register ]
-	 * @author Ragav.
+	 * @author Kulasekaran.
 	 *
 	 */
 	public function register() {
@@ -64,7 +64,7 @@ class AdminController extends CI_Controller {
 	/**
 	 * This removeImage methond are used to remove the image for specfic user (user whose login to website)
 	 * @return redirect to profile methond in Admin Controller
-	 * @author Ragav.
+	 * @author Kulasekaran.
 	 *
 	 */
 	public function removeImage() {
@@ -120,7 +120,7 @@ class AdminController extends CI_Controller {
 		$this->form_validation->set_rules( 'email', $this->lang->line("lbl_email"), 'required|valid_email|max_length[50]|callback_email_exist_check[users.email.'.$this->session->userdata('userName').']',
 												array(
 													'required' => $this->lang->line("required"),
-													'valid_email' => $this->lang->line("email"),
+													'valid_email' => $this->lang->line("valid_email"),
 													'max_length' => $this->lang->line("max_length")
 												)
 											);
