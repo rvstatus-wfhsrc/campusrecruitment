@@ -33,5 +33,7 @@ $lang['lbl_add'] = '追加';
 $lang['lbl_edit'] = '編集';
 $lang['lbl_register'] = '登録';
 $lang['lbl_detail'] = '詳細';
+$lang['lbl_update'] = '更新';
+$lang['lbl_back'] = '後ろに';
 
 ?>

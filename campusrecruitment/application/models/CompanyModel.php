@@ -9,8 +9,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * @author Kulasekaran.
  *
  */
-
 class CompanyModel extends CI_Model {
+
 	/**
 	 * Company Model __construct
 	 *
@@ -60,13 +60,12 @@ class CompanyModel extends CI_Model {
 	}
 
 	/**
-	 * This companyStatus method are used to turns the company active or inactive for the specfic company
+	 * This companyStatus method are used to turns active or inactive for the specfic company
 	 * @return the company status
 	 * @author Kulasekaran.
 	 *
 	 */
-	function companyStatus($id,$delFlag)
-	{
+	function companyStatus($id,$delFlag) {
 		$userName = $this->session->userdata('userName');
 		// $delFlag => 0 ----> change delFlag = 1
 		// $delFlag => 1 ----> change delFlag = 0
@@ -82,7 +81,7 @@ class CompanyModel extends CI_Model {
 
 	/**
 	 * This companyAdd method are used to insert company data for a new company
-	 * @return the status of query execution
+	 * @return the status of company add
 	 * @author Kulasekaran.
 	 *
 	 */
@@ -98,10 +97,35 @@ class CompanyModel extends CI_Model {
 	 * @author Kulasekaran.
 	 *
 	 */
-		function companyDetail($companyId) {
+	function companyDetail($companyId) {
 		$this->db->select('id,companyName,incharge,contact,email,entryDate,address,website,userName,delFlag');
 		$this->db->where(array('id' => $companyId));
 		$companyDetail = $this->db->get('company');
 		return $companyDetail->result()[0];
+	}
+
+	/**
+	 * This companyEdit method are used to retrieve the company details for the specfic company to edit
+	 * @return the company edit detail array
+	 * @author Kulasekaran.
+	 *
+	 */
+	function companyEdit($companyId) {
+		$this->db->select('id,companyName,incharge,contact,email,entryDate,address,website,delFlag');
+		$this->db->where(array('id' => $companyId));
+		$companyEdit = $this->db->get('company');
+		return $companyEdit->result()[0];
+	}
+
+	/**
+	 * This companyUpdate method are used to update the company details into database for the specfic company
+	 * @return the status of company update
+	 * @author Kulasekaran.
+	 *
+	 */
+	function companyUpdate($companyId,$companyUpdateData) {
+		$this->db->where('id', $companyId);
+		$updateCompany = $this->db->update('company', $companyUpdateData);
+		return $updateCompany;
 	}
 }

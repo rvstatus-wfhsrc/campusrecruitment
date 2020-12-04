@@ -47,8 +47,12 @@
 		</div>
 		<?php echo form_open('CompanyController/companyEdit',['method' => 'POST','id' => 'detailForm','name' => 'detailForm']); ?>
 			<input type="hidden" id="base" value="<?php echo base_url(); ?>">
+			<input type="hidden" id="hiddenCompanyId" name="hiddenCompanyId">
 			<div class="ml-4 mb-1 dispNone">
-				<a class="btn bg-warning text-white editBtn" href="javascript:;" onclick="fnCompanyEdit()">
+				<a class="btn btn-info editBtn" href="javascript:;" onclick="fnBackBtn()">
+					<i class="fa fa-chevron-left fa-btn"></i><?php echo lang('lbl_back'); ?>
+				</a>
+				<a class="btn bg-warning text-white editBtn" href="javascript:;" onclick="fnCompanyEdit(<?php echo $companyDetail->id;?>)">
 					<i class="fa fa-edit fa-btn"></i><?php echo lang('lbl_edit'); ?>
 				</a>
 			</div>
@@ -92,7 +96,7 @@
 					<div>
 						<!-- entry date -->
 						<div class="leftSide"><?php echo lang('lbl_entryDate', 'entryDate'); ?> : </div>
-						<div class="rightSide"><?php echo $companyDetail->entryDate; ?></div>
+						<div class="rightSide"><?php echo ($companyDetail->entryDate != '0000-00-00') ? $companyDetail->entryDate : "Nil"; ?></div>
 					</div>
 				</div>
 			</div>

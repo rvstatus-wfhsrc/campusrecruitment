@@ -33,5 +33,7 @@ $lang['lbl_add'] = 'Add';
 $lang['lbl_edit'] = 'Edit';
 $lang['lbl_register'] = 'Register';
 $lang['lbl_detail'] = 'Detail';
+$lang['lbl_update'] = 'Update';
+$lang['lbl_back'] = 'Back';
 
 ?>

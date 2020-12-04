@@ -183,7 +183,7 @@
                                 </div>
                                 <!--image  -->
                                 <div class="form-group form-inline">
-                                    <?php echo lang('lbl_image', 'image', array('class' => 'col-md-4 control-label required')); ?>                   
+                                    <?php echo lang('lbl_image', 'image', array('class' => 'col-md-4 control-label')); ?>                   
                                     <div class="col-md-8">
                                         <?php echo "<input type='file' name='image' id='image' accept='image/*' class='w43 imageName' />"; ?>
                                         <span class="formatError"></span>

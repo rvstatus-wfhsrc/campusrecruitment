@@ -32,8 +32,8 @@ class CompanyController extends CI_Controller {
 	}
 
 	/**
-	 * This companyHistory method are used to get the data form model for the specfic user
-	 * @return to view screen [ detail ]
+	 * This companyHistory method are used to get the data from database for the all available company
+	 * @return to view screen [ history ]
 	 * @author Kulasekaran.
 	 *
 	 */
@@ -66,12 +66,11 @@ class CompanyController extends CI_Controller {
 
 	/**
 	 * This companyStatus method are used to change the delflag for the specfic company
-	 * @redirect to controller [ companyHistory ]
+	 * @return the redirect to controller [ companyHistory ]
 	 * @author Kulasekaran.
 	 *
 	 */
-    public function companyStatus()
-    {
+    public function companyStatus() {
     	$id = $this->input->post('hiddenCompanyId');
     	$delFlag = $this->input->post('hiddenDelFlag');
         $companyStatus = $this->CompanyModel->companyStatus($id,$delFlag);
@@ -84,12 +83,7 @@ class CompanyController extends CI_Controller {
 	 * @author Kulasekaran.
 	 *
 	 */
-    public function companyAdd()
-    {
-        // $designationArray = CommonModel::designation();
-        // $countryArray = CommonModel::country();
-        // $stateArray = array();
-        // $cityArray = array();
+    public function companyAdd() {
         $this->layouts->view('admin/company/addEdit');
     }
 
@@ -105,14 +99,14 @@ class CompanyController extends CI_Controller {
 		$this->form_validation->set_rules( 'companyName', $this->lang->line("lbl_companyName"), 'required|regex_match[/^[A-Za-z\s\.]+$/]|max_length[50]',
 												array(
 													'required' => $this->lang->line("required"),
-													'regex_match' => 'Please enter only alphabetical letter.',
+													'regex_match' => $this->lang->line("alphabetic"),
 													'max_length' => $this->lang->line("max_length")
 												)
 											);
 		$this->form_validation->set_rules( 'incharge', $this->lang->line("lbl_incharge"), 'required|regex_match[/^[A-Za-z\s\.]+$/]|max_length[50]',
 												array(
 													'required' => $this->lang->line("required"),
-													'regex_match' => 'Please enter only alphabetical letter.',
+													'regex_match' => $this->lang->line("alphabetic"),
 													'max_length' => $this->lang->line("max_length")
 												)
 											);
@@ -124,10 +118,10 @@ class CompanyController extends CI_Controller {
 		$this->form_validation->set_rules( 'contact', $this->lang->line("lbl_contact"), 'required|regex_match[/\b\d{10}\b/]',
 												array(
 													'required' => $this->lang->line("required"),
-													'regex_match' => 'The Contact must be 10 digits.'
+													'regex_match' => $this->lang->line("contact_digit")
 												)
 											);
-		$this->form_validation->set_rules( 'email', $this->lang->line("lbl_email"), 'required|valid_email|max_length[50]|callback_email_exist_check[company.email.'.$this->session->userdata('userName').']',
+		$this->form_validation->set_rules( 'email', $this->lang->line("lbl_email"), 'required|valid_email|max_length[50]|callback_email_exist_check[company.email.'.$this->input->post('hiddenCompanyId').']',
 												array(
 													'required' => $this->lang->line("required"),
 													'valid_email' => $this->lang->line("valid_email"),
@@ -140,70 +134,80 @@ class CompanyController extends CI_Controller {
 													'max_length' => $this->lang->line("max_length")
 												)
 											);
-		$this->form_validation->set_rules( 'entryDate', $this->lang->line("lbl_entryDate"), 'required',
+		$this->form_validation->set_rules( 'entryDate', $this->lang->line("lbl_entryDate"), 'required|callback_before_tomorrow['.$this->input->post('entryDate').']',
 												array(
 													'required' => $this->lang->line("required")
 												)
 											);
-		if ($this->form_validation->run() == FALSE){
+		if($this->form_validation->run() == FALSE) {
             $json_response = $this->form_validation->error_array();
             echo json_encode($json_response); exit();
 
-        }else{
+        } else {
            echo json_encode(true); exit();
 
         }
 	}
 
-	function email_exist_check($str, $fields)
-	{
+	/**
+	 * This email_exist_check method are used to validate the email for already exist or not
+	 * @return true or false to companyFormValidation method
+	 * @author Kulasekaran.
+	 *
+	 */
+	function email_exist_check($str, $fields) {
 		list($table, $columnOne, $strTwo) = explode('.', $fields, 3); 
-		$query = $this->db->query("SELECT COUNT(id) AS count FROM $table WHERE ".$columnOne." = '".$str."' AND userName != '".$strTwo."'");
+		$query = $this->db->query("SELECT COUNT(id) AS count FROM $table WHERE ".$columnOne." = '".$str."' AND id != '".$strTwo."'");
 		$row = $query->row();
-		$this->form_validation->set_message('email_exist_check', 'The E-Mail Address already exists.');
+		$this->form_validation->set_message('email_exist_check', $this->lang->line("exist_email"));
 		return ($row->count > 0) ? FALSE : TRUE;
 	}
 
 	/**
 	 * This companyAddForm method are used to get data from form and pass it to model for the specfic company
-	 * @return to view screen [ history ]
+	 * @return the redirect to method [ companyHistory ]
 	 * @author Kulasekaran.
 	 *
 	 */
 	public function companyAddForm() {
-			$userName = $this->session->userdata('userName');
-			//create company userName...
-        	$label = 'CY';
-        	$query = $this->db->query("SELECT userName FROM company WHERE userName LIKE 'CY%' ORDER BY id DESC");
-        	$lastCompanyInArray = $query->result_array();
-        	$lastCompanyUserName = $lastCompanyInArray[0];
-        	$lastCompanyID = $lastCompanyUserName['userName'];
-        	$companyCount = 1;
-	        if (isset($lastCompanyID) && $lastCompanyID != "") 
-	        {
-	            $companyCount = substr($lastCompanyID, -4);
-	            $companyCount = $companyCount + 1;
-	        }
-	        $padCount = str_pad($companyCount, 4, '0', STR_PAD_LEFT);
-	        $companyUserName = $label.$padCount;
-			$companyAddData = array(
-				'companyName' => $this->input->post('companyName'),
-				'incharge' => $this->input->post('incharge'),
-				'address' => $this->input->post('address'),
-				'contact' => $this->input->post('contact'),
-				'email' => $this->input->post('email'),
-				'website' => $this->input->post('website'),
-				'userName' => $companyUserName,
-				'password' => md5('company'),
-				'entryDate' => $this->input->post('entryDate'),
-				'created_by' => $userName
-			);
-			$companyAddStatus = $this->CompanyModel->companyAdd($userName,$companyAddData);
+		$userName = $this->session->userdata('userName');
+		//create company userName...
+        $label = 'CY';
+        $query = $this->db->query("SELECT userName FROM company WHERE userName LIKE 'CY%' ORDER BY id DESC");
+        $lastCompanyInArray = $query->result_array();
+        $lastCompanyUserName = $lastCompanyInArray[0];
+        $lastCompanyID = $lastCompanyUserName['userName'];
+        $companyCount = 1;
+	    if (isset($lastCompanyID) && $lastCompanyID != "") {
+	        $companyCount = substr($lastCompanyID, -4);
+	       	$companyCount = $companyCount + 1;
+	    }
+	    $padCount = str_pad($companyCount, 4, '0', STR_PAD_LEFT);
+	    $companyUserName = $label.$padCount;
+		$companyAddData = array(
+			'companyName' => $this->input->post('companyName'),
+			'incharge' => $this->input->post('incharge'),
+			'address' => $this->input->post('address'),
+			'contact' => $this->input->post('contact'),
+			'email' => $this->input->post('email'),
+			'website' => $this->input->post('website'),
+			'userName' => $companyUserName,
+			'password' => md5('company'),
+			'entryDate' => $this->input->post('entryDate'),
+			'created_by' => $userName
+		);
+		$companyAddStatus = $this->CompanyModel->companyAdd($userName,$companyAddData);
+		if($companyAddStatus == "1") { 
+			$this->session->set_flashdata(array('message' => 'Company Successfully Registered','type' => 'success'));
 			redirect('CompanyController/companyHistory');
+		} else {
+			$this->session->set_flashdata(array('message' => 'Sorry, Something Went Wrong. Please Try Again Later','type' => 'danger'));
+			redirect('CompanyController/companyHistory');
+		}
 	}
 
 	/**
-	 * This company detail method are used to get the data from model for the specfic company
+	 * This companyDetail method are used to get the data from model for the specfic company
 	 * @return to view screen [ detail ]
 	 * @author kulasekaran.
 	 *
@@ -219,4 +223,57 @@ class CompanyController extends CI_Controller {
 		$this->layouts->view('admin/company/detail',$data);
 	}
 
+	/**
+	 * This companyEdit method are used to get the data from model for the specfic company
+	 * @return to view screen [ addEdit ]
+	 * @author kulasekaran.
+	 *
+	 */
+	public function companyEdit() {
+		$companyId = $this->input->post('hiddenCompanyId');
+		$data['companyEdit'] = $this->CompanyModel->companyEdit($companyId);
+		$this->layouts->view('admin/company/addEdit',$data);
+	}
+
+	/**
+	 * This companyUpdate method are used to get the data from form and pass it to model for update process
+	 * @return the redirect to method [ companyHistory ]
+	 * @author kulasekaran.
+	 *
+	 */
+	public function companyUpdate() {
+		$userName = $this->session->userdata('userName');
+		$companyId = $this->input->post('hiddenCompanyId');
+		$companyUpdateData = array(
+			'companyName' => $this->input->post('companyName'),
+			'incharge' => $this->input->post('incharge'),
+			'address' => $this->input->post('address'),
+			'contact' => $this->input->post('contact'),
+			'email' => $this->input->post('email'),
+			'website' => $this->input->post('website'),
+			'password' => md5('company'),
+			'entryDate' => $this->input->post('entryDate'),
+			'updated_by' => $userName
+		);
+		$companyUpdateStatus = $this->CompanyModel->companyUpdate($companyId,$companyUpdateData);
+		if($companyUpdateStatus == "1") {
+	        $this->session->set_flashdata(array('message' => 'Company Details Updated Successfully','type' => 'success'));
+	       	redirect('CompanyController/companyHistory');
+	    } else {
+	        $this->session->set_flashdata(array('message' => 'Company Details Update Failed','type' => 'danger'));
+	        redirect('CompanyController/companyHistory');
+	    }
+	}
+
+	/**
+	 * This before_tomorrow method are used to validate the entry date is before tomorrow or not
+	 * @return true or false to companyFormValidation method
+	 * @author kulasekaran.
+	 *
+	 */
+	function before_tomorrow($entryDate) {
+		$currentDate = date('Y-m-d');
+		$this->form_validation->set_message('before_tomorrow', $this->lang->line("before_tomorrow"));
+		return ($currentDate < $entryDate) ? FALSE : TRUE;
+	}
 }

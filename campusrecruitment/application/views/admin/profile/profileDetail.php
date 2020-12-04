@@ -99,49 +99,49 @@
 					</div>
 					<div>
 						<!-- customer name -->
-						<div class="leftSide">Name : </div>
+						<div class="leftSide"><?php echo lang('lbl_name', 'name'); ?> : </div>
 						<div class="rightSide"><?php echo $profileDetail->name; ?></div>
 					</div>
 					<div>
 						<!-- gender -->
-						<div class="leftSide">Gender : </div>
+						<div class="leftSide"><?php echo lang('lbl_gender', 'gender'); ?> : </div>
 						<div class="rightSide">
 							 <?php echo $profileDetail->gender == 1? 'Male' : 'Female'; ?>
 						</div>
 					</div>
 					<div>
 						<!-- address -->
-						<div class="leftSide">Address : </div>
+						<div class="leftSide"><?php echo lang('lbl_address', 'address'); ?> : </div>
 						<div class="rightSide vat"><?php echo nl2br($profileDetail->address); ?></div>
 					</div>
 					<div>
 						<!-- city -->
-						<div class="leftSide">City : </div>
+						<div class="leftSide"><?php echo lang('lbl_city', 'city'); ?> : </div>
 						<div class="rightSide"><?php echo $cityArray[$profileDetail->city]; ?></div>
 					</div>
 					<div>
 						<!-- state -->
-						<div class="leftSide">State : </div>
+						<div class="leftSide"><?php echo lang('lbl_state', 'state'); ?> : </div>
 						<div class="rightSide"><?php echo $stateArray[$profileDetail->state]; ?></div>
 					</div>
 					<div>
 						<!-- country -->
-						<div class="leftSide">Country : </div>
+						<div class="leftSide"><?php echo lang('lbl_country', 'country'); ?> : </div>
 						<div class="rightSide"><?php echo $countryArray[$profileDetail->country]; ?></div>
 					</div>
 					<div>
 						<!-- pincode -->
-						<div class="leftSide">Pincode : </div>
+						<div class="leftSide"><?php echo lang('lbl_pincode', 'pincode'); ?> : </div>
 						<div class="rightSide"><?php echo $profileDetail->pincode; ?></div>
 					</div>
 					<div>
 						<!-- e-mail -->
-						<div class="leftSide">E-Mail : </div>
+						<div class="leftSide"><?php echo lang('lbl_email', 'email'); ?> : </div>
 						<div class="rightSide"><?php echo $profileDetail->email; ?></div>
 					</div>
 					<div>
 						<!-- contact -->
-						<div class="leftSide">Contact : </div>
+						<div class="leftSide"><?php echo lang('lbl_contact', 'contact'); ?> : </div>
 						<div class="rightSide"><?php echo $profileDetail->contact; ?></div>
 					</div>
 				</div>

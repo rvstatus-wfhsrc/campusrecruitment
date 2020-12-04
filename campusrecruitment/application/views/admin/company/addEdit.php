@@ -14,10 +14,10 @@
         </style>
     </head>
     <body>
-        <div class="">
+        <div>
             <ol class="breadcrumb mb-2 ml-4 w95">
                 <li class="breadcrumb-item"><i class="fa fa-user fa-btn mt3"></i><?php echo lang('lbl_company'); ?>
-                    <?php if(isset($companyEditDetail)) { ?>
+                    <?php if(isset($companyEdit)) { ?>
                         <span class ="dot editScrClr">&bull;</span><span class="editScrClr"><?php echo lang('lbl_edit'); ?></span>
                     <?php } else { ?>
                         <span class ="dot addScrClr">&bull;</span><span class="addScrClr"><?php echo lang('lbl_add'); ?></span>
@@ -29,18 +29,18 @@
             <div class="row justify-content-center">
                 <div class="col-lg-9">
                     <div class="card shadow-lg border-0 rounded-lg mt-4">
-                        <div class="card-header"><h3 class="text-center font-weight-light fs20"><?php if(isset($companyEditDetail)) { echo lang('lbl_companyEdit'); } else { echo lang('lbl_companyAdd'); } ?></h3></div>
+                        <div class="card-header"><h3 class="text-center font-weight-light fs20"><?php if(isset($companyEdit)) { echo lang('lbl_companyEdit'); } else { echo lang('lbl_companyAdd'); } ?></h3></div>
                         <div class="card-body">
                             <!-- register and update company process -->
-                            <?php if(isset($companyEditDetail)) { ?>
-                            <!-- company edit process -->
-                            <?php echo form_open('CompanyController/companyEditForm',['method' => 'POST', 'class' => 'form-horizontal','id' => 'editForm','name' => 'editForm','enctype'=>'multipart/form-data']); ?>
-                            <input type="hidden" id="hiddenEmployeeId" name="hiddenEmployeeId" value= "{{ $employeeEditDetail->id }}" >
-                        <?php } else { ?>
-                            <!-- company add process -->
-                            <?php echo form_open('CompanyController/companyAddForm',['method' => 'POST', 'class' => 'form-horizontal','id' => 'addForm','name' => 'addForm','enctype'=>'multipart/form-data']); ?>
-                        <?php } ?>
-                            <input type="hidden" id="base" value="<?php echo base_url(); ?>">
+                            <?php if(isset($companyEdit)) { ?>
+                                <!-- company edit process -->
+                                <?php echo form_open('CompanyController/companyUpdate',['method' => 'POST', 'class' => 'form-horizontal','id' => 'editForm','name' => 'editForm','enctype'=>'multipart/form-data']); ?>
+                                <input type="hidden" id="hiddenCompanyId" name="hiddenCompanyId" value= "<?php echo $companyEdit->id; ?>" >
+                            <?php } else { ?>
+                                <!-- company add process -->
+                                <?php echo form_open('CompanyController/companyAddForm',['method' => 'POST', 'class' => 'form-horizontal','id' => 'addForm','name' => 'addForm','enctype'=>'multipart/form-data']); ?>
+                            <?php } ?>
+                                <input type="hidden" id="base" value="<?php echo base_url(); ?>">
                                 <!-- company name -->
                                 <div class="form-group form-inline">
                                     <?php echo lang('lbl_companyName', 'companyName', array('class' => 'col-md-4 control-label required')); ?>
@@ -50,7 +50,8 @@
                                                 'id' => 'companyName',
                                                 'name' => 'companyName',
                                                 'placeholder' => 'Enter Company Name',
-                                                'class' => 'input_box col-md-12 form-control w43 h-25'
+                                                'class' => 'input_box col-md-12 form-control w43 h-25',
+                                                'value' => isset($companyEdit) ? set_value("companyName", $companyEdit->companyName) : set_value("companyName")
                                             );
                                             echo form_input($data);
                                         ?>
@@ -70,7 +71,8 @@
                                                 'placeholder' => 'Enter Address',
                                                 'class' => 'form-control w43',
                                                 'rows' => 3,
-                                                'cols' => 46
+                                                'cols' => 46,
+                                                'value' => isset($companyEdit) ? set_value("address", $companyEdit->address) : set_value("address")
                                             );
                                             echo form_textarea($data);
                                         ?>
@@ -88,7 +90,8 @@
                                                 'id' => 'incharge',
                                                 'name' => 'incharge',
                                                 'placeholder' => 'Enter Incharge Name',
-                                                'class' => 'input_box col-md-12 form-control w43 h-25'
+                                                'class' => 'input_box col-md-12 form-control w43 h-25',
+                                                'value' => isset($companyEdit) ? set_value("incharge", $companyEdit->incharge) : set_value("incharge")
                                             );
                                             echo form_input($data);
                                         ?>
@@ -106,7 +109,8 @@
                                                 'id' => 'contact',
                                                 'name' => 'contact',
                                                 'placeholder' => 'Enter Contact',
-                                                'class' => 'input_box col-md-12 form-control w30 h-25'
+                                                'class' => 'input_box col-md-12 form-control w30 h-25',
+                                                'value' => isset($companyEdit) ? set_value("contact", $companyEdit->contact) : set_value("contact")
                                             );
                                             echo form_input($data);
                                         ?>
@@ -124,7 +128,8 @@
                                                 'id' => 'email',
                                                 'name' => 'email',
                                                 'placeholder' => 'Enter E-Mail Address',
-                                                'class' => 'input_box col-md-12 form-control w43 h-25'
+                                                'class' => 'input_box col-md-12 form-control w43 h-25',
+                                                'value' => isset($companyEdit) ? set_value("email", $companyEdit->email) : set_value("email")
                                             );
                                             echo form_input($data);
                                         ?>
@@ -142,7 +147,8 @@
                                                 'id' => 'website',
                                                 'name' => 'website',
                                                 'placeholder' => 'Enter Web Site',
-                                                'class' => 'input_box col-md-12 form-control w43 h-25'
+                                                'class' => 'input_box col-md-12 form-control w43 h-25',
+                                                'value' => isset($companyEdit) ? set_value("website", $companyEdit->website) : set_value("website")
                                             );
                                             echo form_input($data);
                                         ?>
@@ -152,32 +158,39 @@
                                     </div>
                                 </div>
                                 <!-- entry date -->
-                            <div class="form-group form-inline">
-                                <?php echo lang('lbl_entryDate', 'entryDate', array('class' => 'col-md-4 control-label required')); ?>
-                                <div class="form-group col-md-8">
-                                    <?php
+                                <div class="form-group form-inline">
+                                    <?php echo lang('lbl_entryDate', 'entryDate', array('class' => 'col-md-4 control-label required')); ?>
+                                    <div class="form-group col-md-8">
+                                        <?php
                                             $data= array(
                                                 'id' => 'entryDate',
                                                 'name' => 'entryDate',
                                                 'placeholder' => 'Enter Date',
                                                 'class' => 'input_box form-control w23 h-25',
                                                 'autocomplete' => 'off',
-                                                'onclick' => ''
+                                                'onclick' => '',
+                                                'value' => isset($companyEdit) ? set_value("entryDate", $companyEdit->entryDate) : set_value("entryDate")
                                             );
                                             echo form_input($data);
                                         ?>
                                         <div class="error">
                                             <?php echo form_error('entryDate'); ?>
                                         </div>
+                                    </div>
                                 </div>
-                            </div>
-                                <!-- register button -->
                                 <div class="form-group">
                                     <div class="offset-md-4 col-md-6">
-                                        <!-- register button -->
-                                        <button class="btn btn-success registerprocess">
-                                            <i class="fa fa-btn fa-plus"></i><?php echo lang('lbl_register'); ?>
-                                        </button>
+                                        <?php if(isset($companyEdit)) { ?>
+                                            <!-- update button -->
+                                            <button class="btn bg-warning text-white editprocess">
+                                                <i class="fa fa-btn fa-edit"></i><?php echo lang('lbl_update'); ?>
+                                            </button>
+                                        <?php } else { ?>
+                                            <!-- register button -->
+                                            <button class="btn btn-success registerprocess">
+                                                <i class="fa fa-btn fa-plus"></i><?php echo lang('lbl_register'); ?>
+                                            </button>
+                                        <?php } ?>
                                     </div>
                                 </div>
                             <?php echo form_close();?>

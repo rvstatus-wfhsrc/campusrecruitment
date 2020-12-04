@@ -28,9 +28,9 @@
         <div class="dispNone">
             <ol class="breadcrumb mb-1 ml-4 w96">
                 <li class="breadcrumb-item"><i class="fa fa-building-o fa-btn mt3"></i><?php echo lang('lbl_company'); ?><span class ="dot historyScrClr">&bull;</span><span class="historyScrClr"><?php echo lang('lbl_history'); ?></span></li>
-                <!-- @if(Session::has('message'))
-                    <div class="alert alert-{{session('message')['type']}} fmsg tac">{{ Session::get('message')['text'] }}</div>
-                @endif -->
+               <?php if($this->session->flashdata('message')) { ?>
+                    <div class="alert alert-<?php echo $this->session->flashdata('type'); ?> fmsg tac"><?php echo $this->session->flashdata('message'); ?> </div>
+                <?php } ?>
             </ol>
         </div>
         <div class="row">

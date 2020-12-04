@@ -113,7 +113,7 @@ class AdminController extends CI_Controller {
 		$this->form_validation->set_rules( 'name', $this->lang->line("lbl_name"), 'required|regex_match[/^[A-Za-z\s\.]+$/]|max_length[50]',
 												array(
 													'required' => $this->lang->line("required"),
-													'regex_match' => 'Please enter only alphabetical letter.',
+													'regex_match' => $this->lang->line("alphabetic"),
 													'max_length' => $this->lang->line("max_length")
 												)
 											);
@@ -152,13 +152,13 @@ class AdminController extends CI_Controller {
 		$this->form_validation->set_rules( 'pincode', $this->lang->line("lbl_pincode"), 'required|regex_match[/\b\d{6}\b/]',
 												array(
 													'required' => $this->lang->line("required"),
-													'regex_match' => 'The Pincode must be 6 digits.'
+													'regex_match' => $this->lang->line("pincode_digit")
 												)
 											);
 		$this->form_validation->set_rules( 'contact', $this->lang->line("lbl_contact"), 'required|regex_match[/\b\d{10}\b/]',
 												array(
 													'required' => $this->lang->line("required"),
-													'regex_match' => 'The Contact must be 10 digits.'
+													'regex_match' => $this->lang->line("contact_digit")
 												)
 											);
 		if ($this->form_validation->run() == FALSE){
@@ -175,7 +175,7 @@ class AdminController extends CI_Controller {
 		list($table, $columnOne, $strTwo) = explode('.', $fields, 3); 
 		$query = $this->db->query("SELECT COUNT(id) AS count FROM $table WHERE ".$columnOne." = '".$str."' AND userName != '".$strTwo."'");
 		$row = $query->row();
-		$this->form_validation->set_message('email_exist_check', 'The E-Mail Address already exists.');
+		$this->form_validation->set_message('email_exist_check', $this->lang->line("exist_email"));
 		return ($row->count > 0) ? FALSE : TRUE;
 	}
 }
