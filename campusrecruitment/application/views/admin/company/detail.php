@@ -37,6 +37,15 @@
 			.fa-trash {
 				color: #FF0000;
 			}
+			/*Flash message design*/
+		    .fmsg{
+		        font-size: 14px;
+		        margin-left: 173px;
+		        width: 48%;
+		        margin-bottom: 0px;
+		        padding-top: 1px;
+		        padding-bottom: 1px;
+		    }
 		</style>
 	</head>
 	<body>

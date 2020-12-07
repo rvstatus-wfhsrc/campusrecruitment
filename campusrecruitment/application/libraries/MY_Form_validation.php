@@ -17,11 +17,10 @@ class MY_Form_validation extends CI_Form_validation{
 	 * @author Kulasekaran.
 	 *
 	 */
-	function email_exist_check($str, $fields) {
-		list($table, $columnOne, $strTwo) = explode('.', $fields, 3); 
-		$query = $this->db->query("SELECT COUNT(id) AS count FROM $table WHERE ".$columnOne." = '".$str."' AND id != '".$strTwo."'");
+	function exist_email($email) {
+
+		$query = $this->CI->db->query("SELECT COUNT(id) AS count FROM company WHERE email = '".$email."' AND id != '3'");
 		$row = $query->row();
-		$this->form_validation->set_message('email_exist_check', $this->lang->line("exist_email"));
 		return ($row->count > 0) ? FALSE : TRUE;
 	}
 
@@ -31,10 +30,34 @@ class MY_Form_validation extends CI_Form_validation{
 	 * @author kulasekaran.
 	 *
 	 */
-	function before_tomorrow($entryDate) {
+	function before_tomorrow() {
+		$entryDate = $this->CI->input->post('entryDate');
 		$currentDate = date('Y-m-d');
-		$this->form_validation->set_message('before_tomorrow', $this->lang->line("before_tomorrow"));
 		return ($currentDate < $entryDate) ? FALSE : TRUE;
+	}
+
+	/**
+	 * This alphabetic method are used to validate the field are alphabetic or not
+	 * @return true or false to companyProfileFormValidation method
+	 * @author kulasekaran.
+	 *
+	 */
+	function alphabetic($name) {
+		$pattern = "/^[A-Za-z\s\.]+$/";
+		$match = preg_match($pattern,$name);
+		return ($match == 0) ? FALSE : TRUE;
+	}
+
+	/**
+	 * This contact_digit method are used to validate contact field have ten digit or not
+	 * @return true or false to companyProfileFormValidation method
+	 * @author kulasekaran.
+	 *
+	 */
+	function contact_digit($contact) {
+		$pattern = "/\b\d{10}\b/";
+		$match = preg_match($pattern,$contact);
+		return ($match == 0) ? FALSE : TRUE;
 	}
 
 }

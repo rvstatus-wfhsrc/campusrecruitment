@@ -14,17 +14,6 @@
         </style>
     </head>
     <body>
-        <div>
-            <ol class="breadcrumb mb-2 ml-4 w95">
-                <li class="breadcrumb-item"><i class="fa fa-building-o fa-btn mt3"></i><?php echo lang('lbl_company'); ?>
-                    <?php if(isset($companyEdit)) { ?>
-                        <span class ="dot editScrClr">&bull;</span><span class="editScrClr"><?php echo lang('lbl_edit'); ?></span>
-                    <?php } else { ?>
-                        <span class ="dot addScrClr">&bull;</span><span class="addScrClr"><?php echo lang('lbl_add'); ?></span>
-                    <?php } ?>
-                </li>
-            </ol>
-        </div>
         <div class="container mb-4">
             <div class="row justify-content-center">
                 <div class="col-lg-9">
@@ -187,7 +176,8 @@
                                                 'id' => 'password',
                                                 'name' => 'password',
                                                 'placeholder' => 'Enter Password',
-                                                'class' => 'input_box col-md-12 form-control w43 h-25'
+                                                'class' => 'col-md-12 form-control w43 h-25',
+                                                'type' => 'password'
                                             );
                                             echo form_input($data);
                                         ?>
@@ -205,7 +195,8 @@
                                                 'id' => 'password_confirmation',
                                                 'name' => 'password_confirmation',
                                                 'placeholder' => 'Enter Confirm Password',
-                                                'class' => 'input_box col-md-12 form-control w43 h-25'
+                                                'class' => 'col-md-12 form-control w43 h-25',
+                                                'type' => 'password'
                                             );
                                             echo form_input($data);
                                         ?>

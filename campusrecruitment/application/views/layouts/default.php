@@ -37,7 +37,7 @@
         <!-- Navbar-->
         <?php if($this->session->userdata('logged_in') == false) { ?>
             <ul class="navbar-nav ml-auto my-md-0">
-                <li class="nav-item <?php echo ($this->uri->segment(1)=='LoginController') || ($this->uri->segment(2)=='logout') || ($this->uri->segment(2)=='')?'active':''; ?>"><a class="nav-link" href="<?php echo site_url('CompanyController/companyRegister')?>">New Company</a></li>
+                <li class="nav-item <?php echo ($this->uri->segment(1)=='LoginController') || ($this->uri->segment(2)=='companyProfileAdd')?'active':''; ?>"><a class="nav-link" href="<?php echo site_url('CompanyController/companyProfileAdd')?>">New Company</a></li>
                 <li class="nav-item <?php echo ($this->uri->segment(2)=='register')?'active':''; ?>"><a class="nav-link" href="<?php echo site_url('JobSeekerController/jobSeekerRegister') ?>">New Student</a></li>
             </ul>
         <?php } else { ?>

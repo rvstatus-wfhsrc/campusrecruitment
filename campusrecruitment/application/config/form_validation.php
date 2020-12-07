@@ -141,20 +141,18 @@ $config = array(
                                     array(
                                         'field' => 'companyName',
                                         'label' => 'lang:lbl_companyName',
-                                        'rules' => 'required|regex_match[/^[A-Za-z\s\.]+$/]|max_length[50]',
+                                        'rules' => 'required|alphabetic|max_length[50]',
                                             array(
                                                 'required' => 'lang:required',
-                                                'regex_match' => 'lang:alphabetic',
                                                 'max_length' => 'lang:max_length'
                                             )
                                     ),
                                     array(
                                         'field' => 'incharge',
                                         'label' => 'lang:lbl_incharge',
-                                        'rules' => 'required|regex_match[/^[A-Za-z\s\.]+$/]|max_length[50]',
+                                        'rules' => 'required|alphabetic|max_length[50]',
                                             array(
                                                 'required' => 'lang:required',
-                                                'regex_match' => 'lang:alphabetic',
                                                 'max_length' => 'lang:max_length'
                                             )
                                     ),
@@ -169,16 +167,15 @@ $config = array(
                                     array(
                                         'field' => 'contact',
                                         'label' => 'lang:lbl_contact',
-                                        'rules' => 'required|regex_match[/\b\d{10}\b/]',
+                                        'rules' => 'required|contact_digit',
                                             array(
-                                                'required' => 'lang:required',
-                                                'regex_match' => 'lang:contact_digit'
+                                                'required' => 'lang:required'
                                             )
                                     ),
                                     array(
                                         'field' => 'email',
                                         'label' => 'lang:lbl_email',
-                                        'rules' => 'required|valid_email|max_length[50]',
+                                        'rules' => 'required|valid_email|max_length[50]|exist_email',
                                             array(
                                                 'required' => 'lang:required',
                                                 'max_length' => 'lang:max_length',
@@ -197,7 +194,7 @@ $config = array(
                                     array(
                                         'field' => 'entryDate',
                                         'label' => 'lang:lbl_entryDate',
-                                        'rules' => 'required',
+                                        'rules' => 'required|before_tomorrow',
                                             array(
                                                 'required' => 'lang:required'
                                             )

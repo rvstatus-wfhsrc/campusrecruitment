@@ -161,7 +161,7 @@
                                 <?php // echo form_close();?>
                             </div>
                             <div class="card-footer text-center">
-                                <div class="small"><a href="<?php echo site_url('CompanyController/companyRegister') ?>">Are you new Company ? Sign up!</a></div>
+                                <div class="small"><a href="<?php echo site_url('CompanyController/companyProfileAdd') ?>">Are you new Company ? Sign up!</a></div>
                             </div>
                         </div>
                     </div>

@@ -128,7 +128,7 @@ class CompanyController extends CI_Controller {
 													'max_length' => $this->lang->line("max_length")
 												)
 											);
-		$this->form_validation->set_rules( 'website', $this->lang->line("lbl_website"), 'required|max_length[50]',
+		$this->form_validation->set_rules( 'website', $this->lang->line("lbl_website"), 'required|max_length[50]|callback_valid_url['.$this->input->post('website').']',
 												array(
 													'required' => $this->lang->line("required"),
 													'max_length' => $this->lang->line("max_length")
@@ -170,7 +170,6 @@ class CompanyController extends CI_Controller {
 	 *
 	 */
 	public function companyAddForm() {
-		$userName = $this->session->userdata('userName');
 		//create company userName...
         $label = 'CY';
         $query = $this->db->query("SELECT userName FROM company WHERE userName LIKE 'CY%' ORDER BY id DESC");
@@ -184,19 +183,7 @@ class CompanyController extends CI_Controller {
 	    }
 	    $padCount = str_pad($companyCount, 4, '0', STR_PAD_LEFT);
 	    $companyUserName = $label.$padCount;
-		$companyAddData = array(
-			'companyName' => $this->input->post('companyName'),
-			'incharge' => $this->input->post('incharge'),
-			'address' => $this->input->post('address'),
-			'contact' => $this->input->post('contact'),
-			'email' => $this->input->post('email'),
-			'website' => $this->input->post('website'),
-			'userName' => $companyUserName,
-			'password' => md5('company'),
-			'entryDate' => $this->input->post('entryDate'),
-			'created_by' => $userName
-		);
-		$companyAddStatus = $this->CompanyModel->companyAdd($userName,$companyAddData);
+		$companyAddStatus = $this->CompanyModel->companyAdd($companyUserName);
 		if($companyAddStatus == "1") { 
 			$this->session->set_flashdata(array('message' => 'Company Successfully Registered','type' => 'success'));
 			redirect('CompanyController/companyHistory');
@@ -308,8 +295,8 @@ class CompanyController extends CI_Controller {
 	public function companyProfileAddForm() {
 		//create company userName...
         $label = 'CY';
-        $query = $this->db->query("SELECT userName FROM company WHERE userName LIKE 'CY%' ORDER BY id DESC");
-        $lastCompanyInArray = $query->result_array();
+        $userName = $this->CompanyModel->lastCompanyUserName();
+        $lastCompanyInArray = $userName->result_array();
         $lastCompanyUserName = $lastCompanyInArray[0];
         $lastCompanyID = $lastCompanyUserName['userName'];
         $companyCount = 1;
@@ -319,19 +306,7 @@ class CompanyController extends CI_Controller {
 	    }
 	    $padCount = str_pad($companyCount, 4, '0', STR_PAD_LEFT);
 	    $companyUserName = $label.$padCount;
-		$companyAddData = array(
-			'companyName' => $this->input->post('companyName'),
-			'incharge' => $this->input->post('incharge'),
-			'address' => $this->input->post('address'),
-			'contact' => $this->input->post('contact'),
-			'email' => $this->input->post('email'),
-			'website' => $this->input->post('website'),
-			'userName' => $companyUserName,
-			'password' => md5($this->input->post('password')),
-			'entryDate' => $this->input->post('entryDate'),
-			'created_by' => $companyUserName,
-		);
-		$companyAddStatus = $this->CompanyModel->companyProfileAdd($companyAddData);
+		$companyAddStatus = $this->CompanyModel->companyAdd($companyUserName);
 		print_r($companyAddStatus);exit();
 		if($companyAddStatus == "1") { 
 			$this->session->set_flashdata(array('message' => 'Company Successfully Registered','type' => 'success'));
@@ -341,4 +316,22 @@ class CompanyController extends CI_Controller {
 			redirect('CompanyController/companyHistory');
 		}
 	}
+
+	/**
+	 * This valid_url method are used to get data from form and pass it to model for the specfic company
+	 * @return to view
+	 * @author Kulasekaran.
+	 *
+	 */
+	function valid_url($str) {
+
+           $pattern = "/^(http|https|ftp):\/\/([A-Z0-9][A-Z0-9_-]*(?:\.[A-Z0-9][A-Z0-9_-]*)+):?(\d+)?\/?/i";
+           $this->form_validation->set_message('valid_url', "Invalid website");
+            if (!preg_match($pattern, $str))
+            {
+                return FALSE;
+            }
+
+            return TRUE;
+    }
 }

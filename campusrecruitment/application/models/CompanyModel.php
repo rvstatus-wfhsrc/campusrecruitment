@@ -85,9 +85,29 @@ class CompanyModel extends CI_Model {
 	 * @author Kulasekaran.
 	 *
 	 */
-	function companyAdd($userName,$companyAddData) {
-		$this->db->where('userName', $userName);
-		$companyAddStatus = $this->db->insert('company', $companyAddData);
+	function companyAdd($companyUserName) {
+		$userName = $this->session->userdata('userName');
+		$companyAddData = array(
+			'companyName' => $this->input->post('companyName'),
+			'incharge' => $this->input->post('incharge'),
+			'address' => $this->input->post('address'),
+			'contact' => $this->input->post('contact'),
+			'email' => $this->input->post('email'),
+			'website' => $this->input->post('website'),
+			'userName' => $companyUserName,
+			'password' => md5('company'),
+			'entryDate' => $this->input->post('entryDate'),
+			'created_by' => $userName
+		);
+		$companyData = array();
+		if ($this->session->userdata('flag') != 1) {
+			$companyData = array(
+				'password' => md5($this->input->post('password')),
+				'created_by' => $companyUserName
+			);
+		}
+		$companyAddMergeData = array_merge($companyAddData, $companyData);
+		$companyAddStatus = $this->db->insert('company', $companyAddMergeData);
 		return $companyAddStatus;
 	}
 
@@ -138,5 +158,16 @@ class CompanyModel extends CI_Model {
 		$this->db->where('id', $companyId);
 		$updateCompany = $this->db->update('company', $companyUpdateData);
 		return $updateCompany;
+	}
+
+	/**
+	 * This lastCompanyUserName method are used to get the userName of last added company
+	 * @return the username to companyController
+	 * @author Kulasekaran.
+	 *
+	 */
+	function lastCompanyUserName() {
+		$lastUserName = $this->db->query("SELECT userName FROM company WHERE userName LIKE 'CY%' ORDER BY id DESC");
+		return $lastUserName;
 	}
 }
