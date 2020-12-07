@@ -18,9 +18,9 @@ $lang['lbl_image'] = '画像';
 // company screen label
 $lang['lbl_incharge'] = '担当';
 $lang['lbl_companyName'] = '会社名';
-$lang['lbl_serialNumber'] = 'S.No';
-$lang['lbl_active'] = 'アクティブ';
-$lang['lbl_deactive'] = '非アクティブ';
+$lang['lbl_serialNumber'] = '連番';
+$lang['lbl_active'] = '能動';
+$lang['lbl_deactive'] = '非活性';
 $lang['lbl_all'] = 'すべて';
 $lang['lbl_addCompany'] = '会社を追加';
 $lang['lbl_company'] = '会社';
@@ -36,4 +36,27 @@ $lang['lbl_detail'] = '詳細';
 $lang['lbl_update'] = '更新';
 $lang['lbl_back'] = '後ろに';
 
+
+$lang['lbl_password'] = 'パスワード';
+$lang['lbl_conf_password'] = 'Confirm Password'
+
+// job screen label
+$lang['lbl_job'] = '仕事';
+$lang['lbl_jobAdd'] = '仕事追加';
+$lang['lbl_jobEdit'] = '仕事編集';
+$lang['lbl_jobCategory'] = '職部門';
+$lang['lbl_requiredSkill'] = '必要なスキル';
+$lang['lbl_role'] = '役割';
+$lang['lbl_minQualification'] = '最低限の資格';
+$lang['lbl_maxAge'] = '最大年齢';
+$lang['lbl_salary'] = '給料';
+$lang['lbl_jobLocation'] = '仕事の場所';
+$lang['lbl_workingHour'] = '労働時間';
+$lang['lbl_jobDescription'] = '仕事内容';
+$lang['lbl_lastApplyDate'] = '最終申請日';
+$lang['lbl_category'] = '部門';
+$lang['lbl_skill'] = 'スキル';
+$lang['lbl_location'] = '場所';
+$lang['lbl_description'] = '説明';
+$lang['lbl_last_date'] = '最後日付';
 ?>

@@ -38,7 +38,7 @@
                                 <input type="hidden" id="hiddenCompanyId" name="hiddenCompanyId" value= "<?php echo $companyEdit->id; ?>" >
                             <?php } else { ?>
                                 <!-- company add process -->
-                                <?php echo form_open('CompanyController/companyAddForm',['method' => 'POST', 'class' => 'form-horizontal','id' => 'addForm','name' => 'addForm','enctype'=>'multipart/form-data']); ?>
+                                <?php echo form_open('CompanyController/companyProfileAddForm',['method' => 'POST', 'class' => 'form-horizontal','id' => 'addForm','name' => 'addForm','enctype'=>'multipart/form-data']); ?>
                             <?php } ?>
                                 <input type="hidden" id="base" value="<?php echo base_url(); ?>">
                                 <!-- company name -->
@@ -169,12 +169,48 @@
                                                 'class' => 'input_box form-control w23 h-25',
                                                 'autocomplete' => 'off',
                                                 'onclick' => '',
-                                                'value' => (isset($companyEdit) && $companyEdit->entryDate != '0000-00-00') ? set_value("entryDate", $companyEdit->entryDate) : set_value("entryDate")
+                                                'value' => isset($companyEdit) ? set_value("entryDate", $companyEdit->entryDate) : set_value("entryDate")
                                             );
                                             echo form_input($data);
                                         ?>
                                         <div class="error">
                                             <?php echo form_error('entryDate'); ?>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- password -->
+                                <div class="form-group form-inline">
+                                    <?php echo lang('lbl_password', 'password', array('class' => 'col-md-4 control-label required')); ?>
+                                    <div class="col-md-8">
+                                        <?php 
+                                            $data= array(
+                                                'id' => 'password',
+                                                'name' => 'password',
+                                                'placeholder' => 'Enter Password',
+                                                'class' => 'input_box col-md-12 form-control w43 h-25'
+                                            );
+                                            echo form_input($data);
+                                        ?>
+                                        <div class="error">
+                                            <?php echo form_error('password'); ?>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- confirm password -->
+                                <div class="form-group form-inline">
+                                    <?php echo lang('lbl_conf_password', 'password_confirmation', array('class' => 'col-md-4 control-label required')); ?>
+                                    <div class="col-md-8">
+                                        <?php 
+                                            $data= array(
+                                                'id' => 'password_confirmation',
+                                                'name' => 'password_confirmation',
+                                                'placeholder' => 'Enter Confirm Password',
+                                                'class' => 'input_box col-md-12 form-control w43 h-25'
+                                            );
+                                            echo form_input($data);
+                                        ?>
+                                        <div class="error">
+                                            <?php echo form_error('password_confirmation'); ?>
                                         </div>
                                     </div>
                                 </div>
@@ -202,6 +238,6 @@
         <script type="text/javascript" src="<?php echo base_url(); ?>assets/js/jquery.min.js"></script>
         <script type="text/javascript" src="<?php echo base_url(); ?>assets/js/lib/datepicker_jquery_1.9.1.js"></script>
         <script type="text/javascript" src="<?php echo base_url(); ?>assets/js/lib/bootstrap_datepicker_1.5.0.js"></script>
-        <script type="text/javascript" src="<?php echo base_url(); ?>assets/js/admin/company/addEdit.js"></script>
+        <script type="text/javascript" src="<?php echo base_url(); ?>assets/js/company/profile/addEdit.js"></script>
     </body>
 </html>

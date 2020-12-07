@@ -32,13 +32,13 @@
             <a class="navbar-brand" href="<?php echo site_url('AdminController/profile/profileDetail') ?>">Admin</a>
             <button class="btn btn-link btn-sm order-1 order-lg-0" id="sidebarToggle" href="#"><i class="fa fa-bars"></i></button>
             <?php } else { ?>
-            <a class="navbar-brand" href="<?php echo site_url('LoginController/login')?>">Admin</a>
+            <a class="navbar-brand" href="<?php echo site_url('LoginController/index')?>">Home</a>
             <?php } ?>
         <!-- Navbar-->
         <?php if($this->session->userdata('logged_in') == false) { ?>
             <ul class="navbar-nav ml-auto my-md-0">
-                <li class="nav-item <?php echo ($this->uri->segment(1)=='LoginController') || ($this->uri->segment(2)=='logout') || ($this->uri->segment(2)=='')?'active':''; ?>"><a class="nav-link" href="<?php echo site_url('LoginController/login')?>">Login</a></li>
-                <li class="nav-item <?php echo ($this->uri->segment(2)=='register')?'active':''; ?>"><a class="nav-link" href="<?php echo site_url('AdminController/register') ?>">Register</a></li>
+                <li class="nav-item <?php echo ($this->uri->segment(1)=='LoginController') || ($this->uri->segment(2)=='logout') || ($this->uri->segment(2)=='')?'active':''; ?>"><a class="nav-link" href="<?php echo site_url('CompanyController/companyRegister')?>">New Company</a></li>
+                <li class="nav-item <?php echo ($this->uri->segment(2)=='register')?'active':''; ?>"><a class="nav-link" href="<?php echo site_url('JobSeekerController/jobSeekerRegister') ?>">New Student</a></li>
             </ul>
         <?php } else { ?>
             <ul class="navbar-nav ml-auto my-md-0">
@@ -70,26 +70,52 @@
                 <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
                     <div class="sb-sidenav-menu">
                         <div class="nav">
-                            <div class="sb-sidenav-menu-heading">Home</div>
-                            <a class="nav-link <?php echo ($this->uri->segment(3)=='dashboard')?'active':''; ?>" href="<?php echo site_url('DashboardController/dashboard/dashboard') ?>">
-                                <div class="sb-nav-link-icon"><i class="fa fa-tachometer"></i></div>
-                                Dashboard
-                            </a>
-                            <a class="nav-link <?php echo ($this->uri->segment(1)=='AdminController')?'active':''; ?>" href="<?php echo site_url('AdminController/profile/profileDetail') ?>">
-                                <div class="sb-nav-link-icon"><i class="fa fa-user"></i></div>
-                                Profile
-                            </a>
-                            <div class="sb-sidenav-menu-heading">Settings</div>
-                            <a class="nav-link <?php echo ($this->uri->segment(1)=='CompanyController')?'active':''; ?>" data-toggle="collapse" data-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
-                                <div class="sb-nav-link-icon"><i class="fa fa-building"></i></div>
-                                <?php echo lang('lbl_company'); ?>
-                                <div class="sb-sidenav-collapse-arrow"><i class="fa fa-angle-down"></i></div>
-                            </a>
-                            <div class="collapse <?php echo ($this->uri->segment(1)!=null && $this->uri->segment(1)=='CompanyController')?'show':''; ?>" id="collapseLayouts" aria-labelledby="headingOne" data-parent="#sidenavAccordion">
-                                <nav class="sb-sidenav-menu-nested nav">
-                                    <a class="nav-link <?php echo ($this->uri->segment(2)=='companyHistory')?'active':''; ?>" href="<?php echo site_url('CompanyController/companyHistory') ?>"><?php echo lang('lbl_history'); ?></a>
-                                </nav>
-                            </div>
+                            <?php if($this->session->userdata('flag') == 1) { ?>
+                                <div class="sb-sidenav-menu-heading">Home</div>
+                                <a class="nav-link <?php echo ($this->uri->segment(3)=='dashboard')?'active':''; ?>" href="<?php echo site_url('DashboardController/dashboard/dashboard') ?>">
+                                    <div class="sb-nav-link-icon"><i class="fa fa-tachometer"></i></div>
+                                    Dashboard
+                                </a>
+                                <a class="nav-link <?php echo ($this->uri->segment(1)=='AdminController')?'active':''; ?>" href="<?php echo site_url('AdminController/profile/profileDetail') ?>">
+                                    <div class="sb-nav-link-icon"><i class="fa fa-user"></i></div>
+                                    Profile
+                                </a>
+                                <div class="sb-sidenav-menu-heading">Settings</div>
+                                <a class="nav-link <?php echo ($this->uri->segment(1)=='CompanyController')?'active':''; ?>" data-toggle="collapse" data-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
+                                    <div class="sb-nav-link-icon"><i class="fa fa-building"></i></div>
+                                    <?php echo lang('lbl_company'); ?>
+                                    <div class="sb-sidenav-collapse-arrow"><i class="fa fa-angle-down"></i></div>
+                                </a>
+                                <div class="collapse <?php echo ($this->uri->segment(1)!=null && $this->uri->segment(1)=='CompanyController')?'show':''; ?>" id="collapseLayouts" aria-labelledby="headingOne" data-parent="#sidenavAccordion">
+                                    <nav class="sb-sidenav-menu-nested nav">
+                                        <a class="nav-link <?php echo ($this->uri->segment(2)=='companyHistory')?'active':''; ?>" href="<?php echo site_url('CompanyController/companyHistory') ?>"><?php echo lang('lbl_history'); ?></a>
+                                    </nav>
+                                </div>
+                                <a class="nav-link <?php echo ($this->uri->segment(1)=='JobController')?'active':''; ?>" data-toggle="collapse" data-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
+                                    <div class="sb-nav-link-icon">
+                                        <i class="fa fa-briefcase"></i>
+                                    </div>
+                                    <?php echo lang('lbl_job'); ?>
+                                    <div class="sb-sidenav-collapse-arrow">
+                                        <i class="fa fa-angle-down"></i>
+                                    </div>
+                                </a>
+                                <div class="collapse <?php echo ($this->uri->segment(1)!=null && $this->uri->segment(1)=='JobController')?'show':''; ?>" id="collapseLayouts" aria-labelledby="headingOne" data-parent="#sidenavAccordion">
+                                    <nav class="sb-sidenav-menu-nested nav">
+                                        <a class="nav-link <?php echo ($this->uri->segment(2)=='jobHistory')?'active':''; ?>" href="<?php echo site_url('JobController/jobHistory') ?>">
+                                            <?php echo lang('lbl_history'); ?>
+                                        </a>
+                                    </nav>
+                                </div>
+                            <?php } elseif ($this->session->userdata('flag') == 2) { ?>
+                                <div class="sb-sidenav-menu-heading">Home</div>
+                                <a class="nav-link <?php echo ($this->uri->segment(3)=='dashboard')?'active':''; ?>" href="<?php echo site_url('DashboardController/dashboard/dashboard') ?>">
+                                    <div class="sb-nav-link-icon"><i class="fa fa-tachometer"></i></div>
+                                    Dashboard
+                                </a>
+                            <?php } else { ?>
+                                <div class="sb-sidenav-menu-heading">Home</div>
+                            <?php } ?>
                         </div>
                     </div>
                     <div class="sb-sidenav-footer">
@@ -98,7 +124,7 @@
                     </div>
                 </nav>
             </div>
-        <?php } ?>
+       <?php } ?>
         <div id="layoutSidenav_content">
             <main class="mt-2">
             </main>

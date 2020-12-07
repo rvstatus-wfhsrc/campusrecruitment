@@ -13,4 +13,9 @@ $lang['contact_digit'] = 'The {field} must be 10 digits.';
 $lang['before_tomorrow'] = 'The {field} must be a date before tomorrow.';
 $lang['exist_email'] = 'The {field} already exists.';
 
+$lang['password_confirmation'] = 'The Password Confirmation does not match.';
+
+$lang['integer'] = 'The {field} field must contain an integer.';
+$lang['belongstowork'] = "Sorry, the {field} must belong to work.";
+
 ?>

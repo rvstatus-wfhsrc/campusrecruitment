@@ -42,7 +42,10 @@
 	<body>
 	    <div class="dispNone">
 			<ol class="breadcrumb mb-1 ml-4 w95">
-				<li class="breadcrumb-item"><i class="fa fa-user fa-btn mt3"></i><?php echo lang('lbl_company'); ?><span class ="dot detailScrClr">&bull;</span><span class="detailScrClr"><?php echo lang('lbl_detail'); ?></span></li>
+				<li class="breadcrumb-item"><i class="fa fa-building-o fa-btn mt3"></i><?php echo lang('lbl_company'); ?><span class ="dot detailScrClr">&bull;</span><span class="detailScrClr"><?php echo lang('lbl_detail'); ?></span></li>
+				<?php if($this->session->flashdata('message')) { ?>
+	            	<div class="alert alert-<?php echo $this->session->flashdata('type'); ?> fmsg tac"><?php echo $this->session->flashdata('message'); ?> </div>
+	        	<?php } ?>
 	    	</ol>
 		</div>
 		<?php echo form_open('CompanyController/companyEdit',['method' => 'POST','id' => 'detailForm','name' => 'detailForm']); ?>

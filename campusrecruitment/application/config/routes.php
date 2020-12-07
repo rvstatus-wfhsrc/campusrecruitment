@@ -53,3 +53,4 @@ $route['default_controller'] = 'logincontroller';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 $route['siteLangUpdate'] = 'LoginController/siteLangUpdate';
+$route['loginUser'] = 'LoginController/loginUser';

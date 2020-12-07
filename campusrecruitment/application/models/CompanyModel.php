@@ -92,6 +92,17 @@ class CompanyModel extends CI_Model {
 	}
 
 	/**
+	 * This companyProfileAdd method are used to insert company data for a new company
+	 * @return the status of company add
+	 * @author Kulasekaran.
+	 *
+	 */
+	function companyProfileAdd($companyAddData) {
+		$companyAddStatus = $this->db->insert('company', $companyAddData);
+		return $companyAddStatus;
+	}
+
+	/**
 	 * This companyDetail method are used to retrieve the company details for the specfic company
 	 * @return the company detail array
 	 * @author Kulasekaran.

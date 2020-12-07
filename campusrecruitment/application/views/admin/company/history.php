@@ -123,7 +123,7 @@
                                             <td class="vam"><?php echo $history->incharge; ?></td>
                                             <td class="tac vam"><?php echo $history->contact; ?></td>
                                             <td class="tac vam"><?php echo $history->email; ?></td>
-                                            <td class="tac vam"><?php echo $history->entryDate; ?></td>
+                                            <td class="tac vam"><?php echo ($history->entryDate != '0000-00-00') ? $history->entryDate : "Nil"; ?></td>
                                             <td class="tac vam"><?php echo $history->address; ?></td>
                                             <td class="tac vam">
                                                 <a href="javascript:;" onclick="fnCompanyDetail(<?php echo $history->id;?>)" class="m3">

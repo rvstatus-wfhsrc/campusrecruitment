@@ -7,41 +7,38 @@ class LoginController extends CI_Controller {
 
 	public function __construct() {
 		parent::__construct();
-		$this->load->library('Layouts');
-		$this->load->helper('url');
-		$this->load->library('session');
 		$this->load->model('LoginModel');
-		$this->load->library('form_validation');
 	}
 
 	public function index() {
 		$this->layouts->view('login/login');
 	}
 
-	public function login() {
-		$this->layouts->view('login/login');
-	}
-
 	// login process
 	function loginUser() {
 		// login validation
-		$this->form_validation->set_rules( 'userName', $this->lang->line("lbl_userName"), 'required',
-												array(
-													'required' => $this->lang->line("required")
-												)
-											);
-		$this->form_validation->set_rules( 'password', $this->lang->line("lbl_password"), 'required|min_length[6]',
-												array(
-													'required' => $this->lang->line("required"),
-													'min_length' => $this->lang->line("min_length")
-												)
-											);
-		if($this->form_validation->run() == false){
+		// $this->form_validation->set_rules( 'userName', $this->lang->line("lbl_userName"), 'required',
+		// 										array(
+		// 											'required' => $this->lang->line("required")
+		// 										)
+		// 									);
+		// $this->form_validation->set_rules( 'password', $this->lang->line("lbl_password"), 'required|min_length[6]',
+		// $this->form_validation->set_rules( 'password', $this->lang->line("lbl_password"), 'required',
+		// 										array(
+		// 											'required' => $this->lang->line("required"),
+		// 											'min_length' => $this->lang->line("min_length")
+		// 										)
+		// 									);
+		$validationRule = "jobSeekerLoginRule";
+		if($this->input->post('flag') == 1 ) {
+			$validationRule = "adminLoginRule";
+		} elseif ($this->input->post('flag') == 2 ) {
+			$validationRule = "companyLoginRule";
+		}
+		if($this->form_validation->run($validationRule) == false){
 			$this->layouts->view('login/login');	
 		} else {
-			$userName    = $this->input->post('userName',TRUE);
-		    $password = md5($this->input->post('password',TRUE));
-		    $loginProcessCheck = $this->LoginModel->loginProcess($userName,$password);
+			$loginProcessCheck = $this->LoginModel->loginProcess();
 		    // if data matched
 		    if($loginProcessCheck->num_rows() > 0) {
 		        $data  = $loginProcessCheck->row_array();
@@ -68,7 +65,14 @@ class LoginController extends CI_Controller {
 		        }
 		    // if data not matched
 		    } else {
-		    	$data['error']=$this->lang->line("credentials_do_not_match");
+		    	$flag = $this->input->post('flag');
+		        if($flag == 1) {
+		    		$data['adminLoginError']=$this->lang->line("credentials_do_not_match");
+		        } elseif ($flag == 2 ) {
+		    		$data['companyLoginError']=$this->lang->line("credentials_do_not_match");
+		        } else {
+		    		$data['jobSeekerLoginError']=$this->lang->line("credentials_do_not_match");
+		        }
 		        $this->layouts->view('login/login',@$data);
     		}
 		}
@@ -84,7 +88,7 @@ class LoginController extends CI_Controller {
   		$this->session->unset_userdata('flag');
   		$this->session->unset_userdata('userName');
   		$this->session->unset_userdata('logged_in');
-	    redirect('LoginController/login');
+	    redirect('LoginController/index');
    	}
 	// Allowing accesses to student only
 	function siteLangUpdate() {

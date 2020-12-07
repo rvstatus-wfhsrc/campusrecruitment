@@ -230,6 +230,9 @@ class CompanyController extends CI_Controller {
 	 *
 	 */
 	public function companyEdit() {
+		if($this->input->post('hiddenCompanyId') == null) {
+            redirect('CompanyController/companyHistory');
+        }
 		$companyId = $this->input->post('hiddenCompanyId');
 		$data['companyEdit'] = $this->CompanyModel->companyEdit($companyId);
 		$this->layouts->view('admin/company/addEdit',$data);
@@ -258,10 +261,10 @@ class CompanyController extends CI_Controller {
 		$companyUpdateStatus = $this->CompanyModel->companyUpdate($companyId,$companyUpdateData);
 		if($companyUpdateStatus == "1") {
 	        $this->session->set_flashdata(array('message' => 'Company Details Updated Successfully','type' => 'success'));
-	       	redirect('CompanyController/companyHistory');
+	       	redirect('CompanyController/companyDetail');
 	    } else {
 	        $this->session->set_flashdata(array('message' => 'Company Details Update Failed','type' => 'danger'));
-	        redirect('CompanyController/companyHistory');
+	        redirect('CompanyController/companyDetail');
 	    }
 	}
 
@@ -275,5 +278,67 @@ class CompanyController extends CI_Controller {
 		$currentDate = date('Y-m-d');
 		$this->form_validation->set_message('before_tomorrow', $this->lang->line("before_tomorrow"));
 		return ($currentDate < $entryDate) ? FALSE : TRUE;
+	}
+
+	/**
+	 * This companyProfileAdd method are used to call the company add a new screen
+	 * @return to view [ addEdit ]
+	 * @author Kulasekaran.
+	 *
+	 */
+    public function companyProfileAdd() {
+        $this->layouts->view('company/profile/addEdit');
+    }
+
+    public function companyProfileFormValidation() {
+		if ($this->form_validation->run('companyAddEdit') == FALSE) {
+			$json_response = $this->form_validation->error_array();
+			echo json_encode($json_response); exit();
+		} else {
+			echo json_encode(true); exit();
+		}
+	}
+
+	/**
+	 * This companyProfileAddForm method are used to get data from form and pass it to model for the specfic company
+	 * @return to view
+	 * @author Kulasekaran.
+	 *
+	 */
+	public function companyProfileAddForm() {
+		//create company userName...
+        $label = 'CY';
+        $query = $this->db->query("SELECT userName FROM company WHERE userName LIKE 'CY%' ORDER BY id DESC");
+        $lastCompanyInArray = $query->result_array();
+        $lastCompanyUserName = $lastCompanyInArray[0];
+        $lastCompanyID = $lastCompanyUserName['userName'];
+        $companyCount = 1;
+	    if (isset($lastCompanyID) && $lastCompanyID != "") {
+	        $companyCount = substr($lastCompanyID, -4);
+	       	$companyCount = $companyCount + 1;
+	    }
+	    $padCount = str_pad($companyCount, 4, '0', STR_PAD_LEFT);
+	    $companyUserName = $label.$padCount;
+		$companyAddData = array(
+			'companyName' => $this->input->post('companyName'),
+			'incharge' => $this->input->post('incharge'),
+			'address' => $this->input->post('address'),
+			'contact' => $this->input->post('contact'),
+			'email' => $this->input->post('email'),
+			'website' => $this->input->post('website'),
+			'userName' => $companyUserName,
+			'password' => md5($this->input->post('password')),
+			'entryDate' => $this->input->post('entryDate'),
+			'created_by' => $companyUserName,
+		);
+		$companyAddStatus = $this->CompanyModel->companyProfileAdd($companyAddData);
+		print_r($companyAddStatus);exit();
+		if($companyAddStatus == "1") { 
+			$this->session->set_flashdata(array('message' => 'Company Successfully Registered','type' => 'success'));
+			redirect('CompanyController/companyHistory');
+		} else {
+			$this->session->set_flashdata(array('message' => 'Sorry, Something Went Wrong. Please Try Again Later','type' => 'danger'));
+			redirect('CompanyController/companyHistory');
+		}
 	}
 }
