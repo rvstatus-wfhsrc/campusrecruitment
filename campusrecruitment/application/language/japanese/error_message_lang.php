@@ -18,4 +18,8 @@ $lang['password_confirmation'] = 'The Password Confirmation does not match.';
 $lang['integer'] = 'The {field} field must contain an integer.';
 $lang['belongstowork'] = "Sorry, the {field} must belong to work.";
 
+$lang['exist_company_name'] = 'The {field} already exists.';
+$lang['exist_company_website'] = 'The {field} already exists.';
+$lang['valid_website'] = 'The {field} is invalid.';
+
 ?>

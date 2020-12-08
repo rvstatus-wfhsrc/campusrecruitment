@@ -38,7 +38,7 @@ $lang['lbl_back'] = '後ろに';
 
 
 $lang['lbl_password'] = 'パスワード';
-$lang['lbl_conf_password'] = 'Confirm Password'
+$lang['lbl_conf_password'] = 'Confirm Password';
 
 // job screen label
 $lang['lbl_job'] = '仕事';

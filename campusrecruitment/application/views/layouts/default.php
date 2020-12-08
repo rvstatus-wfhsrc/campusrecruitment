@@ -28,16 +28,19 @@
 </head>
 <body id="app-layout">
     <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
-        <?php if($this->session->userdata('logged_in') == true) { ?>
+        <?php if($this->session->userdata('logged_in') == true && $this->session->userdata('flag') == 1) { ?>
             <a class="navbar-brand" href="<?php echo site_url('AdminController/profile/profileDetail') ?>">Admin</a>
             <button class="btn btn-link btn-sm order-1 order-lg-0" id="sidebarToggle" href="#"><i class="fa fa-bars"></i></button>
-            <?php } else { ?>
+        <?php } elseif ($this->session->userdata('logged_in') == true && $this->session->userdata('flag') == 2) { ?>
+            <a class="navbar-brand" href="<?php echo site_url('CompanyController/companyDetail') ?>">Company</a>
+            <button class="btn btn-link btn-sm order-1 order-lg-0" id="sidebarToggle" href="#"><i class="fa fa-bars"></i></button>
+        <?php } else { ?>
             <a class="navbar-brand" href="<?php echo site_url('LoginController/index')?>">Home</a>
             <?php } ?>
         <!-- Navbar-->
         <?php if($this->session->userdata('logged_in') == false) { ?>
             <ul class="navbar-nav ml-auto my-md-0">
-                <li class="nav-item <?php echo ($this->uri->segment(1)=='LoginController') || ($this->uri->segment(2)=='companyProfileAdd')?'active':''; ?>"><a class="nav-link" href="<?php echo site_url('CompanyController/companyProfileAdd')?>">New Company</a></li>
+                <li class="nav-item <?php echo ($this->uri->segment(2)=='companyProfileAdd')?'active':''; ?>"><a class="nav-link" href="<?php echo site_url('CompanyController/companyProfileAdd')?>">New Company</a></li>
                 <li class="nav-item <?php echo ($this->uri->segment(2)=='register')?'active':''; ?>"><a class="nav-link" href="<?php echo site_url('JobSeekerController/jobSeekerRegister') ?>">New Student</a></li>
             </ul>
         <?php } else { ?>
@@ -112,6 +115,10 @@
                                 <a class="nav-link <?php echo ($this->uri->segment(3)=='dashboard')?'active':''; ?>" href="<?php echo site_url('DashboardController/dashboard/dashboard') ?>">
                                     <div class="sb-nav-link-icon"><i class="fa fa-tachometer"></i></div>
                                     Dashboard
+                                </a>
+                                <a class="nav-link <?php echo ($this->uri->segment(2)=='companyDetail')?'active':''; ?>" href="<?php echo site_url('CompanyController/companyDetail') ?>">
+                                    <div class="sb-nav-link-icon"><i class="fa fa-user"></i></div>
+                                    Profile
                                 </a>
                             <?php } else { ?>
                                 <div class="sb-sidenav-menu-heading">Home</div>

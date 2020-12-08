@@ -141,7 +141,7 @@ $config = array(
                                     array(
                                         'field' => 'companyName',
                                         'label' => 'lang:lbl_companyName',
-                                        'rules' => 'required|alphabetic|max_length[50]',
+                                        'rules' => 'required|alphabetic|max_length[50]|exist_company_name',
                                             array(
                                                 'required' => 'lang:required',
                                                 'max_length' => 'lang:max_length'
@@ -185,7 +185,7 @@ $config = array(
                                     array(
                                         'field' => 'website',
                                         'label' => 'lang:lbl_website',
-                                        'rules' => 'required|max_length[50]',
+                                        'rules' => 'required|exist_company_website|valid_website',
                                             array(
                                                 'required' => 'lang:required',
                                                 'max_length' => 'lang:max_length'
@@ -202,11 +202,10 @@ $config = array(
                                     array(
                                         'field' => 'password',
                                         'label' => 'lang:lbl_password',
-                                        'rules' => 'required|min_length[6]|matches[password_confirmation]',
+                                        'rules' => 'required|min_length[6]|password_confirmation',
                                             array(
                                                 'required' => 'lang:required',
-                                                'min_length' => 'lang:min_length',
-                                                'matches' => 'lang:password_confirmation'
+                                                'min_length' => 'lang:min_length'
                                             )
                                     ),
                                     array(
@@ -217,8 +216,71 @@ $config = array(
                                                 'required' => 'lang:required',
                                                 'min_length' => 'lang:min_length'
                                             )
+                                    )
+                                ),
+                'adminCompanyAddEdit' => array(
+                                    array(
+                                        'field' => 'companyName',
+                                        'label' => 'lang:lbl_companyName',
+                                        'rules' => 'required|alphabetic|max_length[50]|exist_company_name',
+                                            array(
+                                                'required' => 'lang:required',
+                                                'max_length' => 'lang:max_length'
+                                            )
                                     ),
-                                )                          
+                                    array(
+                                        'field' => 'incharge',
+                                        'label' => 'lang:lbl_incharge',
+                                        'rules' => 'required|alphabetic|max_length[50]',
+                                            array(
+                                                'required' => 'lang:required',
+                                                'max_length' => 'lang:max_length'
+                                            )
+                                    ),
+                                    array(
+                                        'field' => 'address',
+                                        'label' => 'lang:lbl_address',
+                                        'rules' => 'required',
+                                            array(
+                                                'required' => 'lang:required'
+                                            )
+                                    ),
+                                    array(
+                                        'field' => 'contact',
+                                        'label' => 'lang:lbl_contact',
+                                        'rules' => 'required|contact_digit',
+                                            array(
+                                                'required' => 'lang:required'
+                                            )
+                                    ),
+                                    array(
+                                        'field' => 'email',
+                                        'label' => 'lang:lbl_email',
+                                        'rules' => 'required|valid_email|max_length[50]|exist_email',
+                                            array(
+                                                'required' => 'lang:required',
+                                                'max_length' => 'lang:max_length',
+                                                'valid_email' => 'lang:valid_email'
+                                            )
+                                    ),
+                                    array(
+                                        'field' => 'website',
+                                        'label' => 'lang:lbl_website',
+                                        'rules' => 'required|exist_company_website|valid_website',
+                                            array(
+                                                'required' => 'lang:required',
+                                                'max_length' => 'lang:max_length'
+                                            )
+                                    ),
+                                    array(
+                                        'field' => 'entryDate',
+                                        'label' => 'lang:lbl_entryDate',
+                                        'rules' => 'required|before_tomorrow',
+                                            array(
+                                                'required' => 'lang:required'
+                                            )
+                                    )
+                                )                                      
            );
 
 ?>

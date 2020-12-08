@@ -95,58 +95,12 @@ class CompanyController extends CI_Controller {
 	 */
     public function companyFormValidation() {
 		// company field validation
-		$id = $this->session->userdata('id');
-		$this->form_validation->set_rules( 'companyName', $this->lang->line("lbl_companyName"), 'required|regex_match[/^[A-Za-z\s\.]+$/]|max_length[50]',
-												array(
-													'required' => $this->lang->line("required"),
-													'regex_match' => $this->lang->line("alphabetic"),
-													'max_length' => $this->lang->line("max_length")
-												)
-											);
-		$this->form_validation->set_rules( 'incharge', $this->lang->line("lbl_incharge"), 'required|regex_match[/^[A-Za-z\s\.]+$/]|max_length[50]',
-												array(
-													'required' => $this->lang->line("required"),
-													'regex_match' => $this->lang->line("alphabetic"),
-													'max_length' => $this->lang->line("max_length")
-												)
-											);
-		$this->form_validation->set_rules( 'address', $this->lang->line("lbl_address"), 'required',
-												array(
-													'required' => $this->lang->line("required")
-												)
-											);
-		$this->form_validation->set_rules( 'contact', $this->lang->line("lbl_contact"), 'required|regex_match[/\b\d{10}\b/]',
-												array(
-													'required' => $this->lang->line("required"),
-													'regex_match' => $this->lang->line("contact_digit")
-												)
-											);
-		$this->form_validation->set_rules( 'email', $this->lang->line("lbl_email"), 'required|valid_email|max_length[50]|callback_email_exist_check[company.email.'.$this->input->post('hiddenCompanyId').']',
-												array(
-													'required' => $this->lang->line("required"),
-													'valid_email' => $this->lang->line("valid_email"),
-													'max_length' => $this->lang->line("max_length")
-												)
-											);
-		$this->form_validation->set_rules( 'website', $this->lang->line("lbl_website"), 'required|max_length[50]|callback_valid_url['.$this->input->post('website').']',
-												array(
-													'required' => $this->lang->line("required"),
-													'max_length' => $this->lang->line("max_length")
-												)
-											);
-		$this->form_validation->set_rules( 'entryDate', $this->lang->line("lbl_entryDate"), 'required|callback_before_tomorrow['.$this->input->post('entryDate').']',
-												array(
-													'required' => $this->lang->line("required")
-												)
-											);
-		if($this->form_validation->run() == FALSE) {
-            $json_response = $this->form_validation->error_array();
-            echo json_encode($json_response); exit();
-
-        } else {
-           echo json_encode(true); exit();
-
-        }
+		if ($this->form_validation->run('adminCompanyAddEdit') == FALSE) {
+			$json_response = $this->form_validation->error_array();
+			echo json_encode($json_response); exit();
+		} else {
+			echo json_encode(true); exit();
+		}
 	}
 
 	/**
@@ -170,20 +124,8 @@ class CompanyController extends CI_Controller {
 	 *
 	 */
 	public function companyAddForm() {
-		//create company userName...
-        $label = 'CY';
-        $query = $this->db->query("SELECT userName FROM company WHERE userName LIKE 'CY%' ORDER BY id DESC");
-        $lastCompanyInArray = $query->result_array();
-        $lastCompanyUserName = $lastCompanyInArray[0];
-        $lastCompanyID = $lastCompanyUserName['userName'];
-        $companyCount = 1;
-	    if (isset($lastCompanyID) && $lastCompanyID != "") {
-	        $companyCount = substr($lastCompanyID, -4);
-	       	$companyCount = $companyCount + 1;
-	    }
-	    $padCount = str_pad($companyCount, 4, '0', STR_PAD_LEFT);
-	    $companyUserName = $label.$padCount;
-		$companyAddStatus = $this->CompanyModel->companyAdd($companyUserName);
+		$userName = $this->CompanyModel->lastCompanyUserName();
+		$companyAddStatus = $this->CompanyModel->companyAdd($userName);
 		if($companyAddStatus == "1") { 
 			$this->session->set_flashdata(array('message' => 'Company Successfully Registered','type' => 'success'));
 			redirect('CompanyController/companyHistory');
@@ -199,15 +141,15 @@ class CompanyController extends CI_Controller {
 	 * @author kulasekaran.
 	 *
 	 */
-	public function companyDetail() {
-		$id = $this->input->post('hiddenCompanyId');
-		if ($id != null) {
-			$companydata = array('companyId' => $id);
-		    $this->session->set_userdata($companydata);
+	public function companyDetail() { 
+		$companyId = $this->input->post('hiddenCompanyId');
+		$url = 'admin/company/detail';
+		if ($companyId == null) {
+		    $companyId = $this->session->userdata('userName');
+		    $url = 'company/profile/detail';
 		}
-		$companyId = $this->session->userdata('companyId');
 		$data['companyDetail'] = $this->CompanyModel->companyDetail($companyId);
-		$this->layouts->view('admin/company/detail',$data);
+		$this->layouts->view($url,$data);
 	}
 
 	/**
@@ -293,27 +235,14 @@ class CompanyController extends CI_Controller {
 	 *
 	 */
 	public function companyProfileAddForm() {
-		//create company userName...
-        $label = 'CY';
         $userName = $this->CompanyModel->lastCompanyUserName();
-        $lastCompanyInArray = $userName->result_array();
-        $lastCompanyUserName = $lastCompanyInArray[0];
-        $lastCompanyID = $lastCompanyUserName['userName'];
-        $companyCount = 1;
-	    if (isset($lastCompanyID) && $lastCompanyID != "") {
-	        $companyCount = substr($lastCompanyID, -4);
-	       	$companyCount = $companyCount + 1;
-	    }
-	    $padCount = str_pad($companyCount, 4, '0', STR_PAD_LEFT);
-	    $companyUserName = $label.$padCount;
-		$companyAddStatus = $this->CompanyModel->companyAdd($companyUserName);
-		print_r($companyAddStatus);exit();
+		$companyAddStatus = $this->CompanyModel->companyAdd($userName);
 		if($companyAddStatus == "1") { 
 			$this->session->set_flashdata(array('message' => 'Company Successfully Registered','type' => 'success'));
-			redirect('CompanyController/companyHistory');
+			redirect('CompanyController/companyDetail');
 		} else {
 			$this->session->set_flashdata(array('message' => 'Sorry, Something Went Wrong. Please Try Again Later','type' => 'danger'));
-			redirect('CompanyController/companyHistory');
+			redirect('CompanyController/companyDetail');
 		}
 	}
 

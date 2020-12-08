@@ -43,27 +43,27 @@ $lang['lbl_back'] = 'Back';
 
 
 $lang['lbl_password'] = 'Password';
-$lang['lbl_conf_password'] = 'Confirm Password'
+$lang['lbl_conf_password'] = 'Confirm Password';
 
 
 // job screen label
-// $lang['lbl_job'] = 'Job';
-// $lang['lbl_jobAdd'] = 'Add Job';
-// $lang['lbl_jobEdit'] = 'Update Job';
-// $lang['lbl_jobCategory'] = 'Job Category';
-// $lang['lbl_requiredSkill'] = 'Required Skill';
-// $lang['lbl_role'] = 'Role';
-// $lang['lbl_minQualification'] = 'Minimum Qualification';
-// $lang['lbl_maxAge'] = 'Maximum Age';
-// $lang['lbl_salary'] = 'Salary';
-// $lang['lbl_jobLocation'] = 'Job Location';
-// $lang['lbl_workingHour'] = 'Working Hour';
-// $lang['lbl_jobDescription'] = 'Job Description';
-// $lang['lbl_lastApplyDate'] = 'Last Apply Date';
-// $lang['lbl_category'] = 'Category';
-// $lang['lbl_skill'] = 'Skill';
-// $lang['lbl_location'] = 'Location';
-// $lang['lbl_description'] = 'Description';
-// $lang['lbl_last_date'] = 'Last Date';
+$lang['lbl_job'] = 'Job';
+$lang['lbl_jobAdd'] = 'Add Job';
+$lang['lbl_jobEdit'] = 'Update Job';
+$lang['lbl_jobCategory'] = 'Job Category';
+$lang['lbl_requiredSkill'] = 'Required Skill';
+$lang['lbl_role'] = 'Role';
+$lang['lbl_minQualification'] = 'Minimum Qualification';
+$lang['lbl_maxAge'] = 'Maximum Age';
+$lang['lbl_salary'] = 'Salary';
+$lang['lbl_jobLocation'] = 'Job Location';
+$lang['lbl_workingHour'] = 'Working Hour';
+$lang['lbl_jobDescription'] = 'Job Description';
+$lang['lbl_lastApplyDate'] = 'Last Apply Date';
+$lang['lbl_category'] = 'Category';
+$lang['lbl_skill'] = 'Skill';
+$lang['lbl_location'] = 'Location';
+$lang['lbl_description'] = 'Description';
+$lang['lbl_last_date'] = 'Last Date';
 
 ?>

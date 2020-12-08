@@ -25,7 +25,7 @@ class PageController extends CI_Controller {
   // Allowing accesses to company only
   function company() {
     if($this->session->userdata('flag')==='2') {
-      $this->load->view('company/profileDetail');
+      redirect('CompanyController/companyDetail');
     } else {
       echo "Access Denied";
     }

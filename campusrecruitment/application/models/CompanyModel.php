@@ -85,7 +85,19 @@ class CompanyModel extends CI_Model {
 	 * @author Kulasekaran.
 	 *
 	 */
-	function companyAdd($companyUserName) {
+	function companyAdd($lastAddCompanyUser) {
+		//create company userName...
+        $label = 'CY';
+        $lastCompanyInArray = $lastAddCompanyUser->result_array();
+        $lastCompanyUserName = $lastCompanyInArray[0];
+        $lastCompanyID = $lastCompanyUserName['userName'];
+        $companyCount = 1;
+	    if (isset($lastCompanyID) && $lastCompanyID != "") {
+	        $companyCount = substr($lastCompanyID, -4);
+	       	$companyCount = $companyCount + 1;
+	    }
+	    $padCount = str_pad($companyCount, 4, '0', STR_PAD_LEFT);
+	    $companyUserName = $label.$padCount;
 		$userName = $this->session->userdata('userName');
 		$companyAddData = array(
 			'companyName' => $this->input->post('companyName'),
@@ -130,7 +142,11 @@ class CompanyModel extends CI_Model {
 	 */
 	function companyDetail($companyId) {
 		$this->db->select('id,companyName,incharge,contact,email,entryDate,address,website,userName,delFlag');
-		$this->db->where(array('id' => $companyId));
+		if ($this->input->post('hiddenCompanyId') == null) {
+			$this->db->where(array('userName' => $companyId));
+		} else {
+			$this->db->where(array('id' => $companyId));
+		}
 		$companyDetail = $this->db->get('company');
 		return $companyDetail->result()[0];
 	}

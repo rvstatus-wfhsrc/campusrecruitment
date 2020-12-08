@@ -14,7 +14,7 @@ class LoginModel extends CI_Model {
         if($flag == 1) {
            $result = $this->db->query("SELECT userName,flag FROM users WHERE flag = '".$flag."' AND userName = '".$this->input->post('adminUserName')."' AND password = '".md5($this->input->post('adminPassword'))."'");
         } elseif ($flag == 2 ) {
-            $result = $this->db->query("SELECT userName FROM company WHERE userName = '".$this->input->post('companyUserName')."' AND password = '".md5($this->input->post('companyPassword'))."'");
+            $result = $this->db->query("SELECT userName,flag FROM company WHERE userName = '".$this->input->post('companyUserName')."' AND password = '".md5($this->input->post('companyPassword'))."'");
         } else {
 	       $result = $this->db->query("SELECT userName,flag FROM users WHERE flag = '".$flag."' AND userName = '".$this->input->post('jobSeekerUserName')."' AND password = '".md5($this->input->post('jobSeekerPassword'))."'");
         }
