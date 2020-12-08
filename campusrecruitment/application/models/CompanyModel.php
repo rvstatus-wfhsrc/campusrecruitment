@@ -142,8 +142,9 @@ class CompanyModel extends CI_Model {
 	 */
 	function companyDetail($companyId) {
 		$this->db->select('id,companyName,incharge,contact,email,entryDate,address,website,userName,delFlag');
-		if ($this->input->post('hiddenCompanyId') == null) {
-			$this->db->where(array('userName' => $companyId));
+		if ($companyId == null) {
+			$companyUserName = $this->session->userdata('userName');
+			$this->db->where(array('userName' => $companyUserName));
 		} else {
 			$this->db->where(array('id' => $companyId));
 		}
@@ -170,7 +171,19 @@ class CompanyModel extends CI_Model {
 	 * @author Kulasekaran.
 	 *
 	 */
-	function companyUpdate($companyId,$companyUpdateData) {
+	function companyUpdate() {
+		$userName = $this->session->userdata('userName');
+		$companyId = $this->input->post('hiddenCompanyId');
+		$companyUpdateData = array(
+			'companyName' => $this->input->post('companyName'),
+			'incharge' => $this->input->post('incharge'),
+			'address' => $this->input->post('address'),
+			'contact' => $this->input->post('contact'),
+			'email' => $this->input->post('email'),
+			'website' => $this->input->post('website'),
+			'entryDate' => $this->input->post('entryDate'),
+			'updated_by' => $userName
+		);
 		$this->db->where('id', $companyId);
 		$updateCompany = $this->db->update('company', $companyUpdateData);
 		return $updateCompany;

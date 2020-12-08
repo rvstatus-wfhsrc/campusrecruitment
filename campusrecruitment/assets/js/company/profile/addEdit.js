@@ -46,7 +46,7 @@ $(document).ready(function() {
     $('.editprocess').on('click', function() {
         $(".editprocess").attr("disabled", true);
         resetErrors();
-        var url = 'companyProfileFormValidation';
+        var url = 'companyFormValidation';
         $.each($('form input, form hidden, form textarea, form date'), function(i, v) {
             if (v.type !== 'submit') {
                 data[v.name] = v.value;

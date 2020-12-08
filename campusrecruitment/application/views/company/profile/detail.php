@@ -57,13 +57,10 @@
 	        	<?php } ?>
 	    	</ol>
 		</div>
-		<?php echo form_open('CompanyController/companyEdit',['method' => 'POST','id' => 'detailForm','name' => 'detailForm']); ?>
+		<?php echo form_open('CompanyController/companyProfileEdit',['method' => 'POST','id' => 'detailForm','name' => 'detailForm']); ?>
 			<input type="hidden" id="base" value="<?php echo base_url(); ?>">
 			<input type="hidden" id="hiddenCompanyId" name="hiddenCompanyId">
 			<div class="ml-4 mb-1 dispNone">
-				<a class="btn btn-info editBtn" href="javascript:;" onclick="fnBackBtn()">
-					<i class="fa fa-chevron-left fa-btn"></i><?php echo lang('lbl_back'); ?>
-				</a>
 				<a class="btn bg-warning text-white editBtn" href="javascript:;" onclick="fnCompanyEdit(<?php echo $companyDetail->id;?>)">
 					<i class="fa fa-edit fa-btn"></i><?php echo lang('lbl_edit'); ?>
 				</a>
@@ -114,6 +111,6 @@
 			</div>
 		<?php echo form_close();?>
 	 	<script type="text/javascript" src="<?php echo base_url(); ?>assets/js/jquery.min.js"></script>
-	    <script type="text/javascript" src="<?php echo base_url(); ?>assets/js/admin/company/detail.js"></script>
+	    <script type="text/javascript" src="<?php echo base_url(); ?>assets/js/company/profile/detail.js"></script>
 	</body>
 </html>

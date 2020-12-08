@@ -14,6 +14,15 @@
         </style>
     </head>
     <body>
+        <div>
+            <?php if(isset($companyEdit)) { ?>
+                <ol class="breadcrumb mb-2 ml-4 w95">
+                    <li class="breadcrumb-item"><i class="fa fa-building-o fa-btn mt3"></i><?php echo lang('lbl_company'); ?>
+                        <span class ="dot editScrClr">&bull;</span><span class="editScrClr"><?php echo lang('lbl_edit'); ?></span>
+                    </li>
+                </ol>
+            <?php } ?>
+        </div>
         <div class="container mb-4">
             <div class="row justify-content-center">
                 <div class="col-lg-9">
@@ -23,7 +32,7 @@
                             <!-- register and update company process -->
                             <?php if(isset($companyEdit)) { ?>
                                 <!-- company edit process -->
-                                <?php echo form_open('CompanyController/companyUpdate',['method' => 'POST', 'class' => 'form-horizontal','id' => 'editForm','name' => 'editForm','enctype'=>'multipart/form-data']); ?>
+                                <?php echo form_open('CompanyController/companyProfileUpdate',['method' => 'POST', 'class' => 'form-horizontal','id' => 'editForm','name' => 'editForm','enctype'=>'multipart/form-data']); ?>
                                 <input type="hidden" id="hiddenCompanyId" name="hiddenCompanyId" value= "<?php echo $companyEdit->id; ?>" >
                             <?php } else { ?>
                                 <!-- company add process -->
@@ -167,44 +176,46 @@
                                         </div>
                                     </div>
                                 </div>
-                                <!-- password -->
-                                <div class="form-group form-inline">
-                                    <?php echo lang('lbl_password', 'password', array('class' => 'col-md-4 control-label required')); ?>
-                                    <div class="col-md-8">
-                                        <?php 
-                                            $data= array(
-                                                'id' => 'password',
-                                                'name' => 'password',
-                                                'placeholder' => 'Enter Password',
-                                                'class' => 'col-md-12 form-control w43 h-25',
-                                                'type' => 'password'
-                                            );
-                                            echo form_input($data);
-                                        ?>
-                                        <div class="error">
-                                            <?php echo form_error('password'); ?>
+                                <?php if(!isset($companyEdit)) { ?>
+                                    <!-- password -->
+                                    <div class="form-group form-inline">
+                                        <?php echo lang('lbl_password', 'password', array('class' => 'col-md-4 control-label required')); ?>
+                                        <div class="col-md-8">
+                                            <?php 
+                                                $data= array(
+                                                    'id' => 'password',
+                                                    'name' => 'password',
+                                                    'placeholder' => 'Enter Password',
+                                                    'class' => 'col-md-12 form-control w43 h-25',
+                                                    'type' => 'password'
+                                                );
+                                                echo form_input($data);
+                                            ?>
+                                            <div class="error">
+                                                <?php echo form_error('password'); ?>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                                <!-- confirm password -->
-                                <div class="form-group form-inline">
-                                    <?php echo lang('lbl_conf_password', 'password_confirmation', array('class' => 'col-md-4 control-label required')); ?>
-                                    <div class="col-md-8">
-                                        <?php 
-                                            $data= array(
-                                                'id' => 'password_confirmation',
-                                                'name' => 'password_confirmation',
-                                                'placeholder' => 'Enter Confirm Password',
-                                                'class' => 'col-md-12 form-control w43 h-25',
-                                                'type' => 'password'
-                                            );
-                                            echo form_input($data);
-                                        ?>
-                                        <div class="error">
-                                            <?php echo form_error('password_confirmation'); ?>
+                                    <!-- confirm password -->
+                                    <div class="form-group form-inline">
+                                        <?php echo lang('lbl_conf_password', 'password_confirmation', array('class' => 'col-md-4 control-label required')); ?>
+                                        <div class="col-md-8">
+                                            <?php 
+                                                $data= array(
+                                                    'id' => 'password_confirmation',
+                                                    'name' => 'password_confirmation',
+                                                    'placeholder' => 'Enter Confirm Password',
+                                                    'class' => 'col-md-12 form-control w43 h-25',
+                                                    'type' => 'password'
+                                                );
+                                                echo form_input($data);
+                                            ?>
+                                            <div class="error">
+                                                <?php echo form_error('password_confirmation'); ?>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
+                                <?php } ?>
                                 <div class="form-group">
                                     <div class="offset-md-4 col-md-6">
                                         <?php if(isset($companyEdit)) { ?>

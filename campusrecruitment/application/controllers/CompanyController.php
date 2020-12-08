@@ -104,20 +104,6 @@ class CompanyController extends CI_Controller {
 	}
 
 	/**
-	 * This email_exist_check method are used to validate the email for already exist or not
-	 * @return true or false to companyFormValidation method
-	 * @author Kulasekaran.
-	 *
-	 */
-	function email_exist_check($str, $fields) {
-		list($table, $columnOne, $strTwo) = explode('.', $fields, 3); 
-		$query = $this->db->query("SELECT COUNT(id) AS count FROM $table WHERE ".$columnOne." = '".$str."' AND id != '".$strTwo."'");
-		$row = $query->row();
-		$this->form_validation->set_message('email_exist_check', $this->lang->line("exist_email"));
-		return ($row->count > 0) ? FALSE : TRUE;
-	}
-
-	/**
 	 * This companyAddForm method are used to get data from form and pass it to model for the specfic company
 	 * @return the redirect to method [ companyHistory ]
 	 * @author Kulasekaran.
@@ -141,11 +127,16 @@ class CompanyController extends CI_Controller {
 	 * @author kulasekaran.
 	 *
 	 */
-	public function companyDetail() { 
+	public function companyDetail() {
 		$companyId = $this->input->post('hiddenCompanyId');
 		$url = 'admin/company/detail';
-		if ($companyId == null) {
-		    $companyId = $this->session->userdata('userName');
+		if ($this->session->flashdata('hiddenCompanyId')) {
+		    $companyId = $this->session->flashdata('hiddenCompanyId');
+		    $url = 'company/profile/detail';
+		} elseif ($this->session->flashdata('hiddenAdminCompanyId')) {
+			$companyId = $this->session->flashdata('hiddenAdminCompanyId');
+			$url = 'admin/company/detail';
+		} elseif ($companyId == null) {
 		    $url = 'company/profile/detail';
 		}
 		$data['companyDetail'] = $this->CompanyModel->companyDetail($companyId);
@@ -174,39 +165,14 @@ class CompanyController extends CI_Controller {
 	 *
 	 */
 	public function companyUpdate() {
-		$userName = $this->session->userdata('userName');
-		$companyId = $this->input->post('hiddenCompanyId');
-		$companyUpdateData = array(
-			'companyName' => $this->input->post('companyName'),
-			'incharge' => $this->input->post('incharge'),
-			'address' => $this->input->post('address'),
-			'contact' => $this->input->post('contact'),
-			'email' => $this->input->post('email'),
-			'website' => $this->input->post('website'),
-			'password' => md5('company'),
-			'entryDate' => $this->input->post('entryDate'),
-			'updated_by' => $userName
-		);
-		$companyUpdateStatus = $this->CompanyModel->companyUpdate($companyId,$companyUpdateData);
+		$companyUpdateStatus = $this->CompanyModel->companyUpdate();
 		if($companyUpdateStatus == "1") {
-	        $this->session->set_flashdata(array('message' => 'Company Details Updated Successfully','type' => 'success'));
+	        $this->session->set_flashdata(array('message' => 'Company Details Updated Successfully','type' => 'success','hiddenAdminCompanyId' => $this->input->post('hiddenCompanyId')));
 	       	redirect('CompanyController/companyDetail');
 	    } else {
 	        $this->session->set_flashdata(array('message' => 'Company Details Update Failed','type' => 'danger'));
 	        redirect('CompanyController/companyDetail');
 	    }
-	}
-
-	/**
-	 * This before_tomorrow method are used to validate the entry date is before tomorrow or not
-	 * @return true or false to companyFormValidation method
-	 * @author kulasekaran.
-	 *
-	 */
-	function before_tomorrow($entryDate) {
-		$currentDate = date('Y-m-d');
-		$this->form_validation->set_message('before_tomorrow', $this->lang->line("before_tomorrow"));
-		return ($currentDate < $entryDate) ? FALSE : TRUE;
 	}
 
 	/**
@@ -238,8 +204,8 @@ class CompanyController extends CI_Controller {
         $userName = $this->CompanyModel->lastCompanyUserName();
 		$companyAddStatus = $this->CompanyModel->companyAdd($userName);
 		if($companyAddStatus == "1") { 
-			$this->session->set_flashdata(array('message' => 'Company Successfully Registered','type' => 'success'));
-			redirect('CompanyController/companyDetail');
+			$this->session->set_flashdata(array('message' => 'Company Successfully Registered','type' => 'success','hiddenCompanyId' => $this->session->userdata('userName')));
+			redirect('LoginController');
 		} else {
 			$this->session->set_flashdata(array('message' => 'Sorry, Something Went Wrong. Please Try Again Later','type' => 'danger'));
 			redirect('CompanyController/companyDetail');
@@ -247,20 +213,35 @@ class CompanyController extends CI_Controller {
 	}
 
 	/**
-	 * This valid_url method are used to get data from form and pass it to model for the specfic company
-	 * @return to view
-	 * @author Kulasekaran.
+	 * This companyProfileEdit method are used to get the data from model for the specfic company
+	 * @return to view screen [ company/profile/addEdit ]
+	 * @author kulasekaran.
 	 *
 	 */
-	function valid_url($str) {
+	public function companyProfileEdit() {
+		if($this->input->post('hiddenCompanyId') == null) {
+            redirect('CompanyController/companyDetail');
+        }
+		$companyId = $this->input->post('hiddenCompanyId');
+		$data['companyEdit'] = $this->CompanyModel->companyEdit($companyId);
+		$this->layouts->view('company/profile/addEdit',$data);
+	}
 
-           $pattern = "/^(http|https|ftp):\/\/([A-Z0-9][A-Z0-9_-]*(?:\.[A-Z0-9][A-Z0-9_-]*)+):?(\d+)?\/?/i";
-           $this->form_validation->set_message('valid_url', "Invalid website");
-            if (!preg_match($pattern, $str))
-            {
-                return FALSE;
-            }
+	/**
+	 * This companyProfileUpdate method are used to get the data from form and pass it to model for update process
+	 * @return the redirect to method [ companyHistory ]
+	 * @author kulasekaran.
+	 *
+	 */
+	public function companyProfileUpdate() {
+		$companyUpdateStatus = $this->CompanyModel->companyUpdate();
+		if($companyUpdateStatus == "1") {
+	        $this->session->set_flashdata(array('message' => 'Company Details Updated Successfully','type' => 'success','hiddenCompanyId' => $this->input->post('hiddenCompanyId')));
+	       	redirect('CompanyController/companyDetail');
+	    } else {
+	        $this->session->set_flashdata(array('message' => 'Company Details Update Failed','type' => 'danger'));
+	        redirect('CompanyController/companyDetail');
+	    }
+	}
 
-            return TRUE;
-    }
 }
