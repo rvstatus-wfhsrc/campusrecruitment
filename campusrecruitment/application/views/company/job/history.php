@@ -47,13 +47,13 @@
                         <i class="fa fa-btn fa-plus"></i><?php echo lang('lbl_jobAdd'); ?>
                     </a>
                     <?php echo form_open('JobController/jobHistory',['method' => 'POST','id' => 'historyForm','name' => 'historyForm']); ?>
-                        <!-- <input type="hidden" id="base" value="<?php echo base_url(); ?>"> -->
-                        <!-- <input type="hidden" id="hiddenJobId" name="hiddenJobId">
+                        <input type="hidden" id="base" value="<?php echo base_url(); ?>">
+                        <input type="hidden" id="hiddenJobId" name="hiddenJobId">
                         <input type="hidden" id="hiddenDelFlag" name="hiddenDelFlag">
-                        <input type="hidden" id="hiddenSearch" name="hiddenSearch" value="<?php echo $this->input->post('hiddenSearch'); ?>"> -->
+                        <input type="hidden" id="hiddenSearch" name="hiddenSearch" value="<?php echo $this->input->post('hiddenSearch'); ?>">
 
                         <!-- filtering process -->
-                        <!-- <div class="inb fs16 float-left w54">
+                        <div class="inb fs16 float-left w54">
                             <a href="javascript:;" onclick="fnJobFilter(1)" id="filterVal1" 
                                 class="fs16 btn btn-link <?php echo $disableAll ?>"><?php echo lang('lbl_all'); ?></a>
                             <span> | </span>
@@ -63,17 +63,17 @@
                             <a href="javascript:;" onclick="fnJobFilter(3)" id="filterVal3" 
                                 class="fs16 btn btn-link <?php echo $disableNonActive ?>"><?php echo lang('lbl_deactive'); ?></a>
                         </div>
-                        <input type="hidden" id="filterVal" name="filterVal" value="<?php echo $this->input->post('filterVal'); ?>"> -->
+                        <input type="hidden" id="filterVal" name="filterVal" value="<?php echo $this->input->post('filterVal'); ?>">
 
                         <!-- clear search -->
-                        <!-- <div  class="inb float-left mt-1 w3">
+                        <div  class="inb float-left mt-1 w3">
                             <a href="javascript:;" onclick="fnClearSearch()">
                                 <img style="width: 25px;" src="<?php echo base_url(); ?>assets/images/clearsearch.png" title="Clear Search">
                             </a>
-                        </div> -->
+                        </div>
 
                         <!-- sorting process -->
-                        <!-- <div class="inb float-left">
+                        <div class="inb float-left">
                             <?php 
                                 $data= array (
                                     'id' => 'sortProcess',
@@ -84,10 +84,10 @@
                             ?>
                             <input type="hidden" id="sortVal" name="sortVal" value="<?php echo $this->input->post('sortVal'); ?>">
                             <input type="hidden" id="sortOptn" name="sortOptn" value="<?php echo $this->input->post('sortOptn'); ?>">
-                        </div> -->
+                        </div>
 
                         <!-- searching process -->
-                        <!-- <div class="input-group searchBtn">
+                        <div class="input-group searchBtn">
                             <?php
                                 $data= array(
                                     'id' => 'search',
@@ -103,9 +103,9 @@
                                     <i class="fa fa-search" title="Search"></i>
                                 </a>
                             </div>
-                        </div> -->
+                        </div>
 
-                        <!-- <table class="table table-bordered table-position">
+                        <table class="table table-bordered table-position">
                             <colgroup>
                                 <col width="1%">
                                 <col width="12%">
@@ -131,12 +131,12 @@
                                     <th title="<?php echo lang('lbl_lastApplyDate'); ?>"><?php echo lang('lbl_last_date'); ?></th>
                                     <th></th>
                                 </tr>
-                            </thead> -->
+                            </thead>
                             <?php
                                 if ($jobHistory != null) {
                                     foreach ($jobHistory as $key => $history) {
                                         $class = $key % 2 === 0 ? 'odd' : 'even'; ?>
-                                        <!-- <tr class="<php <?php echo $class; ?>">
+                                        <tr class="<php <?php echo $class; ?>">
                                             <td class="tac vam"><?php echo ($key + 1); ?></td>
                                             <td class="vam"><?php echo $history->designationName; ?></td>
                                             <td class="vam"><?php echo $history->skillName; ?></td>
@@ -150,25 +150,25 @@
                                                 <a href="javascript:;" onclick="fnJobDetail(<?php echo $history->id;?>)" class="m3">
                                                     <img class="w20" 
                                                         src="<?php echo base_url(); ?>assets/images/details.png" title="details view">
-                                                </a> -->
+                                                </a>
                                                 <?php if($history->delFlag == 0) { ?>
-                                                    <!-- <a href="javascript:;" onclick="fnJobActiveOrDeactive(<?php echo $history->id;?> , <?php echo $history->delFlag;?>)">
+                                                    <a href="javascript:;" onclick="fnJobActiveOrDeactive(<?php echo $history->id;?> , <?php echo $history->delFlag;?>)">
                                                         <?php echo lang('lbl_active'); ?>
-                                                    </a> -->
+                                                    </a>
                                                 <?php } else { ?>
-                                                    <!-- <a href="javascript:;" onclick="fnJobActiveOrDeactive(<?php echo $history->id;?> , <?php echo $history->delFlag;?>)" style="color: red;">
+                                                    <a href="javascript:;" onclick="fnJobActiveOrDeactive(<?php echo $history->id;?> , <?php echo $history->delFlag;?>)" style="color: red;">
                                                         <?php echo lang('lbl_deactive'); ?>
-                                                    </a> -->
+                                                    </a>
                                                 <?php } ?>
-                                            <!-- </td>
-                                        </tr> -->
+                                            </td>
+                                        </tr>
                                     <?php } ?>
                             <?php } else { ?>
-                                <!-- <tr>
+                                <tr>
                                     <td colspan="10" class="tac noDataFoundClr fs16">No data found</td>
-                                </tr> -->
+                                </tr>
                             <?php } ?>
-                        <!-- </table> -->
+                        </table>
                     <?php echo form_close();?>
                 </div>
             </div>
@@ -178,6 +178,6 @@
             </div>
         </div>
         <script type="text/javascript" src="<?php echo base_url(); ?>assets/js/jquery.min.js"></script>
-        <script type="text/javascript" src="<?php echo base_url(); ?>assets/js/admin/job/history.js"></script>
+        <script type="text/javascript" src="<?php echo base_url(); ?>assets/js/company/job/history.js"></script>
     </body>
 </html>
