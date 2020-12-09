@@ -75,6 +75,18 @@
                                     </div>
                                 </div>
                                 <div class="form-group form-inline">
+                                    <?php echo lang('lbl_jobType', 'jobType', array('class' => 'col-md-4 control-label required')); ?>
+                                    <div class="col-md-8">
+                                        <input type="radio" name="jobType" class="jobType" value="1" <?php echo set_value('jobType', isset($jobEdit->jobType) ? "checked" : "") ?> />
+                                        <span class = "pr20">Part-Time</span>
+                                        <input type="radio" name="jobType" class="jobType" value="2" <?php echo set_value('jobType', isset($jobEdit->jobType) ? "checked" : "") ?> />
+                                        <span>Full-Time</span>
+                                        <div class="jobTypeError">
+                                            <?php echo form_error('jobType'); ?>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group form-inline">
                                     <?php echo lang('lbl_role', 'role', array('class' => 'col-md-4 control-label required')); ?>
                                     <div class="col-md-8">
                                         <?php

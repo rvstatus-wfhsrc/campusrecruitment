@@ -8,6 +8,15 @@ $(document).ready(function() {
                 if (v.type !== 'submit') {
                     data[v.name] = v.value;
                 }
+                if (v.type == 'radio') {
+                    var rdoval = $('input[name='+v.name+']:checked').val();
+                    if (rdoval != undefined) {
+                        data[v.name] = rdoval;
+                    } else {
+                        // for undefined ie uncheck radio button
+                        data[v.name] = ""; 
+                    }
+                }
             }); // end each
             // alert(JSON.stringify(data));
             $.ajax({
@@ -45,7 +54,12 @@ $(document).ready(function() {
                         $.each(resp, function(i, v) {
                             // view in console for error messages
                             var msg = '<label class="error" style="color:#9C0000; font-size:13px; padding-left: 5px; display:inline-block;" for="'+i+'">'+v+'</label>';
+                            if ($('input[name="' + i + '"]').hasClass('jobType')) {
+                                $('input[name="' + i + '"]').addClass('inputTxtError');
+                                $('.jobTypeError').append(msg);
+                            }else {
                                 $('input[name="' + i + '"], select[name="' + i + '"], textarea[name="' + i + '"]').addClass('inputTxtError').after(msg);
+                            }
                         }); 
                         $(".addEditProcess").attr("disabled", false);
                     }

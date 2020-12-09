@@ -61,4 +61,5 @@ $lang['lbl_description'] = '説明';
 $lang['lbl_last_date'] = '最後日付';
 
 $lang['lbl_extraSkill'] = '追加のスキル';
+$lang['lbl_jobType'] = '職種';
 ?>

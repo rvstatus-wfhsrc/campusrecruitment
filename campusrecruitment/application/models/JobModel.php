@@ -35,6 +35,7 @@ class JobModel extends CI_Model {
 		$jobAddData = array(
 			'companyId' => $userName,
 			'jobCategory' => $this->input->post('jobCategory'),
+			'jobType' => $this->input->post('jobType'),
 			'requiredSkill' => $this->input->post('requiredSkill'),
 			'extraSkill' => $this->input->post('extraSkill'),
 			'role' => $this->input->post('role'),
