@@ -31,9 +31,10 @@ class CompanyModel extends CI_Model {
 	 * @author Kulasekaran.
 	 *
 	 */
-	function companyHistory() {
+	function companyHistory($limit, $start) {
 		$filterVal = $this->input->post('filterVal');
 		$hiddenSearch = $this->input->post('hiddenSearch');
+		$this->db->limit($limit, $start);
 		$this->db->select('id,companyName,incharge,contact,email,entryDate,address,delFlag');
 		// search process
 		$this->db->like('companyName',trim($hiddenSearch));
@@ -198,5 +199,15 @@ class CompanyModel extends CI_Model {
 	function lastCompanyUserName() {
 		$lastUserName = $this->db->query("SELECT userName FROM company WHERE userName LIKE 'CY%' ORDER BY id DESC");
 		return $lastUserName;
+	}
+
+	/**
+	 * This record_count method are used to get the total count of data from company table
+	 * @return to return the total count value to controller
+	 * @author Kulasekaran.
+	 *
+	 */
+	public function record_count() {
+		return $this->db->count_all("company");
 	}
 }

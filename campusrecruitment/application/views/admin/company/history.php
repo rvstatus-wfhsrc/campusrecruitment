@@ -67,10 +67,15 @@
                         <!-- sorting process -->
                         <div class="inb float-left">
                             <?php
-                                echo form_dropdown('sortProcess',$sortArray,set_value('sortProcess', 1, false),'class = "form-control autowidth h34 inb mr-2 CMN_sorting"." " .$sortStyle id = "sortProcess" name = "sortProcess"');
+                                $data= array (
+                                    'id' => 'sortProcess',
+                                    'name' => 'sortProcess',
+                                    'class' => 'form-control autowidth h34 inb mr-2 CMN_sorting '.$sortStyle,
+                                );
+                                echo form_dropdown('sortProcess',$sortArray,set_value('sortProcess', 1, false),$data);
                             ?>
-                            <input type="hidden" id="sortVal" name="sortVal">
-                            <input type="hidden" id="sortOptn" name="sortOptn">
+                            <input type="hidden" id="sortVal" name="sortVal" value="<?php echo $this->input->post('sortVal'); ?>">
+                            <input type="hidden" id="sortOptn" name="sortOptn" value="<?php echo $this->input->post('sortOptn'); ?>">
                         </div>
                         <!-- searching process -->
                         <div class="input-group searchBtn">
@@ -117,7 +122,7 @@
                                 if ($companyHistory != null) {
                                     foreach ($companyHistory as $key=> $history) {
                                         $class = $key % 2 === 0 ? 'odd' : 'even'; ?>
-                                        <tr class="{{ $class }}">
+                                        <tr class="<?php echo $class; ?>">
                                             <td class="tac vam"><?php echo ($key + 1); ?></td>
                                             <td class="vam"><?php echo $history->companyName; ?></td>
                                             <td class="vam"><?php echo $history->incharge; ?></td>
@@ -151,6 +156,10 @@
                         @endif -->
                     <?php echo form_close();?>
                 </div>
+            </div>
+            <!-- Render pagination links -->
+            <div class="pagination" style="margin: auto;">
+                <?php echo $this->pagination->create_links(); ?>
             </div>
         </div>
         <script type="text/javascript" src="<?php echo base_url(); ?>assets/js/jquery.min.js"></script>

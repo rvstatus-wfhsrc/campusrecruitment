@@ -53,6 +53,7 @@ class CompanyController extends CI_Controller {
             $data['disableAll'] = "disabled";
         }
         // sorting process style
+        $sortOptn = $this->input->post('sortOptn');
         $data['sortStyle'] = "sort_desc";
         if(isset($sortOptn) && $sortOptn == "ASC") {
             $data['sortStyle'] = "sort_asc";
@@ -60,7 +61,13 @@ class CompanyController extends CI_Controller {
             $data['sortStyle'] = "sort_desc";
         }
         $data['sortArray'] = array('1' => 'Company Name','2' => 'Incharge','3' => 'Entry Date');
-		$data['companyHistory'] = $this->CompanyModel->companyHistory();
+        // pagination process
+		$totalRecord = $this->CompanyModel->record_count();
+		$pagination_config = $this->CommonModel->paginationConfig($totalRecord,base_url()."CompanyController/companyHistory");
+		$this->pagination->initialize($pagination_config);
+		$page = (isset($_GET['per_page'])) ? $_GET['per_page'] : 0;
+		$data["links"] = $this->pagination->create_links();
+		$data['companyHistory'] = $this->CompanyModel->companyHistory($pagination_config["per_page"], $page);
 		$this->layouts->view('admin/company/history',$data);
 	}
 

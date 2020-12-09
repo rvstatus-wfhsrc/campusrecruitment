@@ -94,6 +94,16 @@
                                         <a class="nav-link <?php echo ($this->uri->segment(2)=='companyHistory')?'active':''; ?>" href="<?php echo site_url('CompanyController/companyHistory') ?>"><?php echo lang('lbl_history'); ?></a>
                                     </nav>
                                 </div>
+                            <?php } elseif ($this->session->userdata('flag') == 2) { ?>
+                                <div class="sb-sidenav-menu-heading">Home</div>
+                                <a class="nav-link <?php echo ($this->uri->segment(3)=='dashboard')?'active':''; ?>" href="<?php echo site_url('DashboardController/dashboard/dashboard') ?>">
+                                    <div class="sb-nav-link-icon"><i class="fa fa-tachometer"></i></div>
+                                    Dashboard
+                                </a>
+                                <a class="nav-link <?php echo ($this->uri->segment(2)=='companyDetail')?'active':''; ?>" href="<?php echo site_url('CompanyController/companyDetail') ?>">
+                                    <div class="sb-nav-link-icon"><i class="fa fa-user"></i></div>
+                                    Profile
+                                </a>
                                 <a class="nav-link <?php echo ($this->uri->segment(1)=='JobController')?'active':''; ?>" data-toggle="collapse" data-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
                                     <div class="sb-nav-link-icon">
                                         <i class="fa fa-briefcase"></i>
@@ -110,16 +120,6 @@
                                         </a>
                                     </nav>
                                 </div>
-                            <?php } elseif ($this->session->userdata('flag') == 2) { ?>
-                                <div class="sb-sidenav-menu-heading">Home</div>
-                                <a class="nav-link <?php echo ($this->uri->segment(3)=='dashboard')?'active':''; ?>" href="<?php echo site_url('DashboardController/dashboard/dashboard') ?>">
-                                    <div class="sb-nav-link-icon"><i class="fa fa-tachometer"></i></div>
-                                    Dashboard
-                                </a>
-                                <a class="nav-link <?php echo ($this->uri->segment(2)=='companyDetail')?'active':''; ?>" href="<?php echo site_url('CompanyController/companyDetail') ?>">
-                                    <div class="sb-nav-link-icon"><i class="fa fa-user"></i></div>
-                                    Profile
-                                </a>
                             <?php } else { ?>
                                 <div class="sb-sidenav-menu-heading">Home</div>
                             <?php } ?>
