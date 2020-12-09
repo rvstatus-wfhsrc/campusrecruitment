@@ -123,6 +123,24 @@
                                     </div>
                                 </div>
                                 <div class="form-group form-inline">
+                                    <?php echo lang('lbl_extraSkill', 'extraSkill', array('class' => 'col-md-4 control-label')); ?>
+                                    <div class="col-md-8">
+                                        <?php
+                                            $fields = array(
+                                                'id' => 'extraSkill',
+                                                'name' => 'extraSkill',
+                                                'placeholder' => 'Enter Extra Skill',
+                                                'class' => 'input_box col-md-12 form-control w43 h-25',
+                                                'value' => set_value('extraSkill',isset($jobEdit->extraSkill) ? $jobEdit->extraSkill : false)
+                                            );
+                                            echo form_input($fields);
+                                        ?>
+                                        <div class="error">
+                                            <?php echo form_error('extraSkill'); ?>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group form-inline">
                                     <?php echo lang('lbl_maxAge', 'maxAge', array('class' => 'col-md-4 control-label required')); ?>
                                     <div class="col-md-8">
                                         <?php
@@ -254,6 +272,6 @@
         <script type="text/javascript" src="<?php echo base_url(); ?>assets/js/jquery.min.js"></script>
         <script type="text/javascript" src="<?php echo base_url(); ?>assets/js/lib/datepicker_jquery_1.9.1.js"></script>
         <script type="text/javascript" src="<?php echo base_url(); ?>assets/js/lib/bootstrap_datepicker_1.5.0.js"></script>
-        <script type="text/javascript" src="<?php echo base_url(); ?>assets/js/admin/job/addEdit.js"></script>
+        <script type="text/javascript" src="<?php echo base_url(); ?>assets/js/company/job/addEdit.js"></script>
     </body>
 </html>

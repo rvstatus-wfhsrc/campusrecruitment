@@ -59,4 +59,6 @@ $lang['lbl_skill'] = 'スキル';
 $lang['lbl_location'] = '場所';
 $lang['lbl_description'] = '説明';
 $lang['lbl_last_date'] = '最後日付';
+
+$lang['lbl_extraSkill'] = '追加のスキル';
 ?>

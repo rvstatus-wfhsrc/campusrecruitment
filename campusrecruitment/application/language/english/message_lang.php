@@ -66,4 +66,6 @@ $lang['lbl_location'] = 'Location';
 $lang['lbl_description'] = 'Description';
 $lang['lbl_last_date'] = 'Last Date';
 
+$lang['lbl_extraSkill'] = 'Extra Skill';
+
 ?>

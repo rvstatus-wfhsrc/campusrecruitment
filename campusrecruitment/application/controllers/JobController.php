@@ -6,7 +6,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  *
  * This Controller are used to perform the company job details related process
  * 
- * @author Ragav.
+ * @author Kulasekaran.
  *
  */
 
@@ -19,16 +19,11 @@ class JobController extends CI_Controller {
 	 * 
 	 * This __construct are used to load the CommonModel and AdminModel
 	 * 
-	 * @author Ragav.
+	 * @author Kulasekaran.
 	 *
 	 */
 	public function __construct() {
 		parent::__construct();
-		// $this->load->library('Layouts');
-		// $this->load->helper('url');
-		// $this->load->library('session');
-		// $this->load->library('form_validation');
-		// $this->load->library('pagination');
 		$this->load->model('JobModel');
 		$this->load->model('CommonModel');
 	}
@@ -36,7 +31,7 @@ class JobController extends CI_Controller {
 	/**
 	 * This jobHistory methond are used to get the data from model for the specfic company (company whose login to website)
 	 * @return to view screen [ history ]
-	 * @author Ragav.
+	 * @author Kulasekaran.
 	 *
 	 */
 	public function jobHistory() {
@@ -79,16 +74,11 @@ class JobController extends CI_Controller {
 	/**
 	 * This jobAdd methond are used for goto the job add screen
 	 * @return to view screen [ add ]
-	 * @author Ragav.
+	 * @author Kulasekaran.
 	 *
 	 */
 	public function jobAdd() {
 		$data = array();
-		// $data['jobCategoryArray'] = array( '' => 'Select Job Category');
-		// $data['requiredSkillArray'] = array( '' => 'Select Required Skill');
-		// $data['roleArray'] = array( '' => 'Select Role');
-		// $data['minQualificationArray'] = array( '' => 'Select Qualification');
-		// $data['jobLocationArray'] = array( '' => 'Select Job Location');
 
 		$data['maxAgeArray'] = $this->maxAgeArray;
 		$data['jobCategoryArray'] = $this->CommonModel->designation();
@@ -100,90 +90,40 @@ class JobController extends CI_Controller {
 	}
 
 
-	// public function jobAddForm() {
-	// 	$jobAddStatus = $this->JobModel->jobAdd();
-	// 	if($jobAddStatus){
-	// 		$this->session->set_flashdata([
-	// 			'message'  => 'Job Details Add Successfully',
-	// 			'type' => 'success'
-	// 		]);
-	// 	} else {
-	// 		$this->session->set_flashdata([
-	// 			'message'  => 'Sorry, Something Went Wrong. Please Try Again Later',
-	// 			'type' => 'danger'
-	// 		]);
-	// 	}
-	// 	redirect('JobController/jobHistory');
-	// }
+	public function jobAddForm() {
+		$jobAddStatus = $this->JobModel->jobAdd();
+		if($jobAddStatus){
+			$this->session->set_flashdata([
+				'message'  => 'Job Details Add Successfully',
+				'type' => 'success'
+			]);
+		} else {
+			$this->session->set_flashdata([
+				'message'  => 'Sorry, Something Went Wrong. Please Try Again Later',
+				'type' => 'danger'
+			]);
+		}
+		redirect('JobController/jobHistory');
+	}
 	/**
 	 * This jobAddEditFormValidation methond are used to validate the given field data
 	 * @return retrun a json value to js in job/addedit.js 
-	 * @author Ragav.
+	 * @author Kulasekaran.
 	 *
 	 */
-	// public function jobAddEditFormValidation() {
-		// $this->form_validation->set_rules( 'jobCategory', $this->lang->line("lbl_jobCategory"), 'required',
-		// 										array(
-		// 											'required' => $this->lang->line("required")
-		// 										)
-		// 									);
-		// $this->form_validation->set_rules( 'requiredSkill', $this->lang->line("lbl_requiredSkill"), 'required',
-		// 										array(
-		// 											'required' => $this->lang->line("required")
-		// 										)
-		// 									);
-		// $this->form_validation->set_rules( 'role', $this->lang->line("lbl_role"), 'required',
-		// 										array(
-		// 											'required' => $this->lang->line("required")
-		// 										)
-		// 									);
-		// $this->form_validation->set_rules( 'minQualification', $this->lang->line("lbl_minQualification"), 'required',
-		// 										array(
-		// 											'required' => $this->lang->line("required")
-		// 										)
-		// 									);
-		// $this->form_validation->set_rules( 'maxAge', $this->lang->line("lbl_maxAge"), 'required',
-		// 										array(
-		// 											'required' => $this->lang->line("required")
-		// 										)
-		// 									);
-		// $this->form_validation->set_rules( 'salary', $this->lang->line("lbl_salary"), 'required',
-		// 										array(
-		// 											'required' => $this->lang->line("required")
-		// 										)
-		// 									);
-		// $this->form_validation->set_rules( 'jobLocation', $this->lang->line("lbl_jobLocation"), 'required',
-		// 										array(
-		// 											'required' => $this->lang->line("required")
-		// 										)
-		// 									);
-		// $this->form_validation->set_rules( 'workingHour', $this->lang->line("lbl_workingHour"), 'required',
-		// 										array(
-		// 											'required' => $this->lang->line("required")
-		// 										)
-		// 									);
-		// $this->form_validation->set_rules( 'jobDescription', $this->lang->line("lbl_jobDescription"), 'required',
-		// 										array(
-		// 											'required' => $this->lang->line("required")
-		// 										)
-		// 									);
-		// $this->form_validation->set_rules( 'lastApplyDate', $this->lang->line("lbl_lastApplyDate"), 'required',
-		// 										array(
-		// 											'required' => $this->lang->line("required")
-		// 										)
-		// 									);
-	// 	if ($this->form_validation->run('jobAddEdit') == FALSE) {
-	// 		$json_response = $this->form_validation->error_array();
-	// 		echo json_encode($json_response); exit();
-	// 	} else {
-	// 		echo json_encode(true); exit();
-	// 	}
-	// }
+	public function jobAddEditFormValidation() {
+		if ($this->form_validation->run('jobAddEdit') == FALSE) {
+			$json_response = $this->form_validation->error_array();
+			echo json_encode($json_response); exit();
+		} else {
+			echo json_encode(true); exit();
+		}
+	}
 
 	/**
 	 * This jobDetail methond are used to get the data from model for the specfic job details
 	 * @return to view screen with data [ job/detail ]
-	 * @author Ragav.
+	 * @author Kulasekaran.
 	 *
 	 */
 	// public function jobDetail() {
@@ -199,7 +139,7 @@ class JobController extends CI_Controller {
 	/**
 	 * This jobEdit methond are used to get the data from model for the specfic job detail for edit process
 	 * @return to view screen with data [ job/addEdit ]
-	 * @author Ragav.
+	 * @author Kulasekaran.
 	 *
 	 */
 	// public function jobEdit() {
@@ -217,7 +157,7 @@ class JobController extends CI_Controller {
 	/**
 	 * This profile methond are used to get the data form model for the specfic user (user whose login to website)
 	 * @return to view screen [ profileDetail ]
-	 * @author Ragav.
+	 * @author Kulasekaran.
 	 *
 	 */
 	// public function jobEditForm() {

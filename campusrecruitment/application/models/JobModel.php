@@ -6,7 +6,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  *
  * This Model are used to perform the company job details related to data base process
  * 
- * @author Ragav.
+ * @author Kulasekaran.
  *
  */
 class JobModel extends CI_Model {
@@ -16,7 +16,7 @@ class JobModel extends CI_Model {
 	 *
 	 * This __construct are used to load the database
 	 * 
-	 * @author Ragav.
+	 * @author Kulasekaran.
 	 *
 	 */
 	function __construct() {
@@ -27,7 +27,7 @@ class JobModel extends CI_Model {
 	/**
 	 * This jobAdd method are used to add the data get from user into data base
 	 * @return to return the jobAddStatus with true or false value to controller according to database results
-	 * @author Ragav.
+	 * @author Kulasekaran.
 	 *
 	 */
 	function jobAdd() {
@@ -36,6 +36,7 @@ class JobModel extends CI_Model {
 			'companyId' => $userName,
 			'jobCategory' => $this->input->post('jobCategory'),
 			'requiredSkill' => $this->input->post('requiredSkill'),
+			'extraSkill' => $this->input->post('extraSkill'),
 			'role' => $this->input->post('role'),
 			'minQualification' => $this->input->post('minQualification'),
 			'maxAge' => $this->input->post('maxAge'),
@@ -54,7 +55,7 @@ class JobModel extends CI_Model {
 	/**
 	 * This jobHistory method are used to retrieves the data from user to data base
 	 * @return to return the jobHistory array value to controller
-	 * @author Ragav.
+	 * @author Kulasekaran.
 	 *
 	 */
 	function jobHistory($limit, $start) {
@@ -113,7 +114,7 @@ class JobModel extends CI_Model {
 	/**
 	 * This record_count method are used to get the total count of data from job_details table
 	 * @return to return the total count value to controller
-	 * @author Ragav.
+	 * @author Kulasekaran.
 	 *
 	 */
 	public function record_count() {
@@ -123,7 +124,7 @@ class JobModel extends CI_Model {
 	/**
 	 * This jobDetail method are used to get the one row data from job_details table
 	 * @return to return the jobDetail array to controller
-	 * @author Ragav.
+	 * @author Kulasekaran.
 	 *
 	 */
 	// public function jobDetail($id) {
@@ -161,7 +162,7 @@ class JobModel extends CI_Model {
 	/**
 	 * This jobEdit method are used to get the one row data from job_details table
 	 * @return to return the jobEdit array to controller
-	 * @author Ragav.
+	 * @author Kulasekaran.
 	 *
 	 */
 	// function jobEdit() {
@@ -190,7 +191,7 @@ class JobModel extends CI_Model {
 	/**
 	 * This jobUpdate method are used to update the one row data into the job_details table
 	 * @return to return the jobUpdateStatus with true or false value to controller according to database results
-	 * @author Ragav.
+	 * @author Kulasekaran.
 	 *
 	 */
 	// function jobUpdate() {

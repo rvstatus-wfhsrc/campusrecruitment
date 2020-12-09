@@ -72,6 +72,11 @@ $config = array(
                                     )
                             ),
                             array(
+                                'field' => 'extraSkill',
+                                'label' => 'lang:lbl_extraSkill',
+                                'rules' => 'extra_skill'
+                            ),
+                            array(
                                 'field' => 'role',
                                 'label' => 'lang:lbl_role',
                                 'rules' => 'required',
@@ -98,10 +103,9 @@ $config = array(
                             array(
                                 'field' => 'salary',
                                 'label' => 'lang:lbl_salary',
-                                'rules' => 'required|belongstowork',
+                                'rules' => 'required|belongstowork|valid_salary',
                                     array(
                                         'required' => 'lang:required'
-                                        // 'integer' => 'lang:integer'
                                     )
                             ),
                             array(
@@ -115,7 +119,7 @@ $config = array(
                             array(
                                 'field' => 'workingHour',
                                 'label' => 'lang:lbl_workingHour',
-                                'rules' => 'required',
+                                'rules' => 'required|working_hours',
                                     array(
                                         'required' => 'lang:required'
                                     )
@@ -131,7 +135,7 @@ $config = array(
                             array(
                                 'field' => 'lastApplyDate',
                                 'label' => 'lang:lbl_lastApplyDate',
-                                'rules' => 'required',
+                                'rules' => 'required|after_today',
                                     array(
                                         'required' => 'lang:required'
                                     )

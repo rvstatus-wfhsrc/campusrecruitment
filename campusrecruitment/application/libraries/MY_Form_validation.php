@@ -121,4 +121,52 @@ class MY_Form_validation extends CI_Form_validation{
     return ($comparePassword != 0) ? FALSE : TRUE;
     }
 
+    /**
+	 * This extra_skill method are used to validate the field are special characters except comma(,) or not
+	 * @return true or false to jobAddEditFormValidation method
+	 * @author kulasekaran.
+	 *
+	 */
+	function extra_skill($name) {
+		$pattern = "/^[A-Za-z\s\,]+$/";
+		$match = preg_match($pattern,$name);
+		return ($match == 0) ? FALSE : TRUE;
+	}
+
+	/**
+	 * This working_hours method are used to validate the field are hour or not
+	 * @return true or false to jobAddEditFormValidation method
+	 * @author kulasekaran.
+	 *
+	 */
+	function working_hours($hour) {
+		$pattern = "/\b\d{1,2}\b/";
+		$match = preg_match($pattern,$hour);
+		return ($match == 0) ? FALSE : TRUE;
+	}
+
+	/**
+	 * This working_hours method are used to validate the field are hour or not
+	 * @return true or false to jobAddEditFormValidation method
+	 * @author kulasekaran.
+	 *
+	 */
+	function valid_salary($salary) {
+		$pattern = "/^[0-9\,]+$/";
+		$match = preg_match($pattern,$salary);
+		return ($match == 0) ? FALSE : TRUE;
+	}
+
+	/**
+	 * This after_today method are used to validate the apply last date is after today or not
+	 * @return true or false to jobAddEditFormValidation method
+	 * @author kulasekaran.
+	 *
+	 */
+	function after_today() {
+		$lastApplyDate = $this->CI->input->post('lastApplyDate');
+		$currentDate = date('Y-m-d');
+		return ($currentDate >= $lastApplyDate) ? FALSE : TRUE;
+	}
+
 }

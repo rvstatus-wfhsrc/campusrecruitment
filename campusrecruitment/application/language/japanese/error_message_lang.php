@@ -22,4 +22,9 @@ $lang['exist_company_name'] = 'The {field} already exists.';
 $lang['exist_company_website'] = 'The {field} already exists.';
 $lang['valid_website'] = 'The {field} is invalid.';
 
+$lang['extra_skill'] = 'The {field} is invalid format.';
+$lang['working_hours'] = 'The {field} is invalid format.';
+$lang['valid_salary'] = 'The {field} is invalid format.';
+$lang['after_today'] = 'The {field} must be a date after today.';
+
 ?>

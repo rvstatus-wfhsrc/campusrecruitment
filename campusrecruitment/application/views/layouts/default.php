@@ -104,6 +104,7 @@
                                     <div class="sb-nav-link-icon"><i class="fa fa-user"></i></div>
                                     Profile
                                 </a>
+                                <div class="sb-sidenav-menu-heading">Settings</div>
                                 <a class="nav-link <?php echo ($this->uri->segment(1)=='JobController')?'active':''; ?>" data-toggle="collapse" data-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
                                     <div class="sb-nav-link-icon">
                                         <i class="fa fa-briefcase"></i>
