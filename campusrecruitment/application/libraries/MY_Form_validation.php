@@ -39,7 +39,7 @@ class MY_Form_validation extends CI_Form_validation{
 	 * @author kulasekaran.
 	 *
 	 */
-	function alphabetic_with_special_char($value) {
+	function alphabetic($value) {
 		$pattern = "/^[A-Za-z\s\.]+$/";
 		$match = preg_match($pattern,$value);
 		return ($match == 0) ? FALSE : TRUE;

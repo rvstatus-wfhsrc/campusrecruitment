@@ -7,7 +7,7 @@ $lang['valid_email'] = 'The {field} is invalid.';
 $lang['max_length'] = 'The {field} may not be greater than 50 characters.';
 
 
-$lang['alphabetic_with_special_char'] = 'Please enter only alphabetical letter.';
+$lang['alphabetic'] = 'Please enter only alphabetical letter.';
 $lang['pincode_digit'] = 'The {field} must be 6 digits.';
 $lang['ten_digit_only'] = 'The {field} must be 10 digits.';
 $lang['before_tomorrow'] = 'The {field} must be a date before tomorrow.';

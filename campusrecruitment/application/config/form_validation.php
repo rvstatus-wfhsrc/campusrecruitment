@@ -157,7 +157,7 @@ $config = array(
                                     array(
                                         'field' => 'companyName',
                                         'label' => 'lang:lbl_companyName',
-                                        'rules' => 'required|alphabetic_with_special_char|max_length[50]|exist_company_name',
+                                        'rules' => 'required|alphabetic|max_length[50]|exist_company_name',
                                             array(
                                                 'required' => 'lang:required',
                                                 'max_length' => 'lang:max_length'
@@ -166,7 +166,7 @@ $config = array(
                                     array(
                                         'field' => 'incharge',
                                         'label' => 'lang:lbl_incharge',
-                                        'rules' => 'required|alphabetic_with_special_char|max_length[50]',
+                                        'rules' => 'required|alphabetic|max_length[50]',
                                             array(
                                                 'required' => 'lang:required',
                                                 'max_length' => 'lang:max_length'
@@ -238,7 +238,7 @@ $config = array(
                                     array(
                                         'field' => 'companyName',
                                         'label' => 'lang:lbl_companyName',
-                                        'rules' => 'required|alphabetic_with_special_char|max_length[50]|exist_company_name',
+                                        'rules' => 'required|alphabetic|max_length[50]|exist_company_name',
                                             array(
                                                 'required' => 'lang:required',
                                                 'max_length' => 'lang:max_length'
@@ -247,7 +247,7 @@ $config = array(
                                     array(
                                         'field' => 'incharge',
                                         'label' => 'lang:lbl_incharge',
-                                        'rules' => 'required|alphabetic_with_special_char|max_length[50]',
+                                        'rules' => 'required|alphabetic|max_length[50]',
                                             array(
                                                 'required' => 'lang:required',
                                                 'max_length' => 'lang:max_length'
