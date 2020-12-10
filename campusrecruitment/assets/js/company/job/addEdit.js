@@ -1,6 +1,9 @@
 var data = {};
 $(document).ready(function() {
     $('.addEditProcess').on('click', function() {
+        var extraSkill = $('#extraSkill').val();
+        extraSkill = extraSkill.replace(/,$/, "");
+        $('#extraSkill').val(extraSkill);
         $(".addEditProcess").attr("disabled", true);
             resetErrors();
             var url = 'jobAddEditFormValidation';

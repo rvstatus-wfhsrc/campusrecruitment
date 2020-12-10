@@ -3,13 +3,6 @@ class MY_Form_validation extends CI_Form_validation{
 	function __construct($config = array()){
 		parent::__construct($config);
 	}
-	function belongstowork($salary) {
-		// print_r($this->CI->input->post());
-		// print_r($this->CI->session->userdata('userName'));
-		$query = $this->CI->db->query("SELECT COUNT(id) AS count FROM users WHERE email = '".$salary."' AND userName != '".$this->CI->session->userdata('userName')."'");
-		$row = $query->row();
-		return ($row->count > 0) ? FALSE : TRUE;
-	}
 
 	/**
 	 * This email_exist_check method are used to validate the email for already exist or not
@@ -41,26 +34,26 @@ class MY_Form_validation extends CI_Form_validation{
 	}
 
 	/**
-	 * This alphabetic method are used to validate the field are alphabetic or not
+	 * This alphabetic_with_special_char method are used to validate the field are alphabetic or not
 	 * @return true or false to companyProfileFormValidation method
 	 * @author kulasekaran.
 	 *
 	 */
-	function alphabetic($name) {
+	function alphabetic_with_special_char($value) {
 		$pattern = "/^[A-Za-z\s\.]+$/";
-		$match = preg_match($pattern,$name);
+		$match = preg_match($pattern,$value);
 		return ($match == 0) ? FALSE : TRUE;
 	}
 
 	/**
-	 * This contact_digit method are used to validate contact field have ten digit or not
+	 * This ten_digit_only method are used to validate field have ten digit or not
 	 * @return true or false to companyProfileFormValidation method
 	 * @author kulasekaran.
 	 *
 	 */
-	function contact_digit($contact) {
+	function ten_digit_only($value) {
 		$pattern = "/\b\d{10}\b/";
-		$match = preg_match($pattern,$contact);
+		$match = preg_match($pattern,$value);
 		return ($match == 0) ? FALSE : TRUE;
 	}
 
@@ -128,7 +121,7 @@ class MY_Form_validation extends CI_Form_validation{
 	 *
 	 */
 	function extra_skill($name) {
-		$pattern = "/^[A-Za-z\s\,]+$/";
+		$pattern = "/^[A-Za-z\s\,\#\+]+$/";
 		$match = preg_match($pattern,$name);
 		return ($match == 0) ? FALSE : TRUE;
 	}
@@ -146,18 +139,6 @@ class MY_Form_validation extends CI_Form_validation{
 	}
 
 	/**
-	 * This working_hours method are used to validate the field are hour or not
-	 * @return true or false to jobAddEditFormValidation method
-	 * @author kulasekaran.
-	 *
-	 */
-	function valid_salary($salary) {
-		$pattern = "/^[0-9\,]+$/";
-		$match = preg_match($pattern,$salary);
-		return ($match == 0) ? FALSE : TRUE;
-	}
-
-	/**
 	 * This after_today method are used to validate the apply last date is after today or not
 	 * @return true or false to jobAddEditFormValidation method
 	 * @author kulasekaran.
@@ -167,6 +148,26 @@ class MY_Form_validation extends CI_Form_validation{
 		$lastApplyDate = $this->CI->input->post('lastApplyDate');
 		$currentDate = date('Y-m-d');
 		return ($currentDate >= $lastApplyDate) ? FALSE : TRUE;
+	}
+
+	/**
+	 * This greater_than_zero method are used to validate the field value is greater than zero or not
+	 * @return true or false to jobAddEditFormValidation method
+	 * @author kulasekaran.
+	 *
+	 */
+	function greater_than_zero($value) {
+		return ($value <= 0) ? FALSE : TRUE;
+	}
+
+	/**
+	 * This less_than_fifteen method are used to validate the field value is less than fifteen or not
+	 * @return true or false to jobAddEditFormValidation method
+	 * @author kulasekaran.
+	 *
+	 */
+	function less_than_fifteen($value) {
+		return ($value >= 15) ? FALSE : TRUE;
 	}
 
 }

@@ -143,7 +143,7 @@
                                             <td class="vam"><?php echo $history->roleName; ?></td>
                                             <td class="tac vam"><?php echo $history->salary; ?></td>
                                             <td class="vam"><?php echo $history->jobLocation; ?></td>
-                                            <td class="tac vam"><?php echo date_format(date_create($history->workingHour),"H:i"); ?></td>
+                                            <td class="tac vam"><?php echo $history->workingHour; ?></td>
                                             <td class="vam"><?php echo nl2br($history->jobDescription); ?></td>
                                             <td class="tac vam"><?php echo $history->lastApplyDate; ?></td>
                                             <td class="tac vam">

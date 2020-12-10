@@ -1,0 +1,1 @@
+ALTER TABLE job_details ADD COLUMN jobType INT(5) NOT NULL AFTER jobCategory;

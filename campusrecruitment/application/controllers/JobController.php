@@ -105,6 +105,7 @@ class JobController extends CI_Controller {
 		}
 		redirect('JobController/jobHistory');
 	}
+
 	/**
 	 * This jobAddEditFormValidation methond are used to validate the given field data
 	 * @return retrun a json value to js in job/addedit.js 
@@ -119,6 +120,19 @@ class JobController extends CI_Controller {
 			echo json_encode(true); exit();
 		}
 	}
+
+	/**
+	 * This jobstatus method are used to change the delflag for the specfic job
+	 * @return the redirect to JobController/jobHistory
+	 * @author Kulasekaran.
+	 *
+	 */
+    public function jobStatus() {
+    	$id = $this->input->post('hiddenJobId');
+    	$delFlag = $this->input->post('hiddenDelFlag');
+        $jobStatus = $this->JobModel->jobStatus($id,$delFlag);
+        return redirect('JobController/jobHistory');
+    }
 
 	/**
 	 * This jobDetail methond are used to get the data from model for the specfic job details

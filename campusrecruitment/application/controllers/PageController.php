@@ -16,7 +16,7 @@ class PageController extends CI_Controller {
   // Allowing accesses to admin only
   function index() {
     if($this->session->userdata('flag')==='1') {
-      redirect('AdminController/profile/profileDetail');
+      redirect('AdminController/profile');
     } else {
       echo "Access Denied";
     }

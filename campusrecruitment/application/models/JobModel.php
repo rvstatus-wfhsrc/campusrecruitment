@@ -123,6 +123,26 @@ class JobModel extends CI_Model {
 	}
 
 	/**
+	 * This jobStatus method are used to turns active or inactive for the specfic job
+	 * @return the job status
+	 * @author Kulasekaran.
+	 *
+	 */
+	function jobStatus($id,$delFlag) {
+		$userName = $this->session->userdata('userName');
+		// $delFlag => 0 ----> change delFlag = 1
+		// $delFlag => 1 ----> change delFlag = 0
+		if ($delFlag == 0) {
+			$this->db->where('id', $id);
+			$jobStatus = $this->db->update('job_details', array('delFlag' => 1,'updated_by' => $userName ));
+		} else {
+			$this->db->where('id', $id);
+			$jobStatus = $this->db->update('job_details', array('delFlag' => 0,'updated_by' => $userName ));
+		}
+		return $jobStatus;
+	}
+
+	/**
 	 * This jobDetail method are used to get the one row data from job_details table
 	 * @return to return the jobDetail array to controller
 	 * @author Kulasekaran.

@@ -67,8 +67,8 @@ function fnJobActiveOrDeactive(id , processType) {
 		var confActiveDeactiveMsg = "Do You Want to change it as Deactive ?";
 	}
 	if (confirm(confActiveDeactiveMsg)) {
-		$("#historyForm").attr("action", "companyStatus");
-		$("#hiddenCompanyId").val(id);
+		$("#historyForm").attr("action", "jobStatus");
+		$("#hiddenJobId").val(id);
 		$("#hiddenDelFlag").val(processType);
 		$("#historyForm").submit();
 	}

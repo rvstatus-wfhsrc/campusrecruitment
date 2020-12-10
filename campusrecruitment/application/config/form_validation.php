@@ -12,9 +12,10 @@ $config = array(
                             array(
                                 'field' => 'jobSeekerPassword',
                                 'label' => 'lang:lbl_password',
-                                'rules' => 'required',
+                                'rules' => 'required|min_length[6]',
                                     array(
-                                        'required' => 'lang:required'
+                                        'required' => 'lang:required',
+                                        'min_length' => 'lang:min_length'
                                     )
                             )
                         ),
@@ -30,9 +31,10 @@ $config = array(
                             array(
                                 'field' => 'companyPassword',
                                 'label' => 'lang:lbl_password',
-                                'rules' => 'required',
+                                'rules' => 'required|min_length[6]',
                                     array(
-                                        'required' => 'lang:required'
+                                        'required' => 'lang:required',
+                                        'min_length' => 'lang:min_length'
                                     )
                             )
                         ),
@@ -48,9 +50,10 @@ $config = array(
                             array(
                                 'field' => 'adminPassword',
                                 'label' => 'lang:lbl_password',
-                                'rules' => 'required',
+                                'rules' => 'required|min_length[6]',
                                     array(
-                                        'required' => 'lang:required'
+                                        'required' => 'lang:required',
+                                        'min_length' => 'lang:min_length'
                                     )
                             )
                         ),
@@ -58,6 +61,14 @@ $config = array(
                             array(
                                 'field' => 'jobCategory',
                                 'label' => 'lang:lbl_jobCategory',
+                                'rules' => 'required',
+                                    array(
+                                        'required' => 'lang:required'
+                                    )
+                            ),
+                            array(
+                                'field' => 'jobType',
+                                'label' => 'lang:lbl_jobType',
                                 'rules' => 'required',
                                     array(
                                         'required' => 'lang:required'
@@ -103,9 +114,10 @@ $config = array(
                             array(
                                 'field' => 'salary',
                                 'label' => 'lang:lbl_salary',
-                                'rules' => 'required|belongstowork|valid_salary',
+                                'rules' => 'required|integer|greater_than_zero',
                                     array(
-                                        'required' => 'lang:required'
+                                        'required' => 'lang:required',
+                                        'integer' => 'lang:integer'                      
                                     )
                             ),
                             array(
@@ -119,7 +131,7 @@ $config = array(
                             array(
                                 'field' => 'workingHour',
                                 'label' => 'lang:lbl_workingHour',
-                                'rules' => 'required|working_hours',
+                                'rules' => 'required|integer|greater_than_zero|less_than_fifteen',
                                     array(
                                         'required' => 'lang:required'
                                     )
@@ -145,7 +157,7 @@ $config = array(
                                     array(
                                         'field' => 'companyName',
                                         'label' => 'lang:lbl_companyName',
-                                        'rules' => 'required|alphabetic|max_length[50]|exist_company_name',
+                                        'rules' => 'required|alphabetic_with_special_char|max_length[50]|exist_company_name',
                                             array(
                                                 'required' => 'lang:required',
                                                 'max_length' => 'lang:max_length'
@@ -154,7 +166,7 @@ $config = array(
                                     array(
                                         'field' => 'incharge',
                                         'label' => 'lang:lbl_incharge',
-                                        'rules' => 'required|alphabetic|max_length[50]',
+                                        'rules' => 'required|alphabetic_with_special_char|max_length[50]',
                                             array(
                                                 'required' => 'lang:required',
                                                 'max_length' => 'lang:max_length'
@@ -171,7 +183,7 @@ $config = array(
                                     array(
                                         'field' => 'contact',
                                         'label' => 'lang:lbl_contact',
-                                        'rules' => 'required|contact_digit',
+                                        'rules' => 'required|ten_digit_only',
                                             array(
                                                 'required' => 'lang:required'
                                             )
@@ -189,7 +201,7 @@ $config = array(
                                     array(
                                         'field' => 'website',
                                         'label' => 'lang:lbl_website',
-                                        'rules' => 'required|exist_company_website|valid_website',
+                                        'rules' => 'required|valid_website|exist_company_website',
                                             array(
                                                 'required' => 'lang:required',
                                                 'max_length' => 'lang:max_length'
@@ -226,7 +238,7 @@ $config = array(
                                     array(
                                         'field' => 'companyName',
                                         'label' => 'lang:lbl_companyName',
-                                        'rules' => 'required|alphabetic|max_length[50]|exist_company_name',
+                                        'rules' => 'required|alphabetic_with_special_char|max_length[50]|exist_company_name',
                                             array(
                                                 'required' => 'lang:required',
                                                 'max_length' => 'lang:max_length'
@@ -235,7 +247,7 @@ $config = array(
                                     array(
                                         'field' => 'incharge',
                                         'label' => 'lang:lbl_incharge',
-                                        'rules' => 'required|alphabetic|max_length[50]',
+                                        'rules' => 'required|alphabetic_with_special_char|max_length[50]',
                                             array(
                                                 'required' => 'lang:required',
                                                 'max_length' => 'lang:max_length'
@@ -252,7 +264,7 @@ $config = array(
                                     array(
                                         'field' => 'contact',
                                         'label' => 'lang:lbl_contact',
-                                        'rules' => 'required|contact_digit',
+                                        'rules' => 'required|ten_digit_only',
                                             array(
                                                 'required' => 'lang:required'
                                             )
@@ -270,7 +282,7 @@ $config = array(
                                     array(
                                         'field' => 'website',
                                         'label' => 'lang:lbl_website',
-                                        'rules' => 'required|exist_company_website|valid_website',
+                                        'rules' => 'required|valid_website|exist_company_website',
                                             array(
                                                 'required' => 'lang:required',
                                                 'max_length' => 'lang:max_length'
