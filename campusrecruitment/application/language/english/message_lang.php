@@ -69,4 +69,6 @@ $lang['lbl_last_date'] = 'Last Date';
 $lang['lbl_extraSkill'] = 'Extra Skill';
 $lang['lbl_jobType'] = 'Job Type';
 
+$lang['lbl_list'] = 'List';
+
 ?>

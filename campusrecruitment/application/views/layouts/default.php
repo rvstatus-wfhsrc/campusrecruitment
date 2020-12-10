@@ -116,8 +116,8 @@
                                 </a>
                                 <div class="collapse <?php echo ($this->uri->segment(1)!=null && $this->uri->segment(1)=='JobController')?'show':''; ?>" id="collapseLayouts" aria-labelledby="headingOne" data-parent="#sidenavAccordion">
                                     <nav class="sb-sidenav-menu-nested nav">
-                                        <a class="nav-link <?php echo ($this->uri->segment(2)=='jobHistory')?'active':''; ?>" href="<?php echo site_url('JobController/jobHistory') ?>">
-                                            <?php echo lang('lbl_history'); ?>
+                                        <a class="nav-link <?php echo ($this->uri->segment(2)=='jobList')?'active':''; ?>" href="<?php echo site_url('JobController/jobList') ?>">
+                                            <?php echo lang('lbl_list'); ?>
                                         </a>
                                     </nav>
                                 </div>

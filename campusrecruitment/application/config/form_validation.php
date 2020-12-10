@@ -114,10 +114,10 @@ $config = array(
                             array(
                                 'field' => 'salary',
                                 'label' => 'lang:lbl_salary',
-                                'rules' => 'required|integer|greater_than_zero',
+                                'rules' => 'required|integer|greater_than[0]',
                                     array(
                                         'required' => 'lang:required',
-                                        'integer' => 'lang:integer'                      
+                                        'integer' => 'lang:integer'
                                     )
                             ),
                             array(
@@ -131,7 +131,7 @@ $config = array(
                             array(
                                 'field' => 'workingHour',
                                 'label' => 'lang:lbl_workingHour',
-                                'rules' => 'required|integer|greater_than_zero|less_than_fifteen',
+                                'rules' => 'required|integer|greater_than[0]|less_than_equal_to[15]',
                                     array(
                                         'required' => 'lang:required'
                                     )
@@ -296,7 +296,7 @@ $config = array(
                                                 'required' => 'lang:required'
                                             )
                                     )
-                                )                                      
+                                )
            );
 
 ?>

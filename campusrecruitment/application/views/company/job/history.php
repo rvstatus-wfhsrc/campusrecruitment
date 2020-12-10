@@ -31,7 +31,7 @@
                     <i class="fa fa-briefcase fa-btn mt3"></i>
                     <?php echo lang('lbl_job'); ?>
                     <span class ="dot historyScrClr">&bull;</span>
-                    <span class="historyScrClr"><?php echo lang('lbl_history'); ?></span>
+                    <span class="historyScrClr"><?php echo lang('lbl_list'); ?></span>
                 </li>
                 <?php if ($this->session->flashdata('message') != "") { ?>
                     <div class="alert alert-<?php echo($this->session->flashdata('type')); ?> fmsg tac">
@@ -108,14 +108,13 @@
                         <table class="table table-bordered table-position">
                             <colgroup>
                                 <col width="1%">
-                                <col width="12%">
+                                <col>
                                 <col width="10%">
                                 <col width="11%">
                                 <col width="11%">
                                 <col width="10%">
                                 <col width="7%">
-                                <col>
-                                <col width="8%">
+                                <col width="9%">
                                 <col width="11%">
                             </colgroup>
                             <thead class="thead">
@@ -127,7 +126,6 @@
                                     <th><?php echo lang('lbl_salary'); ?></th>
                                     <th title="<?php echo lang('lbl_jobLocation'); ?>"><?php echo lang('lbl_location'); ?></th>
                                     <th title="<?php echo lang('lbl_workingHour'); ?>">W.H</th>
-                                    <th title="<?php echo lang('lbl_jobDescription'); ?>"><?php echo lang('lbl_description'); ?></th>
                                     <th title="<?php echo lang('lbl_lastApplyDate'); ?>"><?php echo lang('lbl_last_date'); ?></th>
                                     <th></th>
                                 </tr>
@@ -141,10 +139,9 @@
                                             <td class="vam"><?php echo $history->designationName; ?></td>
                                             <td class="vam"><?php echo $history->skillName; ?></td>
                                             <td class="vam"><?php echo $history->roleName; ?></td>
-                                            <td class="tac vam"><?php echo $history->salary; ?></td>
+                                            <td class="tac vam"><?php echo number_format($history->salary); ?></td>
                                             <td class="vam"><?php echo $history->jobLocation; ?></td>
                                             <td class="tac vam"><?php echo $history->workingHour; ?></td>
-                                            <td class="vam"><?php echo nl2br($history->jobDescription); ?></td>
                                             <td class="tac vam"><?php echo $history->lastApplyDate; ?></td>
                                             <td class="tac vam">
                                                 <a href="javascript:;" onclick="fnJobDetail(<?php echo $history->id;?>)" class="m3">
@@ -165,7 +162,7 @@
                                     <?php } ?>
                             <?php } else { ?>
                                 <tr>
-                                    <td colspan="10" class="tac noDataFoundClr fs16">No data found</td>
+                                    <td colspan="9" class="tac noDataFoundClr fs16">No data found</td>
                                 </tr>
                             <?php } ?>
                         </table>

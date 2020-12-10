@@ -29,12 +29,12 @@ class JobController extends CI_Controller {
 	}
 
 	/**
-	 * This jobHistory methond are used to get the data from model for the specfic company (company whose login to website)
+	 * This jobList method are used to get the data from model for the specfic company (company whose login to website)
 	 * @return to view screen [ history ]
 	 * @author Kulasekaran.
 	 *
 	 */
-	public function jobHistory() {
+	public function jobList() {
 		// filter process
 		$filterVal = $this->input->post('filterVal');
 		$data['disableAll'] = "";
@@ -56,7 +56,7 @@ class JobController extends CI_Controller {
 		} elseif(isset($sortOptn) && $sortOptn == "DESC") {
 			$data['sortStyle'] = "sort_desc";
 		}
-		$data['sortArray'] = array('1' => 'Skill','2' => 'Salary','3' => 'Last Apply Date');
+		$data['sortArray'] = array('1' => 'Created Date','2' => 'Skill','3' => 'Salary','4' => 'Last Apply Date');
 
 		// pagination process
 		$totalRecord = $this->JobModel->record_count();
@@ -65,14 +65,14 @@ class JobController extends CI_Controller {
 		$page = (isset($_GET['per_page'])) ? $_GET['per_page'] : 0;
 
 		$data["links"] = $this->pagination->create_links();
-		$data['jobHistory'] = $this->JobModel->jobHistory($pagination_config["per_page"], $page);
+		$data['jobHistory'] = $this->JobModel->jobList($pagination_config["per_page"], $page);
 		
 		$this->layouts->view('company/job/history',$data);
 	}
 
 
 	/**
-	 * This jobAdd methond are used for goto the job add screen
+	 * This jobAdd method are used for goto the job add screen
 	 * @return to view screen [ add ]
 	 * @author Kulasekaran.
 	 *
@@ -103,11 +103,11 @@ class JobController extends CI_Controller {
 				'type' => 'danger'
 			]);
 		}
-		redirect('JobController/jobHistory');
+		redirect('JobController/jobList');
 	}
 
 	/**
-	 * This jobAddEditFormValidation methond are used to validate the given field data
+	 * This jobAddEditFormValidation method are used to validate the given field data
 	 * @return retrun a json value to js in job/addedit.js 
 	 * @author Kulasekaran.
 	 *
@@ -131,7 +131,7 @@ class JobController extends CI_Controller {
     	$id = $this->input->post('hiddenJobId');
     	$delFlag = $this->input->post('hiddenDelFlag');
         $jobStatus = $this->JobModel->jobStatus($id,$delFlag);
-        return redirect('JobController/jobHistory');
+        return redirect('JobController/jobList');
     }
 
 	/**

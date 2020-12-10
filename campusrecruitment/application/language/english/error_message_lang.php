@@ -18,7 +18,6 @@ $lang['password_confirmation'] = 'The Password Confirmation does not match.';
 
 
 $lang['integer'] = 'The {field} field must contain an integer.';
-$lang['belongstowork'] = "Sorry, the {field} must belong to work.";
 
 $lang['exist_company_name'] = 'The {field} already exists.';
 $lang['exist_company_website'] = 'The {field} already exists.';
@@ -27,7 +26,7 @@ $lang['valid_website'] = 'The {field} is invalid.';
 $lang['extra_skill'] = 'The {field} is invalid format.';
 $lang['working_hours'] = 'The {field} is invalid format.';
 $lang['after_today'] = 'The {field} must be a date after today.';
-$lang['greater_than_zero'] = 'The {field} must be greater than 0.';
-$lang['less_than_fifteen'] = 'The {field} must be less than 15.';
+$lang['greater_than'] = 'The {field} must be greater than {param}.';
+$lang['less_than_equal_to'] = 'The {field} must be less than {param}.';
 
 ?>

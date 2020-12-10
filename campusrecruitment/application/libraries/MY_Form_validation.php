@@ -34,7 +34,7 @@ class MY_Form_validation extends CI_Form_validation{
 	}
 
 	/**
-	 * This alphabetic_with_special_char method are used to validate the field are alphabetic or not
+	 * This alphabetic method are used to validate the field are alphabetic or not
 	 * @return true or false to companyProfileFormValidation method
 	 * @author kulasekaran.
 	 *
@@ -120,21 +120,9 @@ class MY_Form_validation extends CI_Form_validation{
 	 * @author kulasekaran.
 	 *
 	 */
-	function extra_skill($name) {
+	function extra_skill($skill) {
 		$pattern = "/^[A-Za-z\s\,\#\+]+$/";
-		$match = preg_match($pattern,$name);
-		return ($match == 0) ? FALSE : TRUE;
-	}
-
-	/**
-	 * This working_hours method are used to validate the field are hour or not
-	 * @return true or false to jobAddEditFormValidation method
-	 * @author kulasekaran.
-	 *
-	 */
-	function working_hours($hour) {
-		$pattern = "/\b\d{1,2}\b/";
-		$match = preg_match($pattern,$hour);
+		$match = preg_match($pattern,$skill);
 		return ($match == 0) ? FALSE : TRUE;
 	}
 
@@ -148,26 +136,6 @@ class MY_Form_validation extends CI_Form_validation{
 		$lastApplyDate = $this->CI->input->post('lastApplyDate');
 		$currentDate = date('Y-m-d');
 		return ($currentDate >= $lastApplyDate) ? FALSE : TRUE;
-	}
-
-	/**
-	 * This greater_than_zero method are used to validate the field value is greater than zero or not
-	 * @return true or false to jobAddEditFormValidation method
-	 * @author kulasekaran.
-	 *
-	 */
-	function greater_than_zero($value) {
-		return ($value <= 0) ? FALSE : TRUE;
-	}
-
-	/**
-	 * This less_than_fifteen method are used to validate the field value is less than fifteen or not
-	 * @return true or false to jobAddEditFormValidation method
-	 * @author kulasekaran.
-	 *
-	 */
-	function less_than_fifteen($value) {
-		return ($value >= 15) ? FALSE : TRUE;
 	}
 
 }

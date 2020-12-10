@@ -14,7 +14,7 @@ $(document).ready(function() {
 		if (e.keyCode == 13) {
 			// $("#page").val(1);
 			$("#hiddenSearch").val($("#search").val());
-			$("#historyForm").attr("action", "jobHistory");
+			$("#historyForm").attr("action", "jobList");
 			$("#historyForm").submit();
 		}
 	});
@@ -31,14 +31,14 @@ function fnJobFilter(filterValue) {
 	// $("#page").val(1);
 	$( "#filterVal" ).val(filterValue);
 	$("#search").val($("#hiddenSearch").val());
-	$("#historyForm").attr("action", "jobHistory");
+	$("#historyForm").attr("action", "jobList");
 	$( "#historyForm" ).submit();
 }
 // search process
 function fnJobSearch() {
 	// $("#page").val(1);
 	$("#hiddenSearch").val($("#search").val());
-	$("#historyForm").attr("action", "jobHistory");
+	$("#historyForm").attr("action", "jobList");
 	$('#historyForm').submit();
 }
 // sorting process
@@ -56,7 +56,7 @@ function fnSortProcess(){
 			$("#sortOptn").val("ASC");
 		}
 	}
-	$("#historyForm").attr("action", "jobHistory");
+	$("#historyForm").attr("action", "jobList");
 	$( "#historyForm" ).submit();
 }
 // job details active or deactive process
@@ -82,6 +82,6 @@ function fnClearSearch() {
 	$("#sortOptn").val("DESC");
 	$("#search").val("");
 	$("#hiddenSearch").val("");
-	$("#historyForm").attr("action", "jobHistory");
+	$("#historyForm").attr("action", "jobList");
 	$('#historyForm').submit();
 }

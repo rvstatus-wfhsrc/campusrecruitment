@@ -54,12 +54,13 @@ class JobModel extends CI_Model {
 	}
 
 	/**
-	 * This jobHistory method are used to retrieves the data from user to data base
+	 * This jobList method are used to retrieves the data from user to data base
+	 * @param records limit and start value is passed by JobController
 	 * @return to return the jobHistory array value to controller
 	 * @author Kulasekaran.
 	 *
 	 */
-	function jobHistory($limit, $start) {
+	function jobList($limit, $start) {
 		$filterVal = $this->input->post('filterVal');
 		$hiddenSearch = $this->input->post('hiddenSearch');
 		$this->db->limit($limit, $start);
@@ -73,8 +74,8 @@ class JobModel extends CI_Model {
 					jd.maxAge,
 					jd.salary,
 					jd.workingHour,
-					jd.jobDescription,
-					jd.lastApplyDate'
+					jd.lastApplyDate,
+					jd.created_date_time'
 				)
 			->from('job_details as jd')
 			// this is the left join in codeigniter
@@ -100,13 +101,15 @@ class JobModel extends CI_Model {
 			$sortOptn = $this->input->post('sortOptn');
 			$sortVal = $this->input->post('sortVal');
 			if ($sortVal == 1) {
-				$this->db->order_by('skill.skillName', $sortOptn);
+				$this->db->order_by('jd.created_date_time', $sortOptn);
 			} else if ($sortVal == 2) {
-				$this->db->order_by('jd.salary', $sortOptn);
+				$this->db->order_by('skill.skillName', $sortOptn);
 			} else if ($sortVal == 3) {
+				$this->db->order_by('jd.salary', $sortOptn);
+			} else if ($sortVal == 4) {
 				$this->db->order_by('jd.lastApplyDate', $sortOptn);
 			} else {
-				$this->db->order_by('skill.skillName', 'DESC');
+				$this->db->order_by('jd.created_date_time', 'DESC');
 			}
 		$jobHistory = $this->db->get();
 		return $jobHistory->result();
@@ -124,6 +127,7 @@ class JobModel extends CI_Model {
 
 	/**
 	 * This jobStatus method are used to turns active or inactive for the specfic job
+	* @param id and delFlag value of specific job is passed from JobController 
 	 * @return the job status
 	 * @author Kulasekaran.
 	 *
