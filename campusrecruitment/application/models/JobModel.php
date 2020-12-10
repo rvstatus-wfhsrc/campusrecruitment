@@ -193,28 +193,30 @@ class JobModel extends CI_Model {
 	 * @author Kulasekaran.
 	 *
 	 */
-	// function jobEdit() {
-	// 	$this->db->select(
-	// 						'id,
-	// 						jobCategory,
-	// 						requiredSkill,
-	// 						role,
-	// 						minQualification,
-	// 						maxAge,
-	// 						salary,
-	// 						jobLocation,
-	// 						workingHour,
-	// 						jobDescription,
-	// 						lastApplyDate'
-	// 					);
-	// 	$this->db->where(array('id' => $this->input->post('hiddenJobId')));
-	// 	$jobEdit = $this->db->get('job_details');
-	// 	if(isset($jobEdit->result()[0])){
-	// 		return $jobEdit->result()[0];
-	// 	} else {
-	// 		return array();
-	// 	}
-	// }
+	function jobEdit() {
+		$this->db->select(
+							'id,
+							jobCategory,
+							jobType,
+							requiredSkill,
+							extraSkill,
+							role,
+							minQualification,
+							maxAge,
+							salary,
+							jobLocation,
+							workingHour,
+							jobDescription,
+							lastApplyDate'
+						);
+		$this->db->where(array('id' => $this->input->post('hiddenJobId')));
+		$jobEdit = $this->db->get('job_details');
+		if(isset($jobEdit->result()[0])){
+			return $jobEdit->result()[0];
+		} else {
+			return array();
+		}
+	}
 
 	/**
 	 * This jobUpdate method are used to update the one row data into the job_details table
@@ -222,24 +224,26 @@ class JobModel extends CI_Model {
 	 * @author Kulasekaran.
 	 *
 	 */
-	// function jobUpdate() {
-	// 	$userName = $this->session->userdata('userName');
-	// 	$hiddenJobId = $this->input->post('hiddenJobId');
-	// 	$jobUpdateData = array(
-	// 		'jobCategory' => $this->input->post('jobCategory'),
-	// 		'requiredSkill' => $this->input->post('requiredSkill'),
-	// 		'role' => $this->input->post('role'),
-	// 		'minQualification' => $this->input->post('minQualification'),
-	// 		'maxAge' => $this->input->post('maxAge'),
-	// 		'salary' => $this->input->post('salary'),
-	// 		'jobLocation' => $this->input->post('jobLocation'),
-	// 		'workingHour' => $this->input->post('workingHour'),
-	// 		'jobDescription' => $this->input->post('jobDescription'),
-	// 		'lastApplyDate' => $this->input->post('lastApplyDate'),
-	// 		'updated_by' => $userName
-	// 	);
-	// 	$this->db->where('id', $hiddenJobId);
-	// 	$updateUser = $this->db->update('job_details', $jobUpdateData);
-	// 	return $updateUser;
-	// }
+	function jobUpdate() {
+		$userName = $this->session->userdata('userName');
+		$hiddenJobId = $this->input->post('hiddenJobId');
+		$jobUpdateData = array(
+			'jobCategory' => $this->input->post('jobCategory'),
+			'jobType' => $this->input->post('jobType'),
+			'requiredSkill' => $this->input->post('requiredSkill'),
+			'extraSkill' => $this->input->post('extraSkill'),
+			'role' => $this->input->post('role'),
+			'minQualification' => $this->input->post('minQualification'),
+			'maxAge' => $this->input->post('maxAge'),
+			'salary' => $this->input->post('salary'),
+			'jobLocation' => $this->input->post('jobLocation'),
+			'workingHour' => $this->input->post('workingHour'),
+			'jobDescription' => $this->input->post('jobDescription'),
+			'lastApplyDate' => $this->input->post('lastApplyDate'),
+			'updated_by' => $userName
+		);
+		$this->db->where('id', $hiddenJobId);
+		$updateUser = $this->db->update('job_details', $jobUpdateData);
+		return $updateUser;
+	}
 }

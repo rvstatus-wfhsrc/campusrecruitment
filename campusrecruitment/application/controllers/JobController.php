@@ -141,7 +141,7 @@ class JobController extends CI_Controller {
 	 *
 	 */
 	public function jobDetail() {
-		if($this->input->post('hiddenJobId') == null) {
+		if($this->session->flashdata('hiddenJobId') == null && $this->input->post('hiddenJobId') == null) {
             redirect('JobController/jobList');
         }
 		$hiddenJobId = $this->input->post('hiddenJobId');
@@ -154,43 +154,43 @@ class JobController extends CI_Controller {
 	}
 
 	/**
-	 * This jobEdit methond are used to get the data from model for the specfic job detail for edit process
-	 * @return to view screen with data [ job/addEdit ]
+	 * This jobEdit method are used to get the data from model for the specfic job detail for edit process
+	 * @return to view screen with data [ company/job/addEdit ]
 	 * @author Kulasekaran.
 	 *
 	 */
-	// public function jobEdit() {
-	// 	$data['maxAgeArray'] = $this->maxAgeArray;
-	// 	$data['jobEdit'] = $this->JobModel->jobEdit();
-	// 	$data['jobCategoryArray'] = $this->CommonModel->designation();
-	// 	$data['requiredSkillArray'] = $this->CommonModel->skill();
-	// 	$data['roleArray'] = $this->CommonModel->role();
-	// 	$data['minQualificationArray'] = $this->CommonModel->minQualification();
-	// 	$data['jobLocationArray'] = $this->CommonModel->country();
+	public function jobEdit() {
+		$data['maxAgeArray'] = $this->maxAgeArray;
+		$data['jobEdit'] = $this->JobModel->jobEdit();
+		$data['jobCategoryArray'] = $this->CommonModel->designation();
+		$data['requiredSkillArray'] = $this->CommonModel->skill();
+		$data['roleArray'] = $this->CommonModel->role();
+		$data['minQualificationArray'] = $this->CommonModel->minQualification();
+		$data['jobLocationArray'] = $this->CommonModel->country();
 
-	// 	$this->layouts->view('admin/job/addEdit',$data);
-	// }
+		$this->layouts->view('company/job/addEdit',$data);
+	}
 
 	/**
-	 * This profile methond are used to get the data form model for the specfic user (user whose login to website)
-	 * @return to view screen [ profileDetail ]
+	 * This jobEditForm method are used to update the specific job data into database
+	 * @return redirects to JobController/jobDetail
 	 * @author Kulasekaran.
 	 *
 	 */
-	// public function jobEditForm() {
-	// 	$jobUpdateStatus = $this->JobModel->jobUpdate();
-	// 	if($jobUpdateStatus){
-	// 		$this->session->set_flashdata([
-	// 			'message'  => 'Job Details Updated Successfully',
-	// 			'type' => 'success',
-	// 			'hiddenJobId' => $this->input->post('hiddenJobId')
-	// 		]);
-	// 	} else {
-	// 		$this->session->set_flashdata([
-	// 			'message'  => 'Sorry, Something Went Wrong. Please Try Again Later',
-	// 			'type' => 'danger'
-	// 		]);
-	// 	}
-	// 	redirect('JobController/jobDetail');
-	// }
+	public function jobEditForm() {
+		$jobUpdateStatus = $this->JobModel->jobUpdate();
+		if($jobUpdateStatus){
+			$this->session->set_flashdata([
+				'message'  => 'Job Details Updated Successfully',
+				'type' => 'success',
+				'hiddenJobId' => $this->input->post('hiddenJobId')
+			]);
+		} else {
+			$this->session->set_flashdata([
+				'message'  => 'Sorry, Something Went Wrong. Please Try Again Later',
+				'type' => 'danger'
+			]);
+		}
+		redirect('JobController/jobDetail');
+	}
 }

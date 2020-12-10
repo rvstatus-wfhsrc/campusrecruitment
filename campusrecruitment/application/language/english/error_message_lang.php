@@ -17,7 +17,7 @@ $lang['exist_email'] = 'The {field} already exists.';
 $lang['password_confirmation'] = 'The Password Confirmation does not match.';
 
 
-$lang['integer'] = 'The {field} field must contain an integer.';
+$lang['integer'] = 'The {field} field must be an integer.';
 
 $lang['exist_company_name'] = 'The {field} already exists.';
 $lang['exist_company_website'] = 'The {field} already exists.';

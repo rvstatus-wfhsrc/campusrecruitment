@@ -80,10 +80,7 @@
                                         <input type="radio" name="jobType" class="jobType" value="1" <?php echo set_value('jobType', isset($jobEdit->jobType) ? "checked" : "") ?> />
                                         <span class = "pr20">Part-Time</span>
                                         <input type="radio" name="jobType" class="jobType" value="2" <?php echo set_value('jobType', isset($jobEdit->jobType) ? "checked" : "") ?> />
-                                        <span>Full-Time</span>
-                                        <div class="jobTypeError">
-                                            <?php echo form_error('jobType'); ?>
-                                        </div>
+                                        <span class="jobTypeError">Full-Time</span>
                                     </div>
                                 </div>
                                 <div class="form-group form-inline">
@@ -190,16 +187,12 @@
                                     <?php echo lang('lbl_workingHour', 'workingHour', array('class' => 'col-md-4 control-label required')); ?>
                                     <div class="col-md-8">
                                         <?php
-                                            $workingHour = isset($jobEdit->workingHour) ? $jobEdit->workingHour : false;
-                                            if ($workingHour != "") {
-                                                $workingHour = date_format(date_create($workingHour),"H:i");
-                                            }
                                             $fields = array(
                                                 'id' => 'workingHour',
                                                 'name' => 'workingHour',
                                                 'placeholder' => 'Enter Working Hour',
                                                 'class' => 'input_box col-md-12 form-control w43 h-25',
-                                                'value' => set_value('workingHour',$workingHour)
+                                                'value' => set_value('workingHour',isset($jobEdit->workingHour) ? $jobEdit->workingHour : false)
                                             );
                                             echo form_input($fields);
                                         ?>

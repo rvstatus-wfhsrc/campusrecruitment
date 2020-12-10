@@ -1,8 +1,7 @@
 // edit button process
 function fnJobEdit() {
-	alert("Job Edit Screen is under process");
-	// $('#hiddenJobId').val($('#hiddenJobId').val());
-	// $('#jobDetailForm').submit();
+	$('#hiddenJobId').val($('#hiddenJobId').val());
+	$('#jobDetailForm').submit();
 }
 
 // back button process
