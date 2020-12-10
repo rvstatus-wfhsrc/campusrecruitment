@@ -127,7 +127,7 @@ class JobModel extends CI_Model {
 
 	/**
 	 * This jobStatus method are used to turns active or inactive for the specfic job
-	* @param id and delFlag value of specific job is passed from JobController 
+	 * @param id and delFlag value of specific job is passed from JobController 
 	 * @return the job status
 	 * @author Kulasekaran.
 	 *
@@ -148,41 +148,44 @@ class JobModel extends CI_Model {
 
 	/**
 	 * This jobDetail method are used to get the one row data from job_details table
+	 * @param id value of specific job is passed from JobController
 	 * @return to return the jobDetail array to controller
 	 * @author Kulasekaran.
 	 *
 	 */
-	// public function jobDetail($id) {
-	// 	$this->db->select(
-	// 						'dest.designationName,
-	// 						skill.skillName,
-	// 						role.roleName,
-	// 						country.countryName as jobLocation,
-	// 						minqual.minQualification,
-	// 						jd.id,
-	// 						jd.delFlag,
-	// 						jd.maxAge,
-	// 						jd.salary,
-	// 						jd.workingHour,
-	// 						jd.jobDescription,
-	// 						jd.lastApplyDate,
-	// 						cmpy.companyName,
-	// 						cmpy.incharge'
+	public function jobDetail($id) {
+		$this->db->select(
+							'dest.designationName,
+							skill.skillName,
+							role.roleName,
+							country.countryName as jobLocation,
+							minqual.minQualification,
+							jd.id,
+							jd.delFlag,
+							jd.maxAge,
+							jd.salary,
+							jd.workingHour,
+							jd.jobDescription,
+							jd.lastApplyDate,
+							jd.jobType,
+							jd.extraSkill,
+							cmpy.companyName,
+							cmpy.incharge'
 
-	// 					)
-	// 				->from('job_details as jd')
-	// 				 // this is the left join in codeigniter
-	// 				->join('m_designation as dest','dest.designationId = jd.jobCategory','left')
-	// 				->join('m_role as role','role.roleId = jd.role','left')
-	// 				->join('m_skill as skill','skill.skillId = jd.requiredSkill','left')
-	// 				->join('m_country as country','country.countryId = jd.jobLocation','left')
-	// 				->join('m_min_qualification as minqual','minqual.minQualificationId = jd.minQualification','left')
-	// 				->join('company as cmpy','cmpy.userName = jd.companyId','left');
+						)
+					->from('job_details as jd')
+					 // this is the left join in codeigniter
+					->join('m_designation as dest','dest.designationId = jd.jobCategory','left')
+					->join('m_role as role','role.roleId = jd.role','left')
+					->join('m_skill as skill','skill.skillId = jd.requiredSkill','left')
+					->join('m_country as country','country.countryId = jd.jobLocation','left')
+					->join('m_min_qualification as minqual','minqual.minQualificationId = jd.minQualification','left')
+					->join('company as cmpy','cmpy.userName = jd.companyId','left');
 
-	// 	$this->db->where(array('jd.id' => $id));
-	// 	$jobDetail = $this->db->get();
-	// 	return $jobDetail->result()[0];
-	// }
+		$this->db->where(array('jd.id' => $id));
+		$jobDetail = $this->db->get();
+		return $jobDetail->result()[0];
+	}
 
 	/**
 	 * This jobEdit method are used to get the one row data from job_details table

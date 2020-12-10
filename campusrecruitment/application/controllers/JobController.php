@@ -136,19 +136,22 @@ class JobController extends CI_Controller {
 
 	/**
 	 * This jobDetail methond are used to get the data from model for the specfic job details
-	 * @return to view screen with data [ job/detail ]
+	 * @return to view screen with data [ company/job/detail ]
 	 * @author Kulasekaran.
 	 *
 	 */
-	// public function jobDetail() {
-	// 	$hiddenJobId = $this->input->post('hiddenJobId');
-	// 	if($this->session->flashdata('hiddenJobId')){
-	// 		$hiddenJobId = $this->session->flashdata('hiddenJobId');
-	// 	}
-	// 	$data['jobDetail'] = $this->JobModel->jobDetail($hiddenJobId);
+	public function jobDetail() {
+		if($this->input->post('hiddenJobId') == null) {
+            redirect('JobController/jobList');
+        }
+		$hiddenJobId = $this->input->post('hiddenJobId');
+		if($this->session->flashdata('hiddenJobId')){
+			$hiddenJobId = $this->session->flashdata('hiddenJobId');
+		}
+		$data['jobDetail'] = $this->JobModel->jobDetail($hiddenJobId);
 
-	// 	$this->layouts->view('admin/job/detail',$data);
-	// }
+		$this->layouts->view('company/job/detail',$data);
+	}
 
 	/**
 	 * This jobEdit methond are used to get the data from model for the specfic job detail for edit process
