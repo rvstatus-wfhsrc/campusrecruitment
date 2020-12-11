@@ -132,49 +132,41 @@ class CommonModel extends CI_Model {
 		return $mainDeptName;
 	}
 
+	/**
+	 * This paginationConfig methond are used design the pagination link and also config each setting for pagination
+	 * @return a $pagination_config value to the called function from any controller
+	 * @param $totalRecord value is integer get from the specific tabel total data count and $baseUrl value is string for idendify the module
+	 * @author Ragav.
+	 *
+	 */
 	public static function paginationConfig($totalRecord,$baseUrl)
 	{
 		$pagination_config = array();
 		$pagination_config["base_url"] = $baseUrl;
-		// $pagination_config["base_url"] = base_url()."LoginController/login";
 		$pagination_config["total_rows"] = $totalRecord;
 		$pagination_config["per_page"] = 5;
 		$pagination_config['page_query_string'] = true;
+
 		// Pagination link format 
-		/*$pagination_config['num_tag_open'] = '<li>'; 
-		$pagination_config['num_tag_close'] = '</li>'; 
-		$pagination_config['cur_tag_open'] = '<li class="active"><a href="javascript:void(0);">'; 
-		$pagination_config['cur_tag_close'] = '</a></li>'; 
-		$pagination_config['next_link'] = 'Next'; 
-		$pagination_config['prev_link'] = 'Prev'; 
-		$pagination_config['next_tag_open'] = '<li class="pg-next">'; 
-		$pagination_config['next_tag_close'] = '</li>'; 
-		$pagination_config['prev_tag_open'] = '<li class="pg-prev">'; 
-		$pagination_config['prev_tag_close'] = '</li>'; 
-		$pagination_config['first_tag_open'] = '<li>'; 
-		$pagination_config['first_tag_close'] = '</li>'; 
-		$pagination_config['last_tag_open'] = '<li>'; 
-		$pagination_config['last_tag_close'] = '</li>';
-		$pagination_config['attributes'] = array('class' => 'page-link');*/
-
-
 		$pagination_config['full_tag_open'] = '<ul class="pagination">';
 		$pagination_config['full_tag_close'] = '</ul>';
 		$pagination_config['num_tag_open'] = '<li class="page-item">';
 		$pagination_config['num_tag_close'] = '</li>';
-		$pagination_config['cur_tag_open'] = '<li class="page-item active"><a class="page-link" href="#">';
+		$pagination_config['cur_tag_open'] = '<li class="page-item active"><a class="page-link" >';
 		$pagination_config['cur_tag_close'] = '</a></li>';
 		$pagination_config['next_tag_open'] = '<li class="page-item">';
 		$pagination_config['next_tagl_close'] = '</a></li>';
 		$pagination_config['prev_tag_open'] = '<li class="page-item">';
 		$pagination_config['prev_tagl_close'] = '</li>';
-		$pagination_config['first_tag_open'] = '<li class="page-item disabled">';
+		$pagination_config['first_tag_open'] = '<li class="page-item">';
 		$pagination_config['first_tagl_close'] = '</li>';
 		$pagination_config['last_tag_open'] = '<li class="page-item">';
 		$pagination_config['last_tagl_close'] = '</a></li>';
 		$pagination_config['attributes'] = array('class' => 'page-link'); 
-		$pagination_config['next_link'] = 'Next'; 
-		$pagination_config['prev_link'] = 'Prev';
+		$pagination_config['next_link'] = lang('lbl_next'); 
+		$pagination_config['prev_link'] = lang('lbl_previous');
+		$pagination_config['first_link'] = lang('lbl_first'); 
+		$pagination_config['last_link'] = lang('lbl_last');
 		return $pagination_config;
 	}
 

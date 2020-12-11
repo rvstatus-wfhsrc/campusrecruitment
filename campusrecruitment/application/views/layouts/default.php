@@ -35,13 +35,15 @@
             <a class="navbar-brand" href="<?php echo site_url('CompanyController/companyDetail') ?>">Company</a>
             <button class="btn btn-link btn-sm order-1 order-lg-0" id="sidebarToggle" href="#"><i class="fa fa-bars"></i></button>
         <?php } else { ?>
-            <a class="navbar-brand" href="<?php echo site_url('LoginController/index')?>">Home</a>
+            <a class="navbar-brand" style="width: auto;" href="<?php echo site_url('HomeController/index')?>">Home</a>
             <?php } ?>
         <!-- Navbar-->
         <?php if($this->session->userdata('logged_in') == false) { ?>
             <ul class="navbar-nav ml-auto my-md-0">
                 <li class="nav-item <?php echo ($this->uri->segment(2)=='companyProfileAdd')?'active':''; ?>"><a class="nav-link" href="<?php echo site_url('CompanyController/companyProfileAdd')?>">New Company</a></li>
-                <li class="nav-item <?php echo ($this->uri->segment(2)=='register')?'active':''; ?>"><a class="nav-link" href="<?php echo site_url('JobSeekerController/jobSeekerRegister') ?>">New Student</a></li>
+                <li class="nav-item <?php echo (($this->uri->segment(2)=='CompanyLogin') || ($this->input->post('flag') == 2))?'active':''; ?>"><a class="nav-link" href="<?php echo site_url('LoginController/CompanyLogin') ?>">Company Login</a></li>
+                <li class="nav-item <?php echo ($this->uri->segment(2)=='register')?'active':''; ?>"><a class="nav-link" href="<?php echo site_url('JobSeekerController/jobSeekerRegister') ?>">New Job Seeker</a></li>
+                <li class="nav-item <?php echo (($this->uri->segment(2)=='jobSeekerLogin') || ($this->input->post('flag') == 3))?'active':''; ?>"><a class="nav-link" href="<?php echo site_url('LoginController/jobSeekerLogin') ?>">Job Seeker Login</a></li>
             </ul>
         <?php } else { ?>
             <ul class="navbar-nav ml-auto my-md-0">
@@ -133,7 +135,8 @@
                 </nav>
             </div>
        <?php } ?>
-        <div id="layoutSidenav_content">
+        <!-- margin-left: 0px; is need for mobile view style at logout -->
+        <div id="layoutSidenav_content" style="<?php echo $this->session->userdata('userName') ? 'margin-left: -225px;' :'margin-left: 0px;'; ?>">
             <main class="mt-2">
             </main>
             <?=$content_for_layout?>

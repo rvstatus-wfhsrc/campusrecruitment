@@ -71,4 +71,16 @@ $lang['lbl_jobType'] = 'Job Type';
 
 $lang['lbl_list'] = 'List';
 
+// home screen label
+$lang['lbl_findJobIntro'] = 'Find the job that fits your life';
+$lang['lbl_home'] = 'Home';
+$lang['lbl_jobList'] = 'Job List';
+$lang['lbl_moreDetails'] = 'More Detail';
+
+// pagination label
+$lang['lbl_next'] = 'Next';
+$lang['lbl_previous'] = 'Prev';
+$lang['lbl_first'] = '&lsaquo; First';
+$lang['lbl_last'] = 'Last &rsaquo;';
+
 ?>

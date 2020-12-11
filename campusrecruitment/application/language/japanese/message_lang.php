@@ -64,4 +64,18 @@ $lang['lbl_extraSkill'] = '追加のスキル';
 $lang['lbl_jobType'] = '職種';
 
 $lang['lbl_list'] = 'リスト';
+
+// home screen label
+$lang['lbl_findJobIntro'] = 'あなたの人生に合った仕事を見つけましょう';
+$lang['lbl_home'] = 'ホーム';
+$lang['lbl_jobList'] = '職一覧';
+$lang['lbl_moreDetail'] = 'もっと詳しく';
+
+// pagination label
+$lang['lbl_next'] = '次';
+$lang['lbl_previous'] = '先';
+$lang['lbl_first'] = '&lsaquo; 一番';
+$lang['lbl_last'] = '最終 &rsaquo;';
+
+
 ?>
