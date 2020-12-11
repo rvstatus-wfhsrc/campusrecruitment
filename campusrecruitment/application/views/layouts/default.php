@@ -35,7 +35,7 @@
             <a class="navbar-brand" href="<?php echo site_url('CompanyController/companyDetail') ?>">Company</a>
             <button class="btn btn-link btn-sm order-1 order-lg-0" id="sidebarToggle" href="#"><i class="fa fa-bars"></i></button>
         <?php } else { ?>
-            <a class="navbar-brand" style="width: auto;" href="<?php echo site_url('HomeController/index')?>">Home</a>
+            <a class="navbar-brand" style="width: auto;" href="<?php echo site_url('HomeController/index')?>"><?php echo lang('lbl_home'); ?></a>
             <?php } ?>
         <!-- Navbar-->
         <?php if($this->session->userdata('logged_in') == false) { ?>
@@ -136,7 +136,7 @@
             </div>
        <?php } ?>
         <!-- margin-left: 0px; is need for mobile view style at logout -->
-        <div id="layoutSidenav_content" style="<?php echo $this->session->userdata('userName') ? 'margin-left: -225px;' :'margin-left: 0px;'; ?>">
+        <div id="layoutSidenav_content">
             <main class="mt-2">
             </main>
             <?=$content_for_layout?>

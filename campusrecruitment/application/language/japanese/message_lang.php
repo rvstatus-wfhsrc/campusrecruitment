@@ -11,12 +11,14 @@ $lang['lbl_country'] = '国';
 $lang['lbl_state'] = '国家';
 $lang['lbl_city'] = '市';
 $lang['lbl_pincode'] = 'ピンコード';
-$lang['lbl_contact'] = ' 電話';
+$lang['lbl_contact'] = ' 電話番号';
 $lang['lbl_image'] = '画像';
 
+$lang['lbl_userFlag'] = 'ユーザータイプ';
+$lang['lbl_profile'] = 'プロフィール';
 
 // company screen label
-$lang['lbl_incharge'] = '担当';
+$lang['lbl_incharge'] = '担当者名';
 $lang['lbl_companyName'] = '会社名';
 $lang['lbl_serialNumber'] = '連番';
 $lang['lbl_active'] = '能動';
@@ -34,11 +36,9 @@ $lang['lbl_edit'] = '編集';
 $lang['lbl_register'] = '登録';
 $lang['lbl_detail'] = '詳細';
 $lang['lbl_update'] = '更新';
-$lang['lbl_back'] = '後ろに';
+$lang['lbl_back'] = '戻る';
 
-
-$lang['lbl_password'] = 'パスワード';
-$lang['lbl_conf_password'] = 'Confirm Password';
+$lang['lbl_conf_password'] = 'パスワードを確認';
 
 // job screen label
 $lang['lbl_job'] = '仕事';
@@ -60,10 +60,10 @@ $lang['lbl_location'] = '場所';
 $lang['lbl_description'] = '説明';
 $lang['lbl_last_date'] = '最後日付';
 
-$lang['lbl_extraSkill'] = '追加のスキル';
-$lang['lbl_jobType'] = '職種';
+$lang['lbl_extraSkill'] = '余分なスキル';
+$lang['lbl_jobType'] = '仕事分類';
 
-$lang['lbl_list'] = 'リスト';
+$lang['lbl_list'] = '一覧';
 
 // home screen label
 $lang['lbl_findJobIntro'] = 'あなたの人生に合った仕事を見つけましょう';
@@ -76,6 +76,5 @@ $lang['lbl_next'] = '次';
 $lang['lbl_previous'] = '先';
 $lang['lbl_first'] = '&lsaquo; 一番';
 $lang['lbl_last'] = '最終 &rsaquo;';
-
 
 ?>

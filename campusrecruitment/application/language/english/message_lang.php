@@ -17,8 +17,6 @@ $lang['lbl_image'] = 'Image';
 $lang['lbl_userFlag'] = 'User Type';
 $lang['lbl_profile'] = 'Profile';
 
-
-
 // company screen label
 $lang['lbl_incharge'] = 'Incharge';
 $lang['lbl_companyName'] = 'Company Name';
@@ -40,11 +38,7 @@ $lang['lbl_detail'] = 'Detail';
 $lang['lbl_update'] = 'Update';
 $lang['lbl_back'] = 'Back';
 
-
-
-$lang['lbl_password'] = 'Password';
 $lang['lbl_conf_password'] = 'Confirm Password';
-
 
 // job screen label
 $lang['lbl_job'] = 'Job';
@@ -75,7 +69,7 @@ $lang['lbl_list'] = 'List';
 $lang['lbl_findJobIntro'] = 'Find the job that fits your life';
 $lang['lbl_home'] = 'Home';
 $lang['lbl_jobList'] = 'Job List';
-$lang['lbl_moreDetails'] = 'More Detail';
+$lang['lbl_moreDetail'] = 'More Detail';
 
 // pagination label
 $lang['lbl_next'] = 'Next';
