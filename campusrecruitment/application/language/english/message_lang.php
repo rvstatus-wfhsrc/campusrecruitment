@@ -77,4 +77,9 @@ $lang['lbl_previous'] = 'Prev';
 $lang['lbl_first'] = '&lsaquo; First';
 $lang['lbl_last'] = 'Last &rsaquo;';
 
+// job seeker screen label
+$lang['lbl_jobSeeker'] = 'Job Seeker';
+$lang['lbl_jobSeekerAdd'] = 'Add Job Seeker';
+$lang['lbl_jobSeekerEdit'] = 'Update Job Seeker';
+
 ?>

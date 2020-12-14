@@ -296,6 +296,101 @@ $config = array(
                                                 'required' => 'lang:required'
                                             )
                                     )
+                                ),
+                'jobSeekerAddEdit' => array(
+                                    array(
+                                        'field' => 'name',
+                                        'label' => 'lang:lbl_name',
+                                        'rules' => 'required|alphabetic|max_length[50]',
+                                            array(
+                                                'required' => 'lang:required',
+                                                'max_length' => 'lang:max_length'
+                                            )
+                                    ),
+                                    array(
+                                        'field' => 'email',
+                                        'label' => 'lang:lbl_email',
+                                        'rules' => 'required|valid_email|max_length[50]|jobSeeker_email_existing_check',
+                                            array(
+                                                'required' => 'lang:required',
+                                                'max_length' => 'lang:max_length',
+                                                'valid_email' => 'lang:valid_email'
+                                            )
+                                    ),
+                                    array(
+                                        'field' => 'gender',
+                                        'label' => 'lang:lbl_gender',
+                                        'rules' => 'required',
+                                            array(
+                                                'required' => 'lang:required'
+                                            )
+                                    ),
+                                    array(
+                                        'field' => 'address',
+                                        'label' => 'lang:lbl_address',
+                                        'rules' => 'required',
+                                            array(
+                                                'required' => 'lang:required'
+                                            )
+                                    ),
+                                    array(
+                                        'field' => 'country',
+                                        'label' => 'lang:lbl_country',
+                                        'rules' => 'required',
+                                            array(
+                                                'required' => 'lang:required'
+                                            )
+                                    ),
+                                    array(
+                                        'field' => 'state',
+                                        'label' => 'lang:lbl_state',
+                                        'rules' => 'required',
+                                            array(
+                                                'required' => 'lang:required'
+                                            )
+                                    ),
+                                    array(
+                                        'field' => 'city',
+                                        'label' => 'lang:lbl_city',
+                                        'rules' => 'required',
+                                            array(
+                                                'required' => 'lang:required'
+                                            )
+                                    ),
+                                    array(
+                                        'field' => 'pincode',
+                                        'label' => 'lang:lbl_pincode',
+                                        'rules' => 'required|six_digit_only',
+                                            array(
+                                                'required' => 'lang:required'
+                                            )
+                                    ),
+                                    array(
+                                        'field' => 'contact',
+                                        'label' => 'lang:lbl_contact',
+                                        'rules' => 'required|ten_digit_only',
+                                            array(
+                                                'required' => 'lang:required'
+                                            )
+                                    ),
+                                    array(
+                                        'field' => 'password',
+                                        'label' => 'lang:lbl_password',
+                                        'rules' => 'required|min_length[6]|password_confirmation',
+                                            array(
+                                                'required' => 'lang:required',
+                                                'min_length' => 'lang:min_length'
+                                            )
+                                    ),
+                                    array(
+                                        'field' => 'password_confirmation',
+                                        'label' => 'lang:lbl_conf_password',
+                                        'rules' => 'required|min_length[6]',
+                                            array(
+                                                'required' => 'lang:required',
+                                                'min_length' => 'lang:min_length'
+                                            )
+                                    )
                                 )
            );
 

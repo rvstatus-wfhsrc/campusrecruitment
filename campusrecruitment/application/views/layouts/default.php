@@ -42,7 +42,7 @@
             <ul class="navbar-nav ml-auto my-md-0">
                 <li class="nav-item <?php echo ($this->uri->segment(2)=='companyProfileAdd')?'active':''; ?>"><a class="nav-link" href="<?php echo site_url('CompanyController/companyProfileAdd')?>">New Company</a></li>
                 <li class="nav-item <?php echo (($this->uri->segment(2)=='CompanyLogin') || ($this->input->post('flag') == 2))?'active':''; ?>"><a class="nav-link" href="<?php echo site_url('LoginController/CompanyLogin') ?>">Company Login</a></li>
-                <li class="nav-item <?php echo ($this->uri->segment(2)=='register')?'active':''; ?>"><a class="nav-link" href="<?php echo site_url('JobSeekerController/jobSeekerRegister') ?>">New Job Seeker</a></li>
+                <li class="nav-item <?php echo ($this->uri->segment(2)=='jobSeekerProfileAdd')?'active':''; ?>"><a class="nav-link" href="<?php echo site_url('JobSeekerController/jobSeekerProfileAdd') ?>">New Job Seeker</a></li>
                 <li class="nav-item <?php echo (($this->uri->segment(2)=='jobSeekerLogin') || ($this->input->post('flag') == 3))?'active':''; ?>"><a class="nav-link" href="<?php echo site_url('LoginController/jobSeekerLogin') ?>">Job Seeker Login</a></li>
             </ul>
         <?php } else { ?>

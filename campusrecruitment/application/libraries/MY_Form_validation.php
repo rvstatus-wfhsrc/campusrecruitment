@@ -138,4 +138,33 @@ class MY_Form_validation extends CI_Form_validation{
 		return ($currentDate >= $lastApplyDate) ? FALSE : TRUE;
 	}
 
+	/**
+	 * This six_digit_only method are used to validate field have six digit or not
+	 * @return true or false to jobSeekerProfileFormValidation method
+	 * @author kulasekaran.
+	 *
+	 */
+	function six_digit_only($value) {
+		$pattern = "/\b\d{6}\b/";
+		$match = preg_match($pattern,$value);
+		return ($match == 0) ? FALSE : TRUE;
+	}
+
+	/**
+	 * This jobSeeker_email_existing_check method are used to validate the email for already exist or not
+	 * @return true or false to companyProfileFormValidation method
+	 * @author Kulasekaran.
+	 *
+	 */
+	function jobSeeker_email_existing_check($email) {
+		$hiddenUserId = $this->CI->input->post('hiddenUserId');
+		$existUserId = "";
+		if ($hiddenUserId != null) {
+			$existUserId = "NOT id = '".$hiddenUserId."' AND";
+		}
+		$query = $this->CI->db->query("SELECT COUNT(id) AS count FROM users WHERE ".$existUserId." email = '".$email."'");
+		$row = $query->row();
+		return ($row->count > 0) ? FALSE : TRUE;
+	}
+
 }

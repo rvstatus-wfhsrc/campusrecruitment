@@ -77,4 +77,9 @@ $lang['lbl_previous'] = '先';
 $lang['lbl_first'] = '&lsaquo; 一番';
 $lang['lbl_last'] = '最終 &rsaquo;';
 
+// job seeker screen label
+$lang['lbl_jobSeeker'] = '求職者';
+$lang['lbl_jobSeekerAdd'] = '求職者を追加する';
+$lang['lbl_jobSeekerEdit'] = '求職者の更新';
+
 ?>
