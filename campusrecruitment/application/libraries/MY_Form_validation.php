@@ -153,7 +153,7 @@ class MY_Form_validation extends CI_Form_validation{
 	/**
 	 * This jobSeeker_email_existing_check method are used to validate the email for already exist or not
 	 * @return true or false to companyProfileFormValidation method
-	 * @author Kulasekaran.
+	 * @author kulasekaran.
 	 *
 	 */
 	function jobSeeker_email_existing_check($email) {
@@ -162,7 +162,7 @@ class MY_Form_validation extends CI_Form_validation{
 		if ($hiddenUserId != null) {
 			$existUserId = "NOT id = '".$hiddenUserId."' AND";
 		}
-		$query = $this->CI->db->query("SELECT COUNT(id) AS count FROM users WHERE ".$existUserId." email = '".$email."'");
+		$query = $this->CI->db->query("SELECT COUNT(id) AS count FROM users WHERE ".$existUserId." email = '".$email."' AND flag = '3'");
 		$row = $query->row();
 		return ($row->count > 0) ? FALSE : TRUE;
 	}

@@ -65,7 +65,6 @@ class JobSeekerController extends CI_Controller {
 	public function jobSeekerAddForm() {
 		$userName = $this->JobSeekerModel->lastJobSeekerUserName();
 		$jobSeekerAddStatus = $this->JobSeekerModel->jobSeekerAdd($userName);
-		print_r($jobSeekerAddStatus);exit();
 		if($jobSeekerAddStatus){
 			$this->session->set_flashdata([
 				'message'  => 'Job Seeker Details Add Successfully',
@@ -77,30 +76,26 @@ class JobSeekerController extends CI_Controller {
 				'type' => 'danger'
 			]);
 		}
-		redirect('JobSeekerController/jobSeekerDetail');
+		redirect('LoginController/jobSeekerLogin');
 	}
 
 	/**
-	 * This companyDetail method are used to get the data from model for the specfic company
-	 * @return to view screen [ detail ]
+	 * This jobSeekerDetail method are used to get the data from model for the specfic job seeker
+	 * @return to view screen [ jobSeeker/profile/addEdit ]
 	 * @author kulasekaran.
 	 *
 	 */
-	// public function companyDetail() {
-	// 	$companyId = $this->input->post('hiddenCompanyId');
-	// 	$url = 'admin/company/detail';
-	// 	if ($this->session->flashdata('hiddenCompanyId')) {
-	// 	    $companyId = $this->session->flashdata('hiddenCompanyId');
-	// 	    $url = 'company/profile/detail';
-	// 	} elseif ($this->session->flashdata('hiddenAdminCompanyId')) {
-	// 		$companyId = $this->session->flashdata('hiddenAdminCompanyId');
-	// 		$url = 'admin/company/detail';
-	// 	} elseif ($companyId == null) {
-	// 	    $url = 'company/profile/detail';
-	// 	}
-	// 	$data['companyDetail'] = $this->CompanyModel->companyDetail($companyId);
-	// 	$this->layouts->view($url,$data);
-	// }
+	public function jobSeekerDetail() {
+		$jobSeekerId = $this->input->post('hiddenJobSeekerId');
+		$url = 'jobSeeker/profile/detail';
+		if ($this->session->flashdata('hiddenJobSeekerId')) {
+		    $jobSeekerId = $this->session->flashdata('hiddenJobSeekerId');
+		} elseif ($jobSeekerId == null) {
+		    $url = 'company/profile/detail';
+		}
+		$data['jobSeekerDetail'] = $this->JobSeekerModel->jobSeekerDetail($jobSeekerId);
+		$this->layouts->view($url,$data);
+	}
 
 	/**
 	 * This companyEdit method are used to get the data from model for the specfic company

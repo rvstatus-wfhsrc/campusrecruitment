@@ -97,7 +97,7 @@ class LoginController extends CI_Controller {
 					redirect('PageController/company');
 				} else {
 					// access login for student
-					redirect('PageController/student');
+					redirect('PageController/jobSeeker');
 				}
 			} else {
 				// unproper login data given by user

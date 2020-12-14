@@ -32,7 +32,11 @@ class JobSeekerModel extends CI_Model {
 	 */
 	function jobSeekerAdd($lastAddJobSeekerUser) {
 		//create job seeker userName...
-        $label = 'JS';
+		$image = $_FILES['image']['tmp_name'];
+		$blob = null;
+		$addJobSeeker = null;
+		$imageData = null;
+		$label = 'JS';
         $lastJobSeekerInArray = $lastAddJobSeekerUser->result_array();
         if ($lastJobSeekerInArray != null) {
 	        $lastJobSeekerUserName = $lastJobSeekerInArray[0];
@@ -47,20 +51,34 @@ class JobSeekerModel extends CI_Model {
 		} else {
 			$jobSeekerUserName = "JS0001";
 		}
-		$jobSeekerAddData = array(
-			'name' => $this->input->post('name'),
-			'email' => $this->input->post('email'),
-			'gender' => $this->input->post('gender'),
-			'address' => $this->input->post('address'),
-			'country' => $this->input->post('country'),
-			'state' => $this->input->post('state'),
-			'city' => $this->input->post('city'),
-			'pincode' => $this->input->post('pincode'),
-			'contact' => $this->input->post('contact'),
-			'password' => md5($this->input->post('password')),
-			'created_by' => $jobSeekerUserName
-		);
-		$jobSeekerAddStatus = $this->db->insert('users', $jobSeekerAddData);
+		$this->db->trans_begin();
+		try {
+			// for further use
+			if($image != null) {
+				$blob = file_get_contents($_FILES['image']['tmp_name']);
+				$imageData = array('image' => $blob);
+			}
+			$jobSeekerAddData = array(
+				'name' => $this->input->post('name'),
+				'email' => $this->input->post('email'),
+				'gender' => $this->input->post('gender'),
+				'address' => $this->input->post('address'),
+				'country' => $this->input->post('country'),
+				'state' => $this->input->post('state'),
+				'city' => $this->input->post('city'),
+				'pincode' => $this->input->post('pincode'),
+				'contact' => $this->input->post('contact'),
+				'password' => md5($this->input->post('password')),
+				'userName' => $jobSeekerUserName,
+				'created_by' => $jobSeekerUserName,
+				'flag' => 3
+			);
+			$jobSeekerAddMergeData = array_merge($jobSeekerAddData, $imageData);
+			$jobSeekerAddStatus = $this->db->insert('users', $jobSeekerAddMergeData);
+			$this->db->trans_commit();
+		} catch (\Exception $e) {
+			$this->db->trans_rollback();
+		}
 		return $jobSeekerAddStatus;
 	}
 
@@ -76,138 +94,25 @@ class JobSeekerModel extends CI_Model {
 	}
 
 	/**
-	 * This jobList method are used to retrieves the data from user to data base
-	 * @param records limit and start value is passed by JobController
-	 * @return to return the jobHistory array value to controller
+	 * This jobSeekerDetail method are used to get the one row data from users table
+	 * @param id value of specific job seeker is passed from JobSeekerController
+	 * @return to return the jobSeekerDetail array to controller
 	 * @author Kulasekaran.
 	 *
 	 */
-	// function jobList($limit, $start) {
-	// 	$filterVal = $this->input->post('filterVal');
-	// 	$hiddenSearch = $this->input->post('hiddenSearch');
-	// 	$this->db->limit($limit, $start);
-	// 	$this->db->select(
-	// 				'dest.designationName,
-	// 				skill.skillName,
-	// 				role.roleName,
-	// 				country.countryName as jobLocation,
-	// 				jd.id,
-	// 				jd.delFlag,
-	// 				jd.maxAge,
-	// 				jd.salary,
-	// 				jd.workingHour,
-	// 				jd.lastApplyDate,
-	// 				jd.created_date_time'
-	// 			)
-	// 		->from('job_details as jd')
-	// 		// this is the left join in codeigniter
-	// 		->join('m_designation as dest','dest.designationId = jd.jobCategory','left')
-	// 		->join('m_role as role','role.roleId = jd.role','left')
-	// 		->join('m_skill as skill','skill.skillId = jd.requiredSkill','left')
-	// 		->join('m_country as country','country.countryId = jd.jobLocation','left');
-			
-	// 		// filter process
-	// 		if ($filterVal == 2) {
-	// 			$this->db->where(array('jd.delFlag' => 0));
-	// 		} elseif ($filterVal == 3) {
-	// 			$this->db->where(array('jd.delFlag' => 1));
-	// 		}
-
-	// 		// search process
-	// 		$hiddenSearch = $this->input->post('hiddenSearch');
-	// 		if($hiddenSearch != ""){
-	// 			$this->db->like('skill.skillName',trim($hiddenSearch));
-	// 		}
-
-	// 		// sorting process
-	// 		$sortOptn = $this->input->post('sortOptn');
-	// 		$sortVal = $this->input->post('sortVal');
-	// 		if ($sortVal == 1) {
-	// 			$this->db->order_by('jd.created_date_time', $sortOptn);
-	// 		} else if ($sortVal == 2) {
-	// 			$this->db->order_by('skill.skillName', $sortOptn);
-	// 		} else if ($sortVal == 3) {
-	// 			$this->db->order_by('jd.salary', $sortOptn);
-	// 		} else if ($sortVal == 4) {
-	// 			$this->db->order_by('jd.lastApplyDate', $sortOptn);
-	// 		} else {
-	// 			$this->db->order_by('jd.created_date_time', 'DESC');
-	// 		}
-	// 	$jobHistory = $this->db->get();
-	// 	return $jobHistory->result();
-	// }
-
-	/**
-	 * This record_count method are used to get the total count of data from job_details table
-	 * @return to return the total count value to controller
-	 * @author Kulasekaran.
-	 *
-	 */
-	// public function record_count() {
-	// 	return $this->db->count_all("job_details");
-	// }
-
-	/**
-	 * This jobStatus method are used to turns active or inactive for the specfic job
-	 * @param id and delFlag value of specific job is passed from JobController 
-	 * @return the job status
-	 * @author Kulasekaran.
-	 *
-	 */
-	// function jobStatus($id,$delFlag) {
-	// 	$userName = $this->session->userdata('userName');
-	// 	// $delFlag => 0 ----> change delFlag = 1
-	// 	// $delFlag => 1 ----> change delFlag = 0
-	// 	if ($delFlag == 0) {
-	// 		$this->db->where('id', $id);
-	// 		$jobStatus = $this->db->update('job_details', array('delFlag' => 1,'updated_by' => $userName ));
-	// 	} else {
-	// 		$this->db->where('id', $id);
-	// 		$jobStatus = $this->db->update('job_details', array('delFlag' => 0,'updated_by' => $userName ));
-	// 	}
-	// 	return $jobStatus;
-	// }
-
-	/**
-	 * This jobDetail method are used to get the one row data from job_details table
-	 * @param id value of specific job is passed from JobController
-	 * @return to return the jobDetail array to controller
-	 * @author Kulasekaran.
-	 *
-	 */
-	// public function jobDetail($id) {
-	// 	$this->db->select(
-	// 						'dest.designationName,
-	// 						skill.skillName,
-	// 						role.roleName,
-	// 						country.countryName as jobLocation,
-	// 						minqual.minQualification,
-	// 						jd.id,
-	// 						jd.delFlag,
-	// 						jd.maxAge,
-	// 						jd.salary,
-	// 						jd.workingHour,
-	// 						jd.jobDescription,
-	// 						jd.lastApplyDate,
-	// 						jd.jobType,
-	// 						jd.extraSkill,
-	// 						cmpy.companyName,
-	// 						cmpy.incharge'
-
-	// 					)
-	// 				->from('job_details as jd')
-	// 				 // this is the left join in codeigniter
-	// 				->join('m_designation as dest','dest.designationId = jd.jobCategory','left')
-	// 				->join('m_role as role','role.roleId = jd.role','left')
-	// 				->join('m_skill as skill','skill.skillId = jd.requiredSkill','left')
-	// 				->join('m_country as country','country.countryId = jd.jobLocation','left')
-	// 				->join('m_min_qualification as minqual','minqual.minQualificationId = jd.minQualification','left')
-	// 				->join('company as cmpy','cmpy.userName = jd.companyId','left');
-
-	// 	$this->db->where(array('jd.id' => $id));
-	// 	$jobDetail = $this->db->get();
-	// 	return $jobDetail->result()[0];
-	// }
+	public function jobSeekerDetail($jobSeekerId) {
+		print_r($jobSeekerId);exit();
+		$this->db->select('id,name,gender,contact,email,country,state,city,address,userName,delFlag,pincode,image');
+		if ($jobSeekerId == null) {
+			$jobSeekerUserName = $this->session->userdata('userName');
+			$this->db->where(array('userName' => $jobSeekerUserName));
+		} else {
+			$this->db->where(array('id' => $jobSeekerId));
+		}
+		$jobSeekerDetail = $this->db->get('users');
+		print_r($jobSeekerDetail);exit();
+		return $jobSeekerDetail->result()[0];
+	}
 
 	/**
 	 * This jobEdit method are used to get the one row data from job_details table

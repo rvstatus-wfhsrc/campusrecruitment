@@ -32,9 +32,9 @@ class PageController extends CI_Controller {
   }
  
   // Allowing accesses to student only
-  function student() {
+  function jobSeeker() {
     if($this->session->userdata('flag')==='3') {
-      $this->load->view('student/profileDetail');
+      $this->load->view('jobSeeker/profile/detail');
     } else {
       echo "Access Denied";
     }
