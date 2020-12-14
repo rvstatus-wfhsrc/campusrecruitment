@@ -86,15 +86,28 @@ class JobSeekerController extends CI_Controller {
 	 *
 	 */
 	public function jobSeekerDetail() {
-		$jobSeekerId = $this->input->post('hiddenJobSeekerId');
-		$url = 'jobSeeker/profile/detail';
-		if ($this->session->flashdata('hiddenJobSeekerId')) {
-		    $jobSeekerId = $this->session->flashdata('hiddenJobSeekerId');
-		} elseif ($jobSeekerId == null) {
-		    $url = 'company/profile/detail';
+		$data['countryArray'] = $this->CommonModel->country();
+		$data['stateArray'] = $this->CommonModel->state();
+		$data['cityArray'] = $this->CommonModel->city();
+		$data['jobSeekerDetail'] = $this->JobSeekerModel->jobSeekerDetail();
+		$this->layouts->view('jobSeeker/profile/detail',$data);
+	}
+
+	/**
+	 * This removeImage method are used to remove the image for specfic job seeker
+	 * @return redirect to jobSeekerDetail method in JobSeekerController
+	 * @author kulasekaran.
+	 *
+	 */
+	public function removeImage() {
+		$imageStatus = $this->JobSeekerModel->removeImage();
+		if($imageStatus == "1") { 
+			$this->session->set_flashdata(array('message' => 'Image Was Removed','type' => 'success'));
+			redirect('JobSeekerController/jobSeekerDetail');
+		} else {
+			$this->session->set_flashdata(array('message' => 'Sorry, Something Went Wrong. Please Try Again Later','type' => 'danger'));
+			redirect('JobSeekerController/jobSeekerDetail');
 		}
-		$data['jobSeekerDetail'] = $this->JobSeekerModel->jobSeekerDetail($jobSeekerId);
-		$this->layouts->view($url,$data);
 	}
 
 	/**

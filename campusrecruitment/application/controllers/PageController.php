@@ -34,7 +34,7 @@ class PageController extends CI_Controller {
   // Allowing accesses to student only
   function jobSeeker() {
     if($this->session->userdata('flag')==='3') {
-      $this->load->view('jobSeeker/profile/detail');
+      redirect('JobSeekerController/jobSeekerDetail');
     } else {
       echo "Access Denied";
     }

@@ -35,7 +35,7 @@ class JobSeekerModel extends CI_Model {
 		$image = $_FILES['image']['tmp_name'];
 		$blob = null;
 		$addJobSeeker = null;
-		$imageData = null;
+		$imageData = array();
 		$label = 'JS';
         $lastJobSeekerInArray = $lastAddJobSeekerUser->result_array();
         if ($lastJobSeekerInArray != null) {
@@ -53,7 +53,7 @@ class JobSeekerModel extends CI_Model {
 		}
 		$this->db->trans_begin();
 		try {
-			// for further use
+			// $image => not null ----> gets the image data in array
 			if($image != null) {
 				$blob = file_get_contents($_FILES['image']['tmp_name']);
 				$imageData = array('image' => $blob);
@@ -100,18 +100,21 @@ class JobSeekerModel extends CI_Model {
 	 * @author Kulasekaran.
 	 *
 	 */
-	public function jobSeekerDetail($jobSeekerId) {
-		print_r($jobSeekerId);exit();
+	public function jobSeekerDetail() {
 		$this->db->select('id,name,gender,contact,email,country,state,city,address,userName,delFlag,pincode,image');
-		if ($jobSeekerId == null) {
-			$jobSeekerUserName = $this->session->userdata('userName');
-			$this->db->where(array('userName' => $jobSeekerUserName));
-		} else {
-			$this->db->where(array('id' => $jobSeekerId));
-		}
+		$jobSeekerUserName = $this->session->userdata('userName');
+		$this->db->where(array('userName' => $jobSeekerUserName));
 		$jobSeekerDetail = $this->db->get('users');
-		print_r($jobSeekerDetail);exit();
 		return $jobSeekerDetail->result()[0];
+	}
+
+	// remove the job seeker profile image
+	function removeImage() {
+		// Get the status
+		$userName = $this->session->userdata('userName');
+		$data = array('image' => null);
+		$imageStatus = $this->db->update('users',$data,array('userName' => $userName));
+		return $imageStatus;
 	}
 
 	/**

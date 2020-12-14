@@ -125,6 +125,10 @@
                                 </div>
                             <?php } else { ?>
                                 <div class="sb-sidenav-menu-heading">Home</div>
+                                <a class="nav-link <?php echo ($this->uri->segment(2)=='jobSeekerDetail')?'active':''; ?>" href="<?php echo site_url('JobSeekerController/jobSeekerDetail') ?>">
+                                    <div class="sb-nav-link-icon"><i class="fa fa-user"></i></div>
+                                    Profile
+                                </a>
                             <?php } ?>
                         </div>
                     </div>
