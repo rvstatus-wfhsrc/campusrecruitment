@@ -30,7 +30,7 @@ class JobController extends CI_Controller {
 
 	/**
 	 * This jobList method are used to get the data from model for the specfic company (company whose login to website)
-	 * @return to view screen [ history ]
+	 * @return to view screen [ company/job/list ]
 	 * @author Kulasekaran.
 	 *
 	 */
@@ -66,9 +66,9 @@ class JobController extends CI_Controller {
 		$data["serialNumber"] = $page;
 
 		$data["links"] = $this->pagination->create_links();
-		$data['jobHistory'] = $this->JobModel->jobList($pagination_config["per_page"], $page);
+		$data['jobList'] = $this->JobModel->jobList($pagination_config["per_page"], $page);
 		
-		$this->layouts->view('company/job/history',$data);
+		$this->layouts->view('company/job/list',$data);
 	}
 
 
@@ -124,7 +124,7 @@ class JobController extends CI_Controller {
 
 	/**
 	 * This jobstatus method are used to change the delflag for the specfic job
-	 * @return the redirect to JobController/jobHistory
+	 * @return the redirect to JobController/jobList
 	 * @author Kulasekaran.
 	 *
 	 */
