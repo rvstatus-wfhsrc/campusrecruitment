@@ -208,6 +208,31 @@ class CompanyModel extends CI_Model {
 	 *
 	 */
 	public function record_count() {
-		return $this->db->count_all("company");
+		// search process
+		$hiddenSearch = $this->input->post('hiddenSearch');
+		$this->db->like('companyName',trim($hiddenSearch));
+		// sorting process
+		$sortOptn = $this->input->post('sortOptn');
+		$sortVal = $this->input->post('sortVal');
+		if ($sortVal == 1) {
+			$this->db->order_by('companyName', $sortOptn);
+		} else if ($sortVal == 2) {
+			$this->db->order_by('incharge', $sortOptn);
+		} else if ($sortVal == 3) {
+			$this->db->order_by('entryDate', $sortOptn);
+		} else {
+			$this->db->order_by('companyName', 'ASC');
+		}
+		// filter process
+		$filterVal = $this->input->post('filterVal');
+		if ($filterVal == 2) {
+			$this->db->where(array('delFlag' => 0));
+		} elseif ($filterVal == 3) {
+			$this->db->where(array('delFlag' => 1));
+		}
+		$this->db->select('COUNT(company.id) as numrows');
+		$this->db->from('company');
+		$result = $this->db->get();
+		return $result->result()['0']->numrows;
 	}
 }

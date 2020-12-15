@@ -31,30 +31,32 @@ class JobSeekerModel extends CI_Model {
 	 *
 	 */
 	function jobSeekerAdd() {
-		//create job seeker userName...
 		$image = $_FILES['image']['tmp_name'];
 		$blob = null;
 		$addJobSeeker = null;
 		$imageData = array();
+		
+		// create job seeker userName
 		$lastAddJobSeekerUser = $this->JobSeekerModel->lastJobSeekerUserName();
 		$label = 'JS';
-        $lastJobSeekerInArray = $lastAddJobSeekerUser->result_array();
-        if ($lastJobSeekerInArray != null) {
-	        $lastJobSeekerUserName = $lastJobSeekerInArray[0];
-	        $lastJobSeekerID = $lastJobSeekerUserName['userName'];
-	        $jobSeekerCount = 1;
-		    if (isset($lastJobSeekerID) && $lastJobSeekerID != "") {
-		        $jobSeekerCount = substr($lastJobSeekerID, -4);
-		       	$jobSeekerCount = $jobSeekerCount + 1;
-		    }
-		    $padCount = str_pad($jobSeekerCount, 4, '0', STR_PAD_LEFT);
-		    $jobSeekerUserName = $label.$padCount;
+		$lastJobSeekerInArray = $lastAddJobSeekerUser->result_array();
+		if ($lastJobSeekerInArray != null) {
+			$lastJobSeekerUserName = $lastJobSeekerInArray[0];
+			$lastJobSeekerID = $lastJobSeekerUserName['userName'];
+			$jobSeekerCount = 1;
+			if (isset($lastJobSeekerID) && $lastJobSeekerID != "") {
+				$jobSeekerCount = substr($lastJobSeekerID, -4);
+			   	$jobSeekerCount = $jobSeekerCount + 1;
+			}
+			$padCount = str_pad($jobSeekerCount, 4, '0', STR_PAD_LEFT);
+			$jobSeekerUserName = $label.$padCount;
 		} else {
 			$jobSeekerUserName = "JS0001";
 		}
+		
 		$this->db->trans_begin();
 		try {
-			// $image => not null ----> gets the image data in array
+			// $image not null convert the image data into blob in array
 			if($image != null) {
 				$blob = file_get_contents($_FILES['image']['tmp_name']);
 				$imageData = array('image' => $blob);
@@ -160,7 +162,7 @@ class JobSeekerModel extends CI_Model {
 							email,
 							contact'
 						);
-		$this->db->where(array('userName' => $this->session->userdata('userName')));
+		$this->db->where('userName',$this->session->userdata('userName'));
 		$profileEdit = $this->db->get('users');
 		if(isset($profileEdit->result()[0])){
 			return $profileEdit->result()[0];

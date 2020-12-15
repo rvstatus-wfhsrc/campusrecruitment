@@ -43,14 +43,8 @@
                         <input type="hidden" id="base" value="<?php echo base_url(); ?>">
                         <input type="hidden" id="hiddenCompanyId" name="hiddenCompanyId">
                         <input type="hidden" id="hiddenDelFlag" name="hiddenDelFlag">
-                        <!-- {{ Form::hidden('page', $request->page , array('id' => 'page')) }} -->
-                        <?php
-                            $searchText = '';
-                            if(isset($hiddenSearch)) {
-                                $searchText = $hiddenSearch;
-                            }
-                        ?>
-                        <input type="hidden" id="hiddenSearch" name="hiddenSearch">
+                        <input type="hidden" id="per_page" name="per_page">
+                        <input type="hidden" id="hiddenSearch" name="hiddenSearch" value="<?php echo $this->input->post('hiddenSearch'); ?>">
                         <!-- filtering process -->
                         <div class="inb fs16 float-left w54">
                             <a href="javascript:;" onclick="fnCompanyFilter(1)" id="filterVal1" class="fs16 btn btn-link <?php echo $disableAll ?>"><?php echo lang('lbl_all'); ?></a>
@@ -59,7 +53,7 @@
                             <span> | </span>
                             <a href="javascript:;" onclick="fnCompanyFilter(3)" id="filterVal3" class="fs16 btn btn-link <?php echo $disableNonActive ?>"><?php echo lang('lbl_deactive'); ?></a>
                         </div>
-                        <input type="hidden" id="filterVal" name="filterVal">
+                        <input type="hidden" id="filterVal" name="filterVal" value="<?php echo $this->input->post('filterVal'); ?>">
                         <!-- clear search -->
                         <div  class="inb float-left mt-1 w3">
                           <a href="javascript:;" onclick="fnClearSearch()"><img style="width: 25px;" src="<?php echo base_url(); ?>assets/images/clearsearch.png" title="Clear Search"></a>
@@ -85,7 +79,7 @@
                                     'name' => 'search',
                                     'placeholder' => 'Search Company Name',
                                     'class' => 'input_box form-control h34',
-                                    'value' => $searchText
+                                    'value' =>  $this->input->post('hiddenSearch')
                                 );
                                 echo form_input($data);
                             ?>
@@ -123,7 +117,7 @@
                                     foreach ($companyHistory as $key=> $history) {
                                         $class = $key % 2 === 0 ? 'odd' : 'even'; ?>
                                         <tr class="<?php echo $class; ?>">
-                                            <td class="tac vam"><?php echo ($key + 1); ?></td>
+                                            <td class="tac vam"><?php echo (++$serialNumber); ?></td>
                                             <td class="vam"><?php echo $history->companyName; ?></td>
                                             <td class="vam"><?php echo $history->incharge; ?></td>
                                             <td class="tac vam"><?php echo $history->contact; ?></td>
@@ -148,12 +142,6 @@
                                 <?php }
                             ?>
                         </table>
-                        <!-- @if(!empty($departmentHistory->total()))
-                            <span class="pull-left">{{ $departmentHistory->firstItem() }} ~ {{ $departmentHistory->lastItem() }} / {{ $departmentHistory->total() }}</span>
-                            <div class="dataTables_paginate">
-                                {{ $departmentHistory->links() }}
-                            </div>
-                        @endif -->
                     <?php echo form_close();?>
                 </div>
             </div>

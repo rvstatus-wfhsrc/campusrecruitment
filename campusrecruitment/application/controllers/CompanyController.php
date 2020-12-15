@@ -61,7 +61,8 @@ class CompanyController extends CI_Controller {
 		$totalRecord = $this->CompanyModel->record_count();
 		$pagination_config = $this->CommonModel->paginationConfig($totalRecord,base_url()."CompanyController/companyHistory");
 		$this->pagination->initialize($pagination_config);
-		$page = (isset($_GET['per_page'])) ? $_GET['per_page'] : 0;
+		$page = (($this->input->post('per_page') != null)) ? $this->input->post('per_page') : 0;
+		$data["serialNumber"] = $page;
 		$data["links"] = $this->pagination->create_links();
 		$data['companyHistory'] = $this->CompanyModel->companyHistory($pagination_config["per_page"], $page);
 		$this->layouts->view('admin/company/history',$data);
@@ -208,7 +209,7 @@ class CompanyController extends CI_Controller {
 		$companyAddStatus = $this->CompanyModel->companyAdd($userName);
 		if($companyAddStatus == "1") { 
 			$this->session->set_flashdata(array('message' => 'Company Successfully Registered','type' => 'success','hiddenCompanyId' => $this->session->userdata('userName')));
-			redirect('LoginController');
+			redirect('LoginController/CompanyLogin');
 		} else {
 			$this->session->set_flashdata(array('message' => 'Sorry, Something Went Wrong. Please Try Again Later','type' => 'danger'));
 			redirect('CompanyController/companyDetail');

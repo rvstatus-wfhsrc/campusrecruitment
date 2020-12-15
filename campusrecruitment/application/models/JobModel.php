@@ -62,7 +62,6 @@ class JobModel extends CI_Model {
 	 */
 	function jobList($limit, $start) {
 		$filterVal = $this->input->post('filterVal');
-		$hiddenSearch = $this->input->post('hiddenSearch');
 		$this->db->limit($limit, $start);
 		$this->db->select(
 					'dest.designationName,
@@ -105,7 +104,7 @@ class JobModel extends CI_Model {
 			} else if ($sortVal == 2) {
 				$this->db->order_by('skill.skillName', $sortOptn);
 			} else if ($sortVal == 3) {
-				$this->db->order_by('jd.salary', $sortOptn);
+				$this->db->order_by('CAST(jd.salary as SIGNED INTEGER)', $sortOptn);
 			} else if ($sortVal == 4) {
 				$this->db->order_by('jd.lastApplyDate', $sortOptn);
 			} else {
@@ -122,7 +121,37 @@ class JobModel extends CI_Model {
 	 *
 	 */
 	public function record_count() {
-		return $this->db->count_all("job_details");
+		// filter process
+		$filterVal = $this->input->post('filterVal');
+		if ($filterVal == 2) {
+			$this->db->where(array('jd.delFlag' => 0));
+		} elseif ($filterVal == 3) {
+			$this->db->where(array('jd.delFlag' => 1));
+		}
+		// search process
+		$hiddenSearch = $this->input->post('hiddenSearch');
+		if($hiddenSearch != ""){
+			$this->db->like('skill.skillName',trim($hiddenSearch));
+		}
+		// sorting process
+		$sortOptn = $this->input->post('sortOptn');
+		$sortVal = $this->input->post('sortVal');
+		if ($sortVal == 1) {
+			$this->db->order_by('jd.created_date_time', $sortOptn);
+		} else if ($sortVal == 2) {
+			$this->db->order_by('skill.skillName', $sortOptn);
+		} else if ($sortVal == 3) {
+			$this->db->order_by('jd.salary', $sortOptn);
+		} else if ($sortVal == 4) {
+			$this->db->order_by('jd.lastApplyDate', $sortOptn);
+		} else {
+			$this->db->order_by('jd.created_date_time', 'DESC');
+		}
+		$this->db->select('COUNT(jd.id) as numrows');
+		$this->db->from('job_details as jd');
+		$this->db->join('m_skill as skill', 'jd.requiredSkill = skill.skillId');
+		$result = $this->db->get();
+		return $result->result()['0']->numrows;
 	}
 
 	/**

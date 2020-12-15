@@ -60,9 +60,10 @@ class JobController extends CI_Controller {
 
 		// pagination process
 		$totalRecord = $this->JobModel->record_count();
-		$pagination_config = $this->CommonModel->paginationConfig($totalRecord,base_url()."JobController/jobHistory");
+		$pagination_config = $this->CommonModel->paginationConfig($totalRecord,base_url()."JobController/jobList");
 		$this->pagination->initialize($pagination_config);
-		$page = (isset($_GET['per_page'])) ? $_GET['per_page'] : 0;
+		$page = (($this->input->post('per_page') != null)) ? $this->input->post('per_page') : 0;
+		$data["serialNumber"] = $page;
 
 		$data["links"] = $this->pagination->create_links();
 		$data['jobHistory'] = $this->JobModel->jobList($pagination_config["per_page"], $page);
@@ -160,6 +161,9 @@ class JobController extends CI_Controller {
 	 *
 	 */
 	public function jobEdit() {
+		if($this->input->post('hiddenJobId') == null) {
+			redirect('JobController/jobList');
+		}
 		$data['maxAgeArray'] = $this->maxAgeArray;
 		$data['jobEdit'] = $this->JobModel->jobEdit();
 		$data['jobCategoryArray'] = $this->CommonModel->designation();

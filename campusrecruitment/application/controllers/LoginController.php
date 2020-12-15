@@ -14,7 +14,7 @@ class LoginController extends CI_Controller {
 	public $layout_view = 'layouts/default';
 
 	/**
-	 * Home Controller __construct
+	 * Login Controller __construct
 	 *
 	 * This __construct is used to load the LoginModel
 	 * 
@@ -27,7 +27,17 @@ class LoginController extends CI_Controller {
 	}
 
 	/**
-	 * This CompanyLogin methond is used to get the data from model to view screen
+	 * This adminLogin methond is used for goto login screen
+	 * @return to view screen [ admin/login ]
+	 * @author Ragav.
+	 *
+	 */
+	public function adminLogin() {
+		$this->layouts->view('admin/login');
+	}
+
+	/**
+	 * This CompanyLogin methond is used for goto login screen
 	 * @return to view screen [ company/login ]
 	 * @author Ragav.
 	 *
@@ -37,7 +47,7 @@ class LoginController extends CI_Controller {
 	}
 
 	/**
-	 * This jobSeekerLogin methond is used to get the data from model to view screen
+	 * This jobSeekerLogin methond is used for goto login screen
 	 * @return to view screen [ jobSeeker/login ]
 	 * @author Ragav.
 	 *
@@ -47,8 +57,8 @@ class LoginController extends CI_Controller {
 	}
 
 	/**
-	 * This loginUser methond is used to proform the login screen validation for admin,company and job seeker and also check the valid user process.
-	 * then set that use data into the session
+	 * This loginUser methond is used to proform the login screen validation for admin,company and job seeker.
+	 * check the valid user process, then set that use data into the session
 	 * @return to view screen [ login ] for any error on given data or redirect to PageController
 	 * @author Ragav.
 	 *

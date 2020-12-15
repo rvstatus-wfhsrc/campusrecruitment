@@ -24,28 +24,71 @@
         .fa-btn {
             margin-right: 6px;
         }
+        /* hide the link that should open and close the navbar on small screens */
+        .navbar .topnavToggleIcon {
+          display: none;
+        }
+        /* when the screen is less than 600 pixels wide, hide all links, except for the first one ("Home"). Show the link that contains should open and close the navbar (.icon) */
+        @media screen and (max-width: 640px) {
+          .navbar .responsiveUl {display: none;}
+          .navbar .topnavToggleIcon {
+            /*float: right;*/
+            display: block;
+          }
+        }
+        /* the "responsive" class is added to the navbar with JavaScript when the user clicks on the icon. This class makes the navbar look good on small screens (display the links vertically instead of horizontally) */
+        @media screen and (max-width: 640px) {
+            .navbar.responsive {
+                position: relative;
+                height: auto;
+            }
+            .navbar.responsive .topnavToggleIcon {
+                position: absolute;
+                right: 58px;
+                top: 10px;
+            }
+            .navbar.responsive ul:last-child {
+                position: absolute;
+                right: 16px;
+                top: 8px;
+            }
+            .navbar.responsive .responsiveUl {
+                float: none;
+                display: block;
+                text-align: left;
+                margin-left: 8px !important;
+                margin-top: 25px;
+            }
+        }
+        @media screen and (max-width: 767px) {
+            .navbar-brand {
+                position: absolute;
+                top: 0;
+            }
+        }
     </style>
 </head>
 <body id="app-layout">
-    <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
+    <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark" id="topnav">
         <?php if($this->session->userdata('logged_in') == true && $this->session->userdata('flag') == 1) { ?>
             <a class="navbar-brand" href="<?php echo site_url('AdminController/profile/profileDetail') ?>">Admin</a>
-            <button class="btn btn-link btn-sm order-1 order-lg-0" id="sidebarToggle" href="#"><i class="fa fa-bars"></i></button>
         <?php } elseif ($this->session->userdata('logged_in') == true && $this->session->userdata('flag') == 2) { ?>
             <a class="navbar-brand" href="<?php echo site_url('CompanyController/companyDetail') ?>">Company</a>
-            <button class="btn btn-link btn-sm order-1 order-lg-0" id="sidebarToggle" href="#"><i class="fa fa-bars"></i></button>
         <?php } else { ?>
             <a class="navbar-brand" style="width: auto;" href="<?php echo site_url('HomeController/index')?>"><?php echo lang('lbl_home'); ?></a>
             <?php } ?>
         <!-- Navbar-->
         <?php if($this->session->userdata('logged_in') == false) { ?>
-            <ul class="navbar-nav ml-auto my-md-0">
+            <ul class="navbar-nav ml-auto my-md-0 responsiveUl">
                 <li class="nav-item <?php echo ($this->uri->segment(2)=='companyProfileAdd')?'active':''; ?>"><a class="nav-link" href="<?php echo site_url('CompanyController/companyProfileAdd')?>">New Company</a></li>
                 <li class="nav-item <?php echo (($this->uri->segment(2)=='CompanyLogin') || ($this->input->post('flag') == 2))?'active':''; ?>"><a class="nav-link" href="<?php echo site_url('LoginController/CompanyLogin') ?>">Company Login</a></li>
                 <li class="nav-item <?php echo ($this->uri->segment(2)=='jobSeekerProfileAdd')?'active':''; ?>"><a class="nav-link" href="<?php echo site_url('JobSeekerController/jobSeekerProfileAdd') ?>">New Job Seeker</a></li>
                 <li class="nav-item <?php echo (($this->uri->segment(2)=='jobSeekerLogin') || ($this->input->post('flag') == 3))?'active':''; ?>"><a class="nav-link" href="<?php echo site_url('LoginController/jobSeekerLogin') ?>">Job Seeker Login</a></li>
+                <li class="nav-item <?php echo (($this->uri->segment(2)=='adminLogin') || ($this->input->post('flag') == 1))?'active':''; ?>"><a class="nav-link" href="<?php echo site_url('LoginController/adminLogin') ?>">Admin Login</a></li>
             </ul>
+            <button class="btn btn-link order-1 order-lg-0 ml-auto topnavToggleIcon" id="topnavToggle"><i class="fa fa-bars"></i></button>
         <?php } else { ?>
+            <button class="btn btn-link btn-sm order-1 order-lg-0" id="sidebarToggle" href="#"><i class="fa fa-bars"></i></button>
             <ul class="navbar-nav ml-auto my-md-0">
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" id="userDropdown" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-user fa-fw"></i></a>
@@ -58,7 +101,7 @@
         <!-- <div class="inb float-left ml-1">
             <?php echo form_dropdown('siteLang', $siteLang, '', 'class="form-control inb mr-2"');?>
         </div> -->
-        <ul class="navbar-nav my-md-0">
+        <ul class="navbar-nav my-md-0 order-2 order-lg-0">
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" id="langDropDown" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-language" aria-hidden="true"></i></a>
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="langDropDown">
@@ -139,7 +182,6 @@
                 </nav>
             </div>
        <?php } ?>
-        <!-- margin-left: 0px; is need for mobile view style at logout -->
         <div id="layoutSidenav_content">
             <main class="mt-2">
             </main>

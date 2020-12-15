@@ -91,3 +91,8 @@ function fnClearSearch() {
 	$("#historyForm").attr("action", "companyHistory");
 	$('#historyForm').submit();
 }
+function pagination(page) {
+	$("#per_page").val(page);
+	$("#historyForm").attr("action", "companyHistory");
+	$("#historyForm").submit();
+}

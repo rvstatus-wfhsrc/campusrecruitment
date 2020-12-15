@@ -31,48 +31,48 @@
                 <div class="col-lg-9">
                     <div class="card shadow-lg border-0 rounded-lg mt-4">
                         <div class="card-header">
-                            <h3 class="text-center font-weight-light fs20">Company Login</h3>
+                            <h3 class="text-center font-weight-light fs20">Admin Login</h3>
                         </div>
                         <div class="card-body">
                             <?php echo form_open('LoginController/loginUser',
                                 ['method' => 'POST','class' => 'form-horizontal','id' => 'loginForm','name' => 'loginForm']); ?>
                                 <input type="hidden" id="base" name="base" value="<?php echo base_url(); ?>">
-                                <input type="hidden" id="flag" name="flag" value="2">
+                                <input type="hidden" id="flag" name="flag" value="1">
                                 <div class="form-group form-inline">
-                                    <?php echo lang('lbl_userName', 'companyUserName', array('class' => 'col-md-4 control-label required')); ?>
+                                    <?php echo lang('lbl_userName', 'adminUserName', array('class' => 'col-md-4 control-label required')); ?>
                                     <div class="col-md-8">
                                 		<?php
                                             $fields = array(
-                                        		    'id' => 'companyUserName',
-            										'name' => 'companyUserName',
+                                        		    'id' => 'adminUserName',
+            										'name' => 'adminUserName',
             										'placeholder' => 'Enter User Name',
             										'class' => 'input_box col-md-12 form-control sm-w70 w43 h-25',
-                                                    'value' => set_value('companyUserName','')
+                                                    'value' => set_value('adminUserName','')
             								);
     										echo form_input($fields);
                                         ?>
                                         <div class="error">
-                                            <?php echo form_error('companyUserName'); ?>
-                                            <?php echo @$companyLoginError; ?>
+                                            <?php echo form_error('adminUserName'); ?>
+                                            <?php echo @$adminLoginError; ?>
                                         </div>   
                                     </div>
                                 </div>
                                 <div class="form-group form-inline">
-                                    <?php echo lang('lbl_password', 'companyPassword', array('class' => 'col-md-4 control-label required')); ?>
+                                    <?php echo lang('lbl_password', 'adminPassword', array('class' => 'col-md-4 control-label required')); ?>
                                     <div class="col-md-8">
                                         <?php
-                                            $fields = array(
+                                            $fields= array(
             										'type' => 'password',
-            										'id' => 'companyPassword',
-            										'name' => 'companyPassword',
+            										'id' => 'adminPassword',
+            										'name' => 'adminPassword',
             										'placeholder' => 'Enter Password',
             										'class' => 'input_box col-md-12 form-control sm-w70 w43 h-25',
-                                                    'value' => set_value('companyPassword','')
+                                                    'value' => set_value('adminPassword','')
     										);
     										echo form_input($fields);
                                         ?>
                                         <div class="error">
-                                            <?php echo form_error('companyPassword'); ?>
+                                            <?php echo form_error('adminPassword'); ?>
                                         </div>
                                     </div>
                                 </div>
@@ -97,11 +97,9 @@
                         	<?php echo form_close();?>
                         </div>
                         <div class="card-footer text-center">
-                            <div class="small">
-                                <a href="<?php echo site_url('CompanyController/companyProfileAdd') ?>">
-                                    Are you new Company ? Sign up!
-                                </a>
-                            </div>
+                            <!-- <div class="small">
+                                <a href="<?php echo site_url('AdminController/register') ?>">Need an account ? Sign up!</a>
+                            </div> -->
                         </div>
                     </div>
                 </div>

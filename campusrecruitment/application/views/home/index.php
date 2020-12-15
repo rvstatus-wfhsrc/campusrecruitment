@@ -14,6 +14,17 @@
     <link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/home/main.css" type="text/css">
     <!-- responsive CSS styles -->
     <link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/home/responsive.css" type="text/css">
+    <style type="text/css">
+      /* margin-left: 0px; is need for mobile view style at logout */
+      @media (max-width: 840px) {
+        #layoutSidenav #layoutSidenav_content {
+          margin-left: 0;
+        }
+      }
+      .btn {
+        padding: 0.375rem 0.75rem;
+      }
+    </style>
   </head>
   <body>  
     <!-- header section start -->

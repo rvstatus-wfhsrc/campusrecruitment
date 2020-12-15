@@ -77,9 +77,9 @@
                                 <div class="form-group form-inline">
                                     <?php echo lang('lbl_jobType', 'jobType', array('class' => 'col-md-4 control-label required')); ?>
                                     <div class="col-md-8">
-                                        <input type="radio" name="jobType" class="jobType" value="1" <?php echo set_value('jobType', isset($jobEdit->jobType) ? "checked" : "") ?> />
+                                        <input type="radio" name="jobType" class="jobType" value="1" <?php echo set_value('jobType', isset($jobEdit->jobType) && $jobEdit->jobType == 1 ? "checked" : "") ?> />
                                         <span class = "pr20">Part-Time</span>
-                                        <input type="radio" name="jobType" class="jobType" value="2" <?php echo set_value('jobType', isset($jobEdit->jobType) ? "checked" : "") ?> />
+                                        <input type="radio" name="jobType" class="jobType" value="2" <?php echo set_value('jobType', isset($jobEdit->jobType) && $jobEdit->jobType == 2 ? "checked" : "") ?> />
                                         <span class="jobTypeError">Full-Time</span>
                                     </div>
                                 </div>

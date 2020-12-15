@@ -34,7 +34,12 @@ class HomeModel extends CI_Model {
 				->join('m_role as role','role.roleId = jd.role','left')
 				->join('m_country as country','country.countryId = jd.jobLocation','left')
 				->join('company as cmpy', 'jd.companyId = cmpy.userName');
-		$this->db->where(array('jd.delFlag' => 0));
+		$this->db->where(
+						array(
+							'jd.delFlag' => 0,
+							'jd.lastApplyDate >=' => date('Y-m-d')
+						)
+					);
 		// search process
 		$jobKeyWords = $this->input->post('jobKeyWords');
 		$area = $this->input->post('area');
@@ -76,7 +81,12 @@ class HomeModel extends CI_Model {
 		$this->db->join('m_country as country', 'jd.jobLocation = country.countryId');
 		$this->db->join('company as cmpy', 'jd.companyId = cmpy.userName');
 		$this->db->join('m_designation as dest', 'jd.jobCategory = dest.designationId');
-		$this->db->where(array('jd.delFlag' => 0));
+		$this->db->where(
+						array(
+							'jd.delFlag' => 0,
+							'jd.lastApplyDate >=' => date('Y-m-d')
+						)
+					);
 
 		$result = $this->db->get();
 		return $result->result()['0']->numrows;

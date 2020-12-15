@@ -103,10 +103,20 @@ class JobSeekerController extends CI_Controller {
 	public function removeImage() {
 		$imageStatus = $this->JobSeekerModel->removeImage();
 		if($imageStatus == "1") { 
-			$this->session->set_flashdata(array('message' => 'Image Was Removed','type' => 'success'));
+			$this->session->set_flashdata(
+				array(
+					'message' => 'Image Was Removed',
+					'type' => 'success'
+				)
+			);
 			redirect('JobSeekerController/jobSeekerDetail');
 		} else {
-			$this->session->set_flashdata(array('message' => 'Sorry, Something Went Wrong. Please Try Again Later','type' => 'danger'));
+			$this->session->set_flashdata(
+				array(
+					'message' => 'Sorry, Something Went Wrong. Please Try Again Later',
+					'type' => 'danger'
+				)
+			);
 			redirect('JobSeekerController/jobSeekerDetail');
 		}
 	}

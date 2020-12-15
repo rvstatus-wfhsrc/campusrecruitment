@@ -24,6 +24,17 @@
         e.preventDefault();
         $("body").toggleClass("sb-sidenav-toggled");
     });
+    // Toggle between adding and removing the "responsive" class to topnav when the user clicks on the icon
+    $("#topnavToggle").on("click", function(e) {
+        e.preventDefault();
+        var x = document.getElementById("topnav");
+        if (x.className === "sb-topnav navbar navbar-expand navbar-dark bg-dark") {
+            x.className += " responsive";
+        } else {
+            x.className = "sb-topnav navbar navbar-expand navbar-dark bg-dark";
+        }
+    });
+
 })(jQuery);
 $(document).ready(function() {
     $('.siteLang').click(function() {

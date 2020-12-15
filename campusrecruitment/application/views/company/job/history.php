@@ -50,6 +50,7 @@
                         <input type="hidden" id="base" value="<?php echo base_url(); ?>">
                         <input type="hidden" id="hiddenJobId" name="hiddenJobId">
                         <input type="hidden" id="hiddenDelFlag" name="hiddenDelFlag">
+                        <input type="hidden" id="per_page" name="per_page">
                         <input type="hidden" id="hiddenSearch" name="hiddenSearch" value="<?php echo $this->input->post('hiddenSearch'); ?>">
 
                         <!-- filtering process -->
@@ -135,7 +136,7 @@
                                     foreach ($jobHistory as $key => $history) {
                                         $class = $key % 2 === 0 ? 'odd' : 'even'; ?>
                                         <tr class="<php <?php echo $class; ?>">
-                                            <td class="tac vam"><?php echo ($key + 1); ?></td>
+                                            <td class="tac vam"><?php echo (++$serialNumber); ?></td>
                                             <td class="vam"><?php echo $history->designationName; ?></td>
                                             <td class="vam"><?php echo $history->skillName; ?></td>
                                             <td class="vam"><?php echo $history->roleName; ?></td>

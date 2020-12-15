@@ -85,3 +85,8 @@ function fnClearSearch() {
 	$("#historyForm").attr("action", "jobList");
 	$('#historyForm').submit();
 }
+function pagination(page) {
+	$("#per_page").val(page);
+	$("#historyForm").attr("action", "jobList");
+	$("#historyForm").submit();
+}
