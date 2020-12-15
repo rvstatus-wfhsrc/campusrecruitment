@@ -117,17 +117,17 @@
 					<div>
 						<!-- city -->
 						<div class="leftSide"><?php echo lang('lbl_city', 'city'); ?> : </div>
-						<div class="rightSide"><?php echo $cityArray[$jobSeekerDetail->city]; ?></div>
+						<div class="rightSide"><?php echo $jobSeekerDetail->city; ?></div>
 					</div>
 					<div>
 						<!-- state -->
 						<div class="leftSide"><?php echo lang('lbl_state', 'state'); ?> : </div>
-						<div class="rightSide"><?php echo $stateArray[$jobSeekerDetail->state]; ?></div>
+						<div class="rightSide"><?php echo $jobSeekerDetail->state; ?></div>
 					</div>
 					<div>
 						<!-- country -->
 						<div class="leftSide"><?php echo lang('lbl_country', 'country'); ?> : </div>
-						<div class="rightSide"><?php echo $countryArray[$jobSeekerDetail->country]; ?></div>
+						<div class="rightSide"><?php echo $jobSeekerDetail->country; ?></div>
 					</div>
 					<div>
 						<!-- pincode -->

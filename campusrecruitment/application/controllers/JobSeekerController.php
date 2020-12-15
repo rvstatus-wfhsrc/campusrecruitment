@@ -6,7 +6,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  *
  * This Controller are used to perform the job seeker related process
  * 
- * @author Kulasekaran.
+ * @author kulasekaran.
  *
  */
 
@@ -18,7 +18,7 @@ class JobSeekerController extends CI_Controller {
 	 *
 	 * This __construct are used to load the CommonModel and JobSeekerModel
 	 * 
-	 * @author Kulasekaran.
+	 * @author kulasekaran.
 	 *
 	 */
 	public function __construct() {
@@ -30,7 +30,7 @@ class JobSeekerController extends CI_Controller {
     /**
 	 * This jobSeekerProfileAdd method are used to call the job seeker add screen
 	 * @return to view [ jobSeeker/profile/addEdit ]
-	 * @author Kulasekaran.
+	 * @author kulasekaran.
 	 *
 	 */
     public function jobSeekerProfileAdd() {
@@ -41,9 +41,9 @@ class JobSeekerController extends CI_Controller {
     }
 
     /**
-	 * This jobSeekerFormValidation method are used to validate the job seeker add and edit screens fields
+	 * This jobSeekerProfileFormValidation method are used to validate the job seeker add and edit screens fields
 	 * @return the error status into assets/js/jobSeeker/profile/addEdit.js file
-	 * @author Kulasekaran.
+	 * @author kulasekaran.
 	 *
 	 */
     public function jobSeekerProfileFormValidation() {
@@ -59,12 +59,11 @@ class JobSeekerController extends CI_Controller {
 	/**
 	 * This jobSeekerAddForm method are used to get data from form and pass it to model for the specfic job seeker
 	 * @return the redirect to the JobSeekerController/jobSeekerDetail
-	 * @author Kulasekaran.
+	 * @author kulasekaran.
 	 *
 	 */
 	public function jobSeekerAddForm() {
-		$userName = $this->JobSeekerModel->lastJobSeekerUserName();
-		$jobSeekerAddStatus = $this->JobSeekerModel->jobSeekerAdd($userName);
+		$jobSeekerAddStatus = $this->JobSeekerModel->jobSeekerAdd();
 		if($jobSeekerAddStatus){
 			$this->session->set_flashdata([
 				'message'  => 'Job Seeker Details Add Successfully',
@@ -86,9 +85,6 @@ class JobSeekerController extends CI_Controller {
 	 *
 	 */
 	public function jobSeekerDetail() {
-		$data['countryArray'] = $this->CommonModel->country();
-		$data['stateArray'] = $this->CommonModel->state();
-		$data['cityArray'] = $this->CommonModel->city();
 		$data['jobSeekerDetail'] = $this->JobSeekerModel->jobSeekerDetail();
 		$this->layouts->view('jobSeeker/profile/detail',$data);
 	}

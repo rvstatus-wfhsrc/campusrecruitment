@@ -86,7 +86,7 @@
                         	<?php echo form_close();?>
                         </div>
                         <div class="card-footer text-center">
-                            <div class="small"><a href="<?php echo site_url('JobSeekerController/jobSeekerRegister') ?>">Are you new Job Seeker ? Sign up!</a></div>
+                            <div class="small"><a href="<?php echo site_url('JobSeekerController/jobSeekerProfileAdd') ?>">Are you new Job Seeker ? Sign up!</a></div>
                         </div>
                     </div>
                 </div>

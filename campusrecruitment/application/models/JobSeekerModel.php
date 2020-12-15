@@ -2,21 +2,21 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 /**
- * Job Model
+ * Job Seeker Model
  *
  * This Model are used to perform the company job seeker details related to data base process
  * 
- * @author Kulasekaran.
+ * @author kulasekaran.
  *
  */
 class JobSeekerModel extends CI_Model {
 
 	/**
-	 * Job Controller __construct
+	 * Job Seeker Controller __construct
 	 *
 	 * This __construct are used to load the database
 	 * 
-	 * @author Kulasekaran.
+	 * @author kulasekaran.
 	 *
 	 */
 	function __construct() {
@@ -25,17 +25,18 @@ class JobSeekerModel extends CI_Model {
 	}
 
 	/**
-	 * This jobSeekerAdd method are used to add the data get from user into data base
-	 * @return to return the jobSeekerAddStatus with true or false value to controller according to database results
-	 * @author Kulasekaran.
+	 * This jobSeekerAdd method are used to inserts the form data into users table
+	 * @return the jobSeekerAddStatus with true or false value to controller according to database results
+	 * @author kulasekaran.
 	 *
 	 */
-	function jobSeekerAdd($lastAddJobSeekerUser) {
+	function jobSeekerAdd() {
 		//create job seeker userName...
 		$image = $_FILES['image']['tmp_name'];
 		$blob = null;
 		$addJobSeeker = null;
 		$imageData = array();
+		$lastAddJobSeekerUser = $this->JobSeekerModel->lastJobSeekerUserName();
 		$label = 'JS';
         $lastJobSeekerInArray = $lastAddJobSeekerUser->result_array();
         if ($lastJobSeekerInArray != null) {
@@ -85,7 +86,7 @@ class JobSeekerModel extends CI_Model {
 	/**
 	 * This lastJobSeekerUserName method are used to get the userName of last added jobSeeker
 	 * @return the username to JobSeekerController
-	 * @author Kulasekaran.
+	 * @author kulasekaran.
 	 *
 	 */
 	function lastJobSeekerUserName() {
@@ -95,20 +96,42 @@ class JobSeekerModel extends CI_Model {
 
 	/**
 	 * This jobSeekerDetail method are used to get the one row data from users table
-	 * @param id value of specific job seeker is passed from JobSeekerController
 	 * @return to return the jobSeekerDetail array to controller
-	 * @author Kulasekaran.
+	 * @author kulasekaran.
 	 *
 	 */
 	public function jobSeekerDetail() {
-		$this->db->select('id,name,gender,contact,email,country,state,city,address,userName,delFlag,pincode,image');
+		$this->db->select(
+					'country.countryName as country,
+					state.stateName as state,
+					city.cityName as city,
+					user.id,
+					user.name,
+					user.gender,
+					user.contact,
+					user.email,
+					user.address,
+					user.userName,
+					user.delFlag,
+					user.pincode,
+					user.image'
+				)
+			->from('users as user')
+			->join('m_country as country','country.countryId = user.country','left')
+			->join('m_state as state','state.stateId = user.state','left')
+			->join('m_city as city','city.cityId = user.city','left');
 		$jobSeekerUserName = $this->session->userdata('userName');
 		$this->db->where(array('userName' => $jobSeekerUserName));
-		$jobSeekerDetail = $this->db->get('users');
+		$jobSeekerDetail = $this->db->get();
 		return $jobSeekerDetail->result()[0];
 	}
 
-	// remove the job seeker profile image
+	/**
+	 * This removeImage method are used to remove the job seeker profile image from users table
+	 * @return to return the imageStatus to controller
+	 * @author kulasekaran.
+	 *
+	 */
 	function removeImage() {
 		// Get the status
 		$userName = $this->session->userdata('userName');
