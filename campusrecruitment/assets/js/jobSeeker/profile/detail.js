@@ -1,6 +1,6 @@
 function fnJobSeekerEdit() {
-	alert("This screen is underProcess");
-	// $('#detailForm').submit();
+	$('#hiddenJobSeekerId').val($('#hiddenJobSeekerId').val());
+	$('#detailForm').submit();
 }
 function fnRemoveImage() {
 	var confRemoveImgMsg = "Are You Confirm To Remove The Image ?";

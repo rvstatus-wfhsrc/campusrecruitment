@@ -74,6 +74,7 @@
 		</div>
 		<?php echo form_open('JobSeekerController/jobSeekerEdit',['method' => 'POST','id' => 'detailForm','name' => 'detailForm']); ?>
 			<input type="hidden" id="base" value="<?php echo base_url(); ?>">
+			<input type="hidden" id="hiddenJobSeekerId" name="hiddenJobSeekerId" value="<?php echo $jobSeekerDetail->id; ?>">
 			<div class="ml-4 mb-1 dispNone">
 				<a class="btn bg-warning text-white editBtn" href="javascript:;" onclick="fnJobSeekerEdit()">
 					<i class="fa fa-edit fa-btn"></i><?php echo lang('lbl_edit'); ?>

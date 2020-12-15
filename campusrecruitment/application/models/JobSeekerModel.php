@@ -141,63 +141,73 @@ class JobSeekerModel extends CI_Model {
 	}
 
 	/**
-	 * This jobEdit method are used to get the one row data from job_details table
-	 * @return to return the jobEdit array to controller
-	 * @author Kulasekaran.
+	 * This jobSeekerEdit method are used to get the one row data from users table
+	 * @return to return the profileEdit array to controller
+	 * @author ragav.
 	 *
 	 */
-	// function jobEdit() {
-	// 	$this->db->select(
-	// 						'id,
-	// 						jobCategory,
-	// 						jobType,
-	// 						requiredSkill,
-	// 						extraSkill,
-	// 						role,
-	// 						minQualification,
-	// 						maxAge,
-	// 						salary,
-	// 						jobLocation,
-	// 						workingHour,
-	// 						jobDescription,
-	// 						lastApplyDate'
-	// 					);
-	// 	$this->db->where(array('id' => $this->input->post('hiddenJobId')));
-	// 	$jobEdit = $this->db->get('job_details');
-	// 	if(isset($jobEdit->result()[0])){
-	// 		return $jobEdit->result()[0];
-	// 	} else {
-	// 		return array();
-	// 	}
-	// }
+	function jobSeekerEdit() {
+		$this->db->select(
+							'userName,
+							id,
+							name,
+							gender,
+							address,
+							city,
+							state,
+							country,
+							pincode,
+							email,
+							contact'
+						);
+		$this->db->where(array('userName' => $this->session->userdata('userName')));
+		$profileEdit = $this->db->get('users');
+		if(isset($profileEdit->result()[0])){
+			return $profileEdit->result()[0];
+		} else {
+			return array();
+		}
+	}
 
 	/**
-	 * This jobUpdate method are used to update the one row data into the job_details table
-	 * @return to return the jobUpdateStatus with true or false value to controller according to database results
-	 * @author Kulasekaran.
+	 * This jobSeekerUpdate method are used to update the one row data into the users table
+	 * @return to return the updateUser with true or false value to controller according to database results
+	 * @author ragav.
 	 *
 	 */
-	// function jobUpdate() {
-	// 	$userName = $this->session->userdata('userName');
-	// 	$hiddenJobId = $this->input->post('hiddenJobId');
-	// 	$jobUpdateData = array(
-	// 		'jobCategory' => $this->input->post('jobCategory'),
-	// 		'jobType' => $this->input->post('jobType'),
-	// 		'requiredSkill' => $this->input->post('requiredSkill'),
-	// 		'extraSkill' => $this->input->post('extraSkill'),
-	// 		'role' => $this->input->post('role'),
-	// 		'minQualification' => $this->input->post('minQualification'),
-	// 		'maxAge' => $this->input->post('maxAge'),
-	// 		'salary' => $this->input->post('salary'),
-	// 		'jobLocation' => $this->input->post('jobLocation'),
-	// 		'workingHour' => $this->input->post('workingHour'),
-	// 		'jobDescription' => $this->input->post('jobDescription'),
-	// 		'lastApplyDate' => $this->input->post('lastApplyDate'),
-	// 		'updated_by' => $userName
-	// 	);
-	// 	$this->db->where('id', $hiddenJobId);
-	// 	$updateUser = $this->db->update('job_details', $jobUpdateData);
-	// 	return $updateUser;
-	// }
+	function jobSeekerUpdate() {
+		$image = $_FILES['image']['tmp_name'];
+		$blob = null;
+		$updateUser = false;
+		$userName = $this->session->userdata('userName');
+		$this->db->trans_begin();
+		try {
+			if($image != null) {
+				$blob = file_get_contents($_FILES['image']['tmp_name']);
+				$imageData = array('image' => $blob);
+				$this->db->where('userName', $userName);
+				$imageUpdate = $this->db->update('users', $imageData);
+			}
+			$this->db->where('userName', $userName);
+			$profileUpdateData = array(
+				'name' => $this->input->post('name'),
+				'email' => $this->input->post('email'),
+				'gender' => $this->input->post('gender'),
+				'address' => $this->input->post('address'),
+				'country' => $this->input->post('country'),
+				'state' => $this->input->post('state'),
+				'city' => $this->input->post('city'),
+				'pincode' => $this->input->post('pincode'),
+				'contact' => $this->input->post('contact'),
+				'updated_by' => $userName
+			);
+			$updateUser = $this->db->update('users', $profileUpdateData);
+			$this->db->trans_commit();
+			// $updateUser = true;
+		} catch (\Exception $e) {
+			$this->db->trans_rollback();
+		}
+		return $updateUser;
+	}
 
 }

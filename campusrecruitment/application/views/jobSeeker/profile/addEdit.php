@@ -23,7 +23,7 @@
             <?php if(isset($jobSeekerEdit)) { ?>
                 <ol class="breadcrumb mb-2 ml-4 w95">
                     <li class="breadcrumb-item">
-                        <i class="fa fa-briefcase fa-btn mt3"></i>
+                        <i class="fa fa-user fa-btn mt3"></i>
                         <?php echo lang('lbl_jobSeeker'); ?>
                         <span class ="dot editScrClr">&bull;</span>
                         <span class="editScrClr"><?php echo lang('lbl_edit'); ?></span>
@@ -103,9 +103,9 @@
                                 <div class="form-group form-inline">
                                     <?php echo lang('lbl_gender', 'Gender', array('class' => 'col-md-4 control-label required')); ?>
                                     <div class="col-md-8">
-                                        <input type="radio" name="gender" class="gender" value="1" <?php echo set_value('gender', isset($jobSeekerEdit->gender) ? "checked" : "") ?> />
+                                        <input type="radio" name="gender" class="gender" value="1" <?php echo set_value('gender', isset($jobSeekerEdit->gender) && $jobSeekerEdit->gender == 1 ? "checked" : "") ?> />
                                         <span class = "pr20">Male</span>
-                                        <input type="radio" name="gender" class="gender" value="2" <?php echo set_value('gender', isset($jobSeekerEdit->gender) ? "checked" : "") ?> />
+                                        <input type="radio" name="gender" class="gender" value="2" <?php echo set_value('gender', isset($jobSeekerEdit->gender) && $jobSeekerEdit->gender == 2 ? "checked" : "") ?> />
                                         <span class="genderError">Female</span>
                                     </div>
                                 </div>
@@ -219,7 +219,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <?php if(!isset($companyEdit)) { ?>
+                                <?php if(!isset($jobSeekerEdit)) { ?>
                                     <!-- password -->
                                     <div class="form-group form-inline">
                                         <?php echo lang('lbl_password', 'password', array('class' => 'col-md-4 control-label required')); ?>

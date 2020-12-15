@@ -157,10 +157,10 @@ class MY_Form_validation extends CI_Form_validation{
 	 *
 	 */
 	function jobSeeker_email_existing_check($email) {
-		$hiddenUserId = $this->CI->input->post('hiddenUserId');
+		$hiddenJobSeekerId = $this->CI->input->post('hiddenJobSeekerId');
 		$existUserId = "";
-		if ($hiddenUserId != null) {
-			$existUserId = "NOT id = '".$hiddenUserId."' AND";
+		if ($hiddenJobSeekerId != null) {
+			$existUserId = "NOT id = '".$hiddenJobSeekerId."' AND";
 		}
 		$query = $this->CI->db->query("SELECT COUNT(id) AS count FROM users WHERE ".$existUserId." email = '".$email."' AND flag = '3'");
 		$row = $query->row();

@@ -27,28 +27,33 @@ class JobSeekerController extends CI_Controller {
 		$this->load->model('CommonModel');
 	}
 
-    /**
+	/**
 	 * This jobSeekerProfileAdd method are used to call the job seeker add screen
 	 * @return to view [ jobSeeker/profile/addEdit ]
 	 * @author kulasekaran.
 	 *
 	 */
-    public function jobSeekerProfileAdd() {
-    	$data['countryArray'] = $this->CommonModel->country();
+	public function jobSeekerProfileAdd() {
+		$data['countryArray'] = $this->CommonModel->country();
 		$data['stateArray'] = $this->CommonModel->state();
 		$data['cityArray'] = $this->CommonModel->city();
-        $this->layouts->view('jobSeeker/profile/addEdit',$data);
-    }
+		$this->layouts->view('jobSeeker/profile/addEdit',$data);
+	}
 
-    /**
+	/**
 	 * This jobSeekerProfileFormValidation method are used to validate the job seeker add and edit screens fields
 	 * @return the error status into assets/js/jobSeeker/profile/addEdit.js file
 	 * @author kulasekaran.
 	 *
 	 */
-    public function jobSeekerProfileFormValidation() {
-		// job seeker field validation
-		if ($this->form_validation->run('jobSeekerAddEdit') == FALSE) {
+	public function jobSeekerProfileFormValidation() {
+		// job seeker field validation rule
+		// screenFlag ---> 1 for add screen rule and 2 fore edit screen
+		$validationRule = "jobSeekerAdd";
+		if($this->input->post('screenFlag') != 1) {
+			$validationRule = "jobSeekerEdit";
+		}
+		if ($this->form_validation->run($validationRule) == FALSE) {
 			$json_response = $this->form_validation->error_array();
 			echo json_encode($json_response); exit();
 		} else {
@@ -107,104 +112,48 @@ class JobSeekerController extends CI_Controller {
 	}
 
 	/**
-	 * This companyEdit method are used to get the data from model for the specfic company
-	 * @return to view screen [ addEdit ]
-	 * @author kulasekaran.
+	 * This jobSeekerEdit method are used to get the data from model for the specfic job seeker details
+	 * @return to view screen [ jobSeeker/profile/addEdit ]
+	 * @author ragav.
 	 *
 	 */
-	// public function companyEdit() {
-	// 	if($this->input->post('hiddenCompanyId') == null) {
- //            redirect('CompanyController/companyHistory');
- //        }
-	// 	$companyId = $this->input->post('hiddenCompanyId');
-	// 	$data['companyEdit'] = $this->CompanyModel->companyEdit($companyId);
-	// 	$this->layouts->view('admin/company/addEdit',$data);
-	// }
+	public function jobSeekerEdit() {
+		if($this->input->post('hiddenJobSeekerId') == null) {
+			redirect('JobSeekerController/jobSeekerDetail');
+		}
+		$data['countryArray'] = $this->CommonModel->country();
+		$data['stateArray'] = $this->CommonModel->state();
+		$data['cityArray'] = $this->CommonModel->city();
+		$data['jobSeekerEdit'] = $this->JobSeekerModel->jobSeekerEdit();
+
+		$this->layouts->view('jobSeeker/profile/addEdit',$data);
+	}
 
 	/**
-	 * This companyUpdate method are used to get the data from form and pass it to model for update process
-	 * @return the redirect to method [ companyHistory ]
-	 * @author kulasekaran.
+	 * This jobSeekerEditForm method are used to get the data from form and pass it to model for update process
+	 * @return the redirect to JobSeekerController jobSeekerDetail method 
+	 * @author ragav.
 	 *
 	 */
-	// public function companyUpdate() {
-	// 	$companyUpdateStatus = $this->CompanyModel->companyUpdate();
-	// 	if($companyUpdateStatus == "1") {
-	//         $this->session->set_flashdata(array('message' => 'Company Details Updated Successfully','type' => 'success','hiddenAdminCompanyId' => $this->input->post('hiddenCompanyId')));
-	//        	redirect('CompanyController/companyDetail');
-	//     } else {
-	//         $this->session->set_flashdata(array('message' => 'Company Details Update Failed','type' => 'danger'));
-	//         redirect('CompanyController/companyDetail');
-	//     }
-	// }
-
-	/**
-	 * This companyProfileAdd method are used to call the company add a new screen
-	 * @return to view [ addEdit ]
-	 * @author Kulasekaran.
-	 *
-	 */
- //    public function companyProfileAdd() {
- //        $this->layouts->view('company/profile/addEdit');
- //    }
-
- //    public function companyProfileFormValidation() {
-	// 	if ($this->form_validation->run('companyAddEdit') == FALSE) {
-	// 		$json_response = $this->form_validation->error_array();
-	// 		echo json_encode($json_response); exit();
-	// 	} else {
-	// 		echo json_encode(true); exit();
-	// 	}
-	// }
-
-	/**
-	 * This companyProfileAddForm method are used to get data from form and pass it to model for the specfic company
-	 * @return to view
-	 * @author Kulasekaran.
-	 *
-	 */
-	// public function companyProfileAddForm() {
- //        $userName = $this->CompanyModel->lastCompanyUserName();
-	// 	$companyAddStatus = $this->CompanyModel->companyAdd($userName);
-	// 	if($companyAddStatus == "1") { 
-	// 		$this->session->set_flashdata(array('message' => 'Company Successfully Registered','type' => 'success','hiddenCompanyId' => $this->session->userdata('userName')));
-	// 		redirect('LoginController');
-	// 	} else {
-	// 		$this->session->set_flashdata(array('message' => 'Sorry, Something Went Wrong. Please Try Again Later','type' => 'danger'));
-	// 		redirect('CompanyController/companyDetail');
-	// 	}
-	// }
-
-	/**
-	 * This companyProfileEdit method are used to get the data from model for the specfic company
-	 * @return to view screen [ company/profile/addEdit ]
-	 * @author kulasekaran.
-	 *
-	 */
-	// public function companyProfileEdit() {
-	// 	if($this->input->post('hiddenCompanyId') == null) {
- //            redirect('CompanyController/companyDetail');
- //        }
-	// 	$companyId = $this->input->post('hiddenCompanyId');
-	// 	$data['companyEdit'] = $this->CompanyModel->companyEdit($companyId);
-	// 	$this->layouts->view('company/profile/addEdit',$data);
-	// }
-
-	/**
-	 * This companyProfileUpdate method are used to get the data from form and pass it to model for update process
-	 * @return the redirect to method [ companyHistory ]
-	 * @author kulasekaran.
-	 *
-	 */
-	// public function companyProfileUpdate() {
-	// 	$companyUpdateStatus = $this->CompanyModel->companyUpdate();
-	// 	if($companyUpdateStatus == "1") {
-	//         $this->session->set_flashdata(array('message' => 'Company Details Updated Successfully','type' => 'success','hiddenCompanyId' => $this->input->post('hiddenCompanyId')));
-	//        	redirect('CompanyController/companyDetail');
-	//     } else {
-	//         $this->session->set_flashdata(array('message' => 'Company Details Update Failed','type' => 'danger'));
-	//         redirect('CompanyController/companyDetail');
-	//     }
-	// }
+	public function jobSeekerEditForm() {
+		$companyUpdateStatus = $this->JobSeekerModel->jobSeekerUpdate();
+		if($companyUpdateStatus == "1") {
+			$this->session->set_flashdata(
+				array(
+					'message' => 'Job Seeker Details Updated Successfully',
+					'type' => 'success'
+				)
+			);
+			redirect('JobSeekerController/jobSeekerDetail');
+		} else {
+			$this->session->set_flashdata(
+				array(
+					'message' => 'Job Seeker Details Update Failed',
+					'type' => 'danger'
+				)
+			);
+			redirect('JobSeekerController/jobSeekerDetail');
+		}
+	}
 
 }
