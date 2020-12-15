@@ -124,7 +124,7 @@
                                     <div class="sb-nav-link-icon"><i class="fa fa-tachometer"></i></div>
                                     Dashboard
                                 </a>
-                                <a class="nav-link <?php echo ($this->uri->segment(1)=='AdminController')?'active':''; ?>" href="<?php echo site_url('AdminController/profile/profileDetail') ?>">
+                                <a class="nav-link <?php echo ($this->uri->segment(1)=='AdminController')?'active':''; ?>" href="<?php echo site_url('AdminController/profile') ?>">
                                     <div class="sb-nav-link-icon"><i class="fa fa-user"></i></div>
                                     Profile
                                 </a>

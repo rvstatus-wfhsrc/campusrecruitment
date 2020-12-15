@@ -16,24 +16,20 @@ class AdminController extends CI_Controller {
 	/**
 	 * Admin Controller __construct
 	 *
-	 * This __construct are used to load the Layouts, url, session, CommonModel, form validation and AdminModel
+	 * This __construct are used to load the CommonModel and AdminModel
 	 * 
 	 * @author Kulasekaran.
 	 *
 	 */
 	public function __construct() {
 		parent::__construct();
-		$this->load->library('Layouts');
-		$this->load->helper('url');
-		$this->load->library('session');
 		$this->load->model('AdminModel');
 		$this->load->model('CommonModel');
-		$this->load->library('form_validation');
 	}
 
 	/**
-	 * This profile methond are used to get the data form model for the specfic user (user whose login to website)
-	 * @return to view screen [ profileDetail ]
+	 * This profile method are used to get the data from model for the specfic user (user whose login to website)
+	 * @return to view screen [ admin/profile/profileDetail ]
 	 * @author kulasekaran.
 	 *
 	 */
@@ -48,7 +44,7 @@ class AdminController extends CI_Controller {
 
 
 	/**
-	 * This register methond are used for goto the register screen
+	 * This register method are used for goto the register screen
 	 * @throws any excetion are araise mention here
 	 * @param any parameter pass are mention here
 	 * @return to view screen [ register ]
@@ -62,20 +58,29 @@ class AdminController extends CI_Controller {
 
 
 	/**
-	 * This removeImage methond are used to remove the image for specfic user (user whose login to website)
-	 * @return redirect to profile methond in Admin Controller
+	 * This removeImage method are used to remove the image for specfic user (user whose login to website)
+	 * @return redirect to profile method in Admin Controller
 	 * @author Kulasekaran.
 	 *
 	 */
 	public function removeImage() {
 		$imageStatus = $this->AdminModel->removeImage();
 		if($imageStatus == "1") { 
-			$this->session->set_flashdata(array('message' => 'Image Was Removed','type' => 'success'));
-			redirect('AdminController/profile');
+			$this->session->set_flashdata(
+				array(
+					'message' => 'Image Was Removed',
+					'type' => 'success'
+				)
+			);
 		} else {
-			$this->session->set_flashdata(array('message' => 'Sorry, Something Went Wrong. Please Try Again Later','type' => 'danger'));
-			redirect('AdminController/profile');
+			$this->session->set_flashdata(
+				array(
+					'message' => 'Sorry, Something Went Wrong. Please Try Again Later',
+					'type' => 'danger'
+				)
+			);
 		}
+		redirect('AdminController/profile');
 	}
 
 	// To view and set the profile edit page
@@ -105,6 +110,21 @@ class AdminController extends CI_Controller {
 				'updated_by' => $userName
 			);
 			$profileUpdateStatus = $this->AdminModel->profileUpdate($userName,$profileUpdateData);
+			if($profileUpdateStatus == "1") {
+				$this->session->set_flashdata(
+					array(
+						'message' => 'Profile Details Updated Successfully',
+						'type' => 'success'
+					)
+				);
+			} else {
+				$this->session->set_flashdata(
+					array(
+						'message' => 'Profile Details Update Failed',
+						'type' => 'danger'
+					)
+				);
+			}
 			redirect('AdminController/profile');
 	}
 	public function profileUpdateValidation() {
