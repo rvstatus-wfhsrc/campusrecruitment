@@ -81,5 +81,28 @@ $lang['lbl_last'] = '最終 &rsaquo;';
 $lang['lbl_jobSeeker'] = '求職者';
 $lang['lbl_jobSeekerAdd'] = '求職者を追加する';
 $lang['lbl_jobSeekerEdit'] = '求職者の更新';
+$lang['lbl_qualification'] = 'Qualification';
+$lang['lbl_qualificationAdd'] = 'Add Qualification';
+$lang['lbl_tenthMark'] = 'Tenth Mark';
+$lang['lbl_twelvethMark'] = 'Twelveth Mark';
+$lang['lbl_yearOfPassing'] = 'Year Of Passing';
+$lang['lbl_collegeName'] = 'College Name';
+$lang['lbl_cgpa'] = 'CGPA';
+
+// layout navigation bar screen label
+$lang['lbl_jobSearch'] = '仕事探し';
+$lang['lbl_newCompany'] = '新会社';
+$lang['lbl_newjobSeeker'] = '新しい求職者';
+$lang['lbl_companyLogin'] = '会社ログイン';
+$lang['lbl_jobSeekerLogin'] = '求職者ログイン';
+$lang['lbl_adminLogin'] = '管理者ログイン';
+$lang['lbl_admin'] = '管理者';
+
+// login screen label
+$lang['lbl_login'] = 'ログイン';
+$lang['lbl_forgetYourPassword'] = 'パスワードをお忘れですか ？';
+$lang['lbl_newCompanyQuestion'] = 'あなたは新しい会社ですか？';
+$lang['lbl_signup'] = 'サインアップ ！';
+$lang['lbl_newJobSeekerQuestion'] = 'あなたは新しい求職者ですか？';
 
 ?>

@@ -81,5 +81,28 @@ $lang['lbl_last'] = 'Last &rsaquo;';
 $lang['lbl_jobSeeker'] = 'Job Seeker';
 $lang['lbl_jobSeekerAdd'] = 'Add Job Seeker';
 $lang['lbl_jobSeekerEdit'] = 'Update Job Seeker';
+$lang['lbl_qualification'] = 'Qualification';
+$lang['lbl_qualificationAdd'] = 'Add Qualification';
+$lang['lbl_tenthMark'] = 'Tenth Mark';
+$lang['lbl_twelvethMark'] = 'Twelveth Mark';
+$lang['lbl_yearOfPassing'] = 'Year Of Passing';
+$lang['lbl_collegeName'] = 'College Name';
+$lang['lbl_cgpa'] = 'CGPA';
+
+// layout navigation bar screen label
+$lang['lbl_jobSearch'] = 'Job Search';
+$lang['lbl_newCompany'] = 'New Company';
+$lang['lbl_newjobSeeker'] = 'New Job Seeker';
+$lang['lbl_companyLogin'] = 'Company Login';
+$lang['lbl_jobSeekerLogin'] = 'Job Seeker Login';
+$lang['lbl_adminLogin'] = 'Admin Login';
+$lang['lbl_admin'] = 'Admin';
+
+// login screen label
+$lang['lbl_login'] = 'Login';
+$lang['lbl_forgetYourPassword'] = 'Forgot Your Password ?';
+$lang['lbl_newCompanyQuestion'] = 'Are you new Company ?';
+$lang['lbl_signup'] = ' Sign up !';
+$lang['lbl_newJobSeekerQuestion'] = 'Are you new Job Seeker ?';
 
 ?>

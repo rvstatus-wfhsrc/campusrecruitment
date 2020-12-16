@@ -406,6 +406,48 @@ $config = array(
                                         'label' => 'lang:lbl_contact',
                                         'rules' => 'required|ten_digit_only'
                                     )
+                                ),
+                'jobSeekerQualificationAddEdit' => array(
+                                    array(
+                                        'field' => 'tenthMark',
+                                        'label' => 'lang:lbl_tenthMark',
+                                        'rules' => 'required|integer|greater_than[0]|less_than_equal_to[500]'
+                                    ),
+                                    array(
+                                        'field' => 'twelvethMark',
+                                        'label' => 'lang:lbl_twelvethMark',
+                                        'rules' => 'required|integer|greater_than[0]|less_than_equal_to[1200]'
+                                    ),
+                                    array(
+                                        'field' => 'qualification',
+                                        'label' => 'lang:lbl_qualification',
+                                        'rules' => 'required|alphabetic'
+                                    ),
+                                    array(
+                                        'field' => 'yearOfPassing',
+                                        'label' => 'lang:lbl_yearOfPassing',
+                                        'rules' => 'required'
+                                    ),
+                                    array(
+                                        'field' => 'collegeName',
+                                        'label' => 'lang:lbl_collegeName',
+                                        'rules' => 'required|alphabetic|max_length[50]'
+                                    ),
+                                    array(
+                                        'field' => 'cgpa',
+                                        'label' => 'lang:lbl_cgpa',
+                                        'rules' => 'required'
+                                    ),
+                                    array(
+                                        'field' => 'skill',
+                                        'label' => 'lang:lbl_skill',
+                                        'rules' => 'required'
+                                    ),
+                                    array(
+                                        'field' => 'extraSkill',
+                                        'label' => 'lang:lbl_extraSkill',
+                                        'rules' => 'extra_skill'
+                                    )
                                 )
            );
 

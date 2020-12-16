@@ -71,20 +71,22 @@
 <body id="app-layout">
     <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark" id="topnav">
         <?php if($this->session->userdata('logged_in') == true && $this->session->userdata('flag') == 1) { ?>
-            <a class="navbar-brand" href="<?php echo site_url('AdminController/profile/profileDetail') ?>">Admin</a>
+            <a class="navbar-brand" href="<?php echo site_url('AdminController/profile') ?>"><?php echo lang('lbl_admin'); ?></a>
         <?php } elseif ($this->session->userdata('logged_in') == true && $this->session->userdata('flag') == 2) { ?>
-            <a class="navbar-brand" href="<?php echo site_url('CompanyController/companyDetail') ?>">Company</a>
+            <a class="navbar-brand" href="<?php echo site_url('CompanyController/companyDetail') ?>"><?php echo lang('lbl_company'); ?></a>
+        <?php } elseif ($this->session->userdata('logged_in') == true && $this->session->userdata('flag') == 3) { ?>
+            <a class="navbar-brand" href="<?php echo site_url('JobSeekerController/jobSeekerDetail') ?>"><?php echo lang('lbl_jobSeeker'); ?></a>
         <?php } else { ?>
             <a class="navbar-brand" style="width: auto;" href="<?php echo site_url('HomeController/index')?>"><?php echo lang('lbl_home'); ?></a>
             <?php } ?>
         <!-- Navbar-->
         <?php if($this->session->userdata('logged_in') == false) { ?>
             <ul class="navbar-nav ml-auto my-md-0 responsiveUl">
-                <li class="nav-item <?php echo ($this->uri->segment(2)=='companyProfileAdd')?'active':''; ?>"><a class="nav-link" href="<?php echo site_url('CompanyController/companyProfileAdd')?>">New Company</a></li>
-                <li class="nav-item <?php echo (($this->uri->segment(2)=='CompanyLogin') || ($this->input->post('flag') == 2))?'active':''; ?>"><a class="nav-link" href="<?php echo site_url('LoginController/CompanyLogin') ?>">Company Login</a></li>
-                <li class="nav-item <?php echo ($this->uri->segment(2)=='jobSeekerProfileAdd')?'active':''; ?>"><a class="nav-link" href="<?php echo site_url('JobSeekerController/jobSeekerProfileAdd') ?>">New Job Seeker</a></li>
-                <li class="nav-item <?php echo (($this->uri->segment(2)=='jobSeekerLogin') || ($this->input->post('flag') == 3))?'active':''; ?>"><a class="nav-link" href="<?php echo site_url('LoginController/jobSeekerLogin') ?>">Job Seeker Login</a></li>
-                <li class="nav-item <?php echo (($this->uri->segment(2)=='adminLogin') || ($this->input->post('flag') == 1))?'active':''; ?>"><a class="nav-link" href="<?php echo site_url('LoginController/adminLogin') ?>">Admin Login</a></li>
+                <li class="nav-item <?php echo ($this->uri->segment(2)=='companyProfileAdd')?'active':''; ?>"><a class="nav-link" href="<?php echo site_url('CompanyController/companyProfileAdd')?>"><?php echo lang('lbl_newCompany'); ?></a></li>
+                <li class="nav-item <?php echo (($this->uri->segment(2)=='CompanyLogin') || ($this->input->post('flag') == 2))?'active':''; ?>"><a class="nav-link" href="<?php echo site_url('LoginController/CompanyLogin') ?>"><?php echo lang('lbl_companyLogin'); ?></a></li>
+                <li class="nav-item <?php echo ($this->uri->segment(2)=='jobSeekerProfileAdd')?'active':''; ?>"><a class="nav-link" href="<?php echo site_url('JobSeekerController/jobSeekerProfileAdd') ?>"><?php echo lang('lbl_newjobSeeker'); ?></a></li>
+                <li class="nav-item <?php echo (($this->uri->segment(2)=='jobSeekerLogin') || ($this->input->post('flag') == 3))?'active':''; ?>"><a class="nav-link" href="<?php echo site_url('LoginController/jobSeekerLogin') ?>"><?php echo lang('lbl_jobSeekerLogin'); ?></a></li>
+                <li class="nav-item <?php echo (($this->uri->segment(2)=='adminLogin') || ($this->input->post('flag') == 1))?'active':''; ?>"><a class="nav-link" href="<?php echo site_url('LoginController/adminLogin') ?>"><?php echo lang('lbl_adminLogin'); ?></a></li>
             </ul>
             <button class="btn btn-link order-1 order-lg-0 ml-auto topnavToggleIcon" id="topnavToggle"><i class="fa fa-bars"></i></button>
         <?php } else { ?>
@@ -120,16 +122,20 @@
                         <div class="nav">
                             <?php if($this->session->userdata('flag') == 1) { ?>
                                 <div class="sb-sidenav-menu-heading">Home</div>
+                                <a class="nav-link <?php echo ($this->uri->segment(1)=='HomeController')?'active':''; ?>" href="<?php echo site_url('HomeController/index') ?>">
+                                    <div class="sb-nav-link-icon"><i class="fa fa-search" aria-hidden="true"></i></div>
+                                    <?php echo lang('lbl_jobSearch'); ?>
+                                </a>
                                 <a class="nav-link <?php echo ($this->uri->segment(3)=='dashboard')?'active':''; ?>" href="<?php echo site_url('DashboardController/dashboard/dashboard') ?>">
                                     <div class="sb-nav-link-icon"><i class="fa fa-tachometer"></i></div>
                                     Dashboard
                                 </a>
                                 <a class="nav-link <?php echo ($this->uri->segment(1)=='AdminController')?'active':''; ?>" href="<?php echo site_url('AdminController/profile') ?>">
                                     <div class="sb-nav-link-icon"><i class="fa fa-user"></i></div>
-                                    Profile
+                                    <?php echo lang('lbl_profile'); ?>
                                 </a>
                                 <div class="sb-sidenav-menu-heading">Settings</div>
-                                <a class="nav-link <?php echo ($this->uri->segment(1)=='CompanyController')?'active':''; ?>" data-toggle="collapse" data-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
+                                <a class="nav-link <?php echo ($this->uri->segment(1)=='CompanyController')?'active':'collapsed'; ?>" data-toggle="collapse" data-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
                                     <div class="sb-nav-link-icon"><i class="fa fa-building"></i></div>
                                     <?php echo lang('lbl_company'); ?>
                                     <div class="sb-sidenav-collapse-arrow"><i class="fa fa-angle-down"></i></div>
@@ -147,10 +153,10 @@
                                 </a>
                                 <a class="nav-link <?php echo ($this->uri->segment(2)=='companyDetail')?'active':''; ?>" href="<?php echo site_url('CompanyController/companyDetail') ?>">
                                     <div class="sb-nav-link-icon"><i class="fa fa-user"></i></div>
-                                    Profile
+                                    <?php echo lang('lbl_profile'); ?>
                                 </a>
                                 <div class="sb-sidenav-menu-heading">Settings</div>
-                                <a class="nav-link <?php echo ($this->uri->segment(1)=='JobController')?'active':''; ?>" data-toggle="collapse" data-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
+                                <a class="nav-link <?php echo ($this->uri->segment(1)=='JobController')?'active':'collapsed'; ?>" data-toggle="collapse" data-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
                                     <div class="sb-nav-link-icon">
                                         <i class="fa fa-briefcase"></i>
                                     </div>
@@ -170,8 +176,19 @@
                                 <div class="sb-sidenav-menu-heading">Home</div>
                                 <a class="nav-link <?php echo ($this->uri->segment(2)=='jobSeekerDetail')?'active':''; ?>" href="<?php echo site_url('JobSeekerController/jobSeekerDetail') ?>">
                                     <div class="sb-nav-link-icon"><i class="fa fa-user"></i></div>
-                                    Profile
+                                    <?php echo lang('lbl_profile'); ?>
                                 </a>
+                                <div class="sb-sidenav-menu-heading">Education</div>
+                                <a class="nav-link <?php echo ($this->uri->segment(2)=='jobSeekerQualificationDetail' || $this->uri->segment(2)=='jobSeekerQualificationAdd')?'active':'collapsed'; ?>" data-toggle="collapse" data-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
+                                    <div class="sb-nav-link-icon"><i class="fa fa-mortar-board"></i></div>
+                                    <?php echo lang('lbl_qualification'); ?>
+                                    <div class="sb-sidenav-collapse-arrow"><i class="fa fa-angle-down"></i></div>
+                                </a>
+                                <div class="collapse <?php echo ($this->uri->segment(1)=='jobSeekerController')?'show':''; ?>" id="collapseLayouts" aria-labelledby="headingOne" data-parent="#sidenavAccordion">
+                                    <nav class="sb-sidenav-menu-nested nav">
+                                        <a class="nav-link <?php echo ($this->uri->segment(2)=='jobSeekerQualificationDetail')?'active':''; ?>" href="<?php echo site_url('jobSeekerController/jobSeekerQualificationDetail') ?>"><?php echo lang('lbl_history'); ?></a>
+                                    </nav>
+                                </div>
                             <?php } ?>
                         </div>
                     </div>

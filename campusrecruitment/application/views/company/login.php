@@ -31,7 +31,7 @@
                 <div class="col-lg-9">
                     <div class="card shadow-lg border-0 rounded-lg mt-4">
                         <div class="card-header">
-                            <h3 class="text-center font-weight-light fs20">Company Login</h3>
+                            <h3 class="text-center font-weight-light fs20"><?php echo lang('lbl_companyLogin'); ?></h3>
                         </div>
                         <div class="card-body">
                             <?php echo form_open('LoginController/loginUser',
@@ -89,9 +89,9 @@
                                 <div class="form-group">
                                 	<div class="offset-md-4 col-md-6">
                                         <button class="btn bg-warning text-white">
-                                            <i class="fa fa-btn fa-sign-in"></i>Login
+                                            <i class="fa fa-btn fa-sign-in"></i><?php echo lang('lbl_login'); ?>
                                         </button>
-                                        <a class="btn btn-link" href="{{ url('/password/reset') }}">Forgot Your Password ?</a>
+                                        <a class="btn btn-link" href="{{ url('/password/reset') }}"><?php echo lang('lbl_forgetYourPassword'); ?></a>
                                     </div>
                                 </div>
                         	<?php echo form_close();?>
@@ -99,7 +99,7 @@
                         <div class="card-footer text-center">
                             <div class="small">
                                 <a href="<?php echo site_url('CompanyController/companyProfileAdd') ?>">
-                                    Are you new Company ? Sign up!
+                                    <?php echo lang('lbl_newCompanyQuestion')." ".lang('lbl_signup'); ?>
                                 </a>
                             </div>
                         </div>

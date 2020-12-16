@@ -124,7 +124,7 @@ class JobSeekerController extends CI_Controller {
 	/**
 	 * This jobSeekerEdit method are used to get the data from model for the specfic job seeker details
 	 * @return to view screen [ jobSeeker/profile/addEdit ]
-	 * @author ragav.
+	 * @author kulasekaran.
 	 *
 	 */
 	public function jobSeekerEdit() {
@@ -142,7 +142,7 @@ class JobSeekerController extends CI_Controller {
 	/**
 	 * This jobSeekerEditForm method are used to get the data from form and pass it to model for update process
 	 * @return the redirect to JobSeekerController jobSeekerDetail method 
-	 * @author ragav.
+	 * @author kulasekaran.
 	 *
 	 */
 	public function jobSeekerEditForm() {
@@ -164,6 +164,67 @@ class JobSeekerController extends CI_Controller {
 			);
 			redirect('JobSeekerController/jobSeekerDetail');
 		}
+	}
+
+	/**
+	 * This jobSeekerQualificationDetail method are used to get the qualification detail from database for specific job seeker
+	 * @return to view[jobSeeker/qualification/detail]
+	 * @author kulasekaran.
+	 *
+	 */
+	public function jobSeekerQualificationDetail() {
+		$this->layouts->view('jobSeeker/qualification/detail');
+	}
+
+	/**
+	 * This jobSeekerQualificationAdd method are used to display the qualification add screen
+	 * @return to view[jobSeeker/qualification/addEdit] 
+	 * @author kulasekaran.
+	 *
+	 */
+	public function jobSeekerQualificationAdd() {
+		$this->layouts->view('jobSeeker/qualification/addEdit');
+	}
+
+	/**
+	 * This jobSeekerQualificationFormValidation method are used to validate the job seeker's qualification add and edit screens fields
+	 * @return the error status into assets/js/jobSeeker/qualification/addEdit.js file
+	 * @author kulasekaran.
+	 *
+	 */
+	public function jobSeekerQualificationFormValidation() {
+		// job seeker qualification field validation rule
+		// screenFlag ---> 1 for add screen rule and 2 fore edit screen
+		$validationRule = "jobSeekerQualificationAddEdit";
+		if ($this->form_validation->run($validationRule) == FALSE) {
+			$json_response = $this->form_validation->error_array();
+			echo json_encode($json_response); exit();
+		} else {
+			echo json_encode(true); exit();
+		}
+	}
+
+	/**
+	 * This jobSeekerQualificationAddForm method are used to get qualification data from form and pass it to model for the specfic job seeker
+	 * @return the redirect to the JobSeekerController/jobSeekerQualificationDetail
+	 * @author kulasekaran.
+	 *
+	 */
+	public function jobSeekerQualificationAddForm() {
+		$jobSeekerQualificationAddStatus = $this->JobSeekerModel->jobSeekerQualificationAdd();
+		print_r($jobSeekerQualificationAddStatus);exit();
+		if($jobSeekerQualificationAddStatus){
+			$this->session->set_flashdata([
+				'message'  => 'Job Seeker Qualification Details Add Successfully',
+				'type' => 'success'
+			]);
+		} else {
+			$this->session->set_flashdata([
+				'message'  => 'Sorry, Something Went Wrong. Please Try Again Later',
+				'type' => 'danger'
+			]);
+		}
+		redirect('JobSeekerController/jobSeekerQualificationDetail');
 	}
 
 }

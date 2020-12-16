@@ -145,7 +145,7 @@ class JobSeekerModel extends CI_Model {
 	/**
 	 * This jobSeekerEdit method are used to get the one row data from users table
 	 * @return to return the profileEdit array to controller
-	 * @author ragav.
+	 * @author kulasekaran.
 	 *
 	 */
 	function jobSeekerEdit() {
@@ -174,7 +174,7 @@ class JobSeekerModel extends CI_Model {
 	/**
 	 * This jobSeekerUpdate method are used to update the one row data into the users table
 	 * @return to return the updateUser with true or false value to controller according to database results
-	 * @author ragav.
+	 * @author kulasekaran.
 	 *
 	 */
 	function jobSeekerUpdate() {
@@ -210,6 +210,30 @@ class JobSeekerModel extends CI_Model {
 			$this->db->trans_rollback();
 		}
 		return $updateUser;
+	}
+
+	/**
+	 * This jobSeekerQualificationAdd method are used to inserts the form data into t_qualification table
+	 * @return the jobSeekerQualificationAddStatus with true or false value to controller according to database results
+	 * @author kulasekaran.
+	 *
+	 */
+	function jobSeekerQualificationAdd() {
+		$jobSeekerUserName = $this->session->userdata('userName');
+		$jobSeekerQualificationAddData = array(
+			'tenthMark' => $this->input->post('tenthMark'),
+			'twelvethMark' => $this->input->post('twelvethMark'),
+			'qualification' => $this->input->post('qualification'),
+			'yearOfPassing' => $this->input->post('yearOfPassing'),
+			'collegeName' => $this->input->post('collegeName'),
+			'cgpa' => $this->input->post('cgpa'),
+			'skill' => $this->input->post('skill'),
+			'extraSkill' => $this->input->post('extraSkill'),
+			'created_by' => $jobSeekerUserName,
+			'delFlag' => 0
+		);
+		$jobSeekerQualificationAddStatus = $this->db->insert('t_qualification', $jobSeekerQualificationAddData);
+		return $jobSeekerQualificationAddStatus;
 	}
 
 }
