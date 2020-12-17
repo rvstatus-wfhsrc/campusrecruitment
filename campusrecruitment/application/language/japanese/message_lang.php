@@ -88,6 +88,9 @@ $lang['lbl_twelvethMark'] = 'Twelveth Mark';
 $lang['lbl_yearOfPassing'] = 'Year Of Passing';
 $lang['lbl_collegeName'] = 'College Name';
 $lang['lbl_cgpa'] = 'CGPA';
+$lang['lbl_specification'] = 'Specification';
+$lang['lbl_branch'] = 'Branch';
+$lang['lbl_university'] = 'University';
 
 // layout navigation bar screen label
 $lang['lbl_jobSearch'] = '仕事探し';

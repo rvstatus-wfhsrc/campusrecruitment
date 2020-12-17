@@ -411,21 +411,36 @@ $config = array(
                                     array(
                                         'field' => 'tenthMark',
                                         'label' => 'lang:lbl_tenthMark',
-                                        'rules' => 'required|integer|greater_than[0]|less_than_equal_to[500]'
+                                        'rules' => 'required|integer|greater_than[0]|less_than_equal_to[100]'
                                     ),
                                     array(
                                         'field' => 'twelvethMark',
                                         'label' => 'lang:lbl_twelvethMark',
-                                        'rules' => 'required|integer|greater_than[0]|less_than_equal_to[1200]'
+                                        'rules' => 'required|integer|greater_than[0]|less_than_equal_to[100]'
                                     ),
                                     array(
                                         'field' => 'qualification',
                                         'label' => 'lang:lbl_qualification',
-                                        'rules' => 'required|alphabetic'
+                                        'rules' => 'required'
                                     ),
                                     array(
                                         'field' => 'yearOfPassing',
                                         'label' => 'lang:lbl_yearOfPassing',
+                                        'rules' => 'required'
+                                    ),
+                                    array(
+                                        'field' => 'specification',
+                                        'label' => 'lang:lbl_specification',
+                                        'rules' => 'required'
+                                    ),
+                                    array(
+                                        'field' => 'branch',
+                                        'label' => 'lang:lbl_branch',
+                                        'rules' => 'required'
+                                    ),
+                                    array(
+                                        'field' => 'university',
+                                        'label' => 'lang:lbl_university',
                                         'rules' => 'required'
                                     ),
                                     array(

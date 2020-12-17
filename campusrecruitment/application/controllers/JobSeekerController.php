@@ -12,6 +12,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class JobSeekerController extends CI_Controller {
 
+	public $qualificationArray = array('' => 'Select Qualification','1'=>'BCA','2'=>'B.Sc','3'=>'B.COM','4'=>'B.E','5'=>'B.A','6'=>'MCA','7'=>'M.Sc','8'=>'M.E','9'=>'M.A');
+	public $specificationArray = array('' => 'Select Specification','1'=>'UG','2'=>'PG','3'=>'Diploma');
+	public $yearOfPassingArray = array('' => 'Select Year','1991'=>'1991','1992'=>'1992','1993'=>'1993','1994'=>'1994','1995'=>'1995','1996'=>'1996','1997'=>'1997','1998'=>'1998','1999'=>'1999','2000'=>'2000','2001'=>'2001','2002'=>'2002','2003'=>'2003','2004'=>'2004','2005'=>'2005','2006'=>'2006','2007'=>'2007','2008'=>'2008','2009'=>'2009','2010'=>'2010','2011'=>'2011','2012'=>'2012','2013'=>'2013','2014'=>'2014','2015'=>'2015','2016'=>'2016','2017'=>'2017','2018'=>'2018','2019'=>'2019','2020'=>'2020');
+	public $monthOfPassingArray = array('' => 'Select Month','1'=>'January','2'=>'February','3'=>'March','4'=>'April','5'=>'May','6'=>'June','7'=>'July','8'=>'August','9'=>'September','10'=>'October','11'=>'November','12'=>'December');
+	public $branchArray = array('' => 'Select Branch','1'=>'Computer Science','2'=>'Chemistry','3'=>'Mechanical Engineering','4'=>'Physics','5'=>'Maths','6'=>'Electrical & Electronical Engineering','7'=>'Civil Engineering','8'=>'English','9'=>'Electronical Communication');
+	public $universityArray = array('' => 'Select University','1'=>'Anna University','2'=>'Kamaraj University','3'=>'Madras University','4'=>'Manonmaniyam Sundaranar University');
 	public $layout_view = 'layouts/default';
 	/**
 	 * Job Seeker Controller __construct
@@ -183,7 +189,14 @@ class JobSeekerController extends CI_Controller {
 	 *
 	 */
 	public function jobSeekerQualificationAdd() {
-		$this->layouts->view('jobSeeker/qualification/addEdit');
+		$data['skillArray'] = $this->CommonModel->skill();
+		$data['qualificationArray'] = $this->qualificationArray;
+		$data['specificationArray'] = $this->specificationArray;
+		$data['yearOfPassingArray'] = $this->yearOfPassingArray;
+		$data['monthOfPassingArray'] = $this->monthOfPassingArray;
+		$data['branchArray'] = $this->branchArray;
+		$data['universityArray'] = $this->universityArray;
+		$this->layouts->view('jobSeeker/qualification/addEdit',$data);
 	}
 
 	/**

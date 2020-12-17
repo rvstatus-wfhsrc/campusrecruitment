@@ -221,11 +221,16 @@ class JobSeekerModel extends CI_Model {
 	function jobSeekerQualificationAdd() {
 		$jobSeekerUserName = $this->session->userdata('userName');
 		$jobSeekerQualificationAddData = array(
+			'jobSeekerId' => $jobSeekerUserName,
 			'tenthMark' => $this->input->post('tenthMark'),
 			'twelvethMark' => $this->input->post('twelvethMark'),
+			'specification' => $this->input->post('specification'),
 			'qualification' => $this->input->post('qualification'),
+			'branch' => $this->input->post('branch'),
 			'yearOfPassing' => $this->input->post('yearOfPassing'),
+			'monthOfPassing' => $this->input->post('monthOfPassing'),
 			'collegeName' => $this->input->post('collegeName'),
+			'university' => $this->input->post('university'),
 			'cgpa' => $this->input->post('cgpa'),
 			'skill' => $this->input->post('skill'),
 			'extraSkill' => $this->input->post('extraSkill'),
