@@ -114,8 +114,7 @@ class CompanyController extends CI_Controller {
 	 *
 	 */
 	public function companyAddForm() {
-		$userName = $this->CompanyModel->lastCompanyUserName();
-		$companyAddStatus = $this->CompanyModel->companyAdd($userName);
+		$companyAddStatus = $this->CompanyModel->companyAdd();
 		if($companyAddStatus == "1") { 
 			$this->session->set_flashdata(array('message' => 'Company Successfully Registered','type' => 'success'));
 			redirect('CompanyController/companyHistory');
@@ -205,8 +204,7 @@ class CompanyController extends CI_Controller {
 	 *
 	 */
 	public function companyProfileAddForm() {
-        $userName = $this->CompanyModel->lastCompanyUserName();
-		$companyAddStatus = $this->CompanyModel->companyAdd($userName);
+		$companyAddStatus = $this->CompanyModel->companyAdd();
 		if($companyAddStatus == "1") { 
 			$this->session->set_flashdata(array('message' => 'Company Successfully Registered','type' => 'success','hiddenCompanyId' => $this->session->userdata('userName')));
 			redirect('LoginController/CompanyLogin');

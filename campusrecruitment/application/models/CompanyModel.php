@@ -86,8 +86,9 @@ class CompanyModel extends CI_Model {
 	 * @author Kulasekaran.
 	 *
 	 */
-	function companyAdd($lastAddCompanyUser) {
+	function companyAdd() {
 		//create company userName...
+		$lastAddCompanyUser = $this->CompanyModel->lastCompanyUserName();
         $label = 'CY';
         $lastCompanyInArray = $lastAddCompanyUser->result_array();
         $lastCompanyUserName = $lastCompanyInArray[0];

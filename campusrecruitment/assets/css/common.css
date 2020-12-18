@@ -89,6 +89,12 @@
 }
 /* margin bottom class end */
 
+/* margin left class start */
+.ml50 {
+	margin-left: 50% !important;
+}
+/* margin left class end */
+
 /* edit button class start */
 .editBtn {
 	height: 30px;
@@ -209,3 +215,9 @@
 	background-image:url(../images/downArrow.png) !important;
 }
 /* sorting arrow class end */
+
+/* teal color class start */
+.teal {
+	color: teal;
+}
+/* teal color class end */

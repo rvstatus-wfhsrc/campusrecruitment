@@ -91,6 +91,10 @@ $lang['lbl_cgpa'] = 'CGPA';
 $lang['lbl_specification'] = 'Specification';
 $lang['lbl_branch'] = 'Branch';
 $lang['lbl_university'] = 'University';
+$lang['lbl_qualificationDetails'] = 'Qualification Details';
+$lang['lbl_graduationYear'] = 'Graduation Year';
+$lang['lbl_jobSeekerId'] = 'Job Seeker Id';
+$lang['lbl_jobSeekerName'] = 'Job Seeker Name';
 
 // layout navigation bar screen label
 $lang['lbl_jobSearch'] = 'Job Search';

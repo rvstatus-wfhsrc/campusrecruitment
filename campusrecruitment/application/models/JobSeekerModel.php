@@ -98,7 +98,7 @@ class JobSeekerModel extends CI_Model {
 
 	/**
 	 * This jobSeekerDetail method are used to get the one row data from users table
-	 * @return to return the jobSeekerDetail array to controller
+	 * @return to the jobSeekerDetail array to controller
 	 * @author kulasekaran.
 	 *
 	 */
@@ -239,6 +239,97 @@ class JobSeekerModel extends CI_Model {
 		);
 		$jobSeekerQualificationAddStatus = $this->db->insert('t_qualification', $jobSeekerQualificationAddData);
 		return $jobSeekerQualificationAddStatus;
+	}
+
+	/**
+	 * This jobSeekerQualificationDetail method are used to retrieve the qualification related data from t_qualification table
+	 * @return the qualificationDetail array to controller
+	 * @author kulasekaran.
+	 *
+	 */
+	function jobSeekerQualificationDetail() {
+		$this->db->select(
+					'skill.skillName as skill,
+					user.name as name,
+					qual.id,
+					qual.jobSeekerId,
+					qual.tenthMark,
+					qual.twelvethMark,
+					qual.specification,
+					qual.qualification,
+					qual.branch,
+					qual.yearOfPassing,
+					qual.monthOfPassing,
+					qual.CGPA,
+					qual.university,
+					qual.collegeName,
+					qual.extraSkill,
+					qual.delFlag'
+				)
+			->from('t_qualification as qual')
+			->join('m_skill as skill','skill.skillId = qual.skill','left')
+			->join('users as user','user.userName = qual.jobSeekerId','left');
+		$jobSeekerUserName = $this->session->userdata('userName');
+		$this->db->where(array('jobSeekerId' => $jobSeekerUserName));
+		$jobSeekerQualificationDetail = $this->db->get();
+		return $jobSeekerQualificationDetail->result();
+	}
+
+	/**
+	 * This jobSeekerQualificationEdit method are used to get the one row data from t_qualification table
+	 * @return to the jobSeekerQualificationEdit array to controller
+	 * @author kulasekaran.
+	 *
+	 */
+	function jobSeekerQualificationEdit() {
+		$id = $this->input->post('hiddenJobSeekerQualificationId');
+		$this->db->select(
+							'id,
+							tenthMark,
+							twelvethMark,
+							specification,
+							qualification,
+							yearOfPassing,
+							monthOfPassing,
+							collegeName,
+							branch,
+							university,
+							CGPA,
+							skill,
+							extraSkill'
+						);
+		$this->db->where('id',$id);
+		$jobSeekerQualificationEdit = $this->db->get('t_qualification');
+		return $jobSeekerQualificationEdit->result()[0];
+	}
+
+	/**
+	 * This jobSeekerQualificationUpdate method are used to update the one row data into the t_qualification table
+	 * @return to the updateQualification with true or false value to controller according to database results
+	 * @author kulasekaran.
+	 *
+	 */
+	function jobSeekerQualificationUpdate() {
+		$jobSeekerUserName = $this->session->userdata('userName');
+		$id = $this->input->post('hiddenJobSeekerQualificationId');
+		$this->db->where('id', $id);
+		$qualificationUpdateData = array(
+			'tenthMark' => $this->input->post('tenthMark'),
+			'twelvethMark' => $this->input->post('twelvethMark'),
+			'specification' => $this->input->post('specification'),
+			'qualification' => $this->input->post('qualification'),
+			'branch' => $this->input->post('branch'),
+			'yearOfPassing' => $this->input->post('yearOfPassing'),
+			'monthOfPassing' => $this->input->post('monthOfPassing'),
+			'collegeName' => $this->input->post('collegeName'),
+			'university' => $this->input->post('university'),
+			'cgpa' => $this->input->post('cgpa'),
+			'skill' => $this->input->post('skill'),
+			'extraSkill' => $this->input->post('extraSkill'),
+			'updated_by' => $jobSeekerUserName
+		);
+		$updateQualification = $this->db->update('t_qualification', $qualificationUpdateData);
+		return $updateQualification;
 	}
 
 }

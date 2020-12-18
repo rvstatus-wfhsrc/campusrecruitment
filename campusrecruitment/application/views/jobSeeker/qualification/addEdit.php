@@ -34,12 +34,12 @@
                             <!-- register and update qualification process -->
                             <?php if(isset($qualificationEdit)) { ?>
                                 <!-- qualification edit process -->
-                                <?php echo form_open('JobSeekerController/qualificationUpdate',['method' => 'POST', 'class' => 'form-horizontal','id' => 'editForm','name' => 'editForm','enctype'=>'multipart/form-data']); ?>
-                                <input type="hidden" id="hiddenQualificationId" name="hiddenQualificationId" value= "<?php echo $qualificationEdit->id; ?>" >
+                                <?php echo form_open('JobSeekerController/jobSeekerQualificationUpdate',['method' => 'POST', 'class' => 'form-horizontal','id' => 'editForm','name' => 'editForm','enctype'=>'multipart/form-data']); ?>
+                                <input type="hidden" id="hiddenJobSeekerQualificationId" name="hiddenJobSeekerQualificationId" value= "<?php echo $qualificationEdit->id; ?>" >
                                 <input type="hidden" id="screenFlag" name="screenFlag" value= "2" >
                             <?php } else { ?>
                                 <!-- qualification add process -->
-                                <?php echo form_open('JobSeekerController/jobseekerQualificationAddForm',['method' => 'POST', 'class' => 'form-horizontal','id' => 'addForm','name' => 'addForm','enctype'=>'multipart/form-data']); ?>
+                                <?php echo form_open('JobSeekerController/jobSeekerQualificationAddForm',['method' => 'POST', 'class' => 'form-horizontal','id' => 'addForm','name' => 'addForm','enctype'=>'multipart/form-data']); ?>
                             <?php } ?>
                             <input type="hidden" id="screenFlag" name="screenFlag" value= "1" >
                                 <input type="hidden" id="base" value="<?php echo base_url(); ?>">
@@ -91,7 +91,7 @@
                                                 'name' => 'specification',
                                                 'class' => 'form-control autowidth h-25'
                                             );
-                                            echo form_dropdown('specification', $specificationArray,set_value('specification', isset($specificationEdit->specification) ? $specificationEdit->specification : false),$fields);
+                                            echo form_dropdown('specification', $specificationArray,set_value('specification', isset($qualificationEdit->specification) ? $qualificationEdit->specification : false),$fields);
                                         ?>
                                         <div class="error">
                                             <?php echo form_error('specification'); ?>
@@ -125,7 +125,7 @@
                                                 'name' => 'yearOfPassing',
                                                 'class' => 'form-control autowidth h-25'
                                             );
-                                            echo form_dropdown('yearOfPassing', $yearOfPassingArray,set_value('yearOfPassing', isset($yearOfPassingEdit->yearOfPassing) ? $yearOfPassingEdit->yearOfPassing : false),$fields);
+                                            echo form_dropdown('yearOfPassing', $yearOfPassingArray,set_value('yearOfPassing', isset($qualificationEdit->yearOfPassing) ? $qualificationEdit->yearOfPassing : false),$fields);
                                         ?>
                                         <?php
                                             $fields = array (
@@ -133,7 +133,7 @@
                                                 'name' => 'monthOfPassing',
                                                 'class' => 'form-control autowidth h-25'
                                             );
-                                            echo form_dropdown('monthOfPassing', $monthOfPassingArray,set_value('monthOfPassing', isset($monthOfPassingEdit->monthOfPassing) ? $monthOfPassingEdit->monthOfPassing : false),$fields);
+                                            echo form_dropdown('monthOfPassing', $monthOfPassingArray,set_value('monthOfPassing', isset($qualificationEdit->monthOfPassing) ? $qualificationEdit->monthOfPassing : false),$fields);
                                         ?>
                                         <div class="error">
                                             <?php echo form_error('yearOfPassing'); ?>
@@ -169,7 +169,7 @@
                                                 'name' => 'branch',
                                                 'class' => 'form-control autowidth h-25'
                                             );
-                                            echo form_dropdown('branch', $branchArray,set_value('branch', isset($branchEdit->branch) ? $branchEdit->branch : false),$fields);
+                                            echo form_dropdown('branch', $branchArray,set_value('branch', isset($qualificationEdit->branch) ? $qualificationEdit->branch : false),$fields);
                                         ?>
                                         <div class="error">
                                             <?php echo form_error('branch'); ?>
@@ -186,7 +186,7 @@
                                                 'name' => 'university',
                                                 'class' => 'form-control autowidth h-25'
                                             );
-                                            echo form_dropdown('university', $universityArray,set_value('university', isset($universityEdit->university) ? $universityEdit->university : false),$fields);
+                                            echo form_dropdown('university', $universityArray,set_value('university', isset($qualificationEdit->university) ? $qualificationEdit->university : false),$fields);
                                         ?>
                                         <div class="error">
                                             <?php echo form_error('university'); ?>
@@ -203,7 +203,7 @@
                                                 'name' => 'cgpa',
                                                 'placeholder' => 'Enter CGPA',
                                                 'class' => 'input_box col-md-12 form-control w43 h-25',
-                                                'value' => isset($qualificationEdit) ? set_value("cgpa", $qualificationEdit->cgpa) : set_value("cgpa")
+                                                'value' => isset($qualificationEdit) ? set_value("cgpa", $qualificationEdit->CGPA) : set_value("cgpa")
                                             );
                                             echo form_input($data);
                                         ?>

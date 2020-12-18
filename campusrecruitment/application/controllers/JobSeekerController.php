@@ -179,7 +179,14 @@ class JobSeekerController extends CI_Controller {
 	 *
 	 */
 	public function jobSeekerQualificationDetail() {
-		$this->layouts->view('jobSeeker/qualification/detail');
+		$data['qualificationArray'] = $this->qualificationArray;
+		$data['specificationArray'] = $this->specificationArray;
+		$data['yearOfPassingArray'] = $this->yearOfPassingArray;
+		$data['monthOfPassingArray'] = $this->monthOfPassingArray;
+		$data['branchArray'] = $this->branchArray;
+		$data['universityArray'] = $this->universityArray;
+		$data['qualificationDetail'] = $this->JobSeekerModel->jobSeekerQualificationDetail();
+		$this->layouts->view('jobSeeker/qualification/detail',$data);
 	}
 
 	/**
@@ -225,7 +232,6 @@ class JobSeekerController extends CI_Controller {
 	 */
 	public function jobSeekerQualificationAddForm() {
 		$jobSeekerQualificationAddStatus = $this->JobSeekerModel->jobSeekerQualificationAdd();
-		print_r($jobSeekerQualificationAddStatus);exit();
 		if($jobSeekerQualificationAddStatus){
 			$this->session->set_flashdata([
 				'message'  => 'Job Seeker Qualification Details Add Successfully',
@@ -239,5 +245,51 @@ class JobSeekerController extends CI_Controller {
 		}
 		redirect('JobSeekerController/jobSeekerQualificationDetail');
 	}
+
+	/**
+	 * This jobSeekerQualificationEdit method are used to get the data from model for the specfic job seeker's qualification details to edit
+	 * @return to view screen [ jobSeeker/qualification/addEdit ]
+	 * @author kulasekaran.
+	 *
+	 */
+	public function jobSeekerQualificationEdit() {
+		$data['skillArray'] = $this->CommonModel->skill();
+		$data['qualificationArray'] = $this->qualificationArray;
+		$data['specificationArray'] = $this->specificationArray;
+		$data['yearOfPassingArray'] = $this->yearOfPassingArray;
+		$data['monthOfPassingArray'] = $this->monthOfPassingArray;
+		$data['branchArray'] = $this->branchArray;
+		$data['universityArray'] = $this->universityArray;
+		$data['qualificationEdit'] = $this->JobSeekerModel->jobSeekerQualificationEdit();
+		$this->layouts->view('jobSeeker/qualification/addEdit',$data);
+	}
+
+	/**
+	 * This jobSeekerQualificationUpdate method are used to get the data from form and pass it to model for update process
+	 * @return the redirect to JobSeekerController/jobSeekerQualificationDetail method 
+	 * @author kulasekaran.
+	 *
+	 */
+	public function jobSeekerQualificationUpdate() {
+		$qualificationUpdateStatus = $this->JobSeekerModel->jobSeekerQualificationUpdate();
+		if($qualificationUpdateStatus == "1") {
+			$this->session->set_flashdata(
+				array(
+					'message' => 'Job Seeker Qualification Details Updated Successfully',
+					'type' => 'success'
+				)
+			);
+			redirect('JobSeekerController/jobSeekerQualificationDetail');
+		} else {
+			$this->session->set_flashdata(
+				array(
+					'message' => 'Job Seeker Qualification Details Update Failed',
+					'type' => 'danger'
+				)
+			);
+			redirect('JobSeekerController/jobSeekerQualificationDetail');
+		}
+	}
+
 
 }
