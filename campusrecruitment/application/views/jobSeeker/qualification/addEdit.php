@@ -51,15 +51,13 @@
                                             $data= array(
                                                 'id' => 'tenthMark',
                                                 'name' => 'tenthMark',
-                                                'placeholder' => 'Enter Tenth Percentage',
-                                                'class' => 'input_box col-md-12 form-control w43 h-25',
+                                                'placeholder' => 'Tenth Percentage',
+                                                'class' => 'input_box col-md-12 form-control w37 h-25 tenthMark',
                                                 'value' => isset($qualificationEdit) ? set_value("tenthMark", $qualificationEdit->tenthMark) : set_value("tenthMark")
                                             );
                                             echo form_input($data);
                                         ?>
-                                        <div class="error">
-                                            <?php echo form_error('tenthMark'); ?>
-                                        </div>
+                                        <span class="tenthMarkError">%</span>
                                     </div>
                                 </div>
                                 <!-- twelveth mark -->
@@ -70,15 +68,13 @@
                                             $data= array(
                                                 'id' => 'twelvethMark',
                                                 'name' => 'twelvethMark',
-                                                'placeholder' => 'Enter Twelveth Percentage',
-                                                'class' => 'input_box col-md-12 form-control w43 h-25',
+                                                'placeholder' => 'Twelveth Percentage',
+                                                'class' => 'input_box col-md-12 form-control w37 h-25 twelvethMark',
                                                 'value' => isset($qualificationEdit) ? set_value("twelvethMark", $qualificationEdit->twelvethMark) : set_value("twelvethMark")
                                             );
                                             echo form_input($data);
                                         ?>
-                                        <div class="error">
-                                            <?php echo form_error('twelvethMark'); ?>
-                                        </div>
+                                        <span class="twelvethMarkError">%</span>
                                     </div>
                                 </div>
                                 <!-- specification -->
@@ -127,6 +123,15 @@
                                             );
                                             echo form_dropdown('yearOfPassing', $yearOfPassingArray,set_value('yearOfPassing', isset($qualificationEdit->yearOfPassing) ? $qualificationEdit->yearOfPassing : false),$fields);
                                         ?>
+                                        <div class="error">
+                                            <?php echo form_error('yearOfPassing'); ?>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- month of passing -->
+                                <div class="form-group form-inline">
+                                    <?php echo lang('lbl_monthOfPassing', 'monthOfPassing', array('class' => 'col-md-4 control-label required')); ?>
+                                    <div class="col-md-8">
                                         <?php
                                             $fields = array (
                                                 'id' => 'monthOfPassing',
@@ -136,7 +141,7 @@
                                             echo form_dropdown('monthOfPassing', $monthOfPassingArray,set_value('monthOfPassing', isset($qualificationEdit->monthOfPassing) ? $qualificationEdit->monthOfPassing : false),$fields);
                                         ?>
                                         <div class="error">
-                                            <?php echo form_error('yearOfPassing'); ?>
+                                            <?php echo form_error('monthOfPassing'); ?>
                                         </div>
                                     </div>
                                 </div>
@@ -149,7 +154,7 @@
                                                 'id' => 'collegeName',
                                                 'name' => 'collegeName',
                                                 'placeholder' => 'Enter College Name',
-                                                'class' => 'input_box col-md-12 form-control w43 h-25',
+                                                'class' => 'input_box col-md-12 form-control w37 h-25',
                                                 'value' => isset($qualificationEdit) ? set_value("collegeName", $qualificationEdit->collegeName) : set_value("collegeName")
                                             );
                                             echo form_input($data);
@@ -202,7 +207,7 @@
                                                 'id' => 'cgpa',
                                                 'name' => 'cgpa',
                                                 'placeholder' => 'Enter CGPA',
-                                                'class' => 'input_box col-md-12 form-control w43 h-25',
+                                                'class' => 'input_box col-md-12 form-control w25 h-25',
                                                 'value' => isset($qualificationEdit) ? set_value("cgpa", $qualificationEdit->CGPA) : set_value("cgpa")
                                             );
                                             echo form_input($data);

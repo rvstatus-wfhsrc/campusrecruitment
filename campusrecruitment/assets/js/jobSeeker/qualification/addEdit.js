@@ -1,5 +1,28 @@
 var data = {};
 $(document).ready(function() {
+    // remove the leading zero on tenth mark
+    $('#tenthMark').on('input propertychange paste', function (e) {
+        var reg = /^0+/gi;
+        if (this.value.match(reg)) {
+            this.value = this.value.replace(reg, '');
+        }
+    });
+
+    // remove the leading zero on twelveth mark
+    $('#twelvethMark').on('input propertychange paste', function (e) {
+        var reg = /^0+/gi;
+        if (this.value.match(reg)) {
+            this.value = this.value.replace(reg, '');
+        }
+    });
+
+    // remove the leading zero on CGPA
+    $('#cgpa').on('input propertychange paste', function (e) {
+        var reg = /^0+/gi;
+        if (this.value.match(reg)) {
+            this.value = this.value.replace(reg, '');
+        }
+    });
     $('.addEditProcess').on('click', function() {
         $(".addEditProcess").attr("disabled", true);
         // remove the last char on extra skill is comma
@@ -50,7 +73,15 @@ $(document).ready(function() {
                         $.each(resp, function(i, v) {
                             // view in console for error messages
                             var msg = '<label class="error" style="color:#9C0000; font-size:13px; padding-left: 5px; display:inline-block;" for="'+i+'">'+v+'</label>';
-                            $('input[name="' + i + '"], select[name="' + i + '"], textarea[name="' + i + '"]').addClass('inputTxtError').after(msg);
+                            if ($('input[name="' + i + '"]').hasClass('tenthMark')) {
+                                $('input[name="' + i + '"]').addClass('inputTxtError');
+                                $('.tenthMarkError').append(msg);
+                            }else if($('input[name="' + i + '"]').hasClass('twelvethMark')) {
+                                $('input[name="' + i + '"]').addClass('inputTxtError');
+                                $('.twelvethMarkError').append(msg);
+                            }else {
+                                $('input[name="' + i + '"], select[name="' + i + '"], textarea[name="' + i + '"]').addClass('inputTxtError').after(msg);
+                            }
                         }); 
                         $(".addEditProcess").attr("disabled", false);
                     }

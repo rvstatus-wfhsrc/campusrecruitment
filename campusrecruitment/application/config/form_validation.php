@@ -429,6 +429,11 @@ $config = array(
                                         'rules' => 'required'
                                     ),
                                     array(
+                                        'field' => 'monthOfPassing',
+                                        'label' => 'lang:lbl_monthOfPassing',
+                                        'rules' => 'required'
+                                    ),
+                                    array(
                                         'field' => 'specification',
                                         'label' => 'lang:lbl_specification',
                                         'rules' => 'required'

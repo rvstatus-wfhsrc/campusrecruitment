@@ -95,6 +95,7 @@ $lang['lbl_qualificationDetails'] = '資格の詳細';
 $lang['lbl_graduationYear'] = '卒業年';
 $lang['lbl_jobSeekerId'] = '求職者ID';
 $lang['lbl_jobSeekerName'] = '求職者名';
+$lang['lbl_monthOfPassing'] = '合格月';
 
 // layout navigation bar screen label
 $lang['lbl_jobSearch'] = '仕事探し';

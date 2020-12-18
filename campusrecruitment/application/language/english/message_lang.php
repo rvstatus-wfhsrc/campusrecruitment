@@ -95,6 +95,7 @@ $lang['lbl_qualificationDetails'] = 'Qualification Details';
 $lang['lbl_graduationYear'] = 'Graduation Year';
 $lang['lbl_jobSeekerId'] = 'Job Seeker Id';
 $lang['lbl_jobSeekerName'] = 'Job Seeker Name';
+$lang['lbl_monthOfPassing'] = 'Month Of Passing';
 
 // layout navigation bar screen label
 $lang['lbl_jobSearch'] = 'Job Search';

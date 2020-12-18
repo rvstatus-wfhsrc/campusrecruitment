@@ -136,7 +136,7 @@ class CommonModel extends CI_Model {
 	 * This paginationConfig methond are used design the pagination link and also config each setting for pagination
 	 * @return a $pagination_config value to the called function from any controller
 	 * @param $totalRecord value is integer get from the specific tabel total data count and $baseUrl value is string for idendify the module
-	 * @author Ragav.
+	 * @author kulasekaran.
 	 *
 	 */
 	public static function paginationConfig($totalRecord,$baseUrl)
@@ -173,7 +173,7 @@ class CommonModel extends CI_Model {
 	/**
 	 * This designation methond are used get the all available designation 
 	 * @return a $jobCategoryArray value to called function on any controller
-	 * @author Ragav.
+	 * @author kulasekaran.
 	 *
 	 */
 	public function designation()
@@ -193,7 +193,7 @@ class CommonModel extends CI_Model {
 	/**
 	 * This skill methond are used get the all available skill 
 	 * @return a $skillArray value to called function on any controller
-	 * @author Ragav.
+	 * @author kulasekaran.
 	 *
 	 */
 	public function skill()
@@ -202,7 +202,7 @@ class CommonModel extends CI_Model {
 		$this->db->where(array('delFlag' => 0));
 		$this->db->order_by('skillName', 'ASC');
 		$skillResults = $this->db->get('m_skill');
-		$skillArray = array( '' => 'Select Required Skill');
+		$skillArray = array( '' => 'Select Skill');
 		foreach($skillResults->result_array() as $row)
 		{
 			$skillArray[$row['skillId']] = $row['skillName'];
@@ -213,7 +213,7 @@ class CommonModel extends CI_Model {
 	/**
 	 * This role methond are used get the all available role 
 	 * @return a $roleArray value to called function on any controller
-	 * @author Ragav.
+	 * @author kulasekaran.
 	 *
 	 */
 	public function role()
@@ -233,7 +233,7 @@ class CommonModel extends CI_Model {
 	/**
 	 * This minQualification methond are used get the all available minQualification 
 	 * @return a $minQualificationArray value to called function on any controller
-	 * @author Ragav.
+	 * @author kulasekaran.
 	 *
 	 */
 	public function minQualification()
@@ -248,6 +248,79 @@ class CommonModel extends CI_Model {
 			$minQualificationArray[$row['minQualificationId']] = $row['minQualification'];
 		}
 		return $minQualificationArray;
+	}
+
+	/**
+	 * This department method are used get the all available department 
+	 * @return a $departmentArray value to called function on any controller
+	 * @author kulasekaran.
+	 *
+	 */
+	public function department()
+	{
+		$this->db->select('departmentId,departmentName');
+		$this->db->where(array('delFlag' => 0));
+		$this->db->order_by('departmentName', 'ASC');
+		$departmentResults = $this->db->get('m_department');
+		$departmentArray = array( '' => 'Select Branch');
+		foreach($departmentResults->result_array() as $row)
+		{
+			$departmentArray[$row['departmentId']] = $row['departmentName'];
+		}
+		return $departmentArray;
+	}
+
+	/**
+	 * This university method are used get the all available university 
+	 * @return a $universityArray value to called function on any controller
+	 * @author kulasekaran.
+	 *
+	 */
+	public function university()
+	{
+		$this->db->select('universityId,universityName');
+		$this->db->where(array('delFlag' => 0));
+		$this->db->order_by('universityName', 'ASC');
+		$universityResults = $this->db->get('m_university');
+		$universityArray = array( '' => 'Select University');
+		foreach($universityResults->result_array() as $row)
+		{
+			$universityArray[$row['universityId']] = $row['universityName'];
+		}
+		return $universityArray;
+	}
+
+	/**
+	 * This qualification method are used get the all available qualification 
+	 * @return a $qualificationArray value to called function on any controller
+	 * @author kulasekaran.
+	 *
+	 */
+	public function qualification()
+	{
+		$this->db->select('qualificationId,qualification');
+		$this->db->where(array('delFlag' => 0));
+		$this->db->order_by('qualification', 'ASC');
+		$qualificationResults = $this->db->get('m_qualification');
+		$qualificationArray = array( '' => 'Select Qualification');
+		foreach($qualificationResults->result_array() as $row)
+		{
+			$qualificationArray[$row['qualificationId']] = $row['qualification'];
+		}
+		return $qualificationArray;
+	}
+
+	/**
+	 * This getYear method are used get the all available years 
+	 * @return a $yearArray value to called function on any controller
+	 * @author kulasekaran.
+	 *
+	 */
+	public function getYear()
+	{
+		$yearArray = array_combine(range(date("Y"), 1991), range(date("Y"), 1991));
+
+		return $yearArray;
 	}
 
 }
