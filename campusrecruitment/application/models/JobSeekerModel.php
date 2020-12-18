@@ -256,21 +256,26 @@ class JobSeekerModel extends CI_Model {
 					qual.tenthMark,
 					qual.twelvethMark,
 					qual.specification,
-					qual.qualification,
-					qual.branch,
+					qualify.qualification,
+					branch.departmentName,
 					qual.yearOfPassing,
 					qual.monthOfPassing,
 					qual.CGPA,
-					qual.university,
+					univ.universityName,
 					qual.collegeName,
 					qual.extraSkill,
 					qual.delFlag'
 				)
 			->from('t_qualification as qual')
 			->join('m_skill as skill','skill.skillId = qual.skill','left')
+			->join('m_qualification as qualify','qualify.qualificationId = qual.qualification','left')
+			->join('m_department as branch','branch.departmentId = qual.branch','left')
+			->join('m_university as univ','univ.universityId = qual.university','left')
 			->join('users as user','user.userName = qual.jobSeekerId','left');
 		$jobSeekerUserName = $this->session->userdata('userName');
-		$this->db->where(array('jobSeekerId' => $jobSeekerUserName));
+		$this->db->where(array('qual.jobSeekerId' => $jobSeekerUserName));
+		$this->db->where(array('qual.delFlag' => 0));
+		$this->db->order_by('qual.created_date_time', 'DESC');
 		$jobSeekerQualificationDetail = $this->db->get();
 		return $jobSeekerQualificationDetail->result();
 	}

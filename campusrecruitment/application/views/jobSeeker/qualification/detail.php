@@ -49,14 +49,11 @@
                     <?php echo form_open('JobSeekerController/jobSeekerQualificationEdit',['method' => 'POST','id' => 'detailForm','name' => 'detailForm']); ?>
                         <input type="hidden" id="base" value="<?php echo base_url(); ?>">
                         <input type="hidden" id="hiddenJobSeekerQualificationId" name="hiddenJobSeekerQualificationId">
-                        <input type="hidden" id="hiddenDelFlag" name="hiddenDelFlag">
-                        <input type="hidden" id="per_page" name="per_page">
-                        <input type="hidden" id="hiddenSearch" name="hiddenSearch" value="<?php echo $this->input->post('hiddenSearch'); ?>">
-                        <div>
+                        <?php if ($this->session->userdata('flag') != 3) { ?>
                             <div>
                                 <?php echo lang("lbl_jobSeekerId").": ";?><span class='teal'><?php echo $this->session->userdata('userName'); ?></span>
                             </div>
-                        </div>
+                        <?php } ?>
                         <table class="table table-bordered table-position">
                             <colgroup>
                                 <col width="1%">
@@ -78,16 +75,16 @@
                                             <td class="tac vam"><?php echo ($key+1); ?></td>
                                             <td class="vam">
                                                 <div class="float-left">
-                                                    <div><span class='teal'><?php echo lang("lbl_qualification").": ";?></span><a href="javascript:;" onclick="fnQualificationEdit(<?php echo $detail->id; ?>)"><?php echo $qualificationArray[$detail->qualification]; ?></a></div>
-                                                    <div><span class='teal'><?php echo lang("lbl_collegeName").": ";?></span><?php echo $detail->collegeName; ?></div>
-                                                    <div><span class='teal'><?php echo lang("lbl_specification").": ";?></span><?php echo $specificationArray[$detail->specification]; ?></div>
-                                                    <div><span class='teal'><?php echo lang("lbl_university").": ";?></span><?php echo $universityArray[$detail->university]; ?></div>
+                                                    <div><span class='teal'><?php echo lang("lbl_qualification")." : ";?></span><a href="javascript:;" onclick="fnQualificationEdit(<?php echo $detail->id; ?>)"><?php echo $detail->qualification; ?></a></div>
+                                                    <div><span class='teal'><?php echo lang("lbl_collegeName")." : ";?></span><?php echo $detail->collegeName; ?></div>
+                                                    <div><span class='teal'><?php echo lang("lbl_specification")." : ";?></span><?php echo $specificationArray[$detail->specification]; ?></div>
+                                                    <div><span class='teal'><?php echo lang("lbl_skill")." : ";?></span><?php echo $detail->skill; ?></div>
                                                 </div>
                                                 <div class="ml50">
-                                                    <div><span class='teal'><?php echo lang("lbl_branch").": ";?></span><?php echo $branchArray[$detail->branch]; ?></div>
-                                                    <div><span class='teal'><?php echo lang("lbl_cgpa").": ";?></span><?php echo $detail->CGPA; ?></div>
-                                                    <div><span class='teal'><?php echo lang("lbl_skill").": ";?></span><?php echo $detail->skill; ?></div>
-                                                    <div><span class='teal'><?php echo lang("lbl_extraSkill").": ";?></span><?php echo $detail->extraSkill; ?></div>
+                                                    <div><span class='teal'><?php echo lang("lbl_branch")." : ";?></span><?php echo $detail->departmentName; ?></div>
+                                                    <div><span class='teal'><?php echo lang("lbl_university")." : ";?></span><?php echo $detail->universityName; ?></div>
+                                                    <div><span class='teal'><?php echo lang("lbl_cgpa")." : ";?></span><?php echo $detail->CGPA; ?>%</div>
+                                                    <div><span class='teal'><?php echo lang("lbl_extraSkill")." : ";?></span><?php echo ($detail->extraSkill != null) ? $detail->extraSkill : "Nil"; ?></div>
                                                 </div>
                                             </td>
                                             <td class="tac vam"><?php echo $detail->yearOfPassing." / ".$monthOfPassingArray[$detail->monthOfPassing]; ?></td>
@@ -101,10 +98,6 @@
                         </table>
                     <?php echo form_close();?>
                 </div>
-            </div>
-            <!-- Render pagination links -->
-            <div class="pagination" style="margin: auto;">
-                <?php echo $this->pagination->create_links(); ?>
             </div>
         </div>
         <script type="text/javascript" src="<?php echo base_url(); ?>assets/js/jquery.min.js"></script>

@@ -249,6 +249,9 @@ class JobSeekerController extends CI_Controller {
 	 *
 	 */
 	public function jobSeekerQualificationEdit() {
+		if($this->input->post('hiddenJobSeekerQualificationId') == null) {
+			redirect('JobSeekerController/jobSeekerQualificationDetail');
+		}
 		$data['skillArray'] = $this->CommonModel->skill();
 		$data['qualificationArray'] = $this->CommonModel->qualification();
 		$data['specificationArray'] = $this->specificationArray;
