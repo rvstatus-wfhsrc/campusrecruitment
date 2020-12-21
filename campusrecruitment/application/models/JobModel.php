@@ -155,6 +155,9 @@ class JobModel extends CI_Model {
 		$this->db->join('m_skill as skill', 'jd.requiredSkill = skill.skillId');
 		if ($this->session->userdata('flag') == 2) {
 			$this->db->where(array('jd.companyId' => $userName));	
+		} else {
+			$this->db->where(array('jd.lastApplyDate >=' => date('Y-m-d')));
+			$this->db->where(array('jd.delFlag' => 0));
 		}
 		$result = $this->db->get();
 		return $result->result()['0']->numrows;
@@ -311,13 +314,6 @@ class JobModel extends CI_Model {
 			->join('m_role as role','role.roleId = jd.role','left')
 			->join('m_skill as skill','skill.skillId = jd.requiredSkill','left')
 			->join('m_country as country','country.countryId = jd.jobLocation','left');
-			
-			// filter process
-			if ($filterVal == 2) {
-				$this->db->where(array('jd.delFlag' => 0));
-			} elseif ($filterVal == 3) {
-				$this->db->where(array('jd.delFlag' => 1));
-			}
 
 			// search process
 			$hiddenSearch = $this->input->post('hiddenSearch');
@@ -339,6 +335,8 @@ class JobModel extends CI_Model {
 			} else {
 				$this->db->order_by('jd.created_date_time', 'DESC');
 			}
+			$this->db->where(array('jd.lastApplyDate >=' => date('Y-m-d')));
+			$this->db->where(array('jd.delFlag' => 0));
 		$jobHistory = $this->db->get();
 		return $jobHistory->result();
 	}

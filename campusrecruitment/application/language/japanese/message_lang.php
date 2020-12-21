@@ -20,7 +20,7 @@ $lang['lbl_profile'] = 'プロフィール';
 // company screen label
 $lang['lbl_incharge'] = '担当者名';
 $lang['lbl_companyName'] = '会社名';
-$lang['lbl_serialNumber'] = '連番';
+$lang['lbl_serialNumber'] = '番';
 $lang['lbl_active'] = '能動';
 $lang['lbl_deactive'] = '非活性';
 $lang['lbl_all'] = 'すべて';
@@ -62,7 +62,7 @@ $lang['lbl_last_date'] = '最後日付';
 $lang['lbl_extraSkill'] = '余分なスキル';
 $lang['lbl_jobType'] = '仕事分類';
 $lang['lbl_list'] = '一覧';
-$lang['lbl_apply'] = '適用する';
+$lang['lbl_apply'] = 'お申し込み';
 
 // home screen label
 $lang['lbl_findJobIntro'] = 'あなたの人生に合った仕事を見つけましょう';
@@ -87,7 +87,7 @@ $lang['lbl_twelvethMark'] = '12番目のマーク';
 $lang['lbl_yearOfPassing'] = '合格年';
 $lang['lbl_collegeName'] = '大学名';
 $lang['lbl_cgpa'] = 'CGPA';
-$lang['lbl_specification'] = '仕様';
+$lang['lbl_specification'] = '明細';
 $lang['lbl_branch'] = 'ブランチ';
 $lang['lbl_university'] = '大学';
 $lang['lbl_qualificationDetails'] = '資格の詳細';

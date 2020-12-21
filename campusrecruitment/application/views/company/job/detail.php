@@ -72,8 +72,8 @@
 						<?php echo $this->lang->line("lbl_edit"); ?>
 					</a>
 				<?php } else { ?>
-					<a class="btn bg-primary text-white editBtn" href="javascript:;" onclick="fnJobApply()">
-						<i class=""></i>
+					<a class="btn apply_btn text-white editBtn" href="javascript:;" onclick="fnJobApply()">
+						<i class="fa fa-check"></i>
 						<?php echo $this->lang->line("lbl_apply"); ?>
 					</a>
 				<?php } ?>

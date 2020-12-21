@@ -56,18 +56,20 @@
                         <input type="hidden" id="per_page" name="per_page">
                         <input type="hidden" id="hiddenSearch" name="hiddenSearch" value="<?php echo $this->input->post('hiddenSearch'); ?>">
 
-                        <!-- filtering process -->
-                        <div class="inb fs16 float-left w54">
-                            <a href="javascript:;" onclick="fnJobFilter(1)" id="filterVal1" 
-                                class="fs16 btn btn-link <?php echo $disableAll ?>"><?php echo lang('lbl_all'); ?></a>
-                            <span> | </span>
-                            <a href="javascript:;" onclick="fnJobFilter(2)" id="filterVal2" 
-                                class="fs16 btn btn-link <?php echo $disableActive ?>"><?php echo lang('lbl_active'); ?></a>
-                            <span> | </span>
-                            <a href="javascript:;" onclick="fnJobFilter(3)" id="filterVal3" 
-                                class="fs16 btn btn-link <?php echo $disableNonActive ?>"><?php echo lang('lbl_deactive'); ?></a>
-                        </div>
-                        <input type="hidden" id="filterVal" name="filterVal" value="<?php echo $this->input->post('filterVal'); ?>">
+                        <?php if ($this->session->userdata('flag') == 2) { ?>
+                            <!-- filtering process -->
+                            <div class="inb fs16 float-left w54">
+                                <a href="javascript:;" onclick="fnJobFilter(1)" id="filterVal1" 
+                                    class="fs16 btn btn-link <?php echo $disableAll ?>"><?php echo lang('lbl_all'); ?></a>
+                                <span> | </span>
+                                <a href="javascript:;" onclick="fnJobFilter(2)" id="filterVal2" 
+                                    class="fs16 btn btn-link <?php echo $disableActive ?>"><?php echo lang('lbl_active'); ?></a>
+                                <span> | </span>
+                                <a href="javascript:;" onclick="fnJobFilter(3)" id="filterVal3" 
+                                    class="fs16 btn btn-link <?php echo $disableNonActive ?>"><?php echo lang('lbl_deactive'); ?></a>
+                            </div>
+                            <input type="hidden" id="filterVal" name="filterVal" value="<?php echo $this->input->post('filterVal'); ?>">
+                        <?php } ?>
 
                         <!-- clear search -->
                         <div  class="inb float-left mt-1 w3">
@@ -118,8 +120,8 @@
                                 <col width="11%">
                                 <col width="10%">
                                 <col width="7%">
-                                <col width="9%">
                                 <col width="11%">
+                                <col width="13%">
                             </colgroup>
                             <thead class="thead">
                                 <tr>
@@ -163,7 +165,7 @@
                                                         </a>
                                                     <?php } ?>
                                                 <?php } else { ?>
-                                                    <a href="javascript:;" onclick="fnApply(<?php echo $list->id;?>)" style="color: #0000FF;">
+                                                    <a href="javascript:;" onclick="fnApply(<?php echo $list->id;?>)" class="apply_link">
                                                         <?php echo lang('lbl_apply'); ?>
                                                     </a>
                                                 <?php } ?>
