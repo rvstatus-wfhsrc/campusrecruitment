@@ -59,11 +59,10 @@ $lang['lbl_skill'] = 'スキル';
 $lang['lbl_location'] = '場所';
 $lang['lbl_description'] = '説明';
 $lang['lbl_last_date'] = '最後日付';
-
 $lang['lbl_extraSkill'] = '余分なスキル';
 $lang['lbl_jobType'] = '仕事分類';
-
 $lang['lbl_list'] = '一覧';
+$lang['lbl_apply'] = '適用する';
 
 // home screen label
 $lang['lbl_findJobIntro'] = 'あなたの人生に合った仕事を見つけましょう';

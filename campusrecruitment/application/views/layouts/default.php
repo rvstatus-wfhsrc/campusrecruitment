@@ -189,6 +189,17 @@
                                         <a class="nav-link <?php echo ($this->uri->segment(2)=='jobSeekerQualificationDetail')?'active':''; ?>" href="<?php echo site_url('jobSeekerController/jobSeekerQualificationDetail') ?>"><?php echo lang('lbl_detail'); ?></a>
                                     </nav>
                                 </div>
+                                <div class="sb-sidenav-menu-heading">Interface</div>
+                                <a class="nav-link <?php echo ($this->uri->segment(1)=='JobController')?'active':'collapsed'; ?>" data-toggle="collapse" data-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
+                                    <div class="sb-nav-link-icon"><i class="fa fa-mortar-board"></i></div>
+                                    <?php echo lang('lbl_job'); ?>
+                                    <div class="sb-sidenav-collapse-arrow"><i class="fa fa-angle-down"></i></div>
+                                </a>
+                                <div class="collapse <?php echo ($this->uri->segment(1)=='JobController')?'show':''; ?>" id="collapseLayouts" aria-labelledby="headingOne" data-parent="#sidenavAccordion">
+                                    <nav class="sb-sidenav-menu-nested nav">
+                                        <a class="nav-link <?php echo ($this->uri->segment(2)=='jobLists')?'active':''; ?>" href="<?php echo site_url('JobController/jobLists') ?>"><?php echo lang('lbl_list'); ?></a>
+                                    </nav>
+                                </div>
                             <?php } ?>
                         </div>
                     </div>

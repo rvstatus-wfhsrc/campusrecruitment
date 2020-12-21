@@ -59,11 +59,10 @@ $lang['lbl_skill'] = 'Skill';
 $lang['lbl_location'] = 'Location';
 $lang['lbl_description'] = 'Description';
 $lang['lbl_last_date'] = 'Last Date';
-
 $lang['lbl_extraSkill'] = 'Extra Skill';
 $lang['lbl_jobType'] = 'Job Type';
-
 $lang['lbl_list'] = 'List';
+$lang['lbl_apply'] = 'Apply';
 
 // home screen label
 $lang['lbl_findJobIntro'] = 'Find the job that fits your life';

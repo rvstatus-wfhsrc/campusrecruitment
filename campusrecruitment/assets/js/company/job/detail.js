@@ -6,6 +6,15 @@ function fnJobEdit() {
 
 // back button process
 function fnBackBtn() {
-	$("#jobDetailForm").attr("action", "jobList");
+	if ($("#hiddenFlag").val() == 2) {
+		$("#jobDetailForm").attr("action", "jobList");
+	} else {
+		$("#jobDetailForm").attr("action", "jobLists");
+	}
 	$('#jobDetailForm').submit();
+}
+
+// apply button process
+function fnJobApply() {
+	alert('Apply is an underprocess');
 }

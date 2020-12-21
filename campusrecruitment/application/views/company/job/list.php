@@ -43,13 +43,16 @@
         <div class="row">
             <div class="col-xl-12">
                 <div class="container-fluid dispNone">
-                    <a class="btn btn-success mb-1" href="<?php echo site_url('JobController/jobAdd') ?>">
-                        <i class="fa fa-btn fa-plus"></i><?php echo lang('lbl_jobAdd'); ?>
-                    </a>
+                    <?php if ($this->session->userdata('flag') == 2) { ?>
+                        <a class="btn btn-success mb-1" href="<?php echo site_url('JobController/jobAdd') ?>">
+                            <i class="fa fa-btn fa-plus"></i><?php echo lang('lbl_jobAdd'); ?>
+                        </a>
+                    <?php } ?>
                     <?php echo form_open('JobController/jobList',['method' => 'POST','id' => 'listForm','name' => 'listForm']); ?>
                         <input type="hidden" id="base" value="<?php echo base_url(); ?>">
                         <input type="hidden" id="hiddenJobId" name="hiddenJobId">
                         <input type="hidden" id="hiddenDelFlag" name="hiddenDelFlag">
+                        <input type="hidden" id="hiddenFlag" name="hiddenFlag" value="<?php echo $this->session->userdata('flag'); ?>">
                         <input type="hidden" id="per_page" name="per_page">
                         <input type="hidden" id="hiddenSearch" name="hiddenSearch" value="<?php echo $this->input->post('hiddenSearch'); ?>">
 
@@ -149,13 +152,19 @@
                                                     <img class="w20" 
                                                         src="<?php echo base_url(); ?>assets/images/details.png" title="details view">
                                                 </a>
-                                                <?php if($list->delFlag == 0) { ?>
-                                                    <a href="javascript:;" onclick="fnJobActiveOrDeactive(<?php echo $list->id;?> , <?php echo $list->delFlag;?>)">
-                                                        <?php echo lang('lbl_active'); ?>
-                                                    </a>
+                                                <?php if ($this->session->userdata('flag') == 2) { ?>
+                                                    <?php if($list->delFlag == 0) { ?>
+                                                        <a href="javascript:;" onclick="fnJobActiveOrDeactive(<?php echo $list->id;?> , <?php echo $list->delFlag;?>)">
+                                                            <?php echo lang('lbl_active'); ?>
+                                                        </a>
+                                                    <?php } else { ?>
+                                                        <a href="javascript:;" onclick="fnJobActiveOrDeactive(<?php echo $list->id;?> , <?php echo $list->delFlag;?>)" style="color: red;">
+                                                            <?php echo lang('lbl_deactive'); ?>
+                                                        </a>
+                                                    <?php } ?>
                                                 <?php } else { ?>
-                                                    <a href="javascript:;" onclick="fnJobActiveOrDeactive(<?php echo $list->id;?> , <?php echo $list->delFlag;?>)" style="color: red;">
-                                                        <?php echo lang('lbl_deactive'); ?>
+                                                    <a href="javascript:;" onclick="fnApply(<?php echo $list->id;?>)" style="color: #0000FF;">
+                                                        <?php echo lang('lbl_apply'); ?>
                                                     </a>
                                                 <?php } ?>
                                             </td>

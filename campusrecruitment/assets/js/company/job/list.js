@@ -14,7 +14,11 @@ $(document).ready(function() {
 		if (e.keyCode == 13) {
 			// $("#page").val(1);
 			$("#hiddenSearch").val($("#search").val());
-			$("#listForm").attr("action", "jobList");
+			if ($("#hiddenFlag").val() == 2) {
+		$("#listForm").attr("action", "jobList");
+	} else {
+		$("#listForm").attr("action", "jobLists");
+	}
 			$("#listForm").submit();
 		}
 	});
@@ -31,14 +35,22 @@ function fnJobFilter(filterValue) {
 	// $("#page").val(1);
 	$( "#filterVal" ).val(filterValue);
 	$("#search").val($("#hiddenSearch").val());
-	$("#listForm").attr("action", "jobList");
+	if ($("#hiddenFlag").val() == 2) {
+		$("#listForm").attr("action", "jobList");
+	} else {
+		$("#listForm").attr("action", "jobLists");
+	}
 	$( "#listForm" ).submit();
 }
 // search process
 function fnJobSearch() {
 	// $("#page").val(1);
 	$("#hiddenSearch").val($("#search").val());
-	$("#listForm").attr("action", "jobList");
+	if ($("#hiddenFlag").val() == 2) {
+		$("#listForm").attr("action", "jobList");
+	} else {
+		$("#listForm").attr("action", "jobLists");
+	}
 	$('#listForm').submit();
 }
 // sorting process
@@ -56,7 +68,11 @@ function fnSortProcess(){
 			$("#sortOptn").val("ASC");
 		}
 	}
-	$("#listForm").attr("action", "jobList");
+	if ($("#hiddenFlag").val() == 2) {
+		$("#listForm").attr("action", "jobList");
+	} else {
+		$("#listForm").attr("action", "jobLists");
+	}
 	$( "#listForm" ).submit();
 }
 // job details active or deactive process
@@ -82,11 +98,24 @@ function fnClearSearch() {
 	$("#sortOptn").val("DESC");
 	$("#search").val("");
 	$("#hiddenSearch").val("");
-	$("#listForm").attr("action", "jobList");
+	if ($("#hiddenFlag").val() == 2) {
+		$("#listForm").attr("action", "jobList");
+	} else {
+		$("#listForm").attr("action", "jobLists");
+	}
 	$('#listForm').submit();
 }
 function pagination(page) {
 	$("#per_page").val(page);
-	$("#listForm").attr("action", "jobList");
+	if ($("#hiddenFlag").val() == 2) {
+		$("#listForm").attr("action", "jobList");
+	} else {
+		$("#listForm").attr("action", "jobLists");
+	}
 	$("#listForm").submit();
+}
+
+// for apply process
+function fnApply(id) {
+	alert("apply is an underprocess");
 }

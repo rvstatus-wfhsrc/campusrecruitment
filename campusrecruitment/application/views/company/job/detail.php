@@ -61,14 +61,22 @@
 		<?php echo form_open('JobController/jobEdit',['method' => 'POST','id' => 'jobDetailForm','name' => 'jobDetailForm']); ?>
 			<input type="hidden" id="base" name="base" value="<?php echo base_url(); ?>">
 			<input type="hidden" id="hiddenJobId" name="hiddenJobId" value="<?php echo $jobDetail->id; ?>">
+			<input type="hidden" id="hiddenFlag" name="hiddenFlag" value="<?php echo $this->session->userdata('flag'); ?>">
 			<div class="ml-4 mb-1">
 				<a class="btn btn-info editBtn" href="javascript:;" onclick="fnBackBtn()">
 					<i class="fa fa-chevron-left fa-btn"></i><?php echo lang('lbl_back'); ?>
 				</a>
-				<a class="btn bg-warning text-white editBtn" href="javascript:;" onclick="fnJobEdit()">
-					<i class="fa fa-edit fa-btn"></i>
-					<?php echo $this->lang->line("lbl_edit"); ?>
-				</a>
+				<?php if ($this->session->userdata('flag') == 2) { ?>
+					<a class="btn bg-warning text-white editBtn" href="javascript:;" onclick="fnJobEdit()">
+						<i class="fa fa-edit fa-btn"></i>
+						<?php echo $this->lang->line("lbl_edit"); ?>
+					</a>
+				<?php } else { ?>
+					<a class="btn bg-primary text-white editBtn" href="javascript:;" onclick="fnJobApply()">
+						<i class=""></i>
+						<?php echo $this->lang->line("lbl_apply"); ?>
+					</a>
+				<?php } ?>
 			</div>
 			<div class="box ml-4 mb-4">
 				<div class="container content">

@@ -6,7 +6,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  *
  * This Controller are used to perform the company job details related process
  * 
- * @author Kulasekaran.
+ * @author kulasekaran.
  *
  */
 
@@ -19,7 +19,7 @@ class JobController extends CI_Controller {
 	 * 
 	 * This __construct are used to load the CommonModel and AdminModel
 	 * 
-	 * @author Kulasekaran.
+	 * @author kulasekaran.
 	 *
 	 */
 	public function __construct() {
@@ -31,7 +31,7 @@ class JobController extends CI_Controller {
 	/**
 	 * This jobList method are used to get the data from model for the specfic company (company whose login to website)
 	 * @return to view screen [ company/job/list ]
-	 * @author Kulasekaran.
+	 * @author kulasekaran.
 	 *
 	 */
 	public function jobList() {
@@ -75,7 +75,7 @@ class JobController extends CI_Controller {
 	/**
 	 * This jobAdd method are used for goto the job add screen
 	 * @return to view screen [ add ]
-	 * @author Kulasekaran.
+	 * @author kulasekaran.
 	 *
 	 */
 	public function jobAdd() {
@@ -110,7 +110,7 @@ class JobController extends CI_Controller {
 	/**
 	 * This jobAddEditFormValidation method are used to validate the given field data
 	 * @return retrun a json value to js in job/addedit.js 
-	 * @author Kulasekaran.
+	 * @author kulasekaran.
 	 *
 	 */
 	public function jobAddEditFormValidation() {
@@ -125,7 +125,7 @@ class JobController extends CI_Controller {
 	/**
 	 * This jobstatus method are used to change the delflag for the specfic job
 	 * @return the redirect to JobController/jobList
-	 * @author Kulasekaran.
+	 * @author kulasekaran.
 	 *
 	 */
     public function jobStatus() {
@@ -138,7 +138,7 @@ class JobController extends CI_Controller {
 	/**
 	 * This jobDetail methond are used to get the data from model for the specfic job details
 	 * @return to view screen with data [ company/job/detail ]
-	 * @author Kulasekaran.
+	 * @author kulasekaran.
 	 *
 	 */
 	public function jobDetail() {
@@ -157,7 +157,7 @@ class JobController extends CI_Controller {
 	/**
 	 * This jobEdit method are used to get the data from model for the specfic job detail for edit process
 	 * @return to view screen with data [ company/job/addEdit ]
-	 * @author Kulasekaran.
+	 * @author kulasekaran.
 	 *
 	 */
 	public function jobEdit() {
@@ -178,7 +178,7 @@ class JobController extends CI_Controller {
 	/**
 	 * This jobEditForm method are used to update the specific job data into database
 	 * @return redirects to JobController/jobDetail
-	 * @author Kulasekaran.
+	 * @author kulasekaran.
 	 *
 	 */
 	public function jobEditForm() {
@@ -196,5 +196,48 @@ class JobController extends CI_Controller {
 			]);
 		}
 		redirect('JobController/jobDetail');
+	}
+
+	/**
+	 * This jobLists method are used to get the data from model for the all company jobs
+	 * @return to view screen [ company/job/list ]
+	 * @author kulasekaran.
+	 *
+	 */
+	public function jobLists() {
+		// filter process
+		$filterVal = $this->input->post('filterVal');
+		$data['disableAll'] = "";
+		$data['disableActive'] = "";
+		$data['disableNonActive'] = "";
+		if ($filterVal == 2) {
+			$data['disableActive'] = "disabled";
+		} elseif ($filterVal == 3) {
+			$data['disableNonActive'] = "disabled";
+		} else {
+			$data['disableAll'] = "disabled";
+		}
+
+		// sorting process style
+		$sortOptn = $this->input->post('sortOptn');
+		$data['sortStyle'] = "sort_desc";
+		if(isset($sortOptn) && $sortOptn == "ASC") {
+			$data['sortStyle'] = "sort_asc";
+		} elseif(isset($sortOptn) && $sortOptn == "DESC") {
+			$data['sortStyle'] = "sort_desc";
+		}
+		$data['sortArray'] = array('1' => 'Created Date','2' => 'Skill','3' => 'Salary','4' => 'Last Apply Date');
+
+		// pagination process
+		$totalRecord = $this->JobModel->record_count();
+		$pagination_config = $this->CommonModel->paginationConfig($totalRecord,base_url()."JobController/jobLists");
+		$this->pagination->initialize($pagination_config);
+		$page = (($this->input->post('per_page') != null)) ? $this->input->post('per_page') : 0;
+		$data["serialNumber"] = $page;
+
+		$data["links"] = $this->pagination->create_links();
+		$data['jobList'] = $this->JobModel->jobLists($pagination_config["per_page"], $page);
+		
+		$this->layouts->view('company/job/list',$data);
 	}
 }
