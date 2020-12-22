@@ -63,6 +63,12 @@ $lang['lbl_extraSkill'] = 'Extra Skill';
 $lang['lbl_jobType'] = 'Job Type';
 $lang['lbl_list'] = 'List';
 $lang['lbl_apply'] = 'Apply';
+$lang['lbl_applyHistory'] = 'Apply History';
+$lang['lbl_applyDate'] = 'Apply Date';
+$lang['lbl_cancel'] = 'Cancel';
+$lang['lbl_applied'] = 'Applied';
+$lang['lbl_cancelled'] = 'Cancelled';
+$lang['lbl_oneMore'] = 'One More';
 
 // home screen label
 $lang['lbl_findJobIntro'] = 'Find the job that fits your life';

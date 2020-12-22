@@ -199,6 +199,7 @@ class JobModel extends CI_Model {
 							country.countryName as jobLocation,
 							minqual.minQualification,
 							jd.id,
+							jd.companyId,
 							jd.delFlag,
 							jd.maxAge,
 							jd.salary,
@@ -301,6 +302,7 @@ class JobModel extends CI_Model {
 					role.roleName,
 					country.countryName as jobLocation,
 					jd.id,
+					jd.companyId,
 					jd.delFlag,
 					jd.maxAge,
 					jd.salary,
@@ -339,5 +341,100 @@ class JobModel extends CI_Model {
 			$this->db->where(array('jd.delFlag' => 0));
 		$jobHistory = $this->db->get();
 		return $jobHistory->result();
+	}
+
+	/**
+	 * This jobApplyHistory method are used to retrieves the data from apply_job_details to data base
+	 * @param records limit and start value is passed by JobController
+	 * @return to return the jobApplyHistory array value to controller
+	 * @author kulasekaran.
+	 *
+	 */
+	function jobApplyHistory($limit, $start) {
+		$userName = $this->session->userdata('userName');
+		$filterVal = $this->input->post('filterVal');
+		$this->db->limit($limit, $start);
+		$this->db->select(
+					'ajd.id,
+					ajd.companyId,
+					ajd.jobSeekerId,
+					ajd.applyDate,
+					ajd.delFlag,
+					jd.lastApplyDate,
+					cpy.companyName,
+					dsgn.designationName AS jobCategory,
+					jd.salary,
+					cpy.incharge,
+					cpy.contact'
+				)
+			->from('apply_job_details as ajd')
+			// this is the left join in codeigniter
+			->join('company as cpy','cpy.userName = ajd.companyId','left')
+			->join('job_details as jd','jd.id = ajd.jobId','left')
+			->join('m_designation as dsgn','dsgn.designationId = jd.jobCategory','left');
+			
+			// filter process
+			if ($filterVal == 2) {
+				$this->db->where(array('ajd.delFlag' => 0));
+			} elseif ($filterVal == 3) {
+				$this->db->where(array('ajd.delFlag' => 1));
+			}
+
+			// search process
+			$hiddenSearch = $this->input->post('hiddenSearch');
+			if($hiddenSearch != ""){
+				$this->db->like('cpy.companyName',trim($hiddenSearch));
+			}
+
+			// sorting process
+			$sortOptn = $this->input->post('sortOptn');
+			$sortVal = $this->input->post('sortVal');
+			if ($sortVal == 1) {
+				$this->db->order_by('cpy.companyName', $sortOptn);
+			} else if ($sortVal == 2) {
+				$this->db->order_by('dsgn.designationName', $sortOptn);
+			} else if ($sortVal == 3) {
+				$this->db->order_by('ajd.applyDate', $sortOptn);
+			} else {
+				$this->db->order_by('cpy.companyName', 'ASC');
+			}
+		$jobApplyHistory = $this->db->get();
+		return $jobApplyHistory->result();
+	}
+
+	/**
+	 * This jobApplyAdd method are used to add the data into apply_job_details table
+	 * @return to the jobApplyStatus with true or false value to controller according to database results
+	 * @author kulasekaran.
+	 *
+	 */
+	function jobApplyAdd() {
+		$userName = $this->session->userdata('userName');
+		$jobAddData = array(
+			'jobId' => $this->input->post('hiddenJobId'),
+			'companyId' => $this->input->post('hiddenCompanyId'),
+			'jobSeekerId' => $userName,
+			'applyDate' => date('yy-m-d'),
+			'created_by' => $userName,
+			'delFlag' => 0
+		);
+
+		$jobAddStatus = $this->db->insert('apply_job_details', $jobAddData);
+		return $jobAddStatus;
+	}
+
+	/**
+	 * This jobCancelStatus method are used to cancel the specfic applied job
+	 * @param id value of specific job is passed from JobController 
+	 * @return the job cancel status
+	 * @author kulasekaran.
+	 *
+	 */
+	function jobCancelStatus($id) {
+		$userName = $this->session->userdata('userName');
+		// $delFlag => 0 ----> change delFlag = 1
+		$this->db->where('id', $id);
+		$jobCancelStatus = $this->db->update('apply_job_details', array('delFlag' => 1,'updated_by' => $userName ));
+		return $jobCancelStatus;
 	}
 }

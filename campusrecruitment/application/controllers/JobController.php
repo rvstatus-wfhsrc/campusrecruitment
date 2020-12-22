@@ -205,18 +205,6 @@ class JobController extends CI_Controller {
 	 *
 	 */
 	public function jobLists() {
-		// filter process
-		$filterVal = $this->input->post('filterVal');
-		$data['disableAll'] = "";
-		$data['disableActive'] = "";
-		$data['disableNonActive'] = "";
-		if ($filterVal == 2) {
-			$data['disableActive'] = "disabled";
-		} elseif ($filterVal == 3) {
-			$data['disableNonActive'] = "disabled";
-		} else {
-			$data['disableAll'] = "disabled";
-		}
 
 		// sorting process style
 		$sortOptn = $this->input->post('sortOptn');
@@ -240,4 +228,82 @@ class JobController extends CI_Controller {
 		
 		$this->layouts->view('company/job/list',$data);
 	}
+
+	/**
+	 * This jobApplyHistory method are used to get the data from model for the applied jobs by specfic job seeker
+	 * @return to view screen [ company/job/applyHistory ]
+	 * @author kulasekaran.
+	 *
+	 */
+	public function jobApplyHistory() {
+		// filter process
+		$filterVal = $this->input->post('filterVal');
+		$data['disableAll'] = "";
+		$data['disableApplied'] = "";
+		$data['disableCancelled'] = "";
+		if ($filterVal == 2) {
+			$data['disableApplied'] = "disabled";
+		} elseif ($filterVal == 3) {
+			$data['disableCancelled'] = "disabled";
+		} else {
+			$data['disableAll'] = "disabled";
+		}
+
+		// sorting process style
+		$sortOptn = $this->input->post('sortOptn');
+		$data['sortStyle'] = "sort_desc";
+		if(isset($sortOptn) && $sortOptn == "ASC") {
+			$data['sortStyle'] = "sort_asc";
+		} elseif(isset($sortOptn) && $sortOptn == "DESC") {
+			$data['sortStyle'] = "sort_desc";
+		}
+		$data['sortArray'] = array('1' => 'Company Name','2' => 'Job Category','3' => 'Apply Date','4' => 'Last Apply Date');
+
+		// pagination process
+		$totalRecord = $this->JobModel->record_count();
+		$pagination_config = $this->CommonModel->paginationConfig($totalRecord,base_url()."JobController/jobApplyHistory");
+		$this->pagination->initialize($pagination_config);
+		$page = (($this->input->post('per_page') != null)) ? $this->input->post('per_page') : 0;
+		$data["serialNumber"] = $page;
+
+		$data["links"] = $this->pagination->create_links();
+		$data['jobApplyHistory'] = $this->JobModel->jobApplyHistory($pagination_config["per_page"], $page);
+		
+		$this->layouts->view('company/job/applyHistory',$data);
+	}
+
+	/**
+	 * This jobApplyAdd method are used to apply the job for specific job seeker
+	 * @return the redirects to JobController/jobApplyHistory
+	 * @author kulasekaran.
+	 *
+	 */
+	public function jobApplyAdd() {
+		$jobApplyStatus = $this->JobModel->jobApplyAdd();
+		if($jobApplyStatus){
+			$this->session->set_flashdata([
+				'message'  => 'Job Appied Successfully',
+				'type' => 'success'
+			]);
+		} else {
+			$this->session->set_flashdata([
+				'message'  => 'Sorry, Something Went Wrong. Please Try Again Later',
+				'type' => 'danger'
+			]);
+		}
+		redirect('JobController/jobApplyHistory');
+	}
+
+	/**
+	 * This jobCancelStatus method are used to cancel the applied job
+	 * @return the redirect to JobController/jobApplyHistory
+	 * @author kulasekaran.
+	 *
+	 */
+    public function jobCancelStatus() {
+    	$id = $this->input->post('hiddenJobId');
+        $jobCancelStatus = $this->JobModel->jobCancelStatus($id);
+        return redirect('JobController/jobApplyHistory');
+    }
+
 }

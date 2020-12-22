@@ -14,7 +14,12 @@ function fnBackBtn() {
 	$('#jobDetailForm').submit();
 }
 
-// apply button process
-function fnJobApply() {
-	alert('Apply is an underprocess');
+// for apply process
+function fnApply(id,companyId) {
+	if (confirm("Are You Want To Apply ?")) {
+		$("#hiddenJobId").val(id);
+		$("#hiddenCompanyId").val(companyId);
+		$("#jobDetailForm").attr("action", "jobApplyAdd");
+		$("#jobDetailForm").submit();
+	}
 }

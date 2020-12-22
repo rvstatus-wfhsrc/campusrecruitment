@@ -51,6 +51,7 @@
                     <?php echo form_open('JobController/jobList',['method' => 'POST','id' => 'listForm','name' => 'listForm']); ?>
                         <input type="hidden" id="base" value="<?php echo base_url(); ?>">
                         <input type="hidden" id="hiddenJobId" name="hiddenJobId">
+                        <input type="hidden" id="hiddenCompanyId" name="hiddenCompanyId">
                         <input type="hidden" id="hiddenDelFlag" name="hiddenDelFlag">
                         <input type="hidden" id="hiddenFlag" name="hiddenFlag" value="<?php echo $this->session->userdata('flag'); ?>">
                         <input type="hidden" id="per_page" name="per_page">
@@ -71,43 +72,45 @@
                             <input type="hidden" id="filterVal" name="filterVal" value="<?php echo $this->input->post('filterVal'); ?>">
                         <?php } ?>
 
-                        <!-- clear search -->
-                        <div  class="inb float-left mt-1 w3">
-                            <a href="javascript:;" onclick="fnClearSearch()">
-                                <img style="width: 25px;" src="<?php echo base_url(); ?>assets/images/clearsearch.png" title="Clear Search">
-                            </a>
-                        </div>
-
-                        <!-- sorting process -->
-                        <div class="inb float-left">
-                            <?php 
-                                $data= array (
-                                    'id' => 'sortProcess',
-                                    'name' => 'sortProcess',
-                                    'class' => 'form-control autowidth h34 inb mr-2 CMN_sorting '.$sortStyle,
-                                );
-                                echo form_dropdown('sortProcess',$sortArray,set_value('sortProcess', 1, false),$data);
-                            ?>
-                            <input type="hidden" id="sortVal" name="sortVal" value="<?php echo $this->input->post('sortVal'); ?>">
-                            <input type="hidden" id="sortOptn" name="sortOptn" value="<?php echo $this->input->post('sortOptn'); ?>">
-                        </div>
-
-                        <!-- searching process -->
-                        <div class="input-group searchBtn">
-                            <?php
-                                $data= array(
-                                    'id' => 'search',
-                                    'name' => 'search',
-                                    'placeholder' => 'Search Skill Name',
-                                    'class' => 'input_box form-control h34',
-                                    'value' => $this->input->post('hiddenSearch')
-                                );
-                                echo form_input($data);
-                            ?>
-                            <div class="input-group-append">
-                                <a class="btn btn-secondary h34" href="javascript:;" onclick="fnJobSearch()">
-                                    <i class="fa fa-search" title="Search"></i>
+                        <div class="inb float-right">
+                            <!-- clear search -->
+                            <div  class="inb mt-1">
+                                <a href="javascript:;" onclick="fnClearSearch()">
+                                    <img style="width: 25px;" src="<?php echo base_url(); ?>assets/images/clearsearch.png" title="Clear Search">
                                 </a>
+                            </div>
+
+                            <!-- sorting process -->
+                            <div class="inb">
+                                <?php 
+                                    $data= array (
+                                        'id' => 'sortProcess',
+                                        'name' => 'sortProcess',
+                                        'class' => 'form-control autowidth h34 inb mr-2 CMN_sorting '.$sortStyle,
+                                    );
+                                    echo form_dropdown('sortProcess',$sortArray,set_value('sortProcess', 1, false),$data);
+                                ?>
+                                <input type="hidden" id="sortVal" name="sortVal" value="<?php echo $this->input->post('sortVal'); ?>">
+                                <input type="hidden" id="sortOptn" name="sortOptn" value="<?php echo $this->input->post('sortOptn'); ?>">
+                            </div>
+
+                            <!-- searching process -->
+                            <div class="input-group searchBtn w54">
+                                <?php
+                                    $data= array(
+                                        'id' => 'search',
+                                        'name' => 'search',
+                                        'placeholder' => 'Search Skill Name',
+                                        'class' => 'input_box form-control h34',
+                                        'value' => $this->input->post('hiddenSearch')
+                                    );
+                                    echo form_input($data);
+                                ?>
+                                <div class="input-group-append">
+                                    <a class="btn btn-secondary h34" href="javascript:;" onclick="fnJobSearch()">
+                                        <i class="fa fa-search" title="Search"></i>
+                                    </a>
+                                </div>
                             </div>
                         </div>
 
@@ -165,7 +168,7 @@
                                                         </a>
                                                     <?php } ?>
                                                 <?php } else { ?>
-                                                    <a href="javascript:;" onclick="fnApply(<?php echo $list->id;?>)" class="apply_link">
+                                                    <a href="javascript:;" onclick="fnApply(<?php echo $list->id;?> , '<?php echo $list->companyId;?>')" class="apply_link">
                                                         <?php echo lang('lbl_apply'); ?>
                                                     </a>
                                                 <?php } ?>

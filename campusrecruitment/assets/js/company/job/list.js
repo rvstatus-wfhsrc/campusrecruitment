@@ -116,6 +116,11 @@ function pagination(page) {
 }
 
 // for apply process
-function fnApply(id) {
-	alert("apply is an underprocess");
+function fnApply(id,companyId) {
+	if (confirm("Are You Want To Apply ?")) {
+		$("#hiddenJobId").val(id);
+		$("#hiddenCompanyId").val(companyId);
+		$("#listForm").attr("action", "jobApplyAdd");
+		$("#listForm").submit();
+	}
 }

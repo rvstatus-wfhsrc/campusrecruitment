@@ -63,6 +63,12 @@ $lang['lbl_extraSkill'] = '余分なスキル';
 $lang['lbl_jobType'] = '仕事分類';
 $lang['lbl_list'] = '一覧';
 $lang['lbl_apply'] = 'お申し込み';
+$lang['lbl_applyHistory'] = '履歴を適用';
+$lang['lbl_applyDate'] = '適用日';
+$lang['lbl_cancel'] = 'キャンセル';
+$lang['lbl_applied'] = 'アプライド';
+$lang['lbl_cancelled'] = 'キャンセル';
+$lang['lbl_oneMore'] = 'もう1つ';
 
 // home screen label
 $lang['lbl_findJobIntro'] = 'あなたの人生に合った仕事を見つけましょう';

@@ -61,6 +61,7 @@
 		<?php echo form_open('JobController/jobEdit',['method' => 'POST','id' => 'jobDetailForm','name' => 'jobDetailForm']); ?>
 			<input type="hidden" id="base" name="base" value="<?php echo base_url(); ?>">
 			<input type="hidden" id="hiddenJobId" name="hiddenJobId" value="<?php echo $jobDetail->id; ?>">
+			<input type="hidden" id="hiddenCompanyId" name="hiddenCompanyId">
 			<input type="hidden" id="hiddenFlag" name="hiddenFlag" value="<?php echo $this->session->userdata('flag'); ?>">
 			<div class="ml-4 mb-1">
 				<a class="btn btn-info editBtn" href="javascript:;" onclick="fnBackBtn()">
@@ -72,7 +73,7 @@
 						<?php echo $this->lang->line("lbl_edit"); ?>
 					</a>
 				<?php } else { ?>
-					<a class="btn apply_btn text-white editBtn" href="javascript:;" onclick="fnJobApply()">
+					<a class="btn apply_btn text-white editBtn" href="javascript:;" onclick="fnApply(<?php echo $jobDetail->id;?> , '<?php echo $jobDetail->companyId;?>')">
 						<i class="fa fa-check"></i>
 						<?php echo $this->lang->line("lbl_apply"); ?>
 					</a>
