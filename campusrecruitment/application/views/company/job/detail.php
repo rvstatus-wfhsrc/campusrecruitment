@@ -73,7 +73,7 @@
 						<?php echo $this->lang->line("lbl_edit"); ?>
 					</a>
 				<?php } else { ?>
-					<a class="btn apply_btn text-white editBtn" href="javascript:;" onclick="fnApply(<?php echo $jobDetail->id;?> , '<?php echo $jobDetail->companyId;?>')">
+					<a class="btn apply_btn text-white editBtn" href="javascript:;" onclick="fnJobApply(<?php echo $jobDetail->id;?> , '<?php echo $jobDetail->companyId;?>')">
 						<i class="fa fa-check"></i>
 						<?php echo $this->lang->line("lbl_apply"); ?>
 					</a>

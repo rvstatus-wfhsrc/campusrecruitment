@@ -116,11 +116,11 @@ function pagination(page) {
 }
 
 // for apply process
-function fnApply(id,companyId) {
-	if (confirm("Are You Want To Apply ?")) {
+function fnJobApply(id,companyId) {
+	if (confirm("Are You Want To Apply a Job ?")) {
 		$("#hiddenJobId").val(id);
 		$("#hiddenCompanyId").val(companyId);
-		$("#listForm").attr("action", "jobApplyAdd");
+		$("#listForm").attr("action", "jobApply");
 		$("#listForm").submit();
 	}
 }

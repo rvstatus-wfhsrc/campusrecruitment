@@ -12,7 +12,7 @@ $(document).ready(function() {
 	});
 	$('#applyHistoryForm').keydown(function (e) {
 		if (e.keyCode == 13) {
-			// $("#page").val(1);
+			$("#page").val(1);
 			$("#hiddenSearch").val($("#search").val());
 		$("#applyHistoryForm").attr("action", "jobApplyHistory");
 		$("#applyHistoryForm").submit();
@@ -22,14 +22,13 @@ $(document).ready(function() {
 
 // job applied detail process
 function fnJobApplyDetail(id) {
-	alert("Job Apply Detail is an underprocess");
-	// $("#hiddenJobId").val(id);
-	// $("#applyHistoryForm").attr("action", "jobDetail");
-	// $("#applyHistoryForm").submit();
+	$("#hiddenApplyJobId").val(id);
+	$("#applyHistoryForm").attr("action", "jobApplyDetail");
+	$("#applyHistoryForm").submit();
 }
 // filter process
 function fnJobFilter(filterValue) {
-	// $("#page").val(1);
+	$("#page").val(1);
 	$( "#filterVal" ).val(filterValue);
 	$("#search").val($("#hiddenSearch").val());
 	$("#applyHistoryForm").attr("action", "jobApplyHistory");
@@ -37,14 +36,14 @@ function fnJobFilter(filterValue) {
 }
 // search process
 function fnJobSearch() {
-	// $("#page").val(1);
+	$("#page").val(1);
 	$("#hiddenSearch").val($("#search").val());
 	$("#applyHistoryForm").attr("action", "jobApplyHistory");
 	$('#applyHistoryForm').submit();
 }
 // sorting process
 function fnSortProcess(){
-	// $("#page").val(1);
+	$("#page").val(1);
 	$("#search").val($("#hiddenSearch").val());
 	var alreadySortOptn = $("#sortOptn").val();
 	var sortVal = $("#sortProcess").val();
@@ -62,10 +61,10 @@ function fnSortProcess(){
 }
 // job apply cancel process
 function fnCancelApply(id) {
-	var confCancelMsg = "Do You Want to Cancel ?";
+	var confCancelMsg = "Do You Want to Cancel a Job Application ?";
 	if (confirm(confCancelMsg)) {
-		$("#applyHistoryForm").attr("action", "jobCancelStatus");
-		$("#hiddenJobId").val(id);
+		$("#applyHistoryForm").attr("action", "jobApplyCancelStatus");
+		$("#hiddenApplyJobId").val(id);
 		$("#applyHistoryForm").submit();
 	}
 }

@@ -46,9 +46,9 @@
                     <a class="btn btn-success mb-1" href="<?php echo site_url('JobController/jobLists') ?>">
                         <i class="fa fa-btn fa-plus"></i><?php echo lang('lbl_oneMore'); ?>
                     </a>
-                    <?php echo form_open('JobController/jobList',['method' => 'POST','id' => 'applyHistoryForm','name' => 'applyHistoryForm']); ?>
+                    <?php echo form_open('JobController/jobApplyDetail',['method' => 'POST','id' => 'applyHistoryForm','name' => 'applyHistoryForm']); ?>
                         <input type="hidden" id="base" value="<?php echo base_url(); ?>">
-                        <input type="hidden" id="hiddenJobId" name="hiddenJobId">
+                        <input type="hidden" id="hiddenApplyJobId" name="hiddenApplyJobId">
                         <input type="hidden" id="per_page" name="per_page">
                         <input type="hidden" id="hiddenSearch" name="hiddenSearch" value="<?php echo $this->input->post('hiddenSearch'); ?>">
 
@@ -114,8 +114,7 @@
                                 <col width="10%">
                                 <col width="10%">
                                 <col width="12%">
-                                <col width="8%">
-                                <col width="11%">
+                                <col width="10%">
                             </colgroup>
                             <thead class="thead">
                                 <tr>
@@ -125,8 +124,7 @@
                                     <th><?php echo lang('lbl_salary'); ?></th>
                                     <th title="<?php echo lang('lbl_lastApplyDate'); ?>"><?php echo lang('lbl_last_date'); ?></th>
                                     <th><?php echo lang('lbl_applyDate'); ?></th>
-                                    <th><?php echo lang('lbl_incharge'); ?></th>
-                                    <th><?php echo lang('lbl_contact'); ?></th>
+                                    <th><?php echo lang('lbl_incharge'); ?>/<?php echo lang('lbl_contact'); ?></th>
                                     <th></th>
                                 </tr>
                             </thead>
@@ -141,8 +139,7 @@
                                             <td class="tac vam"><?php echo $history->salary; ?></td>
                                             <td class="tac vam"><?php echo $history->lastApplyDate; ?></td>
                                             <td class="tac vam"><?php echo $history->applyDate; ?></td>
-                                            <td class="vam"><?php echo $history->incharge; ?></td>
-                                            <td class="tac vam"><?php echo $history->contact; ?></td>
+                                            <td class="vam"><?php echo $history->incharge; ?><br><?php echo $history->contact; ?></td>
                                             <td class="tac vam">
                                                 <a href="javascript:;" onclick="fnJobApplyDetail(<?php echo $history->id;?>)" class="m3">
                                                     <img class="w20" 
@@ -152,15 +149,13 @@
                                                     <a href="javascript:;" onclick="fnCancelApply(<?php echo $history->id;?>)" style="color: red;">
                                                         <?php echo lang('lbl_cancel'); ?>
                                                     </a>
-                                                <?php } else { ?>
-                                                    <?php echo lang('lbl_cancelled'); ?>
                                                 <?php } ?>
                                             </td>
                                         </tr>
                                     <?php } ?>
                             <?php } else { ?>
                                 <tr>
-                                    <td colspan="9" class="tac noDataFoundClr fs16">No data found</td>
+                                    <td colspan="8" class="tac noDataFoundClr fs16">No data found</td>
                                 </tr>
                             <?php } ?>
                         </table>

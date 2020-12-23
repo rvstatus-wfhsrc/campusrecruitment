@@ -361,17 +361,17 @@ class JobModel extends CI_Model {
 					ajd.applyDate,
 					ajd.delFlag,
 					jd.lastApplyDate,
-					cpy.companyName,
-					dsgn.designationName AS jobCategory,
+					cmpy.companyName,
+					dest.designationName AS jobCategory,
 					jd.salary,
-					cpy.incharge,
-					cpy.contact'
+					cmpy.incharge,
+					cmpy.contact'
 				)
 			->from('apply_job_details as ajd')
 			// this is the left join in codeigniter
-			->join('company as cpy','cpy.userName = ajd.companyId','left')
+			->join('company as cmpy','cmpy.userName = ajd.companyId','left')
 			->join('job_details as jd','jd.id = ajd.jobId','left')
-			->join('m_designation as dsgn','dsgn.designationId = jd.jobCategory','left');
+			->join('m_designation as dest','dest.designationId = jd.jobCategory','left');
 			
 			// filter process
 			if ($filterVal == 2) {
@@ -383,32 +383,32 @@ class JobModel extends CI_Model {
 			// search process
 			$hiddenSearch = $this->input->post('hiddenSearch');
 			if($hiddenSearch != ""){
-				$this->db->like('cpy.companyName',trim($hiddenSearch));
+				$this->db->like('cmpy.companyName',trim($hiddenSearch));
 			}
 
 			// sorting process
 			$sortOptn = $this->input->post('sortOptn');
 			$sortVal = $this->input->post('sortVal');
 			if ($sortVal == 1) {
-				$this->db->order_by('cpy.companyName', $sortOptn);
+				$this->db->order_by('cmpy.companyName', $sortOptn);
 			} else if ($sortVal == 2) {
-				$this->db->order_by('dsgn.designationName', $sortOptn);
+				$this->db->order_by('dest.designationName', $sortOptn);
 			} else if ($sortVal == 3) {
 				$this->db->order_by('ajd.applyDate', $sortOptn);
 			} else {
-				$this->db->order_by('cpy.companyName', 'ASC');
+				$this->db->order_by('cmpy.companyName', 'ASC');
 			}
 		$jobApplyHistory = $this->db->get();
 		return $jobApplyHistory->result();
 	}
 
 	/**
-	 * This jobApplyAdd method are used to add the data into apply_job_details table
+	 * This jobApply method are used to add the data into apply_job_details table
 	 * @return to the jobApplyStatus with true or false value to controller according to database results
 	 * @author kulasekaran.
 	 *
 	 */
-	function jobApplyAdd() {
+	function jobApply() {
 		$userName = $this->session->userdata('userName');
 		$jobAddData = array(
 			'jobId' => $this->input->post('hiddenJobId'),
@@ -424,17 +424,94 @@ class JobModel extends CI_Model {
 	}
 
 	/**
-	 * This jobCancelStatus method are used to cancel the specfic applied job
+	 * This jobApplyCancelStatus method are used to cancel the specfic applied job
 	 * @param id value of specific job is passed from JobController 
 	 * @return the job cancel status
 	 * @author kulasekaran.
 	 *
 	 */
-	function jobCancelStatus($id) {
+	function jobApplyCancelStatus($id) {
 		$userName = $this->session->userdata('userName');
 		// $delFlag => 0 ----> change delFlag = 1
 		$this->db->where('id', $id);
-		$jobCancelStatus = $this->db->update('apply_job_details', array('delFlag' => 1,'updated_by' => $userName ));
-		return $jobCancelStatus;
+		$jobApplyCancelStatus = $this->db->update('apply_job_details', array('delFlag' => 1,'updated_by' => $userName ));
+		return $jobApplyCancelStatus;
+	}
+
+	/**
+	 * This jobApplyDetail method are used to get the one row data from apply_job_details table
+	 * @param id value of specific applied job is passed from JobController
+	 * @return to return the jobApplyDetail array to controller
+	 * @author kulasekaran.
+	 *
+	 */
+	public function jobApplyDetail($id) {
+		$this->db->select(
+					'ajd.id,
+					ajd.companyId,
+					ajd.jobSeekerId,
+					ajd.applyDate,
+					ajd.delFlag,
+					jd.lastApplyDate,
+					cmpy.companyName,
+					dest.designationName AS jobCategory,
+					jd.salary,
+					cmpy.incharge,
+					cmpy.contact'
+				)
+			->from('apply_job_details as ajd')
+			// this is the left join in codeigniter
+			->join('company as cmpy','cmpy.userName = ajd.companyId','left')
+			->join('job_details as jd','jd.id = ajd.jobId','left')
+			->join('m_designation as dest','dest.designationId = jd.jobCategory','left');
+
+		$this->db->where(array('ajd.id' => $id));
+		$jobApplyDetail = $this->db->get();
+		return $jobApplyDetail->result()[0];
+	}
+
+	/**
+	 * This record_count_for_apply method are used to get the total count of data from apply_job_details table
+	 * @return to return the total count value to controller
+	 * @author kulasekaran.
+	 *
+	 */
+	public function record_count_for_apply() {
+		// filter process
+		$userName = $this->session->userdata('userName');
+		$filterVal = $this->input->post('filterVal');
+		// filter process
+		if ($filterVal == 2) {
+			$this->db->where(array('ajd.delFlag' => 0));
+		} elseif ($filterVal == 3) {
+			$this->db->where(array('ajd.delFlag' => 1));
+		}
+
+		// search process
+		$hiddenSearch = $this->input->post('hiddenSearch');
+		if($hiddenSearch != ""){
+			$this->db->like('cmpy.companyName',trim($hiddenSearch));
+		}
+
+		// sorting process
+		$sortOptn = $this->input->post('sortOptn');
+		$sortVal = $this->input->post('sortVal');
+		if ($sortVal == 1) {
+			$this->db->order_by('cmpy.companyName', $sortOptn);
+		} else if ($sortVal == 2) {
+			$this->db->order_by('dest.designationName', $sortOptn);
+		} else if ($sortVal == 3) {
+			$this->db->order_by('ajd.applyDate', $sortOptn);
+		} else {
+			$this->db->order_by('cmpy.companyName', 'ASC');
+		}
+		$this->db->select('COUNT(ajd.id) as numrows');
+		$this->db->from('apply_job_details as ajd');
+		$this->db->join('company as cmpy','cmpy.userName = ajd.companyId','left');
+		$this->db->join('job_details as jd','jd.id = ajd.jobId','left');
+		$this->db->join('m_designation as dest','dest.designationId = jd.jobCategory','left');
+		$this->db->where(array('jd.delFlag' => 0));
+		$result = $this->db->get();
+		return $result->result()['0']->numrows;
 	}
 }

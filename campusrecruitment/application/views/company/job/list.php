@@ -168,7 +168,7 @@
                                                         </a>
                                                     <?php } ?>
                                                 <?php } else { ?>
-                                                    <a href="javascript:;" onclick="fnApply(<?php echo $list->id;?> , '<?php echo $list->companyId;?>')" class="apply_link">
+                                                    <a href="javascript:;" onclick="fnJobApply(<?php echo $list->id;?> , '<?php echo $list->companyId;?>')" class="apply_link">
                                                         <?php echo lang('lbl_apply'); ?>
                                                     </a>
                                                 <?php } ?>

@@ -15,11 +15,11 @@ function fnBackBtn() {
 }
 
 // for apply process
-function fnApply(id,companyId) {
-	if (confirm("Are You Want To Apply ?")) {
+function fnJobApply(id,companyId) {
+	if (confirm("Are You Want To Apply a Job ?")) {
 		$("#hiddenJobId").val(id);
 		$("#hiddenCompanyId").val(companyId);
-		$("#jobDetailForm").attr("action", "jobApplyAdd");
+		$("#jobDetailForm").attr("action", "jobApply");
 		$("#jobDetailForm").submit();
 	}
 }
