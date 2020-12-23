@@ -70,6 +70,7 @@ $lang['lbl_applied'] = 'アプライド';
 $lang['lbl_cancelled'] = 'キャンセル';
 $lang['lbl_oneMore'] = 'もう1つ';
 $lang['lbl_applyDetail'] = '詳細を適用';
+$lang['lbl_appliedDate'] = '適用日';
 
 // home screen label
 $lang['lbl_findJobIntro'] = 'あなたの人生に合った仕事を見つけましょう';

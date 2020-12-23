@@ -208,6 +208,7 @@ class JobModel extends CI_Model {
 							jd.lastApplyDate,
 							jd.jobType,
 							jd.extraSkill,
+							cmpy.contact,
 							cmpy.companyName,
 							cmpy.incharge'
 
@@ -398,6 +399,7 @@ class JobModel extends CI_Model {
 			} else {
 				$this->db->order_by('cmpy.companyName', 'ASC');
 			}
+			$this->db->where(array('ajd.created_by' => $userName));
 		$jobApplyHistory = $this->db->get();
 		return $jobApplyHistory->result();
 	}
@@ -456,6 +458,13 @@ class JobModel extends CI_Model {
 					cmpy.companyName,
 					dest.designationName AS jobCategory,
 					jd.salary,
+					jd.jobType,
+					jd.extraSkill,
+					jd.workingHour,
+					jd.jobDescription,
+					role.roleName,
+					skill.skillName,
+					country.countryName as jobLocation,
 					cmpy.incharge,
 					cmpy.contact'
 				)
@@ -463,6 +472,9 @@ class JobModel extends CI_Model {
 			// this is the left join in codeigniter
 			->join('company as cmpy','cmpy.userName = ajd.companyId','left')
 			->join('job_details as jd','jd.id = ajd.jobId','left')
+			->join('m_role as role','role.roleId = jd.role','left')
+			->join('m_skill as skill','skill.skillId = jd.requiredSkill','left')
+			->join('m_country as country','country.countryId = jd.jobLocation','left')
 			->join('m_designation as dest','dest.designationId = jd.jobCategory','left');
 
 		$this->db->where(array('ajd.id' => $id));
@@ -471,12 +483,12 @@ class JobModel extends CI_Model {
 	}
 
 	/**
-	 * This record_count_for_apply method are used to get the total count of data from apply_job_details table
+	 * This record_count_for_job_apply method are used to get the total count of data from apply_job_details table
 	 * @return to return the total count value to controller
 	 * @author kulasekaran.
 	 *
 	 */
-	public function record_count_for_apply() {
+	public function record_count_for_job_apply() {
 		// filter process
 		$userName = $this->session->userdata('userName');
 		$filterVal = $this->input->post('filterVal');
@@ -510,7 +522,7 @@ class JobModel extends CI_Model {
 		$this->db->join('company as cmpy','cmpy.userName = ajd.companyId','left');
 		$this->db->join('job_details as jd','jd.id = ajd.jobId','left');
 		$this->db->join('m_designation as dest','dest.designationId = jd.jobCategory','left');
-		$this->db->where(array('jd.delFlag' => 0));
+		$this->db->where(array('ajd.created_by' => $userName));
 		$result = $this->db->get();
 		return $result->result()['0']->numrows;
 	}

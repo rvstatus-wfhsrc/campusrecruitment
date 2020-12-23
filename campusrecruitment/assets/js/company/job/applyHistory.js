@@ -12,7 +12,7 @@ $(document).ready(function() {
 	});
 	$('#applyHistoryForm').keydown(function (e) {
 		if (e.keyCode == 13) {
-			$("#page").val(1);
+			// $("#page").val(1);
 			$("#hiddenSearch").val($("#search").val());
 		$("#applyHistoryForm").attr("action", "jobApplyHistory");
 		$("#applyHistoryForm").submit();
@@ -28,7 +28,7 @@ function fnJobApplyDetail(id) {
 }
 // filter process
 function fnJobFilter(filterValue) {
-	$("#page").val(1);
+	// $("#page").val(1);
 	$( "#filterVal" ).val(filterValue);
 	$("#search").val($("#hiddenSearch").val());
 	$("#applyHistoryForm").attr("action", "jobApplyHistory");
@@ -36,14 +36,14 @@ function fnJobFilter(filterValue) {
 }
 // search process
 function fnJobSearch() {
-	$("#page").val(1);
+	// $("#page").val(1);
 	$("#hiddenSearch").val($("#search").val());
 	$("#applyHistoryForm").attr("action", "jobApplyHistory");
 	$('#applyHistoryForm').submit();
 }
 // sorting process
 function fnSortProcess(){
-	$("#page").val(1);
+	// $("#page").val(1);
 	$("#search").val($("#hiddenSearch").val());
 	var alreadySortOptn = $("#sortOptn").val();
 	var sortVal = $("#sortProcess").val();

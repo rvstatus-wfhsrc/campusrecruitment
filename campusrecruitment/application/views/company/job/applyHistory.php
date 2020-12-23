@@ -111,8 +111,8 @@
                                 <col>
                                 <col width="15%">
                                 <col width="8%">
-                                <col width="10%">
-                                <col width="10%">
+                                <col width="11%">
+                                <col width="11%">
                                 <col width="12%">
                                 <col width="10%">
                             </colgroup>
@@ -123,7 +123,7 @@
                 					<th><?php echo lang('lbl_jobCategory'); ?></th>
                                     <th><?php echo lang('lbl_salary'); ?></th>
                                     <th title="<?php echo lang('lbl_lastApplyDate'); ?>"><?php echo lang('lbl_last_date'); ?></th>
-                                    <th><?php echo lang('lbl_applyDate'); ?></th>
+                                    <th><?php echo lang('lbl_appliedDate'); ?></th>
                                     <th><?php echo lang('lbl_incharge'); ?>/<?php echo lang('lbl_contact'); ?></th>
                                     <th></th>
                                 </tr>

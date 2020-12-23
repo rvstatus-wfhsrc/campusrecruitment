@@ -251,16 +251,16 @@ class JobController extends CI_Controller {
 
 		// sorting process style
 		$sortOptn = $this->input->post('sortOptn');
-		$data['sortStyle'] = "sort_asc";
+		$data['sortStyle'] = "sort_desc";
 		if(isset($sortOptn) && $sortOptn == "ASC") {
 			$data['sortStyle'] = "sort_asc";
 		} elseif(isset($sortOptn) && $sortOptn == "DESC") {
 			$data['sortStyle'] = "sort_desc";
 		}
-		$data['sortArray'] = array('1' => 'Company Name','2' => 'Job Category','3' => 'Apply Date','4' => 'Last Apply Date');
+		$data['sortArray'] = array('1' => 'Company Name','2' => 'Job Category','3' => 'Apply Date');
 
 		// pagination process
-		$totalRecord = $this->JobModel->record_count_for_apply();
+		$totalRecord = $this->JobModel->record_count_for_job_apply();
 		$pagination_config = $this->CommonModel->paginationConfig($totalRecord,base_url()."JobController/jobApplyHistory");
 		$this->pagination->initialize($pagination_config);
 		$page = (($this->input->post('per_page') != null)) ? $this->input->post('per_page') : 0;

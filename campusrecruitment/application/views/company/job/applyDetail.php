@@ -61,7 +61,7 @@
 					<i class="fa fa-chevron-left fa-btn"></i><?php echo lang('lbl_back'); ?>
 				</a>
 				<?php if ($jobApplyDetail->delFlag == 0) { ?>
-					<a class="btn apply_btn text-white editBtn" href="javascript:;" onclick="fnCancelApply(<?php echo $jobApplyDetail->id;?>)">
+					<a class="btn btn-danger text-white editBtn" href="javascript:;" onclick="fnCancelApply(<?php echo $jobApplyDetail->id;?>)">
 						<i class="fa fa-close"></i>
 						<?php echo $this->lang->line("lbl_cancel"); ?>
 					</a>
@@ -78,24 +78,52 @@
 						<div class="rightSide"><?php echo $jobApplyDetail->incharge; ?></div>
 					</div>
 					<div>
+						<div class="leftSide"><?php echo $this->lang->line("lbl_contact"); ?> : </div>
+						<div class="rightSide"><?php echo $jobApplyDetail->contact; ?></div>
+					</div>
+					<div>
 						<div class="leftSide"><?php echo $this->lang->line("lbl_jobCategory"); ?> : </div>
 						<div class="rightSide"><?php echo $jobApplyDetail->jobCategory; ?></div>
 					</div>
 					<div>
+						<div class="leftSide"><?php echo $this->lang->line("lbl_jobType"); ?> : </div>
+						<div class="rightSide"><?php echo $jobApplyDetail->jobType == 1? 'Part-Time' : 'Full-Time'; ?></div>
+					</div>
+					<div>
+						<div class="leftSide"><?php echo $this->lang->line("lbl_role"); ?> : </div>
+						<div class="rightSide"><?php echo $jobApplyDetail->roleName; ?></div>
+					</div>
+					<div>
+						<div class="leftSide"><?php echo $this->lang->line("lbl_requiredSkill"); ?> : </div>
+						<div class="rightSide"><?php echo $jobApplyDetail->skillName; ?></div>
+					</div>
+					<div>
+						<div class="leftSide"><?php echo $this->lang->line("lbl_extraSkill"); ?> : </div>
+						<div class="rightSide"><?php echo ($jobApplyDetail->extraSkill != null) ? $jobApplyDetail->extraSkill : "Nil"; ?></div>
+					</div>
+					<div>
+						<div class="leftSide"><?php echo $this->lang->line("lbl_workingHour"); ?> : </div>
+						<div class="rightSide"><?php echo $jobApplyDetail->workingHour; ?> Hours</div>
+					</div>
+					<div>
 						<div class="leftSide"><?php echo $this->lang->line("lbl_salary"); ?> : </div>
-						<div class="rightSide"><?php echo $jobApplyDetail->salary; ?></div>
+						<div class="rightSide"><?php echo number_format($jobApplyDetail->salary); ?> &#8377;</div>
+					</div>
+					<div>
+						<div class="leftSide"><?php echo $this->lang->line("lbl_jobLocation"); ?> : </div>
+						<div class="rightSide"><?php echo $jobApplyDetail->jobLocation; ?></div>
 					</div>
 					<div>
 						<div class="leftSide"><?php echo $this->lang->line("lbl_lastApplyDate"); ?> : </div>
 						<div class="rightSide"><?php echo $jobApplyDetail->lastApplyDate; ?></div>
 					</div>
 					<div>
-						<div class="leftSide"><?php echo $this->lang->line("lbl_applyDate"); ?> : </div>
+						<div class="leftSide"><?php echo $this->lang->line("lbl_appliedDate"); ?> : </div>
 						<div class="rightSide"><?php echo $jobApplyDetail->applyDate; ?></div>
 					</div>
 					<div>
-						<div class="leftSide"><?php echo $this->lang->line("lbl_contact"); ?> : </div>
-						<div class="rightSide"><?php echo $jobApplyDetail->contact; ?></div>
+						<div class="leftSide"><?php echo $this->lang->line("lbl_jobDescription"); ?> : </div>
+						<div class="rightSide"><?php echo $jobApplyDetail->jobDescription; ?></div>
 					</div>
 				</div>
 			</div>

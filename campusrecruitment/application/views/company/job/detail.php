@@ -90,6 +90,10 @@
 						<div class="rightSide"><?php echo $jobDetail->incharge; ?></div>
 					</div>
 					<div>
+						<div class="leftSide"><?php echo $this->lang->line("lbl_contact"); ?> : </div>
+						<div class="rightSide"><?php echo $jobDetail->contact; ?></div>
+					</div>
+					<div>
 						<div class="leftSide"><?php echo $this->lang->line("lbl_jobCategory"); ?> : </div>
 						<div class="rightSide"><?php echo $jobDetail->designationName; ?></div>
 					</div>
