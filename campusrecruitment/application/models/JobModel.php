@@ -399,7 +399,9 @@ class JobModel extends CI_Model {
 			} else {
 				$this->db->order_by('cmpy.companyName', 'ASC');
 			}
-			$this->db->where(array('ajd.created_by' => $userName));
+			if ($this->session->userdata('flag') == 3) {
+				$this->db->where(array('ajd.created_by' => $userName));
+			}
 		$jobApplyHistory = $this->db->get();
 		return $jobApplyHistory->result();
 	}
@@ -522,8 +524,74 @@ class JobModel extends CI_Model {
 		$this->db->join('company as cmpy','cmpy.userName = ajd.companyId','left');
 		$this->db->join('job_details as jd','jd.id = ajd.jobId','left');
 		$this->db->join('m_designation as dest','dest.designationId = jd.jobCategory','left');
-		$this->db->where(array('ajd.created_by' => $userName));
+		if ($this->session->userdata('flag') == 3) {
+			$this->db->where(array('ajd.created_by' => $userName));
+		}
 		$result = $this->db->get();
 		return $result->result()['0']->numrows;
+	}
+
+	/**
+	 * This jobResultAdd method are used to data get data from database
+	 * @return to the jobResultAdd variable to controller with data according to database results
+	 * @author kulasekaran.
+	 *
+	 */
+	function jobResultAdd() {
+		$userName = $this->session->userdata('userName');
+		$id = $this->input->post('hiddenApplyJobId');
+		$this->db->select(
+					'ajd.id,
+					ajd.jobId,
+					ajd.companyId,
+					ajd.jobSeekerId,
+					cmpy.companyName,
+					jd.salary,
+					jd.jobType,
+					jd.extraSkill,
+					skill.skillName,
+					country.countryName as jobLocation,
+					dest.designationName AS jobCategory,
+					user.name AS jobSeekerName,
+					user.gender,
+					user.contact'
+				)
+			->from('apply_job_details as ajd')
+			// this is the left join in codeigniter
+			->join('company as cmpy','cmpy.userName = ajd.companyId','left')
+			->join('job_details as jd','jd.id = ajd.jobId','left')
+			->join('m_skill as skill','skill.skillId = jd.requiredSkill','left')
+			->join('m_country as country','country.countryId = jd.jobLocation','left')
+			->join('m_designation as dest','dest.designationId = jd.jobCategory','left')
+			->join('users as user','user.userName = ajd.jobSeekerId','left');
+
+		$this->db->where(array('ajd.id' => $id));
+		$jobResultAdd = $this->db->get();
+		// print_r($jobResultAdd->result()[0]);exit();
+		return $jobResultAdd->result()[0];
+	}
+
+	/**
+	 * This jobResultAddForm method are used to add the data get from form and inserts into job_result_details table
+	 * @return to the jobResultAddStatus with true or false value to controller according to database results
+	 * @author kulasekaran.
+	 *
+	 */
+	function jobResultAddForm() {
+		$userName = $this->session->userdata('userName');
+		$jobResultAddData = array(
+			'jobId' => $this->input->post('hiddenJobId'),
+			'companyId' => $this->input->post('hiddenCompanyId'),
+			'jobSeekerId' => $this->input->post('hiddenJobSeekerId'),
+			'resultDate' => date('yy-m-d'),
+			'totalMark' => $this->input->post('totalMark'),
+			'obtainMark' => $this->input->post('obtainMark'),
+			'resultStatus' => $this->input->post('resultStatus'),
+			'created_by' => $userName,
+			'delFlag' => 0
+		);
+
+		$jobResultAddStatus = $this->db->insert('job_result_details', $jobResultAddData);
+		return $jobResultAddStatus;
 	}
 }

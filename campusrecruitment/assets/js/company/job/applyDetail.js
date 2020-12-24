@@ -12,3 +12,10 @@ function fnBackBtn() {
 	$("#jobDetailForm").attr("action", "jobApplyHistory");
 	$('#applyDetailForm').submit();
 }
+
+// add result button process
+function fnJobResultAdd(id) {
+	$('#hiddenApplyJobId').val(id);
+	$("#applyDetailForm").attr("action", "jobResultAdd");
+	$('#applyDetailForm').submit();
+}

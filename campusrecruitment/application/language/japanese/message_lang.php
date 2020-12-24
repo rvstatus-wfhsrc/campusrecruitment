@@ -64,13 +64,18 @@ $lang['lbl_jobType'] = '仕事分類';
 $lang['lbl_list'] = '一覧';
 $lang['lbl_apply'] = 'お申し込み';
 $lang['lbl_applyHistory'] = '履歴を適用';
-$lang['lbl_applyDate'] = '適用日';
 $lang['lbl_cancel'] = 'キャンセル';
 $lang['lbl_applied'] = 'アプライド';
 $lang['lbl_cancelled'] = 'キャンセル';
 $lang['lbl_oneMore'] = 'もう1つ';
 $lang['lbl_applyDetail'] = '詳細を適用';
 $lang['lbl_appliedDate'] = '適用日';
+$lang['lbl_addResult'] = 'Add Result';
+$lang['lbl_resultAdd'] = 'Result Add';
+$lang['lbl_resultEdit'] = 'Result Edit';
+$lang['lbl_totalMark'] = 'Total Mark';
+$lang['lbl_obtainMark'] = 'Obtain Mark';
+$lang['lbl_resultStatus'] = 'Result Status';
 
 // home screen label
 $lang['lbl_findJobIntro'] = 'あなたの人生に合った仕事を見つけましょう';

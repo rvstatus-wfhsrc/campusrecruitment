@@ -43,9 +43,11 @@
         <div class="row">
             <div class="col-xl-12">
                 <div class="container-fluid dispNone">
-                    <a class="btn btn-success mb-1" href="<?php echo site_url('JobController/jobLists') ?>">
-                        <i class="fa fa-btn fa-plus"></i><?php echo lang('lbl_oneMore'); ?>
-                    </a>
+                    <?php if ($this->session->userdata('flag') == 3) { ?>
+                        <a class="btn btn-success mb-1" href="<?php echo site_url('JobController/jobLists') ?>">
+                            <i class="fa fa-btn fa-plus"></i><?php echo lang('lbl_oneMore'); ?>
+                        </a>
+                    <?php } ?>
                     <?php echo form_open('JobController/jobApplyDetail',['method' => 'POST','id' => 'applyHistoryForm','name' => 'applyHistoryForm']); ?>
                         <input type="hidden" id="base" value="<?php echo base_url(); ?>">
                         <input type="hidden" id="hiddenApplyJobId" name="hiddenApplyJobId">
@@ -124,7 +126,11 @@
                                     <th><?php echo lang('lbl_salary'); ?></th>
                                     <th title="<?php echo lang('lbl_lastApplyDate'); ?>"><?php echo lang('lbl_last_date'); ?></th>
                                     <th><?php echo lang('lbl_appliedDate'); ?></th>
-                                    <th><?php echo lang('lbl_incharge'); ?>/<?php echo lang('lbl_contact'); ?></th>
+                                    <?php if ($this->session->userdata('flag') == 3) { ?>
+                                        <th><?php echo lang('lbl_incharge'); ?>/<?php echo lang('lbl_contact'); ?></th>
+                                    <?php } else { ?>
+                                        <th title="<?php echo lang('lbl_companyName'); ?>/<?php echo lang('lbl_contact'); ?>"><?php echo lang('lbl_name'); ?>/<?php echo lang('lbl_contact'); ?></th>
+                                    <?php } ?>
                                     <th></th>
                                 </tr>
                             </thead>
@@ -145,7 +151,7 @@
                                                     <img class="w20" 
                                                         src="<?php echo base_url(); ?>assets/images/details.png" title="details view">
                                                 </a>
-                                                <?php if ($history->delFlag == 0) { ?>
+                                                <?php if ($history->delFlag == 0 && $this->session->userdata('flag') == 3) { ?>
                                                     <a href="javascript:;" onclick="fnCancelApply(<?php echo $history->id;?>)" style="color: red;">
                                                         <?php echo lang('lbl_cancel'); ?>
                                                     </a>

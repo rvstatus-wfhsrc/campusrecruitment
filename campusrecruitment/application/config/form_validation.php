@@ -468,6 +468,23 @@ $config = array(
                                         'label' => 'lang:lbl_extraSkill',
                                         'rules' => 'extra_skill'
                                     )
+                                ),
+                'jobResultAddEdit' => array(
+                                    array(
+                                        'field' => 'totalMark',
+                                        'label' => 'lang:lbl_totalMark',
+                                        'rules' => 'required|integer|greater_than[0]'
+                                    ),
+                                    array(
+                                        'field' => 'obtainMark',
+                                        'label' => 'lang:lbl_obtainMark',
+                                        'rules' => 'required|integer|greater_than[0]'
+                                    ),
+                                    array(
+                                        'field' => 'resultStatus',
+                                        'label' => 'lang:lbl_resultStatus',
+                                        'rules' => 'required'
+                                    )
                                 )
            );
 

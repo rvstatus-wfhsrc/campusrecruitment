@@ -321,4 +321,51 @@ class JobController extends CI_Controller {
 		$this->layouts->view('company/job/applyDetail',$data);
 	}
 
+	/**
+	 * This jobResultAdd method are used for goto the job result add screen
+	 * @return to view screen [ company/job/result/addEdit ]
+	 * @author kulasekaran.
+	 *
+	 */
+	public function jobResultAdd() {
+		$data['jobResultAdd'] = $this->JobModel->jobResultAdd();
+		$this->layouts->view('company/job/result/addEdit', $data);
+	}
+
+	/**
+	 * This jobResultAddForm method are used for gets the data from form and insert into database
+	 * @return the redirects to JobController/jobApplyDetail
+	 * @author kulasekaran.
+	 *
+	 */
+	public function jobResultAddForm() {
+		$jobResultAddStatus = $this->JobModel->jobResultAddForm();
+		if($jobResultAddStatus){
+			$this->session->set_flashdata([
+				'message'  => 'Job Result Details Add Successfully',
+				'type' => 'success'
+			]);
+		} else {
+			$this->session->set_flashdata([
+				'message'  => 'Sorry, Something Went Wrong. Please Try Again Later',
+				'type' => 'danger'
+			]);
+		}
+		redirect('JobController/jobApplyDetail');
+	}
+
+	/**
+	 * This jobResultAddEditFormValidation method are used to validate the given field data
+	 * @return retrun a json value to js in job/result/addedit.js 
+	 * @author kulasekaran.
+	 *
+	 */
+	public function jobResultAddEditFormValidation() {
+		if ($this->form_validation->run('jobResultAddEdit') == FALSE) {
+			$json_response = $this->form_validation->error_array();
+			echo json_encode($json_response); exit();
+		} else {
+			echo json_encode(true); exit();
+		}
+	}
 }

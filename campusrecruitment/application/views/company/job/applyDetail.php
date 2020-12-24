@@ -51,6 +51,11 @@
 					<span class ="dot detailScrClr">&bull;</span>
 					<span class="detailScrClr"><?php echo $this->lang->line("lbl_applyDetail"); ?></span>
 				</li>
+				<?php if($this->session->flashdata('message')) { ?>
+					<div class="alert alert-<?php echo $this->session->flashdata('type'); ?> fmsg tac">
+						<?php echo $this->session->flashdata('message'); ?>
+					</div>
+				<?php } ?>
 			</ol>
 		</div>
 		<?php echo form_open('JobController/jobApplyCancelStatus',['method' => 'POST','id' => 'applyDetailForm','name' => 'applyDetailForm']); ?>
@@ -60,10 +65,16 @@
 				<a class="btn btn-info editBtn" href="javascript:;" onclick="fnBackBtn()">
 					<i class="fa fa-chevron-left fa-btn"></i><?php echo lang('lbl_back'); ?>
 				</a>
-				<?php if ($jobApplyDetail->delFlag == 0) { ?>
+				<?php if ($jobApplyDetail->delFlag == 0 && $this->session->userdata('flag') == 3) { ?>
 					<a class="btn btn-danger text-white editBtn" href="javascript:;" onclick="fnCancelApply(<?php echo $jobApplyDetail->id;?>)">
 						<i class="fa fa-close"></i>
 						<?php echo $this->lang->line("lbl_cancel"); ?>
+					</a>
+				<?php } ?>
+				<?php if ($this->session->userdata('flag') == 2) { ?>
+					<a class="btn btn-success editBtn" href="javascript:;" onclick="fnJobResultAdd(<?php echo $jobApplyDetail->id;?>)">
+						<i class="fa fa-plus"></i>
+						<?php echo $this->lang->line("lbl_addResult"); ?>
 					</a>
 				<?php } ?>
 			</div>
