@@ -470,15 +470,15 @@ $config = array(
                                     )
                                 ),
                 'jobResultAddEdit' => array(
-                                    array(
-                                        'field' => 'totalMark',
-                                        'label' => 'lang:lbl_totalMark',
-                                        'rules' => 'required|integer|greater_than[0]'
-                                    ),
+                                    // array(
+                                    //     'field' => 'totalMark',
+                                    //     'label' => 'lang:lbl_totalMark',
+                                    //     'rules' => 'required|integer|greater_than[0]'
+                                    // ),
                                     array(
                                         'field' => 'obtainMark',
                                         'label' => 'lang:lbl_obtainMark',
-                                        'rules' => 'required|integer|greater_than[0]'
+                                        'rules' => 'required|numeric|greater_than[0]|less_than_equal_to[100]'
                                     ),
                                     array(
                                         'field' => 'resultStatus',

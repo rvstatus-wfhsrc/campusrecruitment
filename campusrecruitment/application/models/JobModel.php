@@ -366,13 +366,16 @@ class JobModel extends CI_Model {
 					dest.designationName AS jobCategory,
 					jd.salary,
 					cmpy.incharge,
-					cmpy.contact'
+					cmpy.contact,
+					user.name AS jobSeekerName,
+					user.contact AS jobSeekerContact'
 				)
 			->from('apply_job_details as ajd')
 			// this is the left join in codeigniter
 			->join('company as cmpy','cmpy.userName = ajd.companyId','left')
 			->join('job_details as jd','jd.id = ajd.jobId','left')
-			->join('m_designation as dest','dest.designationId = jd.jobCategory','left');
+			->join('m_designation as dest','dest.designationId = jd.jobCategory','left')
+			->join('users as user','user.userName = ajd.jobSeekerId','left');
 			
 			// filter process
 			if ($filterVal == 2) {
@@ -400,7 +403,9 @@ class JobModel extends CI_Model {
 				$this->db->order_by('cmpy.companyName', 'ASC');
 			}
 			if ($this->session->userdata('flag') == 3) {
-				$this->db->where(array('ajd.created_by' => $userName));
+				$this->db->where(array('ajd.jobSeekerId' => $userName));
+			} else if($this->session->userdata('flag') == 2) {
+				$this->db->where(array('ajd.companyId' => $userName));
 			}
 		$jobApplyHistory = $this->db->get();
 		return $jobApplyHistory->result();
@@ -418,7 +423,7 @@ class JobModel extends CI_Model {
 			'jobId' => $this->input->post('hiddenJobId'),
 			'companyId' => $this->input->post('hiddenCompanyId'),
 			'jobSeekerId' => $userName,
-			'applyDate' => date('yy-m-d'),
+			'applyDate' => date('Y-m-d'),
 			'created_by' => $userName,
 			'delFlag' => 0
 		);
@@ -468,7 +473,10 @@ class JobModel extends CI_Model {
 					skill.skillName,
 					country.countryName as jobLocation,
 					cmpy.incharge,
-					cmpy.contact'
+					cmpy.contact,
+					user.name AS jobSeekerName,
+					user.gender,
+					user.contact AS jobSeekerContact'
 				)
 			->from('apply_job_details as ajd')
 			// this is the left join in codeigniter
@@ -477,7 +485,8 @@ class JobModel extends CI_Model {
 			->join('m_role as role','role.roleId = jd.role','left')
 			->join('m_skill as skill','skill.skillId = jd.requiredSkill','left')
 			->join('m_country as country','country.countryId = jd.jobLocation','left')
-			->join('m_designation as dest','dest.designationId = jd.jobCategory','left');
+			->join('m_designation as dest','dest.designationId = jd.jobCategory','left')
+			->join('users as user','user.userName = ajd.jobSeekerId','left');
 
 		$this->db->where(array('ajd.id' => $id));
 		$jobApplyDetail = $this->db->get();
@@ -525,19 +534,21 @@ class JobModel extends CI_Model {
 		$this->db->join('job_details as jd','jd.id = ajd.jobId','left');
 		$this->db->join('m_designation as dest','dest.designationId = jd.jobCategory','left');
 		if ($this->session->userdata('flag') == 3) {
-			$this->db->where(array('ajd.created_by' => $userName));
+			$this->db->where(array('ajd.jobSeekerId' => $userName));
+		} else if($this->session->userdata('flag') == 2) {
+			$this->db->where(array('ajd.companyId' => $userName));
 		}
 		$result = $this->db->get();
 		return $result->result()['0']->numrows;
 	}
 
 	/**
-	 * This jobResultAdd method are used to data get data from database
+	 * This getJobAppliedDetail method are used to data get data from database
 	 * @return to the jobResultAdd variable to controller with data according to database results
 	 * @author kulasekaran.
 	 *
 	 */
-	function jobResultAdd() {
+	function getJobAppliedDetail() {
 		$userName = $this->session->userdata('userName');
 		$id = $this->input->post('hiddenApplyJobId');
 		$this->db->select(
@@ -545,13 +556,18 @@ class JobModel extends CI_Model {
 					ajd.jobId,
 					ajd.companyId,
 					ajd.jobSeekerId,
+					ajd.applyDate,
 					cmpy.companyName,
 					jd.salary,
 					jd.jobType,
-					jd.extraSkill,
+					jd.maxAge,
+					jd.lastApplyDate,
 					skill.skillName,
 					country.countryName as jobLocation,
 					dest.designationName AS jobCategory,
+					role.roleName,
+					minqual.minQualification,
+					user.userName,
 					user.name AS jobSeekerName,
 					user.gender,
 					user.contact'
@@ -563,12 +579,13 @@ class JobModel extends CI_Model {
 			->join('m_skill as skill','skill.skillId = jd.requiredSkill','left')
 			->join('m_country as country','country.countryId = jd.jobLocation','left')
 			->join('m_designation as dest','dest.designationId = jd.jobCategory','left')
+			->join('m_role as role','role.roleId = jd.role','left')
+			->join('m_min_qualification as minqual','minqual.minQualificationId = jd.minQualification','left')
 			->join('users as user','user.userName = ajd.jobSeekerId','left');
 
 		$this->db->where(array('ajd.id' => $id));
-		$jobResultAdd = $this->db->get();
-		// print_r($jobResultAdd->result()[0]);exit();
-		return $jobResultAdd->result()[0];
+		$jobAppliedDetail = $this->db->get();
+		return $jobAppliedDetail->result()[0];
 	}
 
 	/**
@@ -583,8 +600,8 @@ class JobModel extends CI_Model {
 			'jobId' => $this->input->post('hiddenJobId'),
 			'companyId' => $this->input->post('hiddenCompanyId'),
 			'jobSeekerId' => $this->input->post('hiddenJobSeekerId'),
-			'resultDate' => date('yy-m-d'),
-			'totalMark' => $this->input->post('totalMark'),
+			'resultDate' => date('Y-m-d'),
+			// 'totalMark' => $this->input->post('totalMark'),
 			'obtainMark' => $this->input->post('obtainMark'),
 			'resultStatus' => $this->input->post('resultStatus'),
 			'created_by' => $userName,

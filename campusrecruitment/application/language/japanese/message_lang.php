@@ -70,12 +70,12 @@ $lang['lbl_cancelled'] = 'キャンセル';
 $lang['lbl_oneMore'] = 'もう1つ';
 $lang['lbl_applyDetail'] = '詳細を適用';
 $lang['lbl_appliedDate'] = '適用日';
-$lang['lbl_addResult'] = 'Add Result';
-$lang['lbl_resultAdd'] = 'Result Add';
-$lang['lbl_resultEdit'] = 'Result Edit';
-$lang['lbl_totalMark'] = 'Total Mark';
-$lang['lbl_obtainMark'] = 'Obtain Mark';
-$lang['lbl_resultStatus'] = 'Result Status';
+$lang['lbl_addResult'] = '結果を追加';
+$lang['lbl_resultAdd'] = '結果追加';
+$lang['lbl_resultEdit'] = '結果編集';
+$lang['lbl_totalMark'] = 'トータルマーク';
+$lang['lbl_obtainMark'] = 'マークを取得';
+$lang['lbl_resultStatus'] = '結果ステータス';
 
 // home screen label
 $lang['lbl_findJobIntro'] = 'あなたの人生に合った仕事を見つけましょう';

@@ -16,6 +16,6 @@ function fnBackBtn() {
 // add result button process
 function fnJobResultAdd(id) {
 	$('#hiddenApplyJobId').val(id);
-	$("#applyDetailForm").attr("action", "jobResultAdd");
+	$("#applyDetailForm").attr("action", "getJobAppliedDetail");
 	$('#applyDetailForm').submit();
 }

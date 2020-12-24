@@ -29,4 +29,6 @@ $lang['less_than_equal_to'] = 'The {field} must be less than {param}.';
 
 $lang['jobSeeker_email_existing_check'] = 'The {field} already exists.';
 
+$lang['numeric'] = 'The {field} field must be a number.';
+
 ?>

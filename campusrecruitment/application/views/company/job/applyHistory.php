@@ -113,9 +113,9 @@
                                 <col>
                                 <col width="15%">
                                 <col width="8%">
-                                <col width="11%">
-                                <col width="11%">
                                 <col width="12%">
+                                <col width="12%">
+                                <col width="13%">
                                 <col width="10%">
                             </colgroup>
                             <thead class="thead">
@@ -129,7 +129,7 @@
                                     <?php if ($this->session->userdata('flag') == 3) { ?>
                                         <th><?php echo lang('lbl_incharge'); ?>/<?php echo lang('lbl_contact'); ?></th>
                                     <?php } else { ?>
-                                        <th title="<?php echo lang('lbl_companyName'); ?>/<?php echo lang('lbl_contact'); ?>"><?php echo lang('lbl_name'); ?>/<?php echo lang('lbl_contact'); ?></th>
+                                        <th title="<?php echo lang('lbl_jobSeekerName'); ?>/<?php echo lang('lbl_contact'); ?>"><?php echo lang('lbl_name'); ?>/<?php echo lang('lbl_contact'); ?></th>
                                     <?php } ?>
                                     <th></th>
                                 </tr>
@@ -145,7 +145,11 @@
                                             <td class="tac vam"><?php echo $history->salary; ?></td>
                                             <td class="tac vam"><?php echo $history->lastApplyDate; ?></td>
                                             <td class="tac vam"><?php echo $history->applyDate; ?></td>
-                                            <td class="vam"><?php echo $history->incharge; ?><br><?php echo $history->contact; ?></td>
+                                            <?php if ($this->session->userdata('flag') == 3) { ?>
+                                                <td class="vam"><?php echo $history->incharge; ?><br><?php echo $history->contact; ?></td>
+                                            <?php } else { ?>
+                                                <td class="vam"><?php echo $history->jobSeekerName; ?><br><?php echo $history->jobSeekerContact; ?></td>
+                                            <?php } ?>
                                             <td class="tac vam">
                                                 <a href="javascript:;" onclick="fnJobApplyDetail(<?php echo $history->id;?>)" class="m3">
                                                     <img class="w20" 

@@ -34,7 +34,7 @@
                 <div class="col-lg-9">
                     <div class="card shadow-lg border-0 rounded-lg mt-4">
                         <div class="card-header">
-                            <h3 class="text-center font-weight-light fs20">
+                            <h3 class="text-center font-weight-light">
                                 <?php 
                                     if(isset($jobEdit)) {
                                         echo lang('lbl_resultEdit');
@@ -60,11 +60,74 @@
                                 <input type="hidden" id="screenFlag" name="screenFlag" value= "1" >
                             <?php } ?>
                                 <input type="hidden" id="base" value="<?php echo base_url(); ?>">
-                                <!-- company name -->
+                                <!-- job category -->
                                 <div class="form-group form-inline">
-                                    <?php echo lang('lbl_companyName', 'companyName', array('class' => 'col-md-4 control-label')); ?>
+                                    <?php echo lang('lbl_jobCategory', 'jobCategory', array('class' => 'col-md-4 control-label')); ?>
                                     <div class="col-md-8">
-                                        <?php echo $jobResultAdd->companyName; ?>
+                                        <?php echo $jobResultAdd->jobCategory; ?>
+                                    </div>
+                                </div>
+                                <!-- job type -->
+                                <div class="form-group form-inline">
+                                    <?php echo lang('lbl_jobType', 'jobType', array('class' => 'col-md-4 control-label')); ?>
+                                    <div class="col-md-8">
+                                        <?php echo $jobResultAdd->jobType == 1 ? 'Part-Time' : 'Full-Time'; ?>
+                                    </div>
+                                </div>
+                                <!-- job role -->
+                                <div class="form-group form-inline">
+                                    <?php echo lang('lbl_role', 'role', array('class' => 'col-md-4 control-label')); ?>
+                                    <div class="col-md-8">
+                                        <?php echo $jobResultAdd->roleName; ?>
+                                    </div>
+                                </div>
+                                <!-- required skill -->
+                                <div class="form-group form-inline">
+                                    <?php echo lang('lbl_requiredSkill', 'requiredSkill', array('class' => 'col-md-4 control-label')); ?>
+                                    <div class="col-md-8">
+                                        <?php echo $jobResultAdd->skillName; ?>
+                                    </div>
+                                </div>
+                                <!-- minimum qualification -->
+                                <div class="form-group form-inline">
+                                    <?php echo lang('lbl_minQualification', 'minQualification', array('class' => 'col-md-4 control-label')); ?>
+                                    <div class="col-md-8">
+                                        <?php echo $jobResultAdd->minQualification; ?>
+                                    </div>
+                                </div>
+                                <!-- maximum age -->
+                                <div class="form-group form-inline">
+                                    <?php echo lang('lbl_maxAge', 'maxAge', array('class' => 'col-md-4 control-label')); ?>
+                                    <div class="col-md-8">
+                                        <?php echo $jobResultAdd->maxAge; ?>
+                                    </div>
+                                </div>
+                                <!-- salary -->
+                                <div class="form-group form-inline">
+                                    <?php echo lang('lbl_salary', 'salary', array('class' => 'col-md-4 control-label')); ?>
+                                    <div class="col-md-8">
+                                        <?php echo $jobResultAdd->salary; ?>
+                                    </div>
+                                </div>
+                                <!-- last apply date -->
+                                <div class="form-group form-inline">
+                                    <?php echo lang('lbl_lastApplyDate', 'lastApplyDate', array('class' => 'col-md-4 control-label')); ?>
+                                    <div class="col-md-8">
+                                        <?php echo $jobResultAdd->lastApplyDate; ?>
+                                    </div>
+                                </div>
+                                <!-- applied date -->
+                                <div class="form-group form-inline">
+                                    <?php echo lang('lbl_appliedDate', 'appliedDate', array('class' => 'col-md-4 control-label')); ?>
+                                    <div class="col-md-8">
+                                        <?php echo $jobResultAdd->applyDate; ?>
+                                    </div>
+                                </div>
+                                <!-- userName -->
+                                <div class="form-group form-inline">
+                                    <?php echo lang('lbl_userName', 'userName', array('class' => 'col-md-4 control-label')); ?>
+                                    <div class="col-md-8">
+                                        <?php echo $jobResultAdd->userName; ?>
                                     </div>
                                 </div>
                                 <!-- job seeker name -->
@@ -81,13 +144,6 @@
                                         <?php echo $jobResultAdd->gender == 1? 'Male' : 'Female'; ?>
                                     </div>
                                 </div>
-                                <!-- job category -->
-                                <div class="form-group form-inline">
-                                    <?php echo lang('lbl_jobCategory', 'jobCategory', array('class' => 'col-md-4 control-label')); ?>
-                                    <div class="col-md-8">
-                                        <?php echo $jobResultAdd->jobCategory; ?>
-                                    </div>
-                                </div>
                                 <!-- contact -->
                                 <div class="form-group form-inline">
                                     <?php echo lang('lbl_contact', 'contact', array('class' => 'col-md-4 control-label')); ?>
@@ -97,6 +153,12 @@
                                 </div>
                                 <!-- total mark -->
                                 <div class="form-group form-inline">
+                                    <?php echo lang('lbl_totalMark', 'totalMark', array('class' => 'col-md-4 control-label')); ?>
+                                    <div class="col-md-8">
+                                        100% [<span style="color:red;">Note :</span> Obtain Mark is considered as percentage]
+                                    </div>
+                                </div>
+                                <!-- <div class="form-group form-inline">
                                     <?php echo lang('lbl_totalMark', 'totalMark', array('class' => 'col-md-4 control-label required')); ?>
                                     <div class="col-md-8">
                                         <?php
@@ -113,7 +175,7 @@
                                             <?php echo form_error('totalMark'); ?>
                                         </div>
                                     </div>
-                                </div>
+                                </div> -->
                                 <!-- obtain mark -->
                                 <div class="form-group form-inline">
                                     <?php echo lang('lbl_obtainMark', 'obtainMark', array('class' => 'col-md-4 control-label required')); ?>

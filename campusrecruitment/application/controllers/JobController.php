@@ -322,13 +322,13 @@ class JobController extends CI_Controller {
 	}
 
 	/**
-	 * This jobResultAdd method are used for goto the job result add screen
+	 * This getJobAppliedDetail method are used for goto the job result add screen
 	 * @return to view screen [ company/job/result/addEdit ]
 	 * @author kulasekaran.
 	 *
 	 */
-	public function jobResultAdd() {
-		$data['jobResultAdd'] = $this->JobModel->jobResultAdd();
+	public function getJobAppliedDetail() {
+		$data['jobResultAdd'] = $this->JobModel->getJobAppliedDetail();
 		$this->layouts->view('company/job/result/addEdit', $data);
 	}
 

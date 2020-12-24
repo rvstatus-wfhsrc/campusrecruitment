@@ -4,7 +4,7 @@ $(document).ready(function() {
         $(".addEditProcess").attr("disabled", true);
             resetErrors();
             var url = 'jobResultAddEditFormValidation';
-            $.each($('form input, form hidden, form radio,form select'), function(i, v) {
+            $.each($('form input, form hidden, form radio'), function(i, v) {
                 if (v.type !== 'submit') {
                     data[v.name] = v.value;
                 }
@@ -33,7 +33,6 @@ $(document).ready(function() {
                             if(confirm(confRegMsg)) {
                                 $(".addEditProcess").attr("disabled", false);
                                 $("input").removeAttr('disabled');
-                                $("select").removeAttr('disabled');
                                 $('#addForm').submit();
                             } else {
                                 $(".addEditProcess").attr("disabled", false);
@@ -43,7 +42,6 @@ $(document).ready(function() {
                             if(confirm(confUpdateMsg)) {
                                 $(".addEditProcess").attr("disabled", false);
                                 $("input").removeAttr('disabled');
-                                $("select").removeAttr('disabled');
                                 $('#editForm').submit();
                             } else {
                                 $(".addEditProcess").attr("disabled", false);
@@ -58,7 +56,7 @@ $(document).ready(function() {
                                 $('input[name="' + i + '"]').addClass('inputTxtError');
                                 $('.resultStatusError').append(msg);
                             }else {
-                                $('input[name="' + i + '"], select[name="' + i + '"]').addClass('inputTxtError').after(msg);
+                                $('input[name="' + i + '"]').addClass('inputTxtError').after(msg);
                             }
                         }); 
                         $(".addEditProcess").attr("disabled", false);
@@ -75,6 +73,6 @@ $(document).ready(function() {
 });
 
 function resetErrors() {
-    $('form input, form select').removeClass('inputTxtError');
+    $('form input').removeClass('inputTxtError');
     $('label.error').remove();
 }

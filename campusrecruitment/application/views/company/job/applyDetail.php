@@ -80,18 +80,33 @@
 			</div>
 			<div class="box ml-4 mb-4">
 				<div class="container content">
-					<div>
-						<div class="leftSide"><?php echo $this->lang->line("lbl_companyName"); ?> : </div>
-						<div class="rightSide"><?php echo $jobApplyDetail->companyName; ?></div>
-					</div>
-					<div>
-						<div class="leftSide"><?php echo $this->lang->line("lbl_incharge"); ?> : </div>
-						<div class="rightSide"><?php echo $jobApplyDetail->incharge; ?></div>
-					</div>
-					<div>
-						<div class="leftSide"><?php echo $this->lang->line("lbl_contact"); ?> : </div>
-						<div class="rightSide"><?php echo $jobApplyDetail->contact; ?></div>
-					</div>
+					<?php if ($this->session->userdata('flag') == 3) { ?>
+						<div>
+							<div class="leftSide"><?php echo $this->lang->line("lbl_companyName"); ?> : </div>
+							<div class="rightSide"><?php echo $jobApplyDetail->companyName; ?></div>
+						</div>
+						<div>
+							<div class="leftSide"><?php echo $this->lang->line("lbl_incharge"); ?> : </div>
+							<div class="rightSide"><?php echo $jobApplyDetail->incharge; ?></div>
+						</div>
+						<div>
+							<div class="leftSide"><?php echo $this->lang->line("lbl_contact"); ?> : </div>
+							<div class="rightSide"><?php echo $jobApplyDetail->contact; ?></div>
+						</div>
+					<?php } else { ?>
+						<div>
+							<div class="leftSide"><?php echo $this->lang->line("lbl_jobSeekerName"); ?> : </div>
+							<div class="rightSide"><?php echo $jobApplyDetail->jobSeekerName; ?></div>
+						</div>
+						<div>
+							<div class="leftSide"><?php echo $this->lang->line("lbl_gender"); ?> : </div>
+							<div class="rightSide"><?php echo $jobApplyDetail->gender == 1? 'Male' : 'Female'; ?></div>
+						</div>
+						<div>
+							<div class="leftSide"><?php echo $this->lang->line("lbl_contact"); ?> : </div>
+							<div class="rightSide"><?php echo $jobApplyDetail->jobSeekerContact; ?></div>
+						</div>
+					<?php } ?>
 					<div>
 						<div class="leftSide"><?php echo $this->lang->line("lbl_jobCategory"); ?> : </div>
 						<div class="rightSide"><?php echo $jobApplyDetail->jobCategory; ?></div>
