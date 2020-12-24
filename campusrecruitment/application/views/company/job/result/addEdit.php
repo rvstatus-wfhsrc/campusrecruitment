@@ -54,6 +54,7 @@
                                 <!-- job add process form-->
                                 <?php echo form_open('JobController/jobResultAddForm',
                                     ['method' => 'POST', 'class' => 'form-horizontal','id' => 'addForm','name' => 'addForm']); ?>
+                                <input type="hidden" id="hiddenApplyJobId" name="hiddenApplyJobId" value= "<?php echo $jobResultAdd->id; ?>" >
                                 <input type="hidden" id="hiddenJobId" name="hiddenJobId" value= "<?php echo $jobResultAdd->jobId; ?>" >
                                 <input type="hidden" id="hiddenCompanyId" name="hiddenCompanyId" value= "<?php echo $jobResultAdd->companyId; ?>" >
                                 <input type="hidden" id="hiddenJobSeekerId" name="hiddenJobSeekerId" value= "<?php echo $jobResultAdd->jobSeekerId; ?>" >

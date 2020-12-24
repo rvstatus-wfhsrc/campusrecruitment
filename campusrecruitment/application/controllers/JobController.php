@@ -313,10 +313,13 @@ class JobController extends CI_Controller {
 	 *
 	 */
 	public function jobApplyDetail() {
-		if($this->input->post('hiddenApplyJobId') == null) {
-            redirect('JobController/jobApplyHistory');
+		if($this->input->post('hiddenApplyJobId') != null) {
+			$hiddenApplyJobId = $this->input->post('hiddenApplyJobId');
+        }elseif ($this->session->flashdata('hiddenApplyJobId')) {
+        	$hiddenApplyJobId = $this->session->flashdata('hiddenApplyJobId');
+        } else {
+        	redirect('JobController/jobApplyHistory');
         }
-		$hiddenApplyJobId = $this->input->post('hiddenApplyJobId');
 		$data['jobApplyDetail'] = $this->JobModel->jobApplyDetail($hiddenApplyJobId);
 		$this->layouts->view('company/job/applyDetail',$data);
 	}
@@ -343,7 +346,8 @@ class JobController extends CI_Controller {
 		if($jobResultAddStatus){
 			$this->session->set_flashdata([
 				'message'  => 'Job Result Details Add Successfully',
-				'type' => 'success'
+				'type' => 'success',
+				'hiddenApplyJobId' => $this->input->post('hiddenApplyJobId')
 			]);
 		} else {
 			$this->session->set_flashdata([
