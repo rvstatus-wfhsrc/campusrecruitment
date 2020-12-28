@@ -107,7 +107,7 @@
                                 <div class="form-group form-inline">
                                     <?php echo lang('lbl_salary', 'salary', array('class' => 'col-md-4 control-label')); ?>
                                     <div class="col-md-8">
-                                        <?php echo $jobResultAdd->salary; ?>
+                                        <?php echo number_format($jobResultAdd->salary); ?> &#8377;
                                     </div>
                                 </div>
                                 <!-- last apply date -->
@@ -127,15 +127,15 @@
                                 <!-- userName -->
                                 <div class="form-group form-inline">
                                     <?php echo lang('lbl_userName', 'userName', array('class' => 'col-md-4 control-label')); ?>
-                                    <div class="col-md-8">
-                                        <?php echo $jobResultAdd->userName; ?>
+                                    <div class="col-md-8 teal">
+                                        <b><?php echo $jobResultAdd->userName; ?></b>
                                     </div>
                                 </div>
                                 <!-- job seeker name -->
                                 <div class="form-group form-inline">
                                     <?php echo lang('lbl_jobSeekerName', 'jobSeekerName', array('class' => 'col-md-4 control-label')); ?>
-                                    <div class="col-md-8">
-                                        <?php echo $jobResultAdd->jobSeekerName; ?>
+                                    <div class="col-md-8 teal">
+                                        <b><?php echo $jobResultAdd->jobSeekerName; ?></b>
                                     </div>
                                 </div>
                                 <!-- gender -->
@@ -156,7 +156,7 @@
                                 <div class="form-group form-inline">
                                     <?php echo lang('lbl_totalMark', 'totalMark', array('class' => 'col-md-4 control-label')); ?>
                                     <div class="col-md-8">
-                                        100% [<span style="color:red;">Note :</span> Obtain Mark is considered as percentage]
+                                        100 % (<span style="color:red;"><?php echo lang('lbl_note'); ?> :</span> <?php echo lang('lbl_noteObtainMark'); ?>)
                                     </div>
                                 </div>
                                 <!-- <div class="form-group form-inline">
@@ -185,15 +185,13 @@
                                             $fields = array(
                                                 'id' => 'obtainMark',
                                                 'name' => 'obtainMark',
-                                                'placeholder' => 'Enter Obtain Mark',
-                                                'class' => 'input_box col-md-12 form-control w43 h-25',
+                                                'placeholder' => 'Obtain Mark',
+                                                'class' => 'input_box col-md-12 form-control w25 h-25 obtainMark',
                                                 'value' => set_value('obtainMark',isset($jobEdit->obtainMark) ? $jobEdit->obtainMark : false)
                                             );
                                             echo form_input($fields);
                                         ?>
-                                        <div class="error">
-                                            <?php echo form_error('obtainMark'); ?>
-                                        </div>
+                                        <span class="obtainMarkError">%</span>
                                     </div>
                                 </div>
                                 <!-- result status -->

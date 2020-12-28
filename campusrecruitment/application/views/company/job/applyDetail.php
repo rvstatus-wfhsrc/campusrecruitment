@@ -71,7 +71,7 @@
 						<?php echo $this->lang->line("lbl_cancel"); ?>
 					</a>
 				<?php } ?>
-				<?php if ($this->session->userdata('flag') == 2) { ?>
+				<?php if ($this->session->userdata('flag') == 2 && $jobApplyDetail->delFlag == 0) { ?>
 					<a class="btn btn-success editBtn" href="javascript:;" onclick="fnJobResultAdd(<?php echo $jobApplyDetail->id;?>)">
 						<i class="fa fa-plus"></i>
 						<?php echo $this->lang->line("lbl_addResult"); ?>

@@ -611,4 +611,113 @@ class JobModel extends CI_Model {
 		$jobResultAddStatus = $this->db->insert('job_result_details', $jobResultAddData);
 		return $jobResultAddStatus;
 	}
+
+	/**
+	 * This jobResultHistory method are used to retrieves the data from job_result_details to data base
+	 * @param records limit and start value is passed by JobController
+	 * @return to return the jobResultHistory array value to controller
+	 * @author kulasekaran.
+	 *
+	 */
+	function jobResultHistory($limit, $start) {
+		$userName = $this->session->userdata('userName');
+		$filterVal = $this->input->post('filterVal');
+		$this->db->limit($limit, $start);
+		$this->db->select(
+					'jrd.id,
+					jrd.jobId,
+					jrd.companyId,
+					jrd.jobSeekerId,
+					jrd.resultDate,
+					jrd.obtainMark,
+					jrd.resultStatus,
+					jrd.delFlag,
+					jd.lastApplyDate,
+					cmpy.companyName,
+					dest.designationName AS jobCategory,
+					jd.salary,
+					cmpy.incharge,
+					cmpy.contact,
+					user.name AS jobSeekerName,
+					user.gender,
+					user.contact AS jobSeekerContact'
+				)
+			->from('job_result_details as jrd')
+			// this is the left join in codeigniter
+			->join('company as cmpy','cmpy.userName = jrd.companyId','left')
+			->join('job_details as jd','jd.id = jrd.jobId','left')
+			->join('m_designation as dest','dest.designationId = jd.jobCategory','left')
+			->join('users as user','user.userName = jrd.jobSeekerId','left');
+			
+			// filter process
+			if ($filterVal == 2) {
+				$this->db->where(array('jrd.resultStatus' => 1));
+			} elseif ($filterVal == 3) {
+				$this->db->where(array('jrd.resultStatus' => 2));
+			}
+
+			// search process
+			$hiddenSearch = $this->input->post('hiddenSearch');
+			if($hiddenSearch != ""){
+				$this->db->like('jrd.resultDate',trim($hiddenSearch));
+			}
+
+			// sorting process
+			$sortOptn = $this->input->post('sortOptn');
+			$sortVal = $this->input->post('sortVal');
+			if ($sortVal == 1) {
+				$this->db->order_by('user.name', $sortOptn);
+			} else if ($sortVal == 2) {
+				$this->db->order_by('jrd.obtainMark', $sortOptn);
+			} else {
+				$this->db->order_by('user.name', 'ASC');
+			}
+			$this->db->where(array('jrd.companyId' => $userName));
+		$jobResultHistory = $this->db->get();
+		return $jobResultHistory->result();
+	}
+
+	/**
+	 * This record_count_for_job_result method are used to get the total count of data from job_result_details table
+	 * @return to the total count value to controller
+	 * @author kulasekaran.
+	 *
+	 */
+	public function record_count_for_job_result() {
+		// filter process
+		$userName = $this->session->userdata('userName');
+		$filterVal = $this->input->post('filterVal');
+		// filter process
+		if ($filterVal == 2) {
+			$this->db->where(array('jrd.resultStatus' => 1));
+		} elseif ($filterVal == 3) {
+			$this->db->where(array('jrd.resultStatus' => 2));
+		}
+
+		// search process
+		$hiddenSearch = $this->input->post('hiddenSearch');
+		if($hiddenSearch != ""){
+			$this->db->like('jrd.resultDate',trim($hiddenSearch));
+		}
+
+		// sorting process
+		$sortOptn = $this->input->post('sortOptn');
+		$sortVal = $this->input->post('sortVal');
+		if ($sortVal == 1) {
+			$this->db->order_by('user.name', $sortOptn);
+		} else if ($sortVal == 2) {
+			$this->db->order_by('jrd.obtainMark', $sortOptn);
+		} else {
+			$this->db->order_by('user.name', 'ASC');
+		}
+		$this->db->select('COUNT(jrd.id) as numrows');
+		$this->db->from('job_result_details as jrd');
+		$this->db->join('company as cmpy','cmpy.userName = jrd.companyId','left');
+		$this->db->join('job_details as jd','jd.id = jrd.jobId','left');
+		$this->db->join('m_designation as dest','dest.designationId = jd.jobCategory','left');
+		$this->db->join('users as user','user.userName = jrd.jobSeekerId','left');
+		$this->db->where(array('jrd.companyId' => $userName));
+		$result = $this->db->get();
+		return $result->result()['0']->numrows;
+	}
 }

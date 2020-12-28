@@ -173,6 +173,9 @@
                                         <a class="nav-link <?php echo ($this->uri->segment(2)=='jobApplyHistory')?'active':''; ?>" href="<?php echo site_url('JobController/jobApplyHistory') ?>">
                                             <?php echo lang('lbl_applyHistory'); ?>
                                         </a>
+                                        <a class="nav-link <?php echo ($this->uri->segment(2)=='jobResultHistory')?'active':''; ?>" href="<?php echo site_url('JobController/jobResultHistory') ?>">
+                                            <?php echo lang('lbl_resultHistory'); ?>
+                                        </a>
                                     </nav>
                                 </div>
                             <?php } else { ?>

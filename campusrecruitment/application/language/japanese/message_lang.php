@@ -67,7 +67,7 @@ $lang['lbl_applyHistory'] = '履歴を適用';
 $lang['lbl_cancel'] = 'キャンセル';
 $lang['lbl_applied'] = 'アプライド';
 $lang['lbl_cancelled'] = 'キャンセル';
-$lang['lbl_oneMore'] = 'もう1つ';
+$lang['lbl_findNewJob'] = 'Find New Job';
 $lang['lbl_applyDetail'] = '詳細を適用';
 $lang['lbl_appliedDate'] = '適用日';
 $lang['lbl_addResult'] = '結果を追加';
@@ -76,6 +76,12 @@ $lang['lbl_resultEdit'] = '結果編集';
 $lang['lbl_totalMark'] = 'トータルマーク';
 $lang['lbl_obtainMark'] = 'マークを取得';
 $lang['lbl_resultStatus'] = '結果ステータス';
+$lang['lbl_resultHistory'] = 'Result History';
+$lang['lbl_resultDate'] = 'Result Date';
+$lang['lbl_pass'] = 'Pass';
+$lang['lbl_fail'] = 'Fail';
+$lang['lbl_note'] = 'Note';
+$lang['lbl_noteObtainMark'] = 'Obtain Mark is considered as percentage';
 
 // home screen label
 $lang['lbl_findJobIntro'] = 'あなたの人生に合った仕事を見つけましょう';

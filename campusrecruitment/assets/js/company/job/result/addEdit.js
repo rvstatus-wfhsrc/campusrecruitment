@@ -55,7 +55,10 @@ $(document).ready(function() {
                             if ($('input[name="' + i + '"]').hasClass('resultStatus')) {
                                 $('input[name="' + i + '"]').addClass('inputTxtError');
                                 $('.resultStatusError').append(msg);
-                            }else {
+                            } else if($('input[name="' + i + '"]').hasClass('obtainMark')) {
+                                $('input[name="' + i + '"]').addClass('inputTxtError');
+                                $('.obtainMarkError').append(msg);
+                            } else {
                                 $('input[name="' + i + '"]').addClass('inputTxtError').after(msg);
                             }
                         }); 

@@ -128,12 +128,12 @@ class JobController extends CI_Controller {
 	 * @author kulasekaran.
 	 *
 	 */
-    public function jobStatus() {
-    	$id = $this->input->post('hiddenJobId');
-    	$delFlag = $this->input->post('hiddenDelFlag');
-        $jobStatus = $this->JobModel->jobStatus($id,$delFlag);
-        return redirect('JobController/jobList');
-    }
+	public function jobStatus() {
+		$id = $this->input->post('hiddenJobId');
+		$delFlag = $this->input->post('hiddenDelFlag');
+		$jobStatus = $this->JobModel->jobStatus($id,$delFlag);
+		return redirect('JobController/jobList');
+	}
 
 	/**
 	 * This jobDetail methond are used to get the data from model for the specfic job details
@@ -143,8 +143,8 @@ class JobController extends CI_Controller {
 	 */
 	public function jobDetail() {
 		if($this->session->flashdata('hiddenJobId') == null && $this->input->post('hiddenJobId') == null) {
-            redirect('JobController/jobList');
-        }
+			redirect('JobController/jobList');
+		}
 		$hiddenJobId = $this->input->post('hiddenJobId');
 		if($this->session->flashdata('hiddenJobId')){
 			$hiddenJobId = $this->session->flashdata('hiddenJobId');
@@ -355,7 +355,7 @@ class JobController extends CI_Controller {
 				'type' => 'danger'
 			]);
 		}
-		redirect('JobController/jobApplyDetail');
+		redirect('JobController/jobResultHistory');
 	}
 
 	/**
@@ -371,5 +371,48 @@ class JobController extends CI_Controller {
 		} else {
 			echo json_encode(true); exit();
 		}
+	}
+
+	/**
+	 * This jobResultHistory method are used to get the data from model for the result of applied jobs by specfic job seeker
+	 * @return to view screen [ company/job/resultHistory ]
+	 * @author kulasekaran.
+	 *
+	 */
+	public function jobResultHistory() {
+		// filter process
+		$filterVal = $this->input->post('filterVal');
+		$data['disableAll'] = "";
+		$data['disablePass'] = "";
+		$data['disableFail'] = "";
+		if ($filterVal == 2) {
+			$data['disablePass'] = "disabled";
+		} elseif ($filterVal == 3) {
+			$data['disableFail'] = "disabled";
+		} else {
+			$data['disableAll'] = "disabled";
+		}
+
+		// sorting process style
+		$sortOptn = $this->input->post('sortOptn');
+		$data['sortStyle'] = "sort_asc";
+		if(isset($sortOptn) && $sortOptn == "ASC") {
+			$data['sortStyle'] = "sort_asc";
+		} elseif(isset($sortOptn) && $sortOptn == "DESC") {
+			$data['sortStyle'] = "sort_desc";
+		}
+		$data['sortArray'] = array('1' => 'Job Seeker Name','2' => 'Obtain Mark');
+
+		// pagination process
+		$totalRecord = $this->JobModel->record_count_for_job_result();
+		$pagination_config = $this->CommonModel->paginationConfig($totalRecord,base_url()."JobController/jobApplyHistory");
+		$this->pagination->initialize($pagination_config);
+		$page = (($this->input->post('per_page') != null)) ? $this->input->post('per_page') : 0;
+		$data["serialNumber"] = $page;
+
+		$data["links"] = $this->pagination->create_links();
+		$data['jobResultHistory'] = $this->JobModel->jobResultHistory($pagination_config["per_page"], $page);
+
+		$this->layouts->view('company/job/result/history',$data);
 	}
 }

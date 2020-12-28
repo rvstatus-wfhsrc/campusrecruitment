@@ -67,7 +67,7 @@ $lang['lbl_applyHistory'] = 'Apply History';
 $lang['lbl_cancel'] = 'Cancel';
 $lang['lbl_applied'] = 'Applied';
 $lang['lbl_cancelled'] = 'Cancelled';
-$lang['lbl_oneMore'] = 'One More';
+$lang['lbl_findNewJob'] = 'Find New Job';
 $lang['lbl_applyDetail'] = 'Apply Detail';
 $lang['lbl_appliedDate'] = 'Applied Date';
 $lang['lbl_addResult'] = 'Add Result';
@@ -76,6 +76,12 @@ $lang['lbl_resultEdit'] = 'Result Edit';
 $lang['lbl_totalMark'] = 'Total Mark';
 $lang['lbl_obtainMark'] = 'Obtain Mark';
 $lang['lbl_resultStatus'] = 'Result Status';
+$lang['lbl_resultHistory'] = 'Result History';
+$lang['lbl_resultDate'] = 'Result Date';
+$lang['lbl_pass'] = 'Pass';
+$lang['lbl_fail'] = 'Fail';
+$lang['lbl_note'] = 'Note';
+$lang['lbl_noteObtainMark'] = 'Obtain Mark is considered as percentage';
 
 // home screen label
 $lang['lbl_findJobIntro'] = 'Find the job that fits your life';

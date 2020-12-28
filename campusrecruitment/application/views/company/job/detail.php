@@ -67,12 +67,12 @@
 				<a class="btn btn-info editBtn" href="javascript:;" onclick="fnBackBtn()">
 					<i class="fa fa-chevron-left fa-btn"></i><?php echo lang('lbl_back'); ?>
 				</a>
-				<?php if ($this->session->userdata('flag') == 2) { ?>
+				<?php if ($this->session->userdata('flag') == 2 && $jobDetail->delFlag == 0) { ?>
 					<a class="btn bg-warning text-white editBtn" href="javascript:;" onclick="fnJobEdit()">
 						<i class="fa fa-edit fa-btn"></i>
 						<?php echo $this->lang->line("lbl_edit"); ?>
 					</a>
-				<?php } else { ?>
+				<?php } elseif($this->session->userdata('flag') == 3) { ?>
 					<a class="btn apply_btn text-white editBtn" href="javascript:;" onclick="fnJobApply(<?php echo $jobDetail->id;?> , '<?php echo $jobDetail->companyId;?>')">
 						<i class="fa fa-check"></i>
 						<?php echo $this->lang->line("lbl_apply"); ?>
