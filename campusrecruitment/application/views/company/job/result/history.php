@@ -45,7 +45,7 @@
                 <div class="container-fluid dispNone">
                     <?php echo form_open('JobController/jobApplyDetail',['method' => 'POST','id' => 'historyForm','name' => 'historyForm']); ?>
                         <input type="hidden" id="base" value="<?php echo base_url(); ?>">
-                        <input type="hidden" id="hiddenApplyJobId" name="hiddenApplyJobId">
+                        <input type="hidden" id="hiddenResultJobId" name="hiddenResultJobId">
                         <input type="hidden" id="per_page" name="per_page">
                         <input type="hidden" id="hiddenSearch" name="hiddenSearch" value="<?php echo $this->input->post('hiddenSearch'); ?>">
 
@@ -106,25 +106,41 @@
                             <colgroup>
                                 <col width="1%">
                                 <col>
-                                <col width="8%">
+                                <?php if($this->session->userdata('flag') == 2) { ?>
+                                    <col width="8%">
+                                <?php } else { ?>
+                                    <col width="11%">
+                                <?php } ?>
                                 <col width="15%">
                                 <col width="11%">
                                 <col width="10%">
                                 <col width="10%">
                                 <col width="11%">
-                                <col width="9%">
+                                <?php if($this->session->userdata('flag') == 2) { ?>
+                                    <col width="9%">
+                                <?php } ?>
                             </colgroup>
                             <thead class="thead">
                                 <tr>
                                     <th><?php echo lang('lbl_serialNumber'); ?></th>
-                                    <th><?php echo lang('lbl_jobSeekerName'); ?></th>
-                                    <th><?php echo lang('lbl_gender'); ?></th>
+                                    <?php if($this->session->userdata('flag') == 2) { ?>
+                                        <th><?php echo lang('lbl_jobSeekerName'); ?></th>
+                                    <?php } else { ?>
+                                        <th><?php echo lang('lbl_companyName'); ?></th>
+                                    <?php } ?>
+                                    <?php if($this->session->userdata('flag') == 2) { ?>
+                                        <th><?php echo lang('lbl_gender'); ?></th>
+                                    <?php } else { ?>
+                                        <th><?php echo lang('lbl_appliedDate'); ?></th>
+                                    <?php } ?>
                                     <th><?php echo lang('lbl_jobCategory'); ?></th>
                                     <th><?php echo lang('lbl_obtainMark'); ?></th>
                                     <th><?php echo lang('lbl_resultDate'); ?></th>
                                     <th><?php echo lang('lbl_contact'); ?></th>
                                     <th><?php echo lang('lbl_resultStatus'); ?></th>
-                                    <th></th>
+                                    <?php if($this->session->userdata('flag') == 2) { ?>
+                                        <th></th>
+                                    <?php } ?>
                                 </tr>
                             </thead>
                             <?php
@@ -133,24 +149,42 @@
                                         $class = $key % 2 === 0 ? 'odd' : 'even'; ?>
                                         <tr class="<php <?php echo $class; ?>">
                                             <td class="tac vam"><?php echo (++$serialNumber); ?></td>
-                                            <td class="vam"><?php echo $history->jobSeekerName; ?></td>
-                                            <td class="tac vam"><?php echo $history->gender == 1 ? 'Male' : 'Female'; ?></td>
+                                            <?php if($this->session->userdata('flag') == 2) { ?>
+                                                <td class="vam"><?php echo $history->jobSeekerName; ?></td>
+                                            <?php } else { ?>
+                                                <td class="vam"><?php echo $history->companyName; ?></td>
+                                            <?php } ?>
+                                            <?php if($this->session->userdata('flag') == 2) { ?>
+                                                <td class="tac vam"><?php echo $history->gender == 1 ? 'Male' : 'Female'; ?></td>
+                                            <?php } else { ?>
+                                                <td class="tac vam"><?php echo $history->applyDate; ?></td>
+                                            <?php } ?>
                                             <td class="vam"><?php echo $history->jobCategory; ?></td>
                                             <td class="tac vam"><?php echo $history->obtainMark; ?>%</td>
                                             <td class="tac vam"><?php echo $history->resultDate; ?></td>
-                                            <td class="tac vam"><?php echo $history->jobSeekerContact; ?></td>
+                                            <?php if($this->session->userdata('flag') == 2) { ?>
+                                                <td class="tac vam"><?php echo $history->jobSeekerContact; ?></td>
+                                            <?php } else { ?>
+                                                <td class="tac vam"><?php echo $history->contact; ?></td>
+                                            <?php } ?>
                                             <td class="tac vam"><?php echo $history->resultStatus == 1 ? 'Pass' : 'Fail'; ?></td>
-                                            <td class="tac vam">
-                                                <a href="javascript:;" onclick="fnJobResultDetail(<?php echo $history->id;?>)" class="m3">
-                                                    <img class="w20" 
-                                                        src="<?php echo base_url(); ?>assets/images/details.png" title="details view">
-                                                </a>
-                                            </td>
+                                            <?php if($this->session->userdata('flag') == 2) { ?>
+                                                <td class="tac vam">
+                                                    <a href="javascript:;" onclick="fnJobResultDetail(<?php echo $history->id;?>)" class="m3">
+                                                        <img class="w20" 
+                                                            src="<?php echo base_url(); ?>assets/images/details.png" title="details view">
+                                                    </a>
+                                                </td>
+                                            <?php } ?>
                                         </tr>
                                     <?php } ?>
                             <?php } else { ?>
                                 <tr>
-                                    <td colspan="9" class="tac noDataFoundClr fs16">No data found</td>
+                                    <?php if($this->session->userdata('flag') == 2) { ?>
+                                        <td colspan="9" class="tac noDataFoundClr fs16">No data found</td>
+                                    <?php } else { ?>
+                                        <td colspan="7" class="tac noDataFoundClr fs16">No data found</td>
+                                    <?php } ?>
                                 </tr>
                             <?php } ?>
                         </table>

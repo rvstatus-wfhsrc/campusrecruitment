@@ -21,10 +21,9 @@ $(document).ready(function() {
 
 // job result detail process
 function fnJobResultDetail(id) {
-	alert("Job Result Detail Screen is an underprocess");
-	// $("#hiddenApplyJobId").val(id);
-	// $("#applyHistoryForm").attr("action", "jobApplyDetail");
-	// $("#applyHistoryForm").submit();
+	$("#hiddenResultJobId").val(id);
+	$("#historyForm").attr("action", "jobResultDetail");
+	$("#historyForm").submit();
 }
 // filter process
 function fnJobFilter(filterValue) {

@@ -61,6 +61,8 @@
 		<?php echo form_open('JobController/jobApplyCancelStatus',['method' => 'POST','id' => 'applyDetailForm','name' => 'applyDetailForm']); ?>
 			<input type="hidden" id="base" name="base" value="<?php echo base_url(); ?>">
 			<input type="hidden" id="hiddenApplyJobId" name="hiddenApplyJobId">
+			<input type="hidden" id="hiddenJobId" name="hiddenJobId">
+			<input type="hidden" id="hiddenJobSeekerId" name="hiddenJobSeekerId">
 			<div class="ml-4 mb-1">
 				<a class="btn btn-info editBtn" href="javascript:;" onclick="fnBackBtn()">
 					<i class="fa fa-chevron-left fa-btn"></i><?php echo lang('lbl_back'); ?>
@@ -72,7 +74,7 @@
 					</a>
 				<?php } ?>
 				<?php if ($this->session->userdata('flag') == 2 && $jobApplyDetail->delFlag == 0) { ?>
-					<a class="btn btn-success editBtn" href="javascript:;" onclick="fnJobResultAdd(<?php echo $jobApplyDetail->id;?>)">
+					<a class="btn btn-success editBtn" href="javascript:;" onclick="fnJobResultAdd(<?php echo $jobApplyDetail->jobId;?> , '<?php echo $jobApplyDetail->jobSeekerId;?>')">
 						<i class="fa fa-plus"></i>
 						<?php echo $this->lang->line("lbl_addResult"); ?>
 					</a>

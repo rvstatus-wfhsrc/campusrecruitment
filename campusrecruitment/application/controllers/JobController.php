@@ -251,7 +251,7 @@ class JobController extends CI_Controller {
 
 		// sorting process style
 		$sortOptn = $this->input->post('sortOptn');
-		$data['sortStyle'] = "sort_desc";
+		$data['sortStyle'] = "sort_asc";
 		if(isset($sortOptn) && $sortOptn == "ASC") {
 			$data['sortStyle'] = "sort_asc";
 		} elseif(isset($sortOptn) && $sortOptn == "DESC") {
@@ -414,5 +414,57 @@ class JobController extends CI_Controller {
 		$data['jobResultHistory'] = $this->JobModel->jobResultHistory($pagination_config["per_page"], $page);
 
 		$this->layouts->view('company/job/result/history',$data);
+	}
+
+	/**
+	 * This jobResultDetail method are used to get the data from model for the specfic job result details
+	 * @return to view screen [ company/job/result/detail ]
+	 * @author kulasekaran.
+	 *
+	 */
+	public function jobResultDetail() {
+		if($this->input->post('hiddenResultJobId') == null) {
+        	redirect('JobController/jobResultHistory');
+        }
+        $hiddenResultJobId = $this->input->post('hiddenResultJobId');
+		$data['jobResultDetail'] = $this->JobModel->jobResultDetail($hiddenResultJobId);
+		$this->layouts->view('company/job/result/detail',$data);
+	}
+
+	/**
+	 * This jobResultEdit method are used to get the data from model for the specfic job result details to edit
+	 * @return to view screen [ company/job/result/addEdit ]
+	 * @author kulasekaran.
+	 *
+	 */
+	public function jobResultEdit() {
+		if($this->input->post('hiddenResultJobId') == null) {
+        	redirect('JobController/jobResultHistory');
+        }
+        $data['jobResultAdd'] = $this->JobModel->getJobAppliedDetail();
+		$data['jobResultEdit'] = $this->JobModel->jobResultEdit();
+		$this->layouts->view('company/job/result/addEdit',$data);
+	}
+
+	/**
+	 * This jobResultEditForm method are used to update the specific job result data into database
+	 * @return redirects to JobController/jobResultHistory
+	 * @author kulasekaran.
+	 *
+	 */
+	public function jobResultEditForm() {
+		$jobResultUpdateStatus = $this->JobModel->jobResultUpdate();
+		if($jobResultUpdateStatus){
+			$this->session->set_flashdata([
+				'message'  => 'Job Result Details Updated Successfully',
+				'type' => 'success'
+			]);
+		} else {
+			$this->session->set_flashdata([
+				'message'  => 'Sorry, Something Went Wrong. Please Try Again Later',
+				'type' => 'danger'
+			]);
+		}
+		redirect('JobController/jobResultHistory');
 	}
 }

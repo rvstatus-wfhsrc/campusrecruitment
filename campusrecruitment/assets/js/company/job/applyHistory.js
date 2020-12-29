@@ -50,10 +50,10 @@ function fnSortProcess(){
 	$("#sortVal").val(sortVal);
 	var alreadySortVal = $("#sortVal").val();
 	if(sortVal == alreadySortVal) {
-		if(alreadySortOptn == "ASC" ) {
-			$("#sortOptn").val("DESC");
-		} else {
+		if(alreadySortOptn == "DESC" ) {
 			$("#sortOptn").val("ASC");
+		} else {
+			$("#sortOptn").val("DESC");
 		}
 	}
 	$("#applyHistoryForm").attr("action", "jobApplyHistory");

@@ -14,8 +14,9 @@ function fnBackBtn() {
 }
 
 // add result button process
-function fnJobResultAdd(id) {
-	$('#hiddenApplyJobId').val(id);
+function fnJobResultAdd(jobId,jobSeekerId) {
+	$('#hiddenJobId').val(jobId);
+	$('#hiddenJobSeekerId').val(jobSeekerId);
 	$("#applyDetailForm").attr("action", "getJobAppliedDetail");
 	$('#applyDetailForm').submit();
 }

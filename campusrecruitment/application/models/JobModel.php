@@ -457,6 +457,7 @@ class JobModel extends CI_Model {
 	public function jobApplyDetail($id) {
 		$this->db->select(
 					'ajd.id,
+					ajd.jobId,
 					ajd.companyId,
 					ajd.jobSeekerId,
 					ajd.applyDate,
@@ -550,7 +551,8 @@ class JobModel extends CI_Model {
 	 */
 	function getJobAppliedDetail() {
 		$userName = $this->session->userdata('userName');
-		$id = $this->input->post('hiddenApplyJobId');
+		$jobId = $this->input->post('hiddenJobId');
+		$jobSeekerId = $this->input->post('hiddenJobSeekerId');
 		$this->db->select(
 					'ajd.id,
 					ajd.jobId,
@@ -583,7 +585,8 @@ class JobModel extends CI_Model {
 			->join('m_min_qualification as minqual','minqual.minQualificationId = jd.minQualification','left')
 			->join('users as user','user.userName = ajd.jobSeekerId','left');
 
-		$this->db->where(array('ajd.id' => $id));
+		$this->db->where(array('ajd.jobId' => $jobId));
+		$this->db->where(array('ajd.jobSeekerId' => $jobSeekerId));
 		$jobAppliedDetail = $this->db->get();
 		return $jobAppliedDetail->result()[0];
 	}
@@ -632,6 +635,7 @@ class JobModel extends CI_Model {
 					jrd.obtainMark,
 					jrd.resultStatus,
 					jrd.delFlag,
+					ajd.applyDate,
 					jd.lastApplyDate,
 					cmpy.companyName,
 					dest.designationName AS jobCategory,
@@ -645,6 +649,7 @@ class JobModel extends CI_Model {
 			->from('job_result_details as jrd')
 			// this is the left join in codeigniter
 			->join('company as cmpy','cmpy.userName = jrd.companyId','left')
+			->join('apply_Job_details as ajd','ajd.jobId = jrd.jobId','left')
 			->join('job_details as jd','jd.id = jrd.jobId','left')
 			->join('m_designation as dest','dest.designationId = jd.jobCategory','left')
 			->join('users as user','user.userName = jrd.jobSeekerId','left');
@@ -672,7 +677,11 @@ class JobModel extends CI_Model {
 			} else {
 				$this->db->order_by('user.name', 'ASC');
 			}
-			$this->db->where(array('jrd.companyId' => $userName));
+			if ($this->session->userdata('Flag') == 2) {
+				$this->db->where(array('jrd.companyId' => $userName));
+			} elseif($this->session->userdata('Flag') == 3) {
+				$this->db->where(array('jrd.jobSeekerId' => $userName));
+			}
 		$jobResultHistory = $this->db->get();
 		return $jobResultHistory->result();
 	}
@@ -716,8 +725,94 @@ class JobModel extends CI_Model {
 		$this->db->join('job_details as jd','jd.id = jrd.jobId','left');
 		$this->db->join('m_designation as dest','dest.designationId = jd.jobCategory','left');
 		$this->db->join('users as user','user.userName = jrd.jobSeekerId','left');
-		$this->db->where(array('jrd.companyId' => $userName));
+		if ($this->session->userdata('Flag') == 2) {
+			$this->db->where(array('jrd.companyId' => $userName));
+		} elseif($this->session->userdata('Flag') == 3) {
+			$this->db->where(array('jrd.jobSeekerId' => $userName));
+		}
 		$result = $this->db->get();
 		return $result->result()['0']->numrows;
+	}
+
+	/**
+	 * This jobResultDetail method are used to get the one row data from job_result_details table
+	 * @param id value of specific job result is passed from JobController
+	 * @return to return the jobResultDetail array to controller
+	 * @author kulasekaran.
+	 *
+	 */
+	public function jobResultDetail($id) {
+		$this->db->select(
+					'jrd.id,
+					jrd.jobId,
+					jrd.companyId,
+					jrd.jobSeekerId,
+					jrd.resultDate,
+					jrd.obtainMark,
+					jrd.resultStatus,
+					jrd.delFlag,
+					jd.salary,
+					jd.jobType,
+					jd.lastApplyDate,
+					ajd.applyDate,
+					cmpy.incharge,
+					cmpy.contact,
+					cmpy.companyName,
+					dest.designationName AS jobCategory,
+					role.roleName,
+					user.name AS jobSeekerName,
+					user.gender,
+					user.contact AS jobSeekerContact'
+				)
+			->from('job_result_details as jrd')
+			->join('company as cmpy','cmpy.userName = jrd.companyId','left')
+			->join('job_details as jd','jd.id = jrd.jobId','left')
+			->join('apply_Job_details as ajd','ajd.jobId = jrd.jobId','left')
+			->join('m_role as role','role.roleId = jd.role','left')
+			->join('m_skill as skill','skill.skillId = jd.requiredSkill','left')
+			->join('m_country as country','country.countryId = jd.jobLocation','left')
+			->join('m_designation as dest','dest.designationId = jd.jobCategory','left')
+			->join('users as user','user.userName = jrd.jobSeekerId','left');
+
+		$this->db->where(array('jrd.id' => $id));
+		$jobResultDetail = $this->db->get();
+		return $jobResultDetail->result()[0];
+	}
+
+	/**
+	 * This jobResultEdit method are used to get the one row data from job_result_details table
+	 * @return to return the jobResultEdit array to controller
+	 * @author kulasekaran.
+	 *
+	 */
+	function jobResultEdit() {
+		$this->db->select(
+							'id,
+							jobId,
+							obtainMark,
+							resultStatus'
+						);
+		$this->db->where(array('id' => $this->input->post('hiddenResultJobId')));
+		$jobResultEdit = $this->db->get('job_result_details');
+		return $jobResultEdit->result()[0];
+	}
+
+	/**
+	 * This jobResultUpdate method are used to update the one row data into the job_result_details table
+	 * @return to return the jobResultUpdateStatus with true or false value to controller according to database results
+	 * @author kulasekaran.
+	 *
+	 */
+	function jobResultUpdate() {
+		$userName = $this->session->userdata('userName');
+		$hiddenResultJobId = $this->input->post('hiddenResultJobId');
+		$jobResultUpdateData = array(
+			'obtainMark' => $this->input->post('obtainMark'),
+			'resultStatus' => $this->input->post('resultStatus'),
+			'updated_by' => $userName
+		);
+		$this->db->where('id', $hiddenResultJobId);
+		$resultUpdate = $this->db->update('job_result_details', $jobResultUpdateData);
+		return $resultUpdate;
 	}
 }

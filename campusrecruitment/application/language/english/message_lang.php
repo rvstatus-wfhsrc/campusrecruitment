@@ -82,6 +82,8 @@ $lang['lbl_pass'] = 'Pass';
 $lang['lbl_fail'] = 'Fail';
 $lang['lbl_note'] = 'Note';
 $lang['lbl_noteObtainMark'] = 'Obtain Mark is considered as percentage';
+$lang['lbl_resultDetail'] = 'Result Detail';
+$lang['lbl_editResult'] = 'Edit Result';
 
 // home screen label
 $lang['lbl_findJobIntro'] = 'Find the job that fits your life';

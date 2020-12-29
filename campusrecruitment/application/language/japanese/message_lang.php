@@ -76,12 +76,14 @@ $lang['lbl_resultEdit'] = '結果編集';
 $lang['lbl_totalMark'] = 'トータルマーク';
 $lang['lbl_obtainMark'] = 'マークを取得';
 $lang['lbl_resultStatus'] = '結果ステータス';
-$lang['lbl_resultHistory'] = 'Result History';
-$lang['lbl_resultDate'] = 'Result Date';
-$lang['lbl_pass'] = 'Pass';
-$lang['lbl_fail'] = 'Fail';
-$lang['lbl_note'] = 'Note';
+$lang['lbl_resultHistory'] = '結果履歴';
+$lang['lbl_resultDate'] = '結果の日付';
+$lang['lbl_pass'] = 'パス';
+$lang['lbl_fail'] = '不合格';
+$lang['lbl_note'] = '注意';
 $lang['lbl_noteObtainMark'] = 'Obtain Mark is considered as percentage';
+$lang['lbl_resultDetail'] = '結果の詳細';
+$lang['lbl_editResult'] = '結果の編集';
 
 // home screen label
 $lang['lbl_findJobIntro'] = 'あなたの人生に合った仕事を見つけましょう';

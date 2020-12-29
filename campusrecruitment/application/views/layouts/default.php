@@ -205,6 +205,7 @@
                                     <nav class="sb-sidenav-menu-nested nav">
                                         <a class="nav-link <?php echo ($this->uri->segment(2)=='jobLists')?'active':''; ?>" href="<?php echo site_url('JobController/jobLists') ?>"><?php echo lang('lbl_list'); ?></a>
                                         <a class="nav-link <?php echo ($this->uri->segment(2)=='jobApplyHistory')?'active':''; ?>" href="<?php echo site_url('JobController/jobApplyHistory') ?>"><?php echo lang('lbl_applyHistory'); ?></a>
+                                        <a class="nav-link <?php echo ($this->uri->segment(2)=='jobResultHistory')?'active':''; ?>" href="<?php echo site_url('JobController/jobResultHistory') ?>"><?php echo lang('lbl_resultHistory'); ?></a>
                                     </nav>
                                 </div>
                             <?php } ?>

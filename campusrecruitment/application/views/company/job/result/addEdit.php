@@ -19,7 +19,7 @@
                 <li class="breadcrumb-item">
                     <i class="fa fa-briefcase fa-btn mt3"></i>
                     <?php echo lang('lbl_job'); ?>
-                    <?php if(isset($jobEdit)) { ?>
+                    <?php if(isset($jobResultEdit)) { ?>
                         <span class ="dot editScrClr">&bull;</span>
                         <span class="editScrClr"><?php echo lang('lbl_resultEdit'); ?></span>
                     <?php } else { ?>
@@ -36,7 +36,7 @@
                         <div class="card-header">
                             <h3 class="text-center font-weight-light">
                                 <?php 
-                                    if(isset($jobEdit)) {
+                                    if(isset($jobResultEdit)) {
                                         echo lang('lbl_resultEdit');
                                     } else {
                                         echo lang('lbl_resultAdd');
@@ -45,10 +45,11 @@
                             </h3>
                         </div>
                         <div class="card-body">
-                            <?php if(isset($jobEdit)) { ?>
+                            <?php if(isset($jobResultEdit)) { ?>
                                 <!-- job edit process form -->
                                 <?php echo form_open('JobController/jobResultEditForm',
                                     ['method' => 'POST', 'class' => 'form-horizontal','id' => 'editForm','name' => 'editForm']); ?>
+                                <input type="hidden" id="hiddenResultJobId" name="hiddenResultJobId" value= "<?php echo $jobResultEdit->id; ?>" >
                                 <input type="hidden" id="screenFlag" name="screenFlag" value= "2" >
                             <?php } else { ?>
                                 <!-- job add process form-->
@@ -187,7 +188,7 @@
                                                 'name' => 'obtainMark',
                                                 'placeholder' => 'Obtain Mark',
                                                 'class' => 'input_box col-md-12 form-control w25 h-25 obtainMark',
-                                                'value' => set_value('obtainMark',isset($jobEdit->obtainMark) ? $jobEdit->obtainMark : false)
+                                                'value' => set_value('obtainMark',isset($jobResultEdit->obtainMark) ? $jobResultEdit->obtainMark : false)
                                             );
                                             echo form_input($fields);
                                         ?>
@@ -198,16 +199,16 @@
                                 <div class="form-group form-inline">
                                     <?php echo lang('lbl_resultStatus', 'resultStatus', array('class' => 'col-md-4 control-label required')); ?>
                                     <div class="col-md-8">
-                                        <input type="radio" name="resultStatus" class="resultStatus" value="1" <?php echo set_value('resultStatus', isset($jobEdit->resultStatus) && $jobEdit->resultStatus == 1 ? "checked" : "") ?> />
+                                        <input type="radio" name="resultStatus" class="resultStatus" value="1" <?php echo set_value('resultStatus', isset($jobResultEdit->resultStatus) && $jobResultEdit->resultStatus == 1 ? "checked" : "") ?> />
                                         <span class = "pr20">Pass</span>
-                                        <input type="radio" name="resultStatus" class="resultStatus" value="2" <?php echo set_value('resultStatus', isset($jobEdit->resultStatus) && $jobEdit->resultStatus == 2 ? "checked" : "") ?> />
+                                        <input type="radio" name="resultStatus" class="resultStatus" value="2" <?php echo set_value('resultStatus', isset($jobResultEdit->resultStatus) && $jobResultEdit->resultStatus == 2 ? "checked" : "") ?> />
                                         <span class="resultStatusError">Fail</span>
                                     </div>
                                 </div>
                                 <!-- add or edit button -->
                                 <div class="form-group">
                                     <div class="offset-md-4 col-md-6">
-                                        <?php if(isset($jobEdit)) { ?>
+                                        <?php if(isset($jobResultEdit)) { ?>
                                             <button class="btn bg-warning text-white addEditProcess">
                                                 <i class="fa fa-btn fa-edit"></i>
                                                 <?php echo lang('lbl_update'); ?>
