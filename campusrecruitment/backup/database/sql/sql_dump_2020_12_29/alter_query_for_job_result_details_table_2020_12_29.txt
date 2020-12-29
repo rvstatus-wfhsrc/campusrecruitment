@@ -1,0 +1,1 @@
+ALTER TABLE job_result_details ADD applyJobId INT(5) NOT NULL AFTER jobId;

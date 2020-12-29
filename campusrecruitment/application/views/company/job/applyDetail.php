@@ -151,7 +151,7 @@
 					</div>
 					<div>
 						<div class="leftSide"><?php echo $this->lang->line("lbl_jobDescription"); ?> : </div>
-						<div class="rightSide"><?php echo $jobApplyDetail->jobDescription; ?></div>
+						<div class="rightSide vat"><?php echo nl2br($jobApplyDetail->jobDescription); ?></div>
 					</div>
 				</div>
 			</div>
