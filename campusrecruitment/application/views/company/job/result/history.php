@@ -109,13 +109,13 @@
                                 <?php if($this->session->userdata('flag') == 2) { ?>
                                     <col width="8%">
                                 <?php } else { ?>
-                                    <col width="11%">
+                                    <col width="12%">
                                 <?php } ?>
                                 <col width="15%">
+                                <col width="9%">
                                 <col width="11%">
                                 <col width="10%">
-                                <col width="10%">
-                                <col width="11%">
+                                <col width="12%">
                                 <?php if($this->session->userdata('flag') == 2) { ?>
                                     <col width="9%">
                                 <?php } ?>
@@ -134,9 +134,13 @@
                                         <th><?php echo lang('lbl_appliedDate'); ?></th>
                                     <?php } ?>
                                     <th><?php echo lang('lbl_jobCategory'); ?></th>
-                                    <th><?php echo lang('lbl_obtainMark'); ?></th>
+                                    <th title="<?php echo lang('lbl_titleMark'); ?>"><?php echo lang('lbl_mark'); ?></th>
                                     <th><?php echo lang('lbl_resultDate'); ?></th>
-                                    <th><?php echo lang('lbl_contact'); ?></th>
+                                    <?php if($this->session->userdata('flag') == 2) { ?>
+                                        <th title="<?php echo lang('lbl_titleJobSeekerContact'); ?>"><?php echo lang('lbl_contact'); ?></th>
+                                    <?php } else { ?>
+                                        <th title="<?php echo lang('lbl_titleCompanyContact'); ?>"><?php echo lang('lbl_contact'); ?></th>
+                                    <?php } ?>
                                     <th><?php echo lang('lbl_resultStatus'); ?></th>
                                     <?php if($this->session->userdata('flag') == 2) { ?>
                                         <th></th>

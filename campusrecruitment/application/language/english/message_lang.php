@@ -84,6 +84,10 @@ $lang['lbl_note'] = 'Note';
 $lang['lbl_noteObtainMark'] = 'Obtain Mark is considered as percentage';
 $lang['lbl_resultDetail'] = 'Result Detail';
 $lang['lbl_editResult'] = 'Edit Result';
+$lang['lbl_mark'] = 'Mark';
+$lang['lbl_titleMark'] = 'Obtain Mark ( display as percentage only )';
+$lang['lbl_titleCompanyContact'] = 'Company Phone Number';
+$lang['lbl_titleJobSeekerContact'] = 'Job Seeker Phone Number';
 
 // home screen label
 $lang['lbl_findJobIntro'] = 'Find the job that fits your life';

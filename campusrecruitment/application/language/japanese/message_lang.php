@@ -84,6 +84,10 @@ $lang['lbl_note'] = '注意';
 $lang['lbl_noteObtainMark'] = 'Obtain Mark is considered as percentage';
 $lang['lbl_resultDetail'] = '結果の詳細';
 $lang['lbl_editResult'] = '結果の編集';
+$lang['lbl_mark'] = 'マーク';
+$lang['lbl_titleMark'] = 'Obtain Mark ( display as percentage only )';
+$lang['lbl_titleCompanyContact'] = '会社の電話番号';
+$lang['lbl_titleJobSeekerContact'] = '求職者の電話番号';
 
 // home screen label
 $lang['lbl_findJobIntro'] = 'あなたの人生に合った仕事を見つけましょう';
