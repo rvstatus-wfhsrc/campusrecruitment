@@ -601,6 +601,7 @@ class JobModel extends CI_Model {
 		$userName = $this->session->userdata('userName');
 		$jobResultAddData = array(
 			'jobId' => $this->input->post('hiddenJobId'),
+			'applyJobId' => $this->input->post('hiddenApplyJobId'),
 			'companyId' => $this->input->post('hiddenCompanyId'),
 			'jobSeekerId' => $this->input->post('hiddenJobSeekerId'),
 			'resultDate' => date('Y-m-d'),
@@ -616,7 +617,7 @@ class JobModel extends CI_Model {
 	}
 
 	/**
-	 * This jobResultHistory method are used to retrieves the data from job_result_details to data base
+	 * This jobResultHistory method are used to retrieves the data from job_result_details
 	 * @param records limit and start value is passed by JobController
 	 * @return to return the jobResultHistory array value to controller
 	 * @author kulasekaran.
@@ -649,7 +650,7 @@ class JobModel extends CI_Model {
 			->from('job_result_details as jrd')
 			// this is the left join in codeigniter
 			->join('company as cmpy','cmpy.userName = jrd.companyId','left')
-			->join('apply_Job_details as ajd','ajd.jobId = jrd.jobId','left')
+			->join('apply_job_details as ajd','ajd.id = jrd.applyJobId','left')
 			->join('job_details as jd','jd.id = jrd.jobId','left')
 			->join('m_designation as dest','dest.designationId = jd.jobCategory','left')
 			->join('users as user','user.userName = jrd.jobSeekerId','left');
@@ -677,9 +678,9 @@ class JobModel extends CI_Model {
 			} else {
 				$this->db->order_by('user.name', 'ASC');
 			}
-			if ($this->session->userdata('Flag') == 2) {
+			if ($this->session->userdata('flag') == 2) {
 				$this->db->where(array('jrd.companyId' => $userName));
-			} elseif($this->session->userdata('Flag') == 3) {
+			} else if($this->session->userdata('flag') == 3) {
 				$this->db->where(array('jrd.jobSeekerId' => $userName));
 			}
 		$jobResultHistory = $this->db->get();
@@ -725,11 +726,12 @@ class JobModel extends CI_Model {
 		$this->db->join('job_details as jd','jd.id = jrd.jobId','left');
 		$this->db->join('m_designation as dest','dest.designationId = jd.jobCategory','left');
 		$this->db->join('users as user','user.userName = jrd.jobSeekerId','left');
-		if ($this->session->userdata('Flag') == 2) {
+		if ($this->session->userdata('flag') == 2) {
 			$this->db->where(array('jrd.companyId' => $userName));
-		} elseif($this->session->userdata('Flag') == 3) {
+		} elseif($this->session->userdata('flag') == 3) {
 			$this->db->where(array('jrd.jobSeekerId' => $userName));
 		}
+		$this->db->where(array('jrd.applyJobId' => 'ajd.id'));
 		$result = $this->db->get();
 		return $result->result()['0']->numrows;
 	}
@@ -767,7 +769,7 @@ class JobModel extends CI_Model {
 			->from('job_result_details as jrd')
 			->join('company as cmpy','cmpy.userName = jrd.companyId','left')
 			->join('job_details as jd','jd.id = jrd.jobId','left')
-			->join('apply_Job_details as ajd','ajd.jobId = jrd.jobId','left')
+			->join('apply_job_details as ajd','ajd.jobId = jrd.jobId','left')
 			->join('m_role as role','role.roleId = jd.role','left')
 			->join('m_skill as skill','skill.skillId = jd.requiredSkill','left')
 			->join('m_country as country','country.countryId = jd.jobLocation','left')

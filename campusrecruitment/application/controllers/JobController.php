@@ -374,8 +374,8 @@ class JobController extends CI_Controller {
 	}
 
 	/**
-	 * This jobResultHistory method are used to get the data from model for the result of applied jobs by specfic job seeker
-	 * @return to view screen [ company/job/resultHistory ]
+	 * This jobResultHistory method are used to get the data from model for the result of applied jobs by specfic job seeker or for specific company
+	 * @return to view screen [ company/job/result/history ]
 	 * @author kulasekaran.
 	 *
 	 */

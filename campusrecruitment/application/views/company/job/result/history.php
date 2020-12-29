@@ -183,7 +183,7 @@
                                     <?php if($this->session->userdata('flag') == 2) { ?>
                                         <td colspan="9" class="tac noDataFoundClr fs16">No data found</td>
                                     <?php } else { ?>
-                                        <td colspan="7" class="tac noDataFoundClr fs16">No data found</td>
+                                        <td colspan="8" class="tac noDataFoundClr fs16">No data found</td>
                                     <?php } ?>
                                 </tr>
                             <?php } ?>
