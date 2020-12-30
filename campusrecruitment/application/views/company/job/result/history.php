@@ -154,28 +154,38 @@
                                         $class = $key % 2 === 0 ? 'odd' : 'even'; ?>
                                         <tr class="<php <?php echo $class; ?>">
                                             <td class="tac vam"><?php echo (++$serialNumber); ?></td>
-                                            <?php if($this->session->userdata('flag') == 2) { ?>
-                                                <td class="vam"><?php echo $history->jobSeekerName; ?></td>
-                                            <?php } else { ?>
-                                                <td class="vam"><?php echo $history->companyName; ?></td>
-                                            <?php } ?>
-                                            <?php if($this->session->userdata('flag') == 2) { ?>
-                                                <td class="tac vam"><?php echo $history->gender == 1 ? 'Male' : 'Female'; ?></td>
-                                            <?php } else { ?>
-                                                <td class="tac vam"><?php echo $history->applyDate; ?></td>
-                                            <?php } ?>
-                                            <?php if($this->session->userdata('flag') == 2) { ?>
-                                                <td class="vam"><a href="javascript:;" onclick="fnResultGroupHistory(<?php echo $history->jobCategoryId; ?>)"><?php echo $history->jobCategory; ?></a></td>
-                                            <?php } else { ?>
-                                                <td class="vam"><?php echo $history->jobCategory; ?></td>
-                                            <?php } ?>
+                                            <td class="vam">
+                                                <?php if($this->session->userdata('flag') == 2) { ?>
+                                                    <?php echo $history->jobSeekerName; ?>
+                                                <?php } else { ?>
+                                                    <?php echo $history->companyName; ?>
+                                                <?php } ?>
+                                            </td>
+                                            <td class="tac vam">
+                                                <?php if($this->session->userdata('flag') == 2) { ?>
+                                                    <?php echo $history->gender == 1 ? 'Male' : 'Female'; ?>
+                                                <?php } else { ?>
+                                                    <?php echo $history->applyDate; ?>
+                                                <?php } ?>
+                                            </td>
+                                            <td class="vam">
+                                                <?php if($this->session->userdata('flag') == 2) { ?>
+                                                    <a href="javascript:;" onclick="fnResultGroupHistory(<?php echo $history->jobCategoryId; ?>)">
+                                                        <?php echo $history->jobCategory; ?>
+                                                    </a>
+                                                <?php } else { ?>
+                                                    <?php echo $history->jobCategory; ?>
+                                                <?php } ?>
+                                            </td>
                                             <td class="tac vam"><?php echo $history->obtainMark; ?>%</td>
                                             <td class="tac vam"><?php echo $history->resultDate; ?></td>
-                                            <?php if($this->session->userdata('flag') == 2) { ?>
-                                                <td class="tac vam"><?php echo $history->jobSeekerContact; ?></td>
-                                            <?php } else { ?>
-                                                <td class="tac vam"><?php echo $history->contact; ?></td>
-                                            <?php } ?>
+                                            <td class="tac vam">
+                                                <?php if($this->session->userdata('flag') == 2) { ?>
+                                                    <?php echo $history->jobSeekerContact; ?>
+                                                <?php } else { ?>
+                                                    <?php echo $history->contact; ?>
+                                                <?php } ?>
+                                            </td>
                                             <td class="tac vam"><?php echo $history->resultStatus == 1 ? 'Pass' : 'Fail'; ?></td>
                                             <?php if($this->session->userdata('flag') == 2) { ?>
                                                 <td class="tac vam">

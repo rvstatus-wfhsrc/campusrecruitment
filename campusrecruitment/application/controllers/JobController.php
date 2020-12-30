@@ -214,7 +214,7 @@ class JobController extends CI_Controller {
 		} elseif(isset($sortOptn) && $sortOptn == "DESC") {
 			$data['sortStyle'] = "sort_desc";
 		}
-		$data['sortArray'] = array('1' => 'Created Date','2' => 'Skill','3' => 'Salary','4' => 'Last Apply Date');
+		$data['sortArray'] = array('2' => 'Skill','3' => 'Salary','4' => 'Last Apply Date');
 
 		// pagination process
 		$totalRecord = $this->JobModel->record_count();
@@ -471,6 +471,9 @@ class JobController extends CI_Controller {
 	 *
 	 */
 	public function jobResultGroupHistory() {
+		if ($this->input->post('hiddenJobCategoryId') == null) {
+			redirect('JobController/jobResultHistory');
+		}
 		// filter process
 		$filterVal = $this->input->post('filterVal');
 		$data['disableAll'] = "";

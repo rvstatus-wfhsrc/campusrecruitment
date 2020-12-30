@@ -90,11 +90,13 @@ class LoginController extends CI_Controller {
 				$data  = $loginProcessCheck->row_array();
 				$id  = $data['id'];
 				$userName  = $data['userName'];
+				$name = $data['name'];
 				$password = $data['password'];
 				$flag = $data['flag'];
 				$logindata = array(
 					'id' => $id,
 					'userName'  => $userName,
+					'name' => $name,
 					'flag'     => $flag,
 					'logged_in' => TRUE
 				);

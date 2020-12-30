@@ -72,7 +72,7 @@
                             <input type="hidden" id="filterVal" name="filterVal" value="<?php echo $this->input->post('filterVal'); ?>">
                         <?php } ?>
 
-                        <div class="inb float-right">
+                        <div class="inb float-right" style="padding-bottom:4px;">
                             <!-- clear search -->
                             <div  class="inb mt-1">
                                 <a href="javascript:;" onclick="fnClearSearch()">

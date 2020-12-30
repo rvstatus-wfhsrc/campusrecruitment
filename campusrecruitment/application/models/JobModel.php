@@ -327,16 +327,16 @@ class JobModel extends CI_Model {
 			// sorting process
 			$sortOptn = $this->input->post('sortOptn');
 			$sortVal = $this->input->post('sortVal');
-			if ($sortVal == 1) {
-				$this->db->order_by('jd.created_date_time', $sortOptn);
-			} else if ($sortVal == 2) {
+			if ($sortVal == 2) {
+				// $this->db->order_by('jd.created_date_time', $sortOptn);
+			// } else if ($sortVal == 2) {
 				$this->db->order_by('skill.skillName', $sortOptn);
 			} else if ($sortVal == 3) {
 				$this->db->order_by('CAST(jd.salary as SIGNED INTEGER)', $sortOptn);
 			} else if ($sortVal == 4) {
 				$this->db->order_by('jd.lastApplyDate', $sortOptn);
 			} else {
-				$this->db->order_by('jd.created_date_time', 'DESC');
+				$this->db->order_by('skill.skillName', 'DESC');
 			}
 			$this->db->where(array('jd.lastApplyDate >=' => date('Y-m-d')));
 			$this->db->where(array('jd.delFlag' => 0));
@@ -361,6 +361,7 @@ class JobModel extends CI_Model {
 					ajd.jobSeekerId,
 					ajd.applyDate,
 					ajd.delFlag,
+					jrd.id as jobResultId,
 					jd.lastApplyDate,
 					cmpy.companyName,
 					dest.designationName AS jobCategory,
@@ -375,7 +376,8 @@ class JobModel extends CI_Model {
 			->join('company as cmpy','cmpy.userName = ajd.companyId','left')
 			->join('job_details as jd','jd.id = ajd.jobId','left')
 			->join('m_designation as dest','dest.designationId = jd.jobCategory','left')
-			->join('users as user','user.userName = ajd.jobSeekerId','left');
+			->join('users as user','user.userName = ajd.jobSeekerId','left')
+			->join('job_result_details as jrd','jrd.applyJobId = ajd.id','left');
 			
 			// filter process
 			if ($filterVal == 2) {
@@ -736,6 +738,10 @@ class JobModel extends CI_Model {
 		} elseif($this->session->userdata('flag') == 3) {
 			$this->db->where(array('jrd.jobSeekerId' => $userName));
 		}
+		// for the group result screen where condition
+		if ($this->input->post('hiddenJobCategoryId') != null) {
+			$this->db->where(array('jd.jobCategory' => $this->input->post('hiddenJobCategoryId')));
+		}
 		$result = $this->db->get();
 		return $result->result()['0']->numrows;
 	}
@@ -832,6 +838,8 @@ class JobModel extends CI_Model {
 	function jobResultGroupHistory($limit, $start) {
 		$jobCategoryId = $this->input->post('hiddenJobCategoryId');
 		$filterVal = $this->input->post('filterVal');
+		$userName = $this->session->userdata('userName');
+
 		$this->db->limit($limit, $start);
 		$this->db->select(
 					'jrd.id,
@@ -885,6 +893,7 @@ class JobModel extends CI_Model {
 				$this->db->order_by('user.name', 'ASC');
 			}
 			$this->db->where(array('jd.jobCategory' => $jobCategoryId));
+			$this->db->where(array('jrd.companyId' => $userName));
 		$jobResultGroupHistory = $this->db->get();
 		return $jobResultGroupHistory->result();
 	}

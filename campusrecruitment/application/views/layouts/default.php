@@ -213,7 +213,13 @@
                     </div>
                     <div class="sb-sidenav-footer">
                         <div class="small">Logged in as :</div>
-                        Admin Campus Recruitment
+                        <?php
+                            if($this->session->userdata('flag') == 1 || $this->session->userdata('flag') == 3) {
+                                echo $this->session->userdata('name').' ( '.$this->session->userdata('userName').' ) ';
+                            } else if($this->session->userdata('flag') == 2) {
+                                echo $this->session->userdata('name');
+                            }
+                        ?>
                     </div>
                 </nav>
             </div>

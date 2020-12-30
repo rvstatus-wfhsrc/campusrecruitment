@@ -46,7 +46,7 @@
                     <?php echo form_open('JobController/jobApplyDetail',['method' => 'POST','id' => 'historyForm','name' => 'historyForm']); ?>
                         <input type="hidden" id="base" value="<?php echo base_url(); ?>">
                         <input type="hidden" id="hiddenResultJobId" name="hiddenResultJobId">
-                        <input type="hidden" id="hiddenJobCategoryId" name="hiddenJobCategoryId">
+                        <input type="hidden" id="hiddenJobCategoryId" name="hiddenJobCategoryId" value="<?php echo $this->input->post('hiddenJobCategoryId'); ?>">
                         <input type="hidden" id="per_page" name="per_page">
                         <input type="hidden" id="hiddenSearch" name="hiddenSearch" value="<?php echo $this->input->post('hiddenSearch'); ?>">
 

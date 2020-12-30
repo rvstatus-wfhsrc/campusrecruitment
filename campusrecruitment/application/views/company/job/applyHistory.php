@@ -156,9 +156,15 @@
                                                         src="<?php echo base_url(); ?>assets/images/details.png" title="details view">
                                                 </a>
                                                 <?php if ($history->delFlag == 0 && $this->session->userdata('flag') == 3) { ?>
-                                                    <a href="javascript:;" onclick="fnCancelApply(<?php echo $history->id;?>)" style="color: red;">
-                                                        <?php echo lang('lbl_cancel'); ?>
-                                                    </a>
+                                                    <?php if($history->jobResultId == null) { ?>
+                                                        <a href="javascript:;" onclick="fnCancelApply(<?php echo $history->id;?>)" style="color: red;">
+                                                            <?php echo lang('lbl_cancel'); ?>
+                                                        </a>
+                                                    <?php } else { ?>
+                                                        <a title="check your result" href="<?php echo site_url('JobController/jobResultHistory') ?>">
+                                                            <?php echo "Result"; ?>
+                                                        </a>
+                                                    <?php } ?>
                                                 <?php } ?>
                                             </td>
                                         </tr>
