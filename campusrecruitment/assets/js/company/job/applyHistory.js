@@ -74,7 +74,7 @@ function fnClearSearch() {
 	$("#filterVal").val(1);
 	$("#sortVal").val(1);
 	$("#sortProcess").val(1);
-	$("#sortOptn").val("DESC");
+	$("#sortOptn").val("ASC");
 	$("#search").val("");
 	$("#hiddenSearch").val("");
 	$("#applyHistoryForm").attr("action", "jobApplyHistory");

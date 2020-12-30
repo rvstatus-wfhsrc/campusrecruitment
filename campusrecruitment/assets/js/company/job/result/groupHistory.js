@@ -59,9 +59,9 @@ function fnSortProcess(){
 // clear search process
 function fnClearSearch() {
 	$("#filterVal").val(1);
-	$("#sortVal").val(1);
-	$("#sortProcess").val(1);
-	$("#sortOptn").val("DESC");
+	$("#sortVal").val(2);
+	$("#sortProcess").val(2);
+	$("#sortOptn").val("ASC");
 	$("#search").val("");
 	$("#hiddenSearch").val("");
 	$("#historyForm").attr("action", "jobResultGroupHistory");

@@ -676,11 +676,16 @@ class JobModel extends CI_Model {
 
 			// sorting process
 			$sortOptn = $this->input->post('sortOptn');
-			$sortVal = $this->input->post('sortVal');
+			$sortVal = 2;
+			if ($this->input->post('sortVal') != "") {
+				$sortVal = $this->input->post('sortVal');
+			}
 			if ($sortVal == 1) {
 				$this->db->order_by('user.name', $sortOptn);
 			} else if ($sortVal == 2) {
 				$this->db->order_by('jrd.obtainMark', $sortOptn);
+			} else if ($sortVal == 3) {
+				$this->db->order_by('cmpy.companyName', $sortOptn);
 			} else {
 				$this->db->order_by('user.name', 'ASC');
 			}
@@ -884,7 +889,10 @@ class JobModel extends CI_Model {
 
 			// sorting process
 			$sortOptn = $this->input->post('sortOptn');
-			$sortVal = $this->input->post('sortVal');
+			$sortVal = 2;
+			if ($this->input->post('sortVal') != "") {
+				$sortVal = $this->input->post('sortVal');
+			}
 			if ($sortVal == 1) {
 				$this->db->order_by('user.name', $sortOptn);
 			} else if ($sortVal == 2) {

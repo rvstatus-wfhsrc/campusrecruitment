@@ -78,7 +78,7 @@
                                     'name' => 'sortProcess',
                                     'class' => 'form-control autowidth h34 inb mr-2 CMN_sorting '.$sortStyle,
                                 );
-                                echo form_dropdown('sortProcess',$sortArray,set_value('sortProcess', 1, false),$data);
+                                echo form_dropdown('sortProcess',$sortArray,set_value('sortProcess', 2, false),$data);
                             ?>
                             <input type="hidden" id="sortVal" name="sortVal" value="<?php echo $this->input->post('sortVal'); ?>">
                             <input type="hidden" id="sortOptn" name="sortOptn" value="<?php echo $this->input->post('sortOptn'); ?>">
