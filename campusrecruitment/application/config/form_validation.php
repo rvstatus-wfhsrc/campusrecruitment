@@ -485,6 +485,36 @@ $config = array(
                                         'label' => 'lang:lbl_resultStatus',
                                         'rules' => 'required'
                                     )
+                                ),
+                'getResetPasswordLink' => array(
+                                    array(
+                                        'field' => 'email',
+                                        'label' => 'lang:lbl_email',
+                                        'rules' => 'required|valid_email|max_length[50]',
+                                            array(
+                                                'valid_email' => 'lang:valid_email'
+                                            )
+                                    )
+                                ),
+                'resetPassword' => array(
+                                    array(
+                                        'field' => 'password',
+                                        'label' => 'lang:lbl_password',
+                                        'rules' => 'required|min_length[6]|password_confirmation',
+                                            array(
+                                                'required' => 'lang:required',
+                                                'min_length' => 'lang:min_length'
+                                            )
+                                    ),
+                                    array(
+                                        'field' => 'password_confirmation',
+                                        'label' => 'lang:lbl_conf_password',
+                                        'rules' => 'required|min_length[6]',
+                                            array(
+                                                'required' => 'lang:required',
+                                                'min_length' => 'lang:min_length'
+                                            )
+                                    )
                                 )
            );
 

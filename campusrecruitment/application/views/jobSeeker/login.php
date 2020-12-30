@@ -30,6 +30,11 @@
             <div class="row justify-content-center">
                 <div class="col-lg-9">
                     <div class="card shadow-lg border-0 rounded-lg mt-4">
+                        <?php if($this->session->flashdata('message')) { ?>
+                            <div class="alert alert-<?php echo $this->session->flashdata('type'); ?> tac" style = "margin-bottom : 0px; padding: 0.2rem 1.25rem;">
+                                <?php echo $this->session->flashdata('message'); ?>
+                            </div>
+                        <?php } ?>
                         <div class="card-header">
                             <h3 class="text-center font-weight-light fs20"><?php echo lang('lbl_jobSeekerLogin'); ?></h3>
                         </div>
@@ -92,7 +97,7 @@
                                         <button class="btn bg-warning text-white">
                                             <i class="fa fa-btn fa-sign-in"></i><?php echo lang('lbl_login'); ?>
                                         </button>
-                                        <a class="btn btn-link" href="{{ url('/password/reset') }}"><?php echo lang('lbl_forgetYourPassword'); ?></a>
+                                        <a class="btn btn-link" href="javascript:;" onclick="getResetPasswordLink()"><?php echo lang('lbl_forgetYourPassword'); ?></a>
                                     </div>
                                 </div>
                         	<?php echo form_close();?>
@@ -108,6 +113,13 @@
                 </div>
             </div>
         </div>
-        <script type="text/javascript" src="{{ URL::asset('resources/assets/js/jquery.min.js') }}"></script>
+        <script type="text/javascript" src="<?php echo base_url(); ?>assets/js/jquery.min.js"></script>
+        <script type="text/javascript">
+            function getResetPasswordLink() {
+                $("#flag").val($("#flag").val());
+                $("#loginForm").attr("action", "getResetPasswordLink");
+                $("#loginForm").submit();
+            }
+        </script>
     </body>
 </html>
