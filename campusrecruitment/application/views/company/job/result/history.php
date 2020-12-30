@@ -46,6 +46,7 @@
                     <?php echo form_open('JobController/jobApplyDetail',['method' => 'POST','id' => 'historyForm','name' => 'historyForm']); ?>
                         <input type="hidden" id="base" value="<?php echo base_url(); ?>">
                         <input type="hidden" id="hiddenResultJobId" name="hiddenResultJobId">
+                        <input type="hidden" id="hiddenJobCategoryId" name="hiddenJobCategoryId">
                         <input type="hidden" id="per_page" name="per_page">
                         <input type="hidden" id="hiddenSearch" name="hiddenSearch" value="<?php echo $this->input->post('hiddenSearch'); ?>">
 
@@ -163,7 +164,11 @@
                                             <?php } else { ?>
                                                 <td class="tac vam"><?php echo $history->applyDate; ?></td>
                                             <?php } ?>
-                                            <td class="vam"><?php echo $history->jobCategory; ?></td>
+                                            <?php if($this->session->userdata('flag') == 2) { ?>
+                                                <td class="vam"><a href="javascript:;" onclick="fnResultGroupHistory(<?php echo $history->jobCategoryId; ?>)"><?php echo $history->jobCategory; ?></a></td>
+                                            <?php } else { ?>
+                                                <td class="vam"><?php echo $history->jobCategory; ?></td>
+                                            <?php } ?>
                                             <td class="tac vam"><?php echo $history->obtainMark; ?>%</td>
                                             <td class="tac vam"><?php echo $history->resultDate; ?></td>
                                             <?php if($this->session->userdata('flag') == 2) { ?>

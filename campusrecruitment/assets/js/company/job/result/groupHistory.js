@@ -13,7 +13,7 @@ $(document).ready(function() {
 	$('#historyForm').keydown(function (e) {
 		if (e.keyCode == 13) {
 			$("#hiddenSearch").val($("#search").val());
-		$("#historyForm").attr("action", "jobResultHistory");
+		$("#historyForm").attr("action", "jobResultGroupHistory");
 		$("#historyForm").submit();
 		}
 	});
@@ -29,13 +29,13 @@ function fnJobResultDetail(id) {
 function fnJobFilter(filterValue) {
 	$( "#filterVal" ).val(filterValue);
 	$("#search").val($("#hiddenSearch").val());
-	$("#historyForm").attr("action", "jobResultHistory");
+	$("#historyForm").attr("action", "jobResultGroupHistory");
 	$( "#historyForm" ).submit();
 }
 // search process
 function fnJobSearch() {
 	$("#hiddenSearch").val($("#search").val());
-	$("#historyForm").attr("action", "jobResultHistory");
+	$("#historyForm").attr("action", "jobResultGroupHistory");
 	$('#historyForm').submit();
 }
 // sorting process
@@ -52,7 +52,7 @@ function fnSortProcess(){
 			$("#sortOptn").val("DESC");
 		}
 	}
-	$("#historyForm").attr("action", "jobResultHistory");
+	$("#historyForm").attr("action", "jobResultGroupHistory");
 	$( "#historyForm" ).submit();
 }
 
@@ -64,19 +64,12 @@ function fnClearSearch() {
 	$("#sortOptn").val("DESC");
 	$("#search").val("");
 	$("#hiddenSearch").val("");
-	$("#historyForm").attr("action", "jobResultHistory");
+	$("#historyForm").attr("action", "jobResultGroupHistory");
 	$('#historyForm').submit();
 }
 
 function pagination(page) {
 	$("#per_page").val(page);
-	$("#historyForm").attr("action", "jobResultHistory");
-	$("#historyForm").submit();
-}
-
-// job result group history process
-function fnResultGroupHistory(jobCategoryId) {
-	$("#hiddenJobCategoryId").val(jobCategoryId);
 	$("#historyForm").attr("action", "jobResultGroupHistory");
 	$("#historyForm").submit();
 }

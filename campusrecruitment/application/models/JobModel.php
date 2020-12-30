@@ -477,7 +477,8 @@ class JobModel extends CI_Model {
 					cmpy.contact,
 					user.name AS jobSeekerName,
 					user.gender,
-					user.contact AS jobSeekerContact'
+					user.contact AS jobSeekerContact,
+					jrd.applyJobId'
 				)
 			->from('apply_job_details as ajd')
 			// this is the left join in codeigniter
@@ -487,7 +488,8 @@ class JobModel extends CI_Model {
 			->join('m_skill as skill','skill.skillId = jd.requiredSkill','left')
 			->join('m_country as country','country.countryId = jd.jobLocation','left')
 			->join('m_designation as dest','dest.designationId = jd.jobCategory','left')
-			->join('users as user','user.userName = ajd.jobSeekerId','left');
+			->join('users as user','user.userName = ajd.jobSeekerId','left')
+			->join('job_result_details as jrd','jrd.applyJobId = ajd.id','left');
 
 		$this->db->where(array('ajd.id' => $id));
 		$jobApplyDetail = $this->db->get();
@@ -564,8 +566,9 @@ class JobModel extends CI_Model {
 					jd.jobType,
 					jd.maxAge,
 					jd.lastApplyDate,
+					jd.jobCategory,
 					skill.skillName,
-					country.countryName as jobLocation,
+					country.countryName AS jobLocation,
 					dest.designationName AS jobCategory,
 					role.roleName,
 					minqual.minQualification,
@@ -638,11 +641,12 @@ class JobModel extends CI_Model {
 					jrd.delFlag,
 					ajd.applyDate,
 					jd.lastApplyDate,
-					cmpy.companyName,
-					dest.designationName AS jobCategory,
+					jd.jobCategory AS jobCategoryId,
 					jd.salary,
+					dest.designationName AS jobCategory,
 					cmpy.incharge,
 					cmpy.contact,
+					cmpy.companyName,
 					user.name AS jobSeekerName,
 					user.gender,
 					user.contact AS jobSeekerContact'
@@ -724,6 +728,7 @@ class JobModel extends CI_Model {
 		$this->db->from('job_result_details as jrd');
 		$this->db->join('company as cmpy','cmpy.userName = jrd.companyId','left');
 		$this->db->join('job_details as jd','jd.id = jrd.jobId','left');
+		$this->db->join('apply_job_details as ajd','ajd.id = jrd.applyJobId','left');
 		$this->db->join('m_designation as dest','dest.designationId = jd.jobCategory','left');
 		$this->db->join('users as user','user.userName = jrd.jobSeekerId','left');
 		if ($this->session->userdata('flag') == 2) {
@@ -731,7 +736,6 @@ class JobModel extends CI_Model {
 		} elseif($this->session->userdata('flag') == 3) {
 			$this->db->where(array('jrd.jobSeekerId' => $userName));
 		}
-		$this->db->where(array('jrd.applyJobId' => 'ajd.id'));
 		$result = $this->db->get();
 		return $result->result()['0']->numrows;
 	}
@@ -816,5 +820,72 @@ class JobModel extends CI_Model {
 		$this->db->where('id', $hiddenResultJobId);
 		$resultUpdate = $this->db->update('job_result_details', $jobResultUpdateData);
 		return $resultUpdate;
+	}
+
+	/**
+	 * This jobResultGroupHistory method are used to retrieves the data from job_result_details
+	 * @param records limit and start value is passed by JobController
+	 * @return to return the jobResultGroupHistory array value to controller
+	 * @author kulasekaran.
+	 *
+	 */
+	function jobResultGroupHistory($limit, $start) {
+		$jobCategoryId = $this->input->post('hiddenJobCategoryId');
+		$filterVal = $this->input->post('filterVal');
+		$this->db->limit($limit, $start);
+		$this->db->select(
+					'jrd.id,
+					jrd.jobId,
+					jrd.companyId,
+					jrd.jobSeekerId,
+					jrd.resultDate,
+					jrd.obtainMark,
+					jrd.resultStatus,
+					jrd.delFlag,
+					ajd.applyDate,
+					jd.lastApplyDate,
+					jd.salary,
+					dest.designationName AS jobCategory,
+					cmpy.companyName,
+					cmpy.incharge,
+					cmpy.contact,
+					user.name AS jobSeekerName,
+					user.gender,
+					user.contact AS jobSeekerContact'
+				)
+			->from('job_result_details as jrd')
+			// this is the left join in codeigniter
+			->join('company as cmpy','cmpy.userName = jrd.companyId','left')
+			->join('apply_job_details as ajd','ajd.id = jrd.applyJobId','left')
+			->join('job_details as jd','jd.id = jrd.jobId','left')
+			->join('m_designation as dest','dest.designationId = jd.jobCategory','left')
+			->join('users as user','user.userName = jrd.jobSeekerId','left');
+			
+			// filter process
+			if ($filterVal == 2) {
+				$this->db->where(array('jrd.resultStatus' => 1));
+			} elseif ($filterVal == 3) {
+				$this->db->where(array('jrd.resultStatus' => 2));
+			}
+
+			// search process
+			$hiddenSearch = $this->input->post('hiddenSearch');
+			if($hiddenSearch != ""){
+				$this->db->like('jrd.resultDate',trim($hiddenSearch));
+			}
+
+			// sorting process
+			$sortOptn = $this->input->post('sortOptn');
+			$sortVal = $this->input->post('sortVal');
+			if ($sortVal == 1) {
+				$this->db->order_by('user.name', $sortOptn);
+			} else if ($sortVal == 2) {
+				$this->db->order_by('jrd.obtainMark', $sortOptn);
+			} else {
+				$this->db->order_by('user.name', 'ASC');
+			}
+			$this->db->where(array('jd.jobCategory' => $jobCategoryId));
+		$jobResultGroupHistory = $this->db->get();
+		return $jobResultGroupHistory->result();
 	}
 }

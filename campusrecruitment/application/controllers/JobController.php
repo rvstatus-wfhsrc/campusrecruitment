@@ -313,13 +313,10 @@ class JobController extends CI_Controller {
 	 *
 	 */
 	public function jobApplyDetail() {
-		if($this->input->post('hiddenApplyJobId') != null) {
-			$hiddenApplyJobId = $this->input->post('hiddenApplyJobId');
-        }elseif ($this->session->flashdata('hiddenApplyJobId')) {
-        	$hiddenApplyJobId = $this->session->flashdata('hiddenApplyJobId');
-        } else {
-        	redirect('JobController/jobApplyHistory');
+		if($this->input->post('hiddenApplyJobId') == null) {
+			redirect('JobController/jobApplyHistory');
         }
+        $hiddenApplyJobId = $this->input->post('hiddenApplyJobId');
 		$data['jobApplyDetail'] = $this->JobModel->jobApplyDetail($hiddenApplyJobId);
 		$this->layouts->view('company/job/applyDetail',$data);
 	}
@@ -346,8 +343,7 @@ class JobController extends CI_Controller {
 		if($jobResultAddStatus){
 			$this->session->set_flashdata([
 				'message'  => 'Job Result Details Add Successfully',
-				'type' => 'success',
-				'hiddenApplyJobId' => $this->input->post('hiddenApplyJobId')
+				'type' => 'success'
 			]);
 		} else {
 			$this->session->set_flashdata([
@@ -405,7 +401,7 @@ class JobController extends CI_Controller {
 
 		// pagination process
 		$totalRecord = $this->JobModel->record_count_for_job_result();
-		$pagination_config = $this->CommonModel->paginationConfig($totalRecord,base_url()."JobController/jobApplyHistory");
+		$pagination_config = $this->CommonModel->paginationConfig($totalRecord,base_url()."JobController/jobResultHistory");
 		$this->pagination->initialize($pagination_config);
 		$page = (($this->input->post('per_page') != null)) ? $this->input->post('per_page') : 0;
 		$data["serialNumber"] = $page;
@@ -466,5 +462,48 @@ class JobController extends CI_Controller {
 			]);
 		}
 		redirect('JobController/jobResultHistory');
+	}
+
+	/**
+	 * This jobResultGroupHistory method are used to get the data from model for the result of applied jobs for specific company's job category
+	 * @return to view screen [ company/job/result/history ]
+	 * @author kulasekaran.
+	 *
+	 */
+	public function jobResultGroupHistory() {
+		// filter process
+		$filterVal = $this->input->post('filterVal');
+		$data['disableAll'] = "";
+		$data['disablePass'] = "";
+		$data['disableFail'] = "";
+		if ($filterVal == 2) {
+			$data['disablePass'] = "disabled";
+		} elseif ($filterVal == 3) {
+			$data['disableFail'] = "disabled";
+		} else {
+			$data['disableAll'] = "disabled";
+		}
+
+		// sorting process style
+		$sortOptn = $this->input->post('sortOptn');
+		$data['sortStyle'] = "sort_asc";
+		if(isset($sortOptn) && $sortOptn == "ASC") {
+			$data['sortStyle'] = "sort_asc";
+		} elseif(isset($sortOptn) && $sortOptn == "DESC") {
+			$data['sortStyle'] = "sort_desc";
+		}
+		$data['sortArray'] = array('1' => 'Job Seeker Name','2' => 'Obtain Mark');
+
+		// pagination process
+		$totalRecord = $this->JobModel->record_count_for_job_result();
+		$pagination_config = $this->CommonModel->paginationConfig($totalRecord,base_url()."JobController/jobResultGroupHistory");
+		$this->pagination->initialize($pagination_config);
+		$page = (($this->input->post('per_page') != null)) ? $this->input->post('per_page') : 0;
+		$data["serialNumber"] = $page;
+
+		$data["links"] = $this->pagination->create_links();
+		$data['jobResultHistory'] = $this->JobModel->jobResultGroupHistory($pagination_config["per_page"], $page);
+
+		$this->layouts->view('company/job/result/groupHistory',$data);
 	}
 }

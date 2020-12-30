@@ -411,12 +411,12 @@ $config = array(
                                     array(
                                         'field' => 'tenthMark',
                                         'label' => 'lang:lbl_tenthMark',
-                                        'rules' => 'required|integer|greater_than[0]|less_than_equal_to[100]'
+                                        'rules' => 'required|numeric|greater_than[0]|less_than_equal_to[100]'
                                     ),
                                     array(
                                         'field' => 'twelvethMark',
                                         'label' => 'lang:lbl_twelvethMark',
-                                        'rules' => 'required|integer|greater_than[0]|less_than_equal_to[100]'
+                                        'rules' => 'required|numeric|greater_than[0]|less_than_equal_to[100]'
                                     ),
                                     array(
                                         'field' => 'qualification',
@@ -456,7 +456,7 @@ $config = array(
                                     array(
                                         'field' => 'cgpa',
                                         'label' => 'lang:lbl_cgpa',
-                                        'rules' => 'required'
+                                        'rules' => 'required|numeric|greater_than[0]|less_than_equal_to[10]'
                                     ),
                                     array(
                                         'field' => 'skill',

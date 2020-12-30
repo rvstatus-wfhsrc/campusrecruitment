@@ -88,6 +88,7 @@ $lang['lbl_mark'] = 'Mark';
 $lang['lbl_titleMark'] = 'Obtain Mark ( display as percentage only )';
 $lang['lbl_titleCompanyContact'] = 'Company Phone Number';
 $lang['lbl_titleJobSeekerContact'] = 'Job Seeker Phone Number';
+$lang['lbl_resultGroupHistory'] = 'Result Group History';
 
 // home screen label
 $lang['lbl_findJobIntro'] = 'Find the job that fits your life';
