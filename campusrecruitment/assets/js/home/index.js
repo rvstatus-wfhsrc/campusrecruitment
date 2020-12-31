@@ -24,3 +24,17 @@ function pagination(page) {
 	$("#indexForm").attr("action", "homeSearch");
 	$("#indexForm").submit();
 }
+
+function fnJobCategorySearch(jobCategoryId) {
+	$("#jobKeyWords").val($("#hiddenJobKeyWords").val());
+	$("#area").val($("#hiddenArea").val());
+	$("#jobCategory").val(jobCategoryId);
+	$("#indexForm").attr("action", "homeSearch");
+	$("#indexForm").submit();
+}
+
+function fnJobMoreDetail(jobId) {
+	$("#hiddenJobId").val(jobId);
+	$("#indexForm").attr("action", "jobMoreDetail");
+	$("#indexForm").submit();
+}

@@ -56,3 +56,5 @@ $route['siteLangUpdate'] = 'HomeController/siteLangUpdate';
 $route['loginUser'] = 'LoginController/loginUser';
 $route['homeSearch'] = 'HomeController/index';
 $route['HomeController/homeSearch'] = 'HomeController/index';
+$route['jobMoreDetail'] = 'JobController/jobDetail';
+$route['HomeController/jobMoreDetail'] = 'JobController/jobDetail';

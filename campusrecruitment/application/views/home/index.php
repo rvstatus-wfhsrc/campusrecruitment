@@ -43,6 +43,7 @@
                     <input type="hidden" id="hiddenJobKeyWords" name="hiddenJobKeyWords" value= "<?php echo $this->input->post('jobKeyWords') ?>" >
                     <input type="hidden" id="hiddenArea" name="hiddenArea" value= "<?php echo $this->input->post('area') ?>" >
                     <input type="hidden" id="per_page" name="per_page">
+                    <input type="hidden" id="hiddenJobId" name="hiddenJobId">
                     <input type="hidden" id="base" value="<?php echo base_url(); ?>">
 	                  <div class="row">
 	                    <div class="col-md-4 col-sm-6">
@@ -140,7 +141,7 @@
                       <div class="job-tag">
                         <div class="pull-left">
                           <div class="meta-tag">
-                            <span><a href="javascript:alert('under construction for search by jobCategory');"><i class="ti-brush"></i><?php echo $job->designationName; ?></a></span>
+                            <span><a href="javascript:fnJobCategorySearch(<?php echo $job->jobCategory; ?>)"><i class="ti-brush"></i><?php echo $job->designationName; ?></a></span>
                             <span><i class="ti-location-pin"></i><?php echo $job->jobLocation; ?></span>
                             <span><i class="ti-time"></i><?php echo $job->workingHour; ?> Hrs / Day</span>
                           </div>
@@ -149,7 +150,7 @@
                           <!-- <div class="icon">
                             <i class="ti-heart"></i>
                           </div> -->
-                          <a href="javascript:alert('under construction for job details');" class="btn btn-common btn-rm"><?php echo lang('lbl_moreDetail');?></a>
+                          <a href="javascript:fnJobMoreDetail(<?php echo $job->id; ?>)" class="btn btn-common btn-rm"><?php echo lang('lbl_moreDetail');?></a>
                         </div>
                       </div>
                     </div>

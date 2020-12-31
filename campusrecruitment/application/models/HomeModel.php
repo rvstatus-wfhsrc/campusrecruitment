@@ -24,6 +24,7 @@ class HomeModel extends CI_Model {
 					role.roleName,
 					country.countryName as jobLocation,
 					jd.id,
+					jd.jobCategory,
 					jd.workingHour,
 					jd.jobDescription,
 					jd.lastApplyDate,

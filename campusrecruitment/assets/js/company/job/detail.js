@@ -6,10 +6,12 @@ function fnJobEdit() {
 
 // back button process
 function fnBackBtn() {
-	if ($("#hiddenFlag").val() == 2) {
-		$("#jobDetailForm").attr("action", "jobList");
+	if ($("#hiddenFlag").val() == "") {
+		$("#jobDetailForm").attr("action", "homeSearch");
+	} else if ($("#hiddenFlag").val() == 2) {
+		$("#jobDetailForm").attr("action", "../JobController/jobList");
 	} else {
-		$("#jobDetailForm").attr("action", "jobLists");
+		$("#jobDetailForm").attr("action", "../JobController/jobLists");
 	}
 	$('#jobDetailForm').submit();
 }
