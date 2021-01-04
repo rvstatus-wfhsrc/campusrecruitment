@@ -37,6 +37,9 @@ class DashBoardController extends CI_Controller {
     $data['totalJobPosted'] = $this->DashBoardModel->totalJobPosted();
     $data['totalJobApplied'] = $this->DashBoardModel->totalJobApplied();
     $data['totalPassResult'] = $this->DashBoardModel->totalPassResult();
+    $data['maxJobAppliedDate'] = $this->DashBoardModel->maxJobAppliedDate();
+    $data['totalFailResult'] = $this->DashBoardModel->totalFailResult();
+    $data['totalJobCancelled'] = $this->DashBoardModel->totalJobCancelled();
     $this->layouts->view('company/dashBoard/index',$data);
   }
 
@@ -48,7 +51,7 @@ class DashBoardController extends CI_Controller {
    */
   public function companyAreaChart() {
     $result = $this->DashBoardModel->companyAreaChart();
-    return response()->json($result);
+    echo json_encode($result);exit();
   }
 
   /**
@@ -59,7 +62,7 @@ class DashBoardController extends CI_Controller {
    */
   public function companyBarChart() {
     $result = $this->DashBoardModel->companyBarChart();
-    return response()->json($result);
+    echo json_encode($result);exit();
   }
 
   /**
@@ -70,6 +73,6 @@ class DashBoardController extends CI_Controller {
    */
   public function companyPieChart() {
     $result = $this->DashBoardModel->companyPieChart();
-    return response()->json($result);
+    echo json_encode($result);exit();
   }
 }

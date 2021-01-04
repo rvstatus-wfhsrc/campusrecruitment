@@ -5,7 +5,7 @@ function renderBarChart(chartData, labels) {
     data: {
       labels: labels,
       datasets: [{
-        label: "Token",
+        label: "Job Applied",
         backgroundColor: "rgba(2,117,216,1)",
         borderColor: "rgba(2,117,216,1)",
         data: chartData,

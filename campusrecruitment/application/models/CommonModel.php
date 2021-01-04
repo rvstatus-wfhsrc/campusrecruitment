@@ -24,14 +24,17 @@ class CommonModel extends CI_Model {
 	}
 
 	// to get the state name
-	public function state()
+	public function state($countryId = null)
 	{
+
 		$this->db->select('stateId,stateName');
 		$this->db->where(array('delFlag' => 0));
+		if(isset($countryId) && $countryId != "") {
+			$this->db->where(array('countryId' => $countryId));
+		}
 		$this->db->order_by('stateName', 'asc');
 		$this->db->group_by(array("stateName", "stateId"));
 		$state = $this->db->get('m_state');
-		$stateArray = array( '' => 'Select State');
 		foreach($state->result_array() as $row)
 	    {
 	        $stateArray[$row['stateId']] = $row['stateName']; // add each user id to the array
@@ -40,14 +43,16 @@ class CommonModel extends CI_Model {
 	}
 
 	// to get the city name
-	public function city()
+	public function city($stateId = null)
 	{
 		$this->db->select('cityId,cityName');
 		$this->db->where(array('delFlag' => 0));
+		if(isset($stateId) && $stateId != "") {
+			$this->db->where(array('stateId' => $stateId));
+		}
 		$this->db->order_by('cityName', 'asc');
 		$this->db->group_by(array("cityName", "cityId"));
 		$city = $this->db->get('m_city');
-		$cityArray = array( '' => 'Select City');
 		foreach($city->result_array() as $row)
 	    {
 	        $cityArray[$row['cityId']] = $row['cityName']; // add each user id to the array

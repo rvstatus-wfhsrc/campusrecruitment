@@ -32,13 +32,13 @@ class DashBoardModel extends CI_Model {
 	 */
 	function companyAreaChart() {
 		$currentMonth = date('m');
-		$this->db->select("count(*) AS count,DATE_FORMAT(created_at, '%b-%d') AS date");
-		$this->db->where(array('MONTH(created_at) = ?' => [$currentMonth]));
+		$this->db->select("count(id) AS count,DATE_FORMAT(created_date_time, '%b-%d') AS date");
+		$this->db->where(array('MONTH(created_date_time) =' => '12'));
 		$this->db->where(array('companyId' => $this->session->userdata('userName')));
 		$this->db->where(array('delFlag' => 0));
-		// $this->db->groupBy('date');
+		$this->db->group_by('date');
 		$companyAreaChart = $this->db->get('apply_job_details');
-		return $companyAreaChart->result()[0];
+		return $companyAreaChart->result();
 	}
 
 	/**
@@ -49,14 +49,28 @@ class DashBoardModel extends CI_Model {
 	 */
 	function companyBarChart() {
 		$currentYear = date('Y');
-		$this->db->select("count(*) AS count,monthname(created_date_time, '%b-%d') AS month");
+		$this->db->select("count(id) AS count,DATE_FORMAT(created_date_time, '%m') AS month");
 		$this->db->where(array('YEAR(created_date_time)' => '2020'));
 		$this->db->where(array('companyId' => $this->session->userdata('userName')));
 		$this->db->where(array('delFlag' => 0));
 		// $this->db->orderBy('created_at','ASC');
-		// $this->db->groupBy('month');
+		$this->db->group_by('month');
 		$companyBarChart = $this->db->get('apply_job_details');
-		return $companyBarChart->result()[0];
+		return $companyBarChart->result();
+	}
+
+	/**
+	 * This companyPieChart method are used to retrieve the number of applied and cancelled jobs by job seekers for a specific company
+	 * @return the companyPieChart array
+	 * @author kulasekaran.
+	 *
+	 */
+	function companyPieChart() {
+		$this->db->select("count(delFlag) AS count,delFlag");
+		$this->db->where(array('companyId' => $this->session->userdata('userName')));
+		$this->db->group_by('delFlag');
+		$companyPieChart = $this->db->get('apply_job_details');
+		return $companyPieChart->result();
 	}
 
 	/**
@@ -66,7 +80,7 @@ class DashBoardModel extends CI_Model {
 	 *
 	 */
 	function activeJobSeeker() {
-		$this->db->select('count(*) AS activeJobSeeker');
+		$this->db->select('count(id) AS activeJobSeeker');
 		$this->db->where(array('flag' => 3));
 		$this->db->where(array('delFlag' => 0));
 		$activeJobSeeker = $this->db->get('users');
@@ -80,7 +94,7 @@ class DashBoardModel extends CI_Model {
 	 *
 	 */
 	function totalJobPosted() {
-		$this->db->select('count(*) AS jobPosted');
+		$this->db->select('count(id) AS jobPosted');
 		$this->db->where(array('companyId' => $this->session->userdata('userName')));
 		$this->db->where(array('delFlag' => 0));
 		$totalJobPosted = $this->db->get('job_details');
@@ -94,7 +108,7 @@ class DashBoardModel extends CI_Model {
 	 *
 	 */
 	function totalJobApplied() {
-		$this->db->select('count(*) AS jobApplied');
+		$this->db->select('count(id) AS jobApplied');
 		$this->db->where(array('companyId' => $this->session->userdata('userName')));
 		$this->db->where(array('delFlag' => 0));
 		$totalJobApplied = $this->db->get('apply_job_details');
@@ -108,10 +122,53 @@ class DashBoardModel extends CI_Model {
 	 *
 	 */
 	function totalPassResult() {
-		$this->db->select('count(*) AS passResult');
+		$this->db->select('count(id) AS passResult');
 		$this->db->where(array('companyId' => $this->session->userdata('userName')));
+		$this->db->where(array('resultStatus' => 1));
 		$this->db->where(array('delFlag' => 0));
 		$totalPassResult = $this->db->get('job_result_details');
 		return $totalPassResult->result()[0];
+	}
+
+	/**
+	 * This totalFailResult method are used to retrieve the number of jobs applied for a specific company by job seekers is failed
+	 * @return the totalFailResult array
+	 * @author kulasekaran.
+	 *
+	 */
+	function totalFailResult() {
+		$this->db->select('count(id) AS failResult');
+		$this->db->where(array('companyId' => $this->session->userdata('userName')));
+		$this->db->where(array('resultStatus' => 2));
+		$this->db->where(array('delFlag' => 0));
+		$totalFailResult = $this->db->get('job_result_details');
+		return $totalFailResult->result()[0];
+	}
+
+	/**
+	 * This totalJobCancelled method are used to retrieve the number of jobs cancelled for a specific company by job seekers
+	 * @return the totalJobCancelled array
+	 * @author kulasekaran.
+	 *
+	 */
+	function totalJobCancelled() {
+		$this->db->select('count(id) AS jobCancelled');
+		$this->db->where(array('companyId' => $this->session->userdata('userName')));
+		$this->db->where(array('delFlag' => 1));
+		$totalJobCancelled = $this->db->get('apply_job_details');
+		return $totalJobCancelled->result()[0];
+	}
+
+	/**
+	 * This maxJobAppliedDate method are used to retrieve the maximum created date and time and maximum updated date and time of jobs applied for a specific company by job seekers
+	 * @return the maxJobAppliedDate array
+	 * @author kulasekaran.
+	 *
+	 */
+	function maxJobAppliedDate() {
+		$this->db->select('MAX(created_date_time) AS createdDateTime,MAX(updated_date_time) AS updatedDateTime');
+		$this->db->where(array('delFlag' => 0));
+		$maxJobAppliedDate = $this->db->get('apply_job_details');
+		return $maxJobAppliedDate->result()[0];
 	}
 }

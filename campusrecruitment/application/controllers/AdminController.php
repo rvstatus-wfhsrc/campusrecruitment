@@ -198,4 +198,16 @@ class AdminController extends CI_Controller {
 		$this->form_validation->set_message('email_exist_check', $this->lang->line("exist_email"));
 		return ($row->count > 0) ? FALSE : TRUE;
 	}
+
+	function getState() {
+		$countryId = $this->input->post('countryId');
+        $stateArray = $this->CommonModel->state($countryId);
+        echo json_encode($stateArray);exit;
+    }
+
+    function getCity() {
+    	$stateId = $this->input->post('stateId');
+        $cityArray = $this->CommonModel->city($stateId);
+        echo json_encode($cityArray);exit;
+    }
 }
