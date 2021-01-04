@@ -19,6 +19,9 @@
 .w3 {
 	width: 3% !important;
 }
+.w17 {
+	width: 17% !important;
+}
 .w20 {
 	width: 20% !important;
 }
@@ -39,6 +42,9 @@
 }
 .w43 {
 	width: 43% !important;
+}
+.w52 {
+	width: 52% !important;
 }
 .w54 {
 	width: 54% !important;
@@ -92,6 +98,15 @@
 /* margin top class start */
 .mt3 {
 	margin-top: 3px !important;
+}
+/* margin top class end */
+
+/* margin bottom class start */
+.mb5 {
+	margin-bottom: 5px !important;
+}
+.mb24 {
+	margin-bottom: 24px !important;
 }
 /* margin bottom class end */
 

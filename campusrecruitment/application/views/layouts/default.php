@@ -121,12 +121,13 @@
                     <div class="sb-sidenav-menu">
                         <div class="nav">
                             <?php if($this->session->userdata('flag') == 1) { ?>
-                                <div class="sb-sidenav-menu-heading">Home</div>
+                                <div class="sb-sidenav-menu-heading">Search</div>
                                 <a class="nav-link <?php echo ($this->uri->segment(1)=='HomeController')?'active':''; ?>" href="<?php echo site_url('HomeController/index') ?>">
                                     <div class="sb-nav-link-icon"><i class="fa fa-search" aria-hidden="true"></i></div>
-                                    <?php echo lang('lbl_jobSearch'); ?>
+                                    <?php echo lang('lbl_findNewJob'); ?>
                                 </a>
-                                <a class="nav-link <?php echo ($this->uri->segment(3)=='dashboard')?'active':''; ?>" href="<?php echo site_url('DashboardController/dashboard/dashboard') ?>">
+                                <div class="sb-sidenav-menu-heading">Home</div>
+                                <a class="nav-link <?php echo ($this->uri->segment(3)=='dashboard')?'active':''; ?>" href="<?php echo site_url('DashBoardController/companyDashBoard') ?>">
                                     <div class="sb-nav-link-icon"><i class="fa fa-tachometer"></i></div>
                                     Dashboard
                                 </a>
@@ -146,8 +147,13 @@
                                     </nav>
                                 </div>
                             <?php } elseif ($this->session->userdata('flag') == 2) { ?>
+                                <div class="sb-sidenav-menu-heading">Search</div>
+                                <a class="nav-link <?php echo ($this->uri->segment(1)=='HomeController')?'active':''; ?>" href="<?php echo site_url('HomeController/index') ?>">
+                                    <div class="sb-nav-link-icon"><i class="fa fa-search" aria-hidden="true"></i></div>
+                                    <?php echo lang('lbl_findNewJob'); ?>
+                                </a>
                                 <div class="sb-sidenav-menu-heading">Home</div>
-                                <a class="nav-link <?php echo ($this->uri->segment(3)=='dashboard')?'active':''; ?>" href="<?php echo site_url('DashboardController/dashboard/dashboard') ?>">
+                                <a class="nav-link <?php echo ($this->uri->segment(2)=='companyDashBoard')?'active':''; ?>" href="<?php echo site_url('DashBoardController/companyDashBoard') ?>">
                                     <div class="sb-nav-link-icon"><i class="fa fa-tachometer"></i></div>
                                     Dashboard
                                 </a>
@@ -179,6 +185,11 @@
                                     </nav>
                                 </div>
                             <?php } else { ?>
+                                <div class="sb-sidenav-menu-heading">Search</div>
+                                <a class="nav-link <?php echo ($this->uri->segment(1)=='HomeController')?'active':''; ?>" href="<?php echo site_url('HomeController/index') ?>">
+                                    <div class="sb-nav-link-icon"><i class="fa fa-search" aria-hidden="true"></i></div>
+                                    <?php echo lang('lbl_findNewJob'); ?>
+                                </a>
                                 <div class="sb-sidenav-menu-heading">Home</div>
                                 <a class="nav-link <?php echo ($this->uri->segment(2)=='jobSeekerDetail')?'active':''; ?>" href="<?php echo site_url('JobSeekerController/jobSeekerDetail') ?>">
                                     <div class="sb-nav-link-icon"><i class="fa fa-user"></i></div>

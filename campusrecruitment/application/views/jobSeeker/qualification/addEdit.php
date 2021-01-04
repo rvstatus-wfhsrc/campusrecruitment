@@ -154,7 +154,7 @@
                                                 'id' => 'collegeName',
                                                 'name' => 'collegeName',
                                                 'placeholder' => 'Enter College Name',
-                                                'class' => 'input_box col-md-12 form-control w37 h-25',
+                                                'class' => 'input_box col-md-12 form-control w52 h-25',
                                                 'value' => isset($qualificationEdit) ? set_value("collegeName", $qualificationEdit->collegeName) : set_value("collegeName")
                                             );
                                             echo form_input($data);
