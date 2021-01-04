@@ -171,4 +171,129 @@ class DashBoardModel extends CI_Model {
 		$maxJobAppliedDate = $this->db->get('apply_job_details');
 		return $maxJobAppliedDate->result()[0];
 	}
+
+	/**
+	 * This activeCompany method are used to retrieve the number of companies in active
+	 * @return the activeCompany array
+	 * @author kulasekaran.
+	 *
+	 */
+	function activeCompany() {
+		$this->db->select('count(id) AS activeCompany');
+		$this->db->where(array('flag' => 2));
+		$this->db->where(array('delFlag' => 0));
+		$activeCompany = $this->db->get('company');
+		return $activeCompany->result()[0];
+	}
+
+	/**
+	 * This allCompanyJobPosted method are used to retrieve the number of jobs posted by all companies
+	 * @return the allCompanyJobPosted array
+	 * @author kulasekaran.
+	 *
+	 */
+	function allCompanyJobPosted() {
+		$this->db->select('count(id) AS allJobPosted');
+		$this->db->where(array('delFlag' => 0));
+		$allCompanyJobPosted = $this->db->get('job_details');
+		return $allCompanyJobPosted->result()[0];
+	}
+
+	/**
+	 * This allJobPassResult method are used to retrieve the number of jobs applied for all companies by job seekers is passed
+	 * @return the allJobPassResult array
+	 * @author kulasekaran.
+	 *
+	 */
+	function allJobPassResult() {
+		$this->db->select('count(id) AS allPassResult');
+		$this->db->where(array('resultStatus' => 1));
+		$this->db->where(array('delFlag' => 0));
+		$allJobPassResult = $this->db->get('job_result_details');
+		return $allJobPassResult->result()[0];
+	}
+
+	/**
+	 * This allJobFailResult method are used to retrieve the number of jobs applied for all companies by job seekers is failed
+	 * @return the allJobFailResult array
+	 * @author kulasekaran.
+	 *
+	 */
+	function allJobFailResult() {
+		$this->db->select('count(id) AS allFailResult');
+		$this->db->where(array('resultStatus' => 2));
+		$this->db->where(array('delFlag' => 0));
+		$allJobFailResult = $this->db->get('job_result_details');
+		return $allJobFailResult->result()[0];
+	}
+
+	/**
+	 * This allCompanyJobCancelled method are used to retrieve the number of jobs cancelled for all companies by job seekers
+	 * @return the allCompanyJobCancelled array
+	 * @author kulasekaran.
+	 *
+	 */
+	function allCompanyJobCancelled() {
+		$this->db->select('count(id) AS allJobCancelled');
+		$this->db->where(array('delFlag' => 1));
+		$allCompanyJobCancelled = $this->db->get('apply_job_details');
+		return $allCompanyJobCancelled->result()[0];
+	}
+
+	/**
+	 * This adminAreaChart method are used to retrieve the number of jobs applied in current month by job seekers all companies
+	 * @return the adminAreaChart array
+	 * @author kulasekaran.
+	 *
+	 */
+	function adminAreaChart() {
+		$currentMonth = date('m');
+		$this->db->select("count(id) AS count,DATE_FORMAT(created_date_time, '%b-%d') AS date");
+		$this->db->where(array('MONTH(created_date_time) =' => '12'));
+		$this->db->group_by('date');
+		$adminAreaChart = $this->db->get('apply_job_details');
+		return $adminAreaChart->result();
+	}
+
+	/**
+	 * This adminBarChart method are used to retrieve the number of jobs applied in current year by job seekers for all companies
+	 * @return the adminBarChart array
+	 * @author kulasekaran.
+	 *
+	 */
+	function adminBarChart() {
+		$currentYear = date('Y');
+		$this->db->select("count(id) AS count,DATE_FORMAT(created_date_time, '%m') AS month");
+		$this->db->where(array('YEAR(created_date_time)' => '2020'));
+		$this->db->group_by('month');
+		$adminBarChart = $this->db->get('apply_job_details');
+		return $adminBarChart->result();
+	}
+
+	/**
+	 * This adminPieChart method are used to retrieve the number of applied and cancelled jobs by job seekers for all companies
+	 * @return the adminPieChart array
+	 * @author kulasekaran.
+	 *
+	 */
+	function adminPieChart() {
+		$this->db->select("count(ajd.delFlag) AS count,jrd.resultStatus")
+			->from('apply_job_details AS ajd')
+			->join('job_result_details as jrd','jrd.resultStatus = ajd.delFlag','left');
+		$this->db->group_by('jrd.resultStatus');
+		$adminPieChart = $this->db->get();
+		return $adminPieChart->result();
+	}
+
+	/**
+	 * This maxAllJobAppliedDate method are used to retrieve the maximum created date and time and maximum updated date and time of jobs applied for all companies by job seekers
+	 * @return the maxAllJobAppliedDate array
+	 * @author kulasekaran.
+	 *
+	 */
+	function maxAllJobAppliedDate() {
+		$this->db->select('MAX(created_date_time) AS createdDateTime,MAX(updated_date_time) AS updatedDateTime');
+		$maxJobAppliedDate = $this->db->get('apply_job_details');
+		return $maxJobAppliedDate->result()[0];
+	}
 }

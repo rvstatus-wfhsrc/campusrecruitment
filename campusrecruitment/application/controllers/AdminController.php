@@ -200,13 +200,13 @@ class AdminController extends CI_Controller {
 	}
 
 	function getState() {
-		$countryId = $this->input->post('countryId');
+		$countryId = $this->input->get('countryId');
         $stateArray = $this->CommonModel->state($countryId);
         echo json_encode($stateArray);exit;
     }
 
     function getCity() {
-    	$stateId = $this->input->post('stateId');
+    	$stateId = $this->input->get('stateId');
         $cityArray = $this->CommonModel->city($stateId);
         echo json_encode($cityArray);exit;
     }

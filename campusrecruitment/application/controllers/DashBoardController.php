@@ -75,4 +75,55 @@ class DashBoardController extends CI_Controller {
     $result = $this->DashBoardModel->companyPieChart();
     echo json_encode($result);exit();
   }
+
+  /**
+   * This adminDashBoard method are used to call the admin dash board screen
+   * @return to view [ admin/dashBoard/index ]
+   * @author kulasekaran.
+   *
+   */
+  public function adminDashBoard() {
+    $data['activeJobSeeker'] = $this->DashBoardModel->activeJobSeeker();
+    $data['activeCompany'] = $this->DashBoardModel->activeCompany();
+    $data['allCompanyJobPosted'] = $this->DashBoardModel->allCompanyJobPosted();
+    $data['allJobPassResult'] = $this->DashBoardModel->allJobPassResult();
+    $data['allJobFailResult'] = $this->DashBoardModel->allJobFailResult();
+    $data['allCompanyJobCancelled'] = $this->DashBoardModel->allCompanyJobCancelled();
+    $data['maxAllJobAppliedDate'] = $this->DashBoardModel->maxAllJobAppliedDate();
+    $this->layouts->view('admin/dashBoard/index',$data);
+  }
+
+  /**
+   * This adminAreaChart method are used to get the all companies data and return the data for area chart
+   * @return json response
+   * @author kulasekaran.
+   *
+   */
+  public function adminAreaChart() {
+    $result = $this->DashBoardModel->adminAreaChart();
+    echo json_encode($result);exit();
+  }
+
+  /**
+   * This adminBarChart method are used to get the all companies data and return the data for bar chart
+   * @return json response
+   * @author kulasekaran.
+   *
+   */
+  public function adminBarChart() {
+    $result = $this->DashBoardModel->adminBarChart();
+    echo json_encode($result);exit();
+  }
+
+  /**
+   * This adminPieChart method are used to get the all companies data and return the data for pie chart
+   * @return json response
+   * @author kulasekaran.
+   *
+   */
+  public function adminPieChart() {
+    $result = $this->DashBoardModel->adminPieChart();
+    echo json_encode($result);exit();
+  }
+
 }

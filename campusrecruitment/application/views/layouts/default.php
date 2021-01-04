@@ -127,7 +127,7 @@
                                     <?php echo lang('lbl_findNewJob'); ?>
                                 </a>
                                 <div class="sb-sidenav-menu-heading">Home</div>
-                                <a class="nav-link <?php echo ($this->uri->segment(3)=='dashboard')?'active':''; ?>" href="<?php echo site_url('DashBoardController/companyDashBoard') ?>">
+                                <a class="nav-link <?php echo ($this->uri->segment(2)=='adminDashBoard')?'active':''; ?>" href="<?php echo site_url('DashBoardController/adminDashBoard') ?>">
                                     <div class="sb-nav-link-icon"><i class="fa fa-tachometer"></i></div>
                                     Dashboard
                                 </a>
