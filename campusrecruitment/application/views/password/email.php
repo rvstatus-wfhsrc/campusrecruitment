@@ -33,7 +33,7 @@
                                 <p>You can reset your password here.</p>
                                 <div class="panel-body">
                                     <?php echo form_open('LoginController/resentLinkSend',['method' => 'POST','id' => 'passwordResetForm','name' => 'passwordResetForm']); ?>
-                                    <input type="hidden" id="base" name="base" value="<?php echo base_url(); ?>">
+                                    <input type="hidden" id="baseUrl" name="baseUrl" value="<?php echo base_url(); ?>">
                                     <?php
                                         $flag = $this->input->get('flag');
                                         if($this->input->post('flag') != ""){

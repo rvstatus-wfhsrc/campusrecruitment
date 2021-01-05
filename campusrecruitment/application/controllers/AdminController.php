@@ -25,6 +25,9 @@ class AdminController extends CI_Controller {
 		parent::__construct();
 		$this->load->model('AdminModel');
 		$this->load->model('CommonModel');
+		if ($this->session->userdata('flag') == null) {
+			redirect('HomeController/index');
+		}
 	}
 
 	/**

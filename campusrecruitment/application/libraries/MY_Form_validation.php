@@ -152,7 +152,7 @@ class MY_Form_validation extends CI_Form_validation{
 	}
 
 	/**
-	 * This jobSeeker_email_existing_check method are used to validate the email for already exist or not in job seeker
+	 * This jobSeeker_email_existing_check method are used to validate the email for already exist or not
 	 * @return true or false to jobSeekerProfileFormValidation method
 	 * @author kulasekaran.
 	 *

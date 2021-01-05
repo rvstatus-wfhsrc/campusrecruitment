@@ -12,7 +12,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class JobSeekerModel extends CI_Model {
 
 	/**
-	 * Job Seeker Controller __construct
+	 * Job Seeker Model __construct
 	 *
 	 * This __construct are used to load the database
 	 * 

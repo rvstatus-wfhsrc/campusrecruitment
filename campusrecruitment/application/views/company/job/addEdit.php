@@ -70,9 +70,6 @@
                                             );
                                             echo form_dropdown('jobCategory', $jobCategoryArray,set_value('jobCategory', isset($jobEdit->jobCategory) ? $jobEdit->jobCategory : false),$fields);
                                         ?>
-                                        <div class="error">
-                                            <?php echo form_error('jobCategory'); ?>
-                                        </div>
                                     </div>
                                 </div>
                                 <div class="form-group form-inline">
@@ -95,9 +92,6 @@
                                             );
                                             echo form_dropdown('role', $roleArray,set_value('role', isset($jobEdit->role) ? $jobEdit->role : false),$fields);
                                         ?>
-                                        <div class="error">
-                                            <?php echo form_error('role'); ?>
-                                        </div>
                                     </div>
                                 </div>
                                 <div class="form-group form-inline">
@@ -111,9 +105,6 @@
                                             );
                                             echo form_dropdown('minQualification', $minQualificationArray,set_value('minQualification', isset($jobEdit->minQualification) ? $jobEdit->minQualification : false),$fields);
                                         ?>
-                                        <div class="error">
-                                            <?php echo form_error('minQualification'); ?>
-                                        </div>
                                     </div>
                                 </div>
                                 <div class="form-group form-inline">
@@ -127,9 +118,6 @@
                                             );
                                             echo form_dropdown('requiredSkill', $requiredSkillArray,set_value('requiredSkill', isset($jobEdit->requiredSkill) ? $jobEdit->requiredSkill : false),$fields);
                                         ?>
-                                        <div class="error">
-                                            <?php echo form_error('requiredSkill'); ?>
-                                        </div>
                                     </div>
                                 </div>
                                 <div class="form-group form-inline">
@@ -145,9 +133,6 @@
                                             );
                                             echo form_input($fields);
                                         ?>
-                                        <div class="error">
-                                            <?php echo form_error('extraSkill'); ?>
-                                        </div>
                                     </div>
                                 </div>
                                 <div class="form-group form-inline">
@@ -161,9 +146,6 @@
                                             );
                                             echo form_dropdown('maxAge', $maxAgeArray,set_value('maxAge', isset($jobEdit->maxAge) ? $jobEdit->maxAge : false),$fields);
                                         ?>
-                                        <div class="error">
-                                            <?php echo form_error('maxAge'); ?>
-                                        </div>
                                     </div>
                                 </div>
                                 <div class="form-group form-inline">
@@ -179,9 +161,6 @@
                                             );
                                             echo form_input($fields);
                                         ?>
-                                        <div class="error">
-                                            <?php echo form_error('salary'); ?>
-                                        </div>
                                     </div>
                                 </div>
                                 <div class="form-group form-inline">
@@ -197,9 +176,6 @@
                                             );
                                             echo form_input($fields);
                                         ?>
-                                        <div class="error">
-                                            <?php echo form_error('workingHour'); ?>
-                                        </div>
                                     </div>
                                 </div>
                                 <div class="form-group form-inline">
@@ -213,9 +189,6 @@
                                             );
                                             echo form_dropdown('jobLocation', $jobLocationArray,set_value('jobLocation', isset($jobEdit->jobLocation) ? $jobEdit->jobLocation : false),$fields);
                                         ?>
-                                        <div class="error">
-                                            <?php echo form_error('jobLocation'); ?>
-                                        </div>
                                     </div>
                                 </div>
                                 <div class="form-group form-inline">
@@ -249,9 +222,6 @@
                                             );
                                             echo form_textarea($fields);
                                         ?>
-                                        <div class="error">
-                                            <?php echo form_error('jobDescription'); ?>
-                                        </div>
                                     </div>
                                 </div>
                                 <div class="form-group">

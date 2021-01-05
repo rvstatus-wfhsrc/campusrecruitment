@@ -89,9 +89,6 @@
                                             );
                                             echo form_dropdown('specification', $specificationArray,set_value('specification', isset($qualificationEdit->specification) ? $qualificationEdit->specification : false),$fields);
                                         ?>
-                                        <div class="error">
-                                            <?php echo form_error('specification'); ?>
-                                        </div>
                                     </div>
                                 </div>
                                 <!-- qualification -->
@@ -106,9 +103,6 @@
                                             );
                                             echo form_dropdown('qualification', $qualificationArray,set_value('qualification', isset($qualificationEdit->qualification) ? $qualificationEdit->qualification : false),$fields);
                                         ?>
-                                        <div class="error">
-                                            <?php echo form_error('qualification'); ?>
-                                        </div>
                                     </div>
                                 </div>
                                 <!-- year of passing -->
@@ -123,9 +117,6 @@
                                             );
                                             echo form_dropdown('yearOfPassing', $yearOfPassingArray,set_value('yearOfPassing', isset($qualificationEdit->yearOfPassing) ? $qualificationEdit->yearOfPassing : false),$fields);
                                         ?>
-                                        <div class="error">
-                                            <?php echo form_error('yearOfPassing'); ?>
-                                        </div>
                                     </div>
                                 </div>
                                 <!-- month of passing -->
@@ -140,9 +131,6 @@
                                             );
                                             echo form_dropdown('monthOfPassing', $monthOfPassingArray,set_value('monthOfPassing', isset($qualificationEdit->monthOfPassing) ? $qualificationEdit->monthOfPassing : false),$fields);
                                         ?>
-                                        <div class="error">
-                                            <?php echo form_error('monthOfPassing'); ?>
-                                        </div>
                                     </div>
                                 </div>
                                 <!-- college name -->
@@ -159,9 +147,6 @@
                                             );
                                             echo form_input($data);
                                         ?>
-                                        <div class="error">
-                                            <?php echo form_error('collegeName'); ?>
-                                        </div>
                                     </div>
                                 </div>
                                 <!-- branch -->
@@ -176,9 +161,6 @@
                                             );
                                             echo form_dropdown('branch', $branchArray,set_value('branch', isset($qualificationEdit->branch) ? $qualificationEdit->branch : false),$fields);
                                         ?>
-                                        <div class="error">
-                                            <?php echo form_error('branch'); ?>
-                                        </div>
                                     </div>
                                 </div>
                                 <!-- university -->
@@ -193,9 +175,6 @@
                                             );
                                             echo form_dropdown('university', $universityArray,set_value('university', isset($qualificationEdit->university) ? $qualificationEdit->university : false),$fields);
                                         ?>
-                                        <div class="error">
-                                            <?php echo form_error('university'); ?>
-                                        </div>
                                     </div>
                                 </div>
                                 <!-- CGPA -->
@@ -212,9 +191,6 @@
                                             );
                                             echo form_input($data);
                                         ?>
-                                        <div class="error">
-                                            <?php echo form_error('cgpa'); ?>
-                                        </div>
                                     </div>
                                 </div>
                                 <!-- skill -->
@@ -229,9 +205,6 @@
                                             );
                                             echo form_dropdown('skill', $skillArray,set_value('skill', isset($qualificationEdit->skill) ? $qualificationEdit->skill : false),$fields);
                                         ?>
-                                        <div class="error">
-                                            <?php echo form_error('skill'); ?>
-                                        </div>
                                     </div>
                                 </div>
                                 <!-- extra skill -->
@@ -248,9 +221,6 @@
                                             );
                                             echo form_input($fields);
                                         ?>
-                                        <div class="error">
-                                            <?php echo form_error('extraSkill'); ?>
-                                        </div>
                                     </div>
                                 </div>
                                 <div class="form-group">

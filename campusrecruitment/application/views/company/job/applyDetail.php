@@ -59,7 +59,7 @@
 			</ol>
 		</div>
 		<?php echo form_open('JobController/jobApplyCancelStatus',['method' => 'POST','id' => 'applyDetailForm','name' => 'applyDetailForm']); ?>
-			<input type="hidden" id="base" name="base" value="<?php echo base_url(); ?>">
+			<input type="hidden" id="baseUrl" name="baseUrl" value="<?php echo base_url(); ?>">
 			<input type="hidden" id="hiddenApplyJobId" name="hiddenApplyJobId">
 			<input type="hidden" id="hiddenJobId" name="hiddenJobId">
 			<input type="hidden" id="hiddenJobSeekerId" name="hiddenJobSeekerId">

@@ -23,7 +23,7 @@
                     <div class="card-header"><h3 class="text-center font-weight-light">Reset Password</h3></div>
                     <div class="card-body">
                         <?php echo form_open('LoginController/passwordResetForm',['method' => 'POST','id' => 'passwordResetForm','name' => 'passwordResetForm']); ?>
-                            <input type="hidden" id="base" name="base" value="<?php echo base_url(); ?>">
+                            <input type="hidden" id="baseUrl" name="baseUrl" value="<?php echo base_url(); ?>">
                             <?php
                                 $flag = $this->input->get('flag');
                                 $email = $this->input->get('email');

@@ -56,9 +56,6 @@
                                             );
                                             echo form_input($data);
                                         ?>
-                                        <div class="error">
-                                            <?php echo form_error('companyName'); ?>
-                                        </div>
                                     </div>
                                 </div>
                                 <!-- address -->
@@ -77,9 +74,6 @@
                                             );
                                             echo form_textarea($data);
                                         ?>
-                                        <div class="error">
-                                            <?php echo form_error('address'); ?>
-                                        </div>
                                     </div>
                                 </div>
                                 <!-- incharge -->
@@ -96,9 +90,6 @@
                                             );
                                             echo form_input($data);
                                         ?>
-                                        <div class="error">
-                                            <?php echo form_error('incharge'); ?>
-                                        </div>
                                     </div>
                                 </div>
                                 <!-- contact -->
@@ -115,9 +106,6 @@
                                             );
                                             echo form_input($data);
                                         ?>
-                                        <div class="error">
-                                            <?php echo form_error('contact'); ?>
-                                        </div>
                                     </div>
                                 </div>
                                 <!-- e-mail -->
@@ -134,9 +122,6 @@
                                             );
                                             echo form_input($data);
                                         ?>
-                                        <div class="error">
-                                            <?php echo form_error('email'); ?>
-                                        </div>
                                     </div>
                                 </div>
                                 <!-- website -->
@@ -153,9 +138,6 @@
                                             );
                                             echo form_input($data);
                                         ?>
-                                        <div class="error">
-                                            <?php echo form_error('website'); ?>
-                                        </div>
                                     </div>
                                 </div>
                                 <!-- entry date -->
@@ -174,9 +156,6 @@
                                             );
                                             echo form_input($data);
                                         ?>
-                                        <div class="error">
-                                            <?php echo form_error('entryDate'); ?>
-                                        </div>
                                     </div>
                                 </div>
                                 <div class="form-group">

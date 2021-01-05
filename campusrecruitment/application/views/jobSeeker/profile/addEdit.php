@@ -75,9 +75,6 @@
                                             );
                                             echo form_input($data);
                                         ?>
-                                        <div class="error">
-                                            <?php echo form_error('name'); ?>
-                                        </div>
                                     </div>
                                 </div>
                                 <!-- e-mail -->
@@ -94,9 +91,6 @@
                                             );
                                             echo form_input($data);
                                         ?>
-                                        <div class="error">
-                                            <?php echo form_error('email'); ?>
-                                        </div>
                                     </div>
                                 </div>
                                 <!-- gender -->
@@ -125,9 +119,6 @@
                                             );
                                             echo form_textarea($data);
                                         ?>
-                                        <div class="error">
-                                            <?php echo form_error('address'); ?>
-                                        </div>
                                     </div>
                                 </div>
                                 <!-- country -->
@@ -142,9 +133,6 @@
                                             );
                                             echo form_dropdown('country', $countryArray,set_value('country', isset($jobSeekerEdit->country) ? $jobSeekerEdit->country : false),$fields);
                                         ?>
-                                        <div class="error">
-                                            <?php echo form_error('country'); ?>
-                                        </div>
                                     </div>
                                 </div>
                                 <!-- state -->
@@ -159,9 +147,6 @@
                                             );
                                             echo form_dropdown('state', $stateArray,set_value('state', isset($jobSeekerEdit->state) ? $jobSeekerEdit->state : false),$fields);
                                         ?>
-                                        <div class="error">
-                                            <?php echo form_error('state'); ?>
-                                        </div>
                                     </div>
                                 </div>
                                 <!-- city -->
@@ -176,9 +161,6 @@
                                             );
                                             echo form_dropdown('city', $cityArray,set_value('city', isset($jobSeekerEdit->city) ? $jobSeekerEdit->city : false),$fields);
                                         ?>
-                                        <div class="error">
-                                            <?php echo form_error('city'); ?>
-                                        </div>
                                     </div>
                                 </div>
                                 <!-- pincode -->
@@ -195,9 +177,6 @@
                                             );
                                             echo form_input($data);
                                         ?>
-                                        <div class="error">
-                                            <?php echo form_error('pincode'); ?>
-                                        </div>
                                     </div>
                                 </div>
                                 <!-- contact -->
@@ -214,9 +193,6 @@
                                             );
                                             echo form_input($data);
                                         ?>
-                                        <div class="error">
-                                            <?php echo form_error('contact'); ?>
-                                        </div>
                                     </div>
                                 </div>
                                 <?php if(!isset($jobSeekerEdit)) { ?>
@@ -234,9 +210,6 @@
                                                 );
                                                 echo form_input($data);
                                             ?>
-                                            <div class="error">
-                                                <?php echo form_error('password'); ?>
-                                            </div>
                                         </div>
                                     </div>
                                     <!-- confirm password -->
@@ -253,9 +226,6 @@
                                                 );
                                                 echo form_input($data);
                                             ?>
-                                            <div class="error">
-                                                <?php echo form_error('password_confirmation'); ?>
-                                            </div>
                                         </div>
                                     </div>
                                 <?php } ?>

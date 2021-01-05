@@ -47,9 +47,6 @@
                                             );
                                             echo form_input($data);
                                         ?>
-                                        <div class="error">
-                                            <?php echo form_error('name'); ?>
-                                        </div>
                                     </div>
                                 </div>
                                 <!-- e-mail -->
@@ -66,9 +63,6 @@
                                             );
                                             echo form_input($data);
                                         ?>
-                                        <div class="error">
-                                            <?php echo form_error('email'); ?>
-                                        </div>
                                     </div>
                                 </div>
                                 <!-- gender -->
@@ -81,9 +75,6 @@
                                         <input type="radio" name="gender" value="2" <?php echo set_value('gender', $profileEdit->gender) == 2 ? "checked" : ""; ?> />
                                         <!-- <input type="radio" name="gender" value="2" <?php echo set_radio('gender', 2, $profileEdit->gender === 2) ?> /> -->
                                         <span>Female</span>
-                                        <div class="error">
-                                            <?php echo form_error('gender'); ?>
-                                        </div>
                                     </div>
                                 </div>
                                 <!-- address -->
@@ -102,9 +93,6 @@
                                             );
                                             echo form_textarea($data);
                                         ?>
-                                        <div class="error">
-                                            <?php echo form_error('address'); ?>
-                                        </div>
                                     </div>
                                 </div>
                                 <!-- country -->
@@ -114,9 +102,6 @@
                                         <?php
                                             echo form_dropdown('country', $countryArray,set_value('country', $profileEdit->country, false),'class = "form-control autowidth h-25" id = "country" name = "country" placeholder = "Select Country"');
                                         ?>
-                                        <div class="error">
-                                            <?php echo form_error('country'); ?>
-                                        </div>
                                     </div>
                                 </div>
                                 <!-- state -->
@@ -126,9 +111,6 @@
                                         <?php 
                                             echo form_dropdown('state', $stateArray,set_value('state', $profileEdit->state, false),'class = "form-control autowidth h-25" id = "state" name = "state"');
                                         ?>
-                                        <div class="error">
-                                            <?php echo form_error('state'); ?>
-                                        </div>
                                     </div>
                                 </div>
                                 <!-- city -->
@@ -138,9 +120,6 @@
                                         <?php
                                             echo form_dropdown('city', $cityArray,set_value('city', $profileEdit->city, false),'class = "form-control autowidth h-25" id = "city" name = "city"');
                                         ?>
-                                        <div class="error">
-                                            <?php echo form_error('city'); ?>
-                                        </div>
                                     </div>
                                 </div>
                                 <!-- pincode -->
@@ -157,9 +136,6 @@
                                             );
                                             echo form_input($data);
                                         ?>
-                                        <div class="error">
-                                            <?php echo form_error('pincode'); ?>
-                                        </div>
                                     </div>
                                 </div>
                                 <!-- contact -->
@@ -176,9 +152,6 @@
                                             );
                                             echo form_input($data);
                                         ?>
-                                        <div class="error">
-                                            <?php echo form_error('contact'); ?>
-                                        </div>
                                     </div>
                                 </div>
                                 <!--image  -->

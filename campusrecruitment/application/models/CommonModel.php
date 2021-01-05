@@ -323,9 +323,10 @@ class CommonModel extends CI_Model {
 	 */
 	public function getYear()
 	{
-		$yearArray = array_combine(range(date("Y"), 1991), range(date("Y"), 1991));
-
-		return $yearArray;
+	  	$inserted = array('' => 'Select Year');
+	  	$original = array_combine(range(date("Y"), 1991), range(date("Y"), 1991));
+	  	$yearArray = $inserted+$original;
+	  	return $yearArray;
 	}
 
 }

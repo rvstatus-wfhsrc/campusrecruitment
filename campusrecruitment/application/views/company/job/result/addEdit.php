@@ -128,14 +128,14 @@
                                 <!-- userName -->
                                 <div class="form-group form-inline">
                                     <?php echo lang('lbl_userName', 'userName', array('class' => 'col-md-4 control-label')); ?>
-                                    <div class="col-md-8 teal">
+                                    <div class="col-md-8" style="color:#0000FF;">
                                         <b><?php echo $jobResultAdd->userName; ?></b>
                                     </div>
                                 </div>
                                 <!-- job seeker name -->
                                 <div class="form-group form-inline">
                                     <?php echo lang('lbl_jobSeekerName', 'jobSeekerName', array('class' => 'col-md-4 control-label')); ?>
-                                    <div class="col-md-8 teal">
+                                    <div class="col-md-8" style="color:#9C0000;">
                                         <b><?php echo $jobResultAdd->jobSeekerName; ?></b>
                                     </div>
                                 </div>
