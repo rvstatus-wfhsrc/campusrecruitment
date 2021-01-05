@@ -33,22 +33,22 @@
         <input type="hidden" id="baseUrl" value="<?php echo base_url(); ?>">
         <div class="display_btn">
             <a class="btn btn-info text-white mb24 mb5 btn_custom w17 w100">
-                <i class="fa fa-btn fa-users"></i><br><?php echo $activeJobSeeker->activeJobSeeker; ?> <?php echo lang('lbl_JOBSEEKER'); ?>
+                <i class="fa fa-btn fa-users"></i><br><?php echo $activeJobSeeker->activeJobSeeker; ?> <?php echo lang('lbl_caps_jobSeeker'); ?>
             </a>
             <a class="btn btn-warning text-white mb24 mb5 btn_custom w17 w100">
-                <i class="fa fa-btn fa-briefcase"></i><br><?php echo $totalJobPosted->jobPosted; ?> <?php echo lang('lbl_jobPosted'); ?>
+                <i class="fa fa-btn fa-briefcase"></i><br><?php echo $totalJobPosted->jobPosted; ?> <?php echo lang('lbl_caps_jobPosted'); ?>
             </a>
             <a class="btn btn-primary text-white mb24 mb5 btn_custom w17 w100">
-                <i class="fa fa-btn fa-briefcase"></i><br><?php echo $totalJobApplied->jobApplied; ?> <?php echo lang('lbl_jobApplied'); ?>
+                <i class="fa fa-btn fa-briefcase"></i><br><?php echo $totalJobApplied->jobApplied; ?> <?php echo lang('lbl_caps_jobApplied'); ?>
             </a>
             <a class="btn btn-success text-white mb24 mb5 btn_custom w17 w100">
-                <i class="fa fa-btn fa-columns"></i><br><?php echo $totalPassResult->passResult; ?> <?php echo lang('lbl_passResult'); ?>
+                <i class="fa fa-btn fa-briefcase"></i><br><?php echo $totalPassResult->passResult; ?> <?php echo lang('lbl_caps_passResult'); ?>
             </a>
             <a class="btn btn-info text-white mb24 mb5 btn_custom w17 w100">
-                <i class="fa fa-btn fa-columns"></i><br><?php echo $totalFailResult->failResult; ?> <?php echo lang('lbl_failResult'); ?>
+                <i class="fa fa-btn fa-briefcase"></i><br><?php echo $totalFailResult->failResult; ?> <?php echo lang('lbl_caps_failResult'); ?>
             </a>
             <a class="btn btn-danger text-white mb24 mb5 btn_custom w17 w100">
-                <i class="fa fa-btn fa-briefcase"></i><br><?php echo $totalJobCancelled->jobCancelled; ?> <?php echo lang('lbl_jobCancelled'); ?>
+                <i class="fa fa-btn fa-briefcase"></i><br><?php echo $totalJobCancelled->jobCancelled; ?> <?php echo lang('lbl_caps_jobCancelled'); ?>
             </a>
         </div>
         <div class="row">
@@ -56,7 +56,7 @@
                 <div class="card mb-4">
                     <div class="card-header">
                         <i class="fa fa-area-chart mr-1"></i>
-                        This Month (Job Applied)
+                        <?php echo lang('lbl_heading_thisMonth'); ?>
                     </div>
                     <div class="card-body"><canvas id="myAreaChart" width="100%" height="30" style="width: 100% !important;"></canvas></div>
                     <div class="card-footer small text-muted">
@@ -68,16 +68,18 @@
                             $maxUpdatedDate = $maxJobAppliedDate->createdDateTime;
                             if (($maxJobAppliedDate->updatedDateTime != null) && ($maxJobAppliedDate->updatedDateTime > $maxJobAppliedDate->createdDateTime)) {
                                 $maxUpdatedDate = $maxJobAppliedDate->updatedDateTime;
+                            } elseif ($maxUpdatedDate == null) {
+                                $maxUpdatedDate = date('Y-m-d H:i:s');
                             }
                             $maxDate = date("Y-m-d", strtotime($maxUpdatedDate));
-                            $day = date("Y-m-d", strtotime($maxUpdatedDate))." at";
+                            $day = date("Y-m-d", strtotime($maxUpdatedDate))." ".lang('lbl_at');
                             $time = date("H:i", strtotime($maxUpdatedDate));
                             if ($today == $maxDate) {
-                                $day = "today at";
+                                $day = lang('lbl_today')." ".lang('lbl_at');
                             } elseif($yesterday == $maxDate) {
-                                $day = "yesterday at";
+                                $day = lang('lbl_yesterday')." ".lang('lbl_at');
                             }
-                            $updatedDate = "Updated ".$day." ".$time;
+                            $updatedDate = lang('lbl_updated')." ".$day." ".$time;
                             date_default_timezone_set($getDefaultTimeZone);
                             if(isset($maxUpdatedDate) && $maxUpdatedDate != ""){
                                 echo $updatedDate;
@@ -92,7 +94,7 @@
                 <div class="card mb-4">
                     <div class="card-header">
                         <i class="fa fa-bar-chart mr-1"></i>
-                        This Year (Job Applied)
+                        <?php echo lang('lbl_heading_thisYear'); ?>
                     </div>
                     <div class="card-body"><canvas id="myBarChart" width="100%" height="50" style="width: 100% !important;"></canvas></div>
                     <div class="card-footer small text-muted">
@@ -108,7 +110,7 @@
                 <div class="card mb-4">
                     <div class="card-header">
                         <i class="fa fa-pie-chart mr-1"></i>
-                        From The Beginning (Job Details)
+                        <?php echo lang('lbl_heading_fromTheBeginning'); ?>
                     </div>
                     <div class="card-body"><canvas id="myPieChart" width="100%" height="50" style="width: 100% !important;"></canvas></div>
                     <div class="card-footer small text-muted">

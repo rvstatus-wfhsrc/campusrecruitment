@@ -49,11 +49,10 @@ class DashBoardModel extends CI_Model {
 	 */
 	function companyBarChart() {
 		$currentYear = date('Y');
-		$this->db->select("count(id) AS count,DATE_FORMAT(created_date_time, '%m') AS month");
+		$this->db->select("count(id) AS count,DATE_FORMAT(created_date_time, '%M') AS month");
 		$this->db->where(array('YEAR(created_date_time)' => $currentYear));
 		$this->db->where(array('companyId' => $this->session->userdata('userName')));
 		$this->db->where(array('delFlag' => 0));
-		// $this->db->orderBy('created_at','ASC');
 		$this->db->group_by('month');
 		$companyBarChart = $this->db->get('apply_job_details');
 		return $companyBarChart->result();
@@ -169,6 +168,7 @@ class DashBoardModel extends CI_Model {
 	 */
 	function maxJobAppliedDate() {
 		$this->db->select('MAX(created_date_time) AS createdDateTime,MAX(updated_date_time) AS updatedDateTime');
+		$this->db->where(array('companyId' => $this->session->userdata('userName')));
 		$this->db->where(array('delFlag' => 0));
 		$maxJobAppliedDate = $this->db->get('apply_job_details');
 		return $maxJobAppliedDate->result()[0];
@@ -265,7 +265,7 @@ class DashBoardModel extends CI_Model {
 	 */
 	function adminBarChart() {
 		$currentYear = date('Y');
-		$this->db->select("count(id) AS count,DATE_FORMAT(created_date_time, '%m') AS month");
+		$this->db->select("count(id) AS count,DATE_FORMAT(created_date_time, '%M') AS month");
 		$this->db->where(array('YEAR(created_date_time)' => $currentYear));
 		$this->db->group_by('month');
 		$adminBarChart = $this->db->get('apply_job_details');

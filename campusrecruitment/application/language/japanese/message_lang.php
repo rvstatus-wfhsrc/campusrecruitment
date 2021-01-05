@@ -67,7 +67,7 @@ $lang['lbl_applyHistory'] = '履歴を適用';
 $lang['lbl_cancel'] = 'キャンセル';
 $lang['lbl_applied'] = 'アプライド';
 $lang['lbl_cancelled'] = 'キャンセル';
-$lang['lbl_findNewJob'] = 'Find New Job';
+$lang['lbl_findNewJob'] = '新しい仕事を探す';
 $lang['lbl_applyDetail'] = '詳細を適用';
 $lang['lbl_appliedDate'] = '適用日';
 $lang['lbl_addResult'] = '結果を追加';
@@ -141,11 +141,19 @@ $lang['lbl_newJobSeekerQuestion'] = 'あなたは新しい求職者ですか？'
 // dashboard screen label
 $lang['lbl_dashboard'] = 'ダッシュボード';
 $lang['lbl_charts'] = 'チャート';
-$lang['lbl_JOBSEEKER'] = '求職者';
-$lang['lbl_jobPosted'] = '求人情報';
-$lang['lbl_jobApplied'] = '適用された仕事';
-$lang['lbl_passResult'] = '合格結果';
-$lang['lbl_failResult'] = '失敗の結果';
-$lang['lbl_jobCancelled'] = 'JOB CANCELLED';
+$lang['lbl_caps_jobSeeker'] = '求職者';
+$lang['lbl_caps_jobPosted'] = '求人情報';
+$lang['lbl_caps_jobApplied'] = '適用された仕事';
+$lang['lbl_caps_passResult'] = '合格結果';
+$lang['lbl_caps_failResult'] = '失敗の結果';
+$lang['lbl_caps_jobCancelled'] = 'JOB CANCELLED';
+$lang['lbl_caps_company'] = '会社';
+$lang['lbl_heading_thisYear'] = '今年 (求人応募)';
+$lang['lbl_heading_thisMonth'] = '今月 (求人応募)';
+$lang['lbl_heading_fromTheBeginning'] = '最初から (仕事の詳細)';
+$lang['lbl_yesterday'] = '昨日';
+$lang['lbl_today'] = '今日';
+$lang['lbl_at'] = 'で';
+$lang['lbl_updated'] = '更新しました';
 
 ?>

@@ -141,11 +141,19 @@ $lang['lbl_newJobSeekerQuestion'] = 'Are you new Job Seeker ?';
 // dashboard screen label
 $lang['lbl_dashboard'] = 'Dashboard';
 $lang['lbl_charts'] = 'Charts';
-$lang['lbl_JOBSEEKER'] = 'JOB SEEKER';
-$lang['lbl_jobPosted'] = 'JOB POSTED';
-$lang['lbl_jobApplied'] = 'JOB APPLIED';
-$lang['lbl_passResult'] = 'PASS RESULT';
-$lang['lbl_failResult'] = 'FAIL RESULT';
-$lang['lbl_jobCancelled'] = 'JOB CANCELLED';
+$lang['lbl_caps_jobSeeker'] = 'JOB SEEKER';
+$lang['lbl_caps_jobPosted'] = 'JOB POSTED';
+$lang['lbl_caps_jobApplied'] = 'JOB APPLIED';
+$lang['lbl_caps_passResult'] = 'PASS RESULT';
+$lang['lbl_caps_failResult'] = 'FAIL RESULT';
+$lang['lbl_caps_jobCancelled'] = 'JOB CANCELLED';
+$lang['lbl_caps_company'] = 'COMPANY';
+$lang['lbl_heading_thisYear'] = 'This Year (Job Applied)';
+$lang['lbl_heading_thisMonth'] = 'This Month (Job Applied)';
+$lang['lbl_heading_fromTheBeginning'] = 'From The Beginning (Job Details)';
+$lang['lbl_yesterday'] = 'yesterday';
+$lang['lbl_today'] = 'today';
+$lang['lbl_at'] = 'at';
+$lang['lbl_updated'] = 'Updated';
 
 ?>
