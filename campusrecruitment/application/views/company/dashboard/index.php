@@ -27,27 +27,28 @@
 <body>
     <div class="container-fluid">
         <ol class="breadcrumb mb-4">
-            <li class="breadcrumb-item"><i class="fa fa-tachometer fa-btn mt3"></i>Dashboard</li>
-            <li class="breadcrumb-item active">Charts</li>
+            <li class="breadcrumb-item"><i class="fa fa-tachometer fa-btn mt3"></i><?php echo lang('lbl_dashboard'); ?></li>
+            <li class="breadcrumb-item active"><?php echo lang('lbl_charts'); ?></li>
         </ol>
+        <input type="hidden" id="baseUrl" value="<?php echo base_url(); ?>">
         <div class="display_btn">
             <a class="btn btn-info text-white mb24 mb5 btn_custom w17 w100">
-                <i class="fa fa-btn fa-users"></i><br><?php echo $activeJobSeeker->activeJobSeeker; ?> JOB SEEKER
+                <i class="fa fa-btn fa-users"></i><br><?php echo $activeJobSeeker->activeJobSeeker; ?> <?php echo lang('lbl_JOBSEEKER'); ?>
             </a>
             <a class="btn btn-warning text-white mb24 mb5 btn_custom w17 w100">
-                <i class="fa fa-btn fa-briefcase"></i><br><?php echo $totalJobPosted->jobPosted; ?> JOB POSTED
+                <i class="fa fa-btn fa-briefcase"></i><br><?php echo $totalJobPosted->jobPosted; ?> <?php echo lang('lbl_jobPosted'); ?>
             </a>
             <a class="btn btn-primary text-white mb24 mb5 btn_custom w17 w100">
-                <i class="fa fa-btn fa-briefcase"></i><br><?php echo $totalJobApplied->jobApplied; ?> JOB APPLIED
+                <i class="fa fa-btn fa-briefcase"></i><br><?php echo $totalJobApplied->jobApplied; ?> <?php echo lang('lbl_jobApplied'); ?>
             </a>
             <a class="btn btn-success text-white mb24 mb5 btn_custom w17 w100">
-                <i class="fa fa-btn fa-columns"></i><br><?php echo $totalPassResult->passResult; ?> PASS RESULT
+                <i class="fa fa-btn fa-columns"></i><br><?php echo $totalPassResult->passResult; ?> <?php echo lang('lbl_passResult'); ?>
             </a>
             <a class="btn btn-info text-white mb24 mb5 btn_custom w17 w100">
-                <i class="fa fa-btn fa-columns"></i><br><?php echo $totalFailResult->failResult; ?> FAIL RESULT
+                <i class="fa fa-btn fa-columns"></i><br><?php echo $totalFailResult->failResult; ?> <?php echo lang('lbl_failResult'); ?>
             </a>
             <a class="btn btn-danger text-white mb24 mb5 btn_custom w17 w100">
-                <i class="fa fa-btn fa-briefcase"></i><br><?php echo $totalJobCancelled->jobCancelled; ?> JOB CANCELLED
+                <i class="fa fa-btn fa-briefcase"></i><br><?php echo $totalJobCancelled->jobCancelled; ?> <?php echo lang('lbl_jobCancelled'); ?>
             </a>
         </div>
         <div class="row">
@@ -107,7 +108,7 @@
                 <div class="card mb-4">
                     <div class="card-header">
                         <i class="fa fa-pie-chart mr-1"></i>
-                        From The Beginning (Job Applied)
+                        From The Beginning (Job Details)
                     </div>
                     <div class="card-body"><canvas id="myPieChart" width="100%" height="50" style="width: 100% !important;"></canvas></div>
                     <div class="card-footer small text-muted">

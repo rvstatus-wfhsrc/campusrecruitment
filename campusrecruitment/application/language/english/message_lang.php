@@ -138,4 +138,14 @@ $lang['lbl_newCompanyQuestion'] = 'Are you new Company ?';
 $lang['lbl_signup'] = ' Sign up !';
 $lang['lbl_newJobSeekerQuestion'] = 'Are you new Job Seeker ?';
 
+// dashboard screen label
+$lang['lbl_dashboard'] = 'Dashboard';
+$lang['lbl_charts'] = 'Charts';
+$lang['lbl_JOBSEEKER'] = 'JOB SEEKER';
+$lang['lbl_jobPosted'] = 'JOB POSTED';
+$lang['lbl_jobApplied'] = 'JOB APPLIED';
+$lang['lbl_passResult'] = 'PASS RESULT';
+$lang['lbl_failResult'] = 'FAIL RESULT';
+$lang['lbl_jobCancelled'] = 'JOB CANCELLED';
+
 ?>

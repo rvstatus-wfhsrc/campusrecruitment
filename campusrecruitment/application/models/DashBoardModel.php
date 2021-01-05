@@ -33,7 +33,7 @@ class DashBoardModel extends CI_Model {
 	function companyAreaChart() {
 		$currentMonth = date('m');
 		$this->db->select("count(id) AS count,DATE_FORMAT(created_date_time, '%b-%d') AS date");
-		$this->db->where(array('MONTH(created_date_time) =' => '12'));
+		$this->db->where(array('MONTH(created_date_time) =' => $currentMonth));
 		$this->db->where(array('companyId' => $this->session->userdata('userName')));
 		$this->db->where(array('delFlag' => 0));
 		$this->db->group_by('date');
@@ -50,7 +50,7 @@ class DashBoardModel extends CI_Model {
 	function companyBarChart() {
 		$currentYear = date('Y');
 		$this->db->select("count(id) AS count,DATE_FORMAT(created_date_time, '%m') AS month");
-		$this->db->where(array('YEAR(created_date_time)' => '2020'));
+		$this->db->where(array('YEAR(created_date_time)' => $currentYear));
 		$this->db->where(array('companyId' => $this->session->userdata('userName')));
 		$this->db->where(array('delFlag' => 0));
 		// $this->db->orderBy('created_at','ASC');
@@ -113,7 +113,6 @@ class DashBoardModel extends CI_Model {
 	function totalJobApplied() {
 		$this->db->select('count(id) AS jobApplied');
 		$this->db->where(array('companyId' => $this->session->userdata('userName')));
-		$this->db->where(array('delFlag' => 0));
 		$totalJobApplied = $this->db->get('apply_job_details');
 		return $totalJobApplied->result()[0];
 	}
@@ -252,7 +251,7 @@ class DashBoardModel extends CI_Model {
 	function adminAreaChart() {
 		$currentMonth = date('m');
 		$this->db->select("count(id) AS count,DATE_FORMAT(created_date_time, '%b-%d') AS date");
-		$this->db->where(array('MONTH(created_date_time) =' => '12'));
+		$this->db->where(array('MONTH(created_date_time) =' => $currentMonth));
 		$this->db->group_by('date');
 		$adminAreaChart = $this->db->get('apply_job_details');
 		return $adminAreaChart->result();
@@ -267,7 +266,7 @@ class DashBoardModel extends CI_Model {
 	function adminBarChart() {
 		$currentYear = date('Y');
 		$this->db->select("count(id) AS count,DATE_FORMAT(created_date_time, '%m') AS month");
-		$this->db->where(array('YEAR(created_date_time)' => '2020'));
+		$this->db->where(array('YEAR(created_date_time)' => $currentYear));
 		$this->db->group_by('month');
 		$adminBarChart = $this->db->get('apply_job_details');
 		return $adminBarChart->result();

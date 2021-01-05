@@ -128,7 +128,7 @@
                                 <div class="sb-sidenav-menu-heading">Home</div>
                                 <a class="nav-link <?php echo ($this->uri->segment(2)=='adminDashBoard')?'active':''; ?>" href="<?php echo site_url('DashBoardController/adminDashBoard') ?>">
                                     <div class="sb-nav-link-icon"><i class="fa fa-tachometer"></i></div>
-                                    Dashboard
+                                    <?php echo lang('lbl_dashboard'); ?>
                                 </a>
                                 <a class="nav-link <?php echo ($this->uri->segment(1)=='AdminController')?'active':''; ?>" href="<?php echo site_url('AdminController/profile') ?>">
                                     <div class="sb-nav-link-icon"><i class="fa fa-user"></i></div>
@@ -154,7 +154,7 @@
                                 <div class="sb-sidenav-menu-heading">Home</div>
                                 <a class="nav-link <?php echo ($this->uri->segment(2)=='companyDashBoard')?'active':''; ?>" href="<?php echo site_url('DashBoardController/companyDashBoard') ?>">
                                     <div class="sb-nav-link-icon"><i class="fa fa-tachometer"></i></div>
-                                    Dashboard
+                                    <?php echo lang('lbl_dashboard'); ?>
                                 </a>
                                 <a class="nav-link <?php echo ($this->uri->segment(2)=='companyDetail')?'active':''; ?>" href="<?php echo site_url('CompanyController/companyDetail') ?>">
                                     <div class="sb-nav-link-icon"><i class="fa fa-user"></i></div>

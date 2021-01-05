@@ -41,7 +41,7 @@
                         <div class="card-body">
                             <?php echo form_open('LoginController/loginUser',
                                 ['method' => 'POST','class' => 'form-horizontal','id' => 'loginForm','name' => 'loginForm']); ?>
-                                <input type="hidden" id="base" name="base" value="<?php echo base_url(); ?>">
+                                <input type="hidden" id="baseUrl" name="baseUrl" value="<?php echo base_url(); ?>">
                                 <input type="hidden" id="flag" name="flag" value="1">
                                 <div class="form-group form-inline">
                                     <?php echo lang('lbl_userName', 'adminUserName', array('class' => 'col-md-4 control-label required')); ?>

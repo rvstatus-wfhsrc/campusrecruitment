@@ -138,4 +138,14 @@ $lang['lbl_newCompanyQuestion'] = 'あなたは新しい会社ですか？';
 $lang['lbl_signup'] = 'サインアップ ！';
 $lang['lbl_newJobSeekerQuestion'] = 'あなたは新しい求職者ですか？';
 
+// dashboard screen label
+$lang['lbl_dashboard'] = 'ダッシュボード';
+$lang['lbl_charts'] = 'チャート';
+$lang['lbl_JOBSEEKER'] = '求職者';
+$lang['lbl_jobPosted'] = '求人情報';
+$lang['lbl_jobApplied'] = '適用された仕事';
+$lang['lbl_passResult'] = '合格結果';
+$lang['lbl_failResult'] = '失敗の結果';
+$lang['lbl_jobCancelled'] = 'JOB CANCELLED';
+
 ?>

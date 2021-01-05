@@ -38,7 +38,7 @@
 })(jQuery);
 $(document).ready(function() {
     $('.siteLang').click(function() {
-        var base_url = $('#base').val();
+        var base_url = $('#baseUrl').val();
         var siteLang = $(this).attr('data-key');
         $.ajax({
             url:base_url+'HomeController/siteLangUpdate',

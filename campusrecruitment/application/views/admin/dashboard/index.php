@@ -27,8 +27,8 @@
 <body>
     <div class="container-fluid">
         <ol class="breadcrumb mb-4">
-            <li class="breadcrumb-item"><i class="fa fa-tachometer fa-btn mt3"></i>Dashboard</li>
-            <li class="breadcrumb-item active">Charts</li>
+            <li class="breadcrumb-item"><i class="fa fa-tachometer fa-btn mt3"></i><?php echo lang('lbl_dashboard'); ?></li>
+            <li class="breadcrumb-item active"><?php echo lang('lbl_charts'); ?></li>
         </ol>
         <div class="display_btn">
             <a class="btn btn-info text-white mb24 mb5 btn_custom w17 w100">
@@ -107,7 +107,7 @@
                 <div class="card mb-4">
                     <div class="card-header">
                         <i class="fa fa-pie-chart mr-1"></i>
-                        From The Beginning (Job Applied)
+                        From The Beginning (Job Details)
                     </div>
                     <div class="card-body"><canvas id="myPieChart" width="100%" height="50" style="width: 100% !important;"></canvas></div>
                     <div class="card-footer small text-muted">
