@@ -3,6 +3,7 @@
 <html lang="en">
     <head>
         <meta charset="utf-8">
+        <link rel = "stylesheet" type = "text/css" href = "<?php echo base_url(); ?>assets/css/lib/bootstrap-datepicker-1.5.0.css">
         <style>
             h3 {
                 font-size: 20px;
@@ -40,7 +41,7 @@
                                 <!-- company add process -->
                                 <?php echo form_open('CompanyController/companyAddForm',['method' => 'POST', 'class' => 'form-horizontal','id' => 'addForm','name' => 'addForm','enctype'=>'multipart/form-data']); ?>
                             <?php } ?>
-                                <input type="hidden" id="base" value="<?php echo base_url(); ?>">
+                                <input type="hidden" id="baseUrl" value="<?php echo base_url(); ?>">
                                 <!-- company name -->
                                 <div class="form-group form-inline">
                                     <?php echo lang('lbl_companyName', 'companyName', array('class' => 'col-md-4 control-label required')); ?>

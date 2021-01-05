@@ -44,7 +44,7 @@
                     <input type="hidden" id="hiddenArea" name="hiddenArea" value= "<?php echo $this->input->post('area') ?>" >
                     <input type="hidden" id="per_page" name="per_page">
                     <input type="hidden" id="hiddenJobId" name="hiddenJobId">
-                    <input type="hidden" id="base" value="<?php echo base_url(); ?>">
+                    <input type="hidden" id="baseUrl" value="<?php echo base_url(); ?>">
 	                  <div class="row">
 	                    <div class="col-md-4 col-sm-6">
 	                      <div class="form-group">

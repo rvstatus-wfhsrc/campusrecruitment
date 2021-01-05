@@ -61,7 +61,7 @@
                                 <input type="hidden" id="hiddenJobSeekerId" name="hiddenJobSeekerId" value= "<?php echo $jobResultAdd->jobSeekerId; ?>" >
                                 <input type="hidden" id="screenFlag" name="screenFlag" value= "1" >
                             <?php } ?>
-                                <input type="hidden" id="base" value="<?php echo base_url(); ?>">
+                                <input type="hidden" id="baseUrl" value="<?php echo base_url(); ?>">
                                 <!-- job category -->
                                 <div class="form-group form-inline">
                                     <?php echo lang('lbl_jobCategory', 'jobCategory', array('class' => 'col-md-4 control-label')); ?>

@@ -15,7 +15,6 @@
     <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous"> -->
     <!-- <link href="css/styles.css" rel="stylesheet" /> -->
     <link rel = "stylesheet" type = "text/css" href = "<?php echo base_url(); ?>assets/css/styles.css">
-    <link rel = "stylesheet" type = "text/css" href = "<?php echo base_url(); ?>assets/css/lib/bootstrap-datepicker-1.5.0.css">
     <link rel = "stylesheet" type = "text/css" href = "<?php echo base_url(); ?>assets/css/common.css">
     <style>
         body {
@@ -135,7 +134,7 @@
                                     <div class="sb-nav-link-icon"><i class="fa fa-user"></i></div>
                                     <?php echo lang('lbl_profile'); ?>
                                 </a>
-                                <div class="sb-sidenav-menu-heading">Settings</div>
+                                <div class="sb-sidenav-menu-heading">Interface</div>
                                 <a class="nav-link <?php echo ($this->uri->segment(1)=='CompanyController')?'active':'collapsed'; ?>" data-toggle="collapse" data-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
                                     <div class="sb-nav-link-icon"><i class="fa fa-building"></i></div>
                                     <?php echo lang('lbl_company'); ?>

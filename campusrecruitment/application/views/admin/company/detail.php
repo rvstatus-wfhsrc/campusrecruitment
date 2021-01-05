@@ -58,7 +58,7 @@
 	    	</ol>
 		</div>
 		<?php echo form_open('CompanyController/companyEdit',['method' => 'POST','id' => 'detailForm','name' => 'detailForm']); ?>
-			<input type="hidden" id="base" value="<?php echo base_url(); ?>">
+			<input type="hidden" id="baseUrl" value="<?php echo base_url(); ?>">
 			<input type="hidden" id="hiddenCompanyId" name="hiddenCompanyId">
 			<div class="ml-4 mb-1 dispNone">
 				<a class="btn btn-info editBtn" href="javascript:;" onclick="fnBackBtn()">

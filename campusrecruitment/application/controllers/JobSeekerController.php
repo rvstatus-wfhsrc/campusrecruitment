@@ -87,7 +87,7 @@ class JobSeekerController extends CI_Controller {
 
 	/**
 	 * This jobSeekerDetail method are used to get the data from model for the specfic job seeker
-	 * @return to view screen [ jobSeeker/profile/addEdit ]
+	 * @return to view screen [ jobSeeker/profile/detail ]
 	 * @author kulasekaran.
 	 *
 	 */

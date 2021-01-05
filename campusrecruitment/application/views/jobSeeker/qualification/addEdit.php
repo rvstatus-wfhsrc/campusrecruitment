@@ -42,7 +42,7 @@
                                 <?php echo form_open('JobSeekerController/jobSeekerQualificationAddForm',['method' => 'POST', 'class' => 'form-horizontal','id' => 'addForm','name' => 'addForm','enctype'=>'multipart/form-data']); ?>
                             <?php } ?>
                             <input type="hidden" id="screenFlag" name="screenFlag" value= "1" >
-                                <input type="hidden" id="base" value="<?php echo base_url(); ?>">
+                                <input type="hidden" id="baseUrl" value="<?php echo base_url(); ?>">
                                 <!-- tenth mark -->
                                 <div class="form-group form-inline">
                                     <?php echo lang('lbl_tenthMark', 'tenthMark', array('class' => 'col-md-4 control-label required')); ?>

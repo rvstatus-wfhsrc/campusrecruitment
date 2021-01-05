@@ -3,11 +3,11 @@ function renderPieChart(chartData) {
 	var myPieChart = new Chart(ctx, {
     type: 'pie',
   	data: {
-      labels: [ "Applied", "Passed", "Failed"],
+      labels: [ "Waiting", "Pass", "Fail"],
       datasets: [{
 
         data: chartData,
-        backgroundColor: ['#007bff', '#28a745', '#dc3545'],
+        backgroundColor: ['', '#28a745', '#17a2b8'],
     	}],
   	},
     options: {

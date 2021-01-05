@@ -49,7 +49,7 @@
                         </a>
                     <?php } ?>
                     <?php echo form_open('JobController/jobList',['method' => 'POST','id' => 'listForm','name' => 'listForm']); ?>
-                        <input type="hidden" id="base" value="<?php echo base_url(); ?>">
+                        <input type="hidden" id="baseUrl" value="<?php echo base_url(); ?>">
                         <input type="hidden" id="hiddenJobId" name="hiddenJobId">
                         <input type="hidden" id="hiddenCompanyId" name="hiddenCompanyId">
                         <input type="hidden" id="hiddenDelFlag" name="hiddenDelFlag">

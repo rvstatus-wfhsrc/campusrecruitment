@@ -73,7 +73,7 @@
 	    	</ol>
 		</div>
 		<?php echo form_open('AdminController/profileEdit',['method' => 'POST','id' => 'profileDetailForm','name' => 'profileDetailForm']); ?>
-			<input type="hidden" id="base" value="<?php echo base_url(); ?>">
+			<input type="hidden" id="baseUrl" value="<?php echo base_url(); ?>">
 			<div class="ml-4 mb-1 dispNone">
 				<a class="btn bg-warning text-white editBtn" href="javascript:;" onclick="fnProfileEdit()">
 					<i class="fa fa-edit fa-btn"></i>Edit

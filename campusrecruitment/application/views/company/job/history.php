@@ -47,7 +47,7 @@
                         <i class="fa fa-btn fa-plus"></i><?php echo lang('lbl_jobAdd'); ?>
                     </a>
                     <?php echo form_open('JobController/jobHistory',['method' => 'POST','id' => 'historyForm','name' => 'historyForm']); ?>
-                        <input type="hidden" id="base" value="<?php echo base_url(); ?>">
+                        <input type="hidden" id="baseUrl" value="<?php echo base_url(); ?>">
                         <input type="hidden" id="hiddenJobId" name="hiddenJobId">
                         <input type="hidden" id="hiddenDelFlag" name="hiddenDelFlag">
                         <input type="hidden" id="per_page" name="per_page">

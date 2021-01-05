@@ -66,10 +66,13 @@ class DashBoardModel extends CI_Model {
 	 *
 	 */
 	function companyPieChart() {
-		$this->db->select("count(delFlag) AS count,delFlag");
-		$this->db->where(array('companyId' => $this->session->userdata('userName')));
-		$this->db->group_by('delFlag');
-		$companyPieChart = $this->db->get('apply_job_details');
+		$this->db->select("count(ajd.id) AS count,jrd.resultStatus")
+			->from('apply_job_details AS ajd')
+			->join('job_result_details as jrd','jrd.applyJobId = ajd.id','left');
+		$this->db->group_by('jrd.resultStatus');
+		$this->db->where(array('ajd.companyId' => $this->session->userdata('userName')));
+		$this->db->where(array('ajd.delFlag' => '0'));
+		$companyPieChart = $this->db->get();
 		return $companyPieChart->result();
 	}
 
@@ -277,10 +280,11 @@ class DashBoardModel extends CI_Model {
 	 *
 	 */
 	function adminPieChart() {
-		$this->db->select("count(ajd.delFlag) AS count,jrd.resultStatus")
+		$this->db->select("count(ajd.id) AS count,jrd.resultStatus")
 			->from('apply_job_details AS ajd')
-			->join('job_result_details as jrd','jrd.resultStatus = ajd.delFlag','left');
+			->join('job_result_details as jrd','jrd.applyJobId = ajd.id','left');
 		$this->db->group_by('jrd.resultStatus');
+		$this->db->where(array('ajd.delFlag' => '0'));
 		$adminPieChart = $this->db->get();
 		return $adminPieChart->result();
 	}

@@ -47,7 +47,7 @@
                         <i class="fa fa-btn fa-plus"></i><?php echo lang('lbl_qualificationAdd'); ?>
                     </a>
                     <?php echo form_open('JobSeekerController/jobSeekerQualificationEdit',['method' => 'POST','id' => 'detailForm','name' => 'detailForm']); ?>
-                        <input type="hidden" id="base" value="<?php echo base_url(); ?>">
+                        <input type="hidden" id="baseUrl" value="<?php echo base_url(); ?>">
                         <input type="hidden" id="hiddenJobSeekerQualificationId" name="hiddenJobSeekerQualificationId">
                         <?php if ($this->session->userdata('flag') != 3) { ?>
                             <div>

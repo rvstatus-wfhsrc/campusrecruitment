@@ -60,7 +60,7 @@
                                     ['method' => 'POST', 'class' => 'form-horizontal','id' => 'addForm','name' => 'addForm','enctype'=>'multipart/form-data']); ?>
                                 <input type="hidden" id="screenFlag" name="screenFlag" value= "1" >
                             <?php } ?>
-                                <input type="hidden" id="base" value="<?php echo base_url(); ?>">
+                                <input type="hidden" id="baseUrl" value="<?php echo base_url(); ?>">
                                 <!-- name -->
                                 <div class="form-group form-inline">
                                     <?php echo lang('lbl_name', 'name', array('class' => 'col-md-4 control-label required')); ?>

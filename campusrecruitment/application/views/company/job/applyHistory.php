@@ -49,7 +49,7 @@
                         </a>
                     <?php } ?>
                     <?php echo form_open('JobController/jobApplyDetail',['method' => 'POST','id' => 'applyHistoryForm','name' => 'applyHistoryForm']); ?>
-                        <input type="hidden" id="base" value="<?php echo base_url(); ?>">
+                        <input type="hidden" id="baseUrl" value="<?php echo base_url(); ?>">
                         <input type="hidden" id="hiddenApplyJobId" name="hiddenApplyJobId">
                         <input type="hidden" id="per_page" name="per_page">
                         <input type="hidden" id="hiddenSearch" name="hiddenSearch" value="<?php echo $this->input->post('hiddenSearch'); ?>">

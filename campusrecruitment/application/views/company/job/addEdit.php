@@ -3,6 +3,7 @@
 <html lang="en">
     <head>
         <meta charset="utf-8">
+        <link rel = "stylesheet" type = "text/css" href = "<?php echo base_url(); ?>assets/css/lib/bootstrap-datepicker-1.5.0.css">
         <style>
             h3 {
                 font-size: 20px;
@@ -57,7 +58,7 @@
                                     ['method' => 'POST', 'class' => 'form-horizontal','id' => 'addForm','name' => 'addForm']); ?>
                                 <input type="hidden" id="screenFlag" name="screenFlag" value= "1" >
                             <?php } ?>
-                                <input type="hidden" id="base" value="<?php echo base_url(); ?>">
+                                <input type="hidden" id="baseUrl" value="<?php echo base_url(); ?>">
                                 <div class="form-group form-inline">
                                     <?php echo lang('lbl_jobCategory', 'jobCategory', array('class' => 'col-md-4 control-label required')); ?>
                                     <div class="col-md-8">

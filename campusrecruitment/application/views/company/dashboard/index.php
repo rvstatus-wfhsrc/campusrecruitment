@@ -107,7 +107,7 @@
                 <div class="card mb-4">
                     <div class="card-header">
                         <i class="fa fa-pie-chart mr-1"></i>
-                        From The Beginning (Job Applied and Cancelled)
+                        From The Beginning (Job Applied)
                     </div>
                     <div class="card-body"><canvas id="myPieChart" width="100%" height="50" style="width: 100% !important;"></canvas></div>
                     <div class="card-footer small text-muted">

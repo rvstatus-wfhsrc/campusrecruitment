@@ -40,7 +40,7 @@
                         <i class="fa fa-btn fa-plus"></i><?php echo lang('lbl_addCompany'); ?>
                     </a>
                     <?php echo form_open('CompanyController/CompanyDetail',['method' => 'POST','id' => 'historyForm','name' => 'historyForm']); ?>
-                        <input type="hidden" id="base" value="<?php echo base_url(); ?>">
+                        <input type="hidden" id="baseUrl" value="<?php echo base_url(); ?>">
                         <input type="hidden" id="hiddenCompanyId" name="hiddenCompanyId">
                         <input type="hidden" id="hiddenDelFlag" name="hiddenDelFlag">
                         <input type="hidden" id="per_page" name="per_page">
@@ -123,7 +123,7 @@
                                             <td class="tac vam"><?php echo $history->contact; ?></td>
                                             <td class="vam"><?php echo $history->email; ?></td>
                                             <td class="tac vam"><?php echo ($history->entryDate != '0000-00-00') ? $history->entryDate : "Nil"; ?></td>
-                                            <td class="vam"><?php echo $history->address; ?></td>
+                                            <td class="vam"><?php echo nl2br($history->address); ?></td>
                                             <td class="tac vam">
                                                 <a href="javascript:;" onclick="fnCompanyDetail(<?php echo $history->id;?>)" class="m3">
                                                     <img style="width: 20px;"
