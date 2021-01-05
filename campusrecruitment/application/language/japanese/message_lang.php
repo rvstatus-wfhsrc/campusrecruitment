@@ -146,14 +146,14 @@ $lang['lbl_caps_jobPosted'] = '求人情報';
 $lang['lbl_caps_jobApplied'] = '適用された仕事';
 $lang['lbl_caps_passResult'] = '合格結果';
 $lang['lbl_caps_failResult'] = '失敗の結果';
-$lang['lbl_caps_jobCancelled'] = 'JOB CANCELLED';
+$lang['lbl_caps_jobCancelled'] = '仕事が取り消し';
 $lang['lbl_caps_company'] = '会社';
 $lang['lbl_heading_thisYear'] = '今年 (求人応募)';
 $lang['lbl_heading_thisMonth'] = '今月 (求人応募)';
 $lang['lbl_heading_fromTheBeginning'] = '最初から (仕事の詳細)';
-$lang['lbl_yesterday'] = '昨日';
-$lang['lbl_today'] = '今日';
-$lang['lbl_at'] = 'で';
-$lang['lbl_updated'] = '更新しました';
+$lang['lbl_yesterday'] = 'yesterday';
+$lang['lbl_today'] = 'today';
+$lang['lbl_at'] = 'at';
+$lang['lbl_updated'] = 'Updated';
 
 ?>

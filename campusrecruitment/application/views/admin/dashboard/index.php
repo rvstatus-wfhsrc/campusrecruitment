@@ -36,7 +36,7 @@
                 <i class="fa fa-btn fa-users"></i><br><?php echo $activeJobSeeker->activeJobSeeker; ?> <?php echo lang('lbl_caps_jobSeeker'); ?>
             </a>
             <a class="btn btn-warning text-white mb24 mb5 btn_custom w17 w100">
-                <i class="fa fa-btn fa-briefcase"></i><br><?php echo $activeCompany->activeCompany; ?> <?php echo lang('lbl_caps_company'); ?>
+                <i class="fa fa-btn fa-building-o"></i><br><?php echo $activeCompany->activeCompany; ?> <?php echo lang('lbl_caps_company'); ?>
             </a>
             <a class="btn btn-primary text-white mb24 mb5 btn_custom w17 w100">
                 <i class="fa fa-btn fa-briefcase"></i><br><?php echo $allCompanyJobPosted->allJobPosted; ?> <?php echo lang('lbl_caps_jobPosted'); ?>
