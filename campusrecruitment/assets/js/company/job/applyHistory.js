@@ -50,10 +50,10 @@ function fnSortProcess(){
 	$("#sortVal").val(sortVal);
 	var alreadySortVal = $("#sortVal").val();
 	if(sortVal == alreadySortVal) {
-		if(alreadySortOptn == "DESC" ) {
-			$("#sortOptn").val("ASC");
-		} else {
+		if(alreadySortOptn == "ASC" ) {
 			$("#sortOptn").val("DESC");
+		} else {
+			$("#sortOptn").val("ASC");
 		}
 	}
 	$("#applyHistoryForm").attr("action", "jobApplyHistory");
@@ -72,9 +72,9 @@ function fnCancelApply(id) {
 // clear search process
 function fnClearSearch() {
 	$("#filterVal").val(1);
-	$("#sortVal").val(1);
-	$("#sortProcess").val(1);
-	$("#sortOptn").val("ASC");
+	$("#sortVal").val(3);
+	$("#sortProcess").val(3);
+	$("#sortOptn").val("DESC");
 	$("#search").val("");
 	$("#hiddenSearch").val("");
 	$("#applyHistoryForm").attr("action", "jobApplyHistory");

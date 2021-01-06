@@ -10,15 +10,15 @@ Target Server Type    : MYSQL
 Target Server Version : 50625
 File Encoding         : 65001
 
-Date: 2021-01-06 10:25:29
+Date: 2021-01-06 18:24:23
 */
 
 SET FOREIGN_KEY_CHECKS=0;
 -- ----------------------------
--- Table structure for `company`
+-- Table structure for `cmt_company`
 -- ----------------------------
-DROP TABLE IF EXISTS `company`;
-CREATE TABLE `company` (
+DROP TABLE IF EXISTS `cmt_company`;
+CREATE TABLE `cmt_company` (
   `id` int(10) NOT NULL AUTO_INCREMENT,
   `companyName` varchar(50) NOT NULL,
   `address` varchar(255) NOT NULL,
@@ -39,5 +39,5 @@ CREATE TABLE `company` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
--- Records of company
+-- Records of cmt_company
 -- ----------------------------

@@ -10,15 +10,15 @@ Target Server Type    : MYSQL
 Target Server Version : 50625
 File Encoding         : 65001
 
-Date: 2021-01-06 10:27:31
+Date: 2021-01-06 18:25:47
 */
 
 SET FOREIGN_KEY_CHECKS=0;
 -- ----------------------------
--- Table structure for `password_resets`
+-- Table structure for `cmt_password_resets`
 -- ----------------------------
-DROP TABLE IF EXISTS `password_resets`;
-CREATE TABLE `password_resets` (
+DROP TABLE IF EXISTS `cmt_password_resets`;
+CREATE TABLE `cmt_password_resets` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `email` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
   `token` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
@@ -30,5 +30,5 @@ CREATE TABLE `password_resets` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- ----------------------------
--- Records of password_resets
+-- Records of cmt_password_resets
 -- ----------------------------

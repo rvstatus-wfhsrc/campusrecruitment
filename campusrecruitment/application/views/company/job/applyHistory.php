@@ -82,7 +82,7 @@
                                     'name' => 'sortProcess',
                                     'class' => 'form-control autowidth h34 inb mr-2 CMN_sorting '.$sortStyle,
                                 );
-                                echo form_dropdown('sortProcess',$sortArray,set_value('sortProcess', 1, false),$data);
+                                echo form_dropdown('sortProcess',$sortArray,set_value('sortProcess', 3, false),$data);
                             ?>
                             <input type="hidden" id="sortVal" name="sortVal" value="<?php echo $this->input->post('sortVal'); ?>">
                             <input type="hidden" id="sortOptn" name="sortOptn" value="<?php echo $this->input->post('sortOptn'); ?>">
@@ -91,10 +91,15 @@
                         <!-- searching process -->
                         <div class="input-group searchBtn">
                             <?php
+                                if ($this->session->userdata('flag') == 2) {
+                                    $searchPlaceHolder = 'Search Job Seeker Name';
+                                } elseif ($this->session->userdata('flag') == 3) {
+                                    $searchPlaceHolder = 'Search Company Name';
+                                }
                                 $data= array(
                                     'id' => 'search',
                                     'name' => 'search',
-                                    'placeholder' => 'Search Company Name',
+                                    'placeholder' => $searchPlaceHolder,
                                     'class' => 'input_box form-control h34',
                                     'value' => $this->input->post('hiddenSearch')
                                 );
@@ -116,7 +121,7 @@
                                 <col width="12%">
                                 <col width="12%">
                                 <col width="16%">
-                                <col width="10%">
+                                <col width="13%">
                             </colgroup>
                             <thead class="thead">
                                 <tr>

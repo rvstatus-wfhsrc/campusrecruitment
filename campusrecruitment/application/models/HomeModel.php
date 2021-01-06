@@ -30,11 +30,11 @@ class HomeModel extends CI_Model {
 					jd.lastApplyDate,
 					jd.jobType'
 				)
-				->from('job_details as jd')
-				->join('m_designation as dest','dest.designationId = jd.jobCategory','left')
-				->join('m_role as role','role.roleId = jd.role','left')
-				->join('m_country as country','country.countryId = jd.jobLocation','left')
-				->join('company as cmpy', 'jd.companyId = cmpy.userName');
+				->from('cmt_job_details as jd')
+				->join('cmt_m_designation as dest','dest.designationId = jd.jobCategory','left')
+				->join('cmt_m_role as role','role.roleId = jd.role','left')
+				->join('cmt_m_country as country','country.countryId = jd.jobLocation','left')
+				->join('cmt_company as cmpy', 'jd.companyId = cmpy.userName');
 		$this->db->where(
 						array(
 							'jd.delFlag' => 0,
@@ -78,10 +78,10 @@ class HomeModel extends CI_Model {
 
 		$this->db->like($likeArray);
 		$this->db->select('COUNT(jd.id) as numrows');
-		$this->db->from('job_details as jd');
-		$this->db->join('m_country as country', 'jd.jobLocation = country.countryId');
-		$this->db->join('company as cmpy', 'jd.companyId = cmpy.userName');
-		$this->db->join('m_designation as dest', 'jd.jobCategory = dest.designationId');
+		$this->db->from('cmt_job_details as jd');
+		$this->db->join('cmt_m_country as country', 'jd.jobLocation = country.countryId');
+		$this->db->join('cmt_company as cmpy', 'jd.companyId = cmpy.userName');
+		$this->db->join('cmt_m_designation as dest', 'jd.jobCategory = dest.designationId');
 		$this->db->where(
 						array(
 							'jd.delFlag' => 0,

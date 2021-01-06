@@ -14,7 +14,7 @@ class CommonModel extends CI_Model {
 		$this->db->where(array('delFlag' => 0));
 		$this->db->order_by('countryName', 'asc');
 		$this->db->group_by(array("countryName", "countryId"));
-		$country = $this->db->get('m_country');
+		$country = $this->db->get('cmt_m_country');
 		$countryArray = array( '' => 'Select Country');
 		foreach($country->result_array() as $row)
 	    {
@@ -34,7 +34,7 @@ class CommonModel extends CI_Model {
 		}
 		$this->db->order_by('stateName', 'asc');
 		$this->db->group_by(array("stateName", "stateId"));
-		$state = $this->db->get('m_state');
+		$state = $this->db->get('cmt_m_state');
 		foreach($state->result_array() as $row)
 	    {
 	        $stateArray[$row['stateId']] = $row['stateName']; // add each user id to the array
@@ -52,7 +52,7 @@ class CommonModel extends CI_Model {
 		}
 		$this->db->order_by('cityName', 'asc');
 		$this->db->group_by(array("cityName", "cityId"));
-		$city = $this->db->get('m_city');
+		$city = $this->db->get('cmt_m_city');
 		foreach($city->result_array() as $row)
 	    {
 	        $cityArray[$row['cityId']] = $row['cityName']; // add each user id to the array
@@ -73,7 +73,7 @@ class CommonModel extends CI_Model {
 	// to get the department name
 	public static function dept($mainDeptId)
 	{
-		$dept = DB::table('m_department')
+		$dept = DB::table('cmt_m_department')
 					->where('delFlag', 0)
 					->where('mainDeptId', $mainDeptId)
 					->orderBy('departmentId', 'ASC')
@@ -106,7 +106,7 @@ class CommonModel extends CI_Model {
 	// to get the designation name
 	// public static function designation()
 	// {
-	// 	$designation = DB::table('m_designation')
+	// 	$designation = DB::table('cmt_m_designation')
 	// 				->where('delFlag', 0)
 	// 				->orderBy('designationName', 'ASC')
 	// 				->lists('designationName','designationId');
@@ -116,7 +116,7 @@ class CommonModel extends CI_Model {
 	// to get the user name
 	public static function userName()
 	{
-		$userName = DB::table('users')
+		$userName = DB::table('cmt_users')
 					->select(DB::raw('concat (name," (",userName,")") as name,userName'))
 					->where('delFlag', 0)
 					->where('adminFlag', 0)
@@ -186,7 +186,7 @@ class CommonModel extends CI_Model {
 		$this->db->select('designationId,designationName');
 		$this->db->where(array('delFlag' => 0));
 		$this->db->order_by('designationName', 'ASC');
-		$jobCategoryResults = $this->db->get('m_designation');
+		$jobCategoryResults = $this->db->get('cmt_m_designation');
 		$jobCategoryArray = array( '' => 'Select Job Category');
 		foreach($jobCategoryResults->result_array() as $row)
 		{
@@ -206,7 +206,7 @@ class CommonModel extends CI_Model {
 		$this->db->select('skillId,skillName');
 		$this->db->where(array('delFlag' => 0));
 		$this->db->order_by('skillName', 'ASC');
-		$skillResults = $this->db->get('m_skill');
+		$skillResults = $this->db->get('cmt_m_skill');
 		$skillArray = array( '' => 'Select Skill');
 		foreach($skillResults->result_array() as $row)
 		{
@@ -226,7 +226,7 @@ class CommonModel extends CI_Model {
 		$this->db->select('roleId,roleName');
 		$this->db->where(array('delFlag' => 0));
 		$this->db->order_by('roleName', 'ASC');
-		$roleResults = $this->db->get('m_role');
+		$roleResults = $this->db->get('cmt_m_role');
 		$roleArray = array( '' => 'Select Role');
 		foreach($roleResults->result_array() as $row)
 		{
@@ -246,7 +246,7 @@ class CommonModel extends CI_Model {
 		$this->db->select('minQualificationId,minQualification');
 		$this->db->where(array('delFlag' => 0));
 		$this->db->order_by('minQualification', 'ASC');
-		$minQualificationResults = $this->db->get('m_min_qualification');
+		$minQualificationResults = $this->db->get('cmt_m_min_qualification');
 		$minQualificationArray = array( '' => 'Select Qualification');
 		foreach($minQualificationResults->result_array() as $row)
 		{
@@ -266,7 +266,7 @@ class CommonModel extends CI_Model {
 		$this->db->select('departmentId,departmentName');
 		$this->db->where(array('delFlag' => 0));
 		$this->db->order_by('departmentName', 'ASC');
-		$departmentResults = $this->db->get('m_department');
+		$departmentResults = $this->db->get('cmt_m_department');
 		$departmentArray = array( '' => 'Select Branch');
 		foreach($departmentResults->result_array() as $row)
 		{
@@ -286,7 +286,7 @@ class CommonModel extends CI_Model {
 		$this->db->select('universityId,universityName');
 		$this->db->where(array('delFlag' => 0));
 		$this->db->order_by('universityName', 'ASC');
-		$universityResults = $this->db->get('m_university');
+		$universityResults = $this->db->get('cmt_m_university');
 		$universityArray = array( '' => 'Select University');
 		foreach($universityResults->result_array() as $row)
 		{
@@ -306,7 +306,7 @@ class CommonModel extends CI_Model {
 		$this->db->select('qualificationId,qualification');
 		$this->db->where(array('delFlag' => 0));
 		$this->db->order_by('qualification', 'ASC');
-		$qualificationResults = $this->db->get('m_qualification');
+		$qualificationResults = $this->db->get('cmt_m_qualification');
 		$qualificationArray = array( '' => 'Select Qualification');
 		foreach($qualificationResults->result_array() as $row)
 		{

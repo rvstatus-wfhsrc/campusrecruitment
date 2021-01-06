@@ -11,7 +11,7 @@ class AdminModel extends CI_Model {
 	function profileDetail($userName) {
 		$this->db->select('userName,name,gender,address,city,state,country,pincode,email,contact,image');
 		$this->db->where(array('userName' => $userName));
-		$profileDetail = $this->db->get('users');
+		$profileDetail = $this->db->get('cmt_users');
 		return $profileDetail->result()[0];
 	}
 
@@ -20,7 +20,7 @@ class AdminModel extends CI_Model {
 		// Get the status
 		$userName = $this->session->userdata('userName');
 		$data = array('image' => null);
-		$imageStatus = $this->db->update('users',$data,array('userName' => $userName));
+		$imageStatus = $this->db->update('cmt_users',$data,array('userName' => $userName));
 		return $imageStatus;
 	}
 
@@ -28,7 +28,7 @@ class AdminModel extends CI_Model {
 	function profileEdit($userName) {
 		$this->db->select('userName,name,gender,address,city,state,country,pincode,email,contact,image');
 		$this->db->where(array('userName' => $userName));
-		$profileEdit = $this->db->get('users');
+		$profileEdit = $this->db->get('cmt_users');
 		return $profileEdit->result()[0];
 	}
 
@@ -45,10 +45,10 @@ class AdminModel extends CI_Model {
 				$blob = file_get_contents($_FILES['image']['tmp_name']);
 				$imageData = array('image' => $blob);
 				$this->db->where('userName', $userName);
-				$imageUpdate = $this->db->update('users', $imageData);
+				$imageUpdate = $this->db->update('cmt_users', $imageData);
 			}
 			$this->db->where('userName', $userName);
-			$updateUser = $this->db->update('users', $profileUpdateData);
+			$updateUser = $this->db->update('cmt_users', $profileUpdateData);
 			$this->db->trans_commit();
 		} catch (\Exception $e) {
 			$this->db->trans_rollback();

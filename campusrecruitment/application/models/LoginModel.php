@@ -25,11 +25,11 @@ class LoginModel extends CI_Model {
   function loginProcess() {
     $flag = $this->input->post('flag');
     if($flag == 1) {
-      $result = $this->db->query("SELECT userName,name,flag FROM users WHERE flag = '".$flag."' AND userName = '".$this->input->post('adminUserName')."' AND password = '".md5($this->input->post('adminPassword'))."'");
+      $result = $this->db->query("SELECT userName,name,flag FROM cmt_users WHERE flag = '".$flag."' AND userName = '".$this->input->post('adminUserName')."' AND password = '".md5($this->input->post('adminPassword'))."'");
     } elseif ($flag == 2 ) {
-      $result = $this->db->query("SELECT userName,companyName AS name,flag FROM company WHERE userName = '".$this->input->post('companyUserName')."' AND password = '".md5($this->input->post('companyPassword'))."'");
+      $result = $this->db->query("SELECT userName,companyName AS name,flag FROM cmt_company WHERE userName = '".$this->input->post('companyUserName')."' AND password = '".md5($this->input->post('companyPassword'))."'");
     } else {
-	     $result = $this->db->query("SELECT userName,name,flag FROM users WHERE flag = '".$flag."' AND userName = '".$this->input->post('jobSeekerUserName')."' AND password = '".md5($this->input->post('jobSeekerPassword'))."'");
+	     $result = $this->db->query("SELECT userName,name,flag FROM cmt_users WHERE flag = '".$flag."' AND userName = '".$this->input->post('jobSeekerUserName')."' AND password = '".md5($this->input->post('jobSeekerPassword'))."'");
     }
 	  return $result;
 	}
@@ -43,11 +43,11 @@ class LoginModel extends CI_Model {
   function forgetEmailExistingCheckProcess() {
     $flag = $this->input->post('flag');
     if($flag == 1) {
-      $result = $this->db->query("SELECT email,name FROM users WHERE flag = '".$flag."' AND email = '".$this->input->post('email')."'");
+      $result = $this->db->query("SELECT email,name FROM cmt_users WHERE flag = '".$flag."' AND email = '".$this->input->post('email')."'");
     } elseif ($flag == 2 ) {
-      $result = $this->db->query("SELECT email,companyName as name FROM company WHERE email = '".$this->input->post('email')."'");
+      $result = $this->db->query("SELECT email,companyName as name FROM cmt_company WHERE email = '".$this->input->post('email')."'");
     } else {
-    $result = $this->db->query("SELECT email,name FROM users WHERE flag = '".$flag."' AND email = '".$this->input->post('email')."'");
+    $result = $this->db->query("SELECT email,name FROM cmt_users WHERE flag = '".$flag."' AND email = '".$this->input->post('email')."'");
     }
     return $result;
   }
@@ -59,16 +59,16 @@ class LoginModel extends CI_Model {
    *
    */
   function updateToken($email,$token) {
-    $dataExistingCheck = $this->db->query("SELECT email FROM password_resets WHERE email = '".$email."'");
+    $dataExistingCheck = $this->db->query("SELECT email FROM cmt_password_resets WHERE email = '".$email."'");
     if($dataExistingCheck->num_rows() > 0) {
       $this->db->where('email', $email);
-      $result = $this->db->update('password_resets', array('token' => $token));
+      $result = $this->db->update('cmt_password_resets', array('token' => $token));
     } else {
       $tokenData = array(
         'email' => $email,
         'token' => $token
       );
-      $result = $this->db->insert('password_resets', $tokenData);
+      $result = $this->db->insert('cmt_password_resets', $tokenData);
     }
     return $result;
   }
@@ -80,7 +80,7 @@ class LoginModel extends CI_Model {
    *
    */
   function userVerification() {
-    $userVerificationCheck = $this->db->query("SELECT email FROM password_resets WHERE email = '".$this->input->get('email')."' AND token = '".$this->input->get('token')."'");
+    $userVerificationCheck = $this->db->query("SELECT email FROM cmt_password_resets WHERE email = '".$this->input->get('email')."' AND token = '".$this->input->get('token')."'");
     if($userVerificationCheck->num_rows() > 0) {
       return true;
     } else {
@@ -89,7 +89,7 @@ class LoginModel extends CI_Model {
   }
 
   /**
-   * This updatePassword method is used to update the password in users table and also update the password_resets table
+   * This updatePassword method is used to update the password in cmt_users table and also update the cmt_password_resets table
    * @return to the  [ password/email ]
    * @author kulasekaran.
    *
@@ -101,9 +101,9 @@ class LoginModel extends CI_Model {
     $updatePasswordResults = null;
     $this->db->trans_begin();
     try {
-        $table = "users";
+        $table = "cmt_users";
         if($flag == 2) {
-          $table = "company";
+          $table = "cmt_company";
         }
         $passwordUpdateData = array(
                                 'password' => md5($this->input->post('password')),
@@ -116,7 +116,7 @@ class LoginModel extends CI_Model {
      
         $this->db->where('email', $email);
         $this->db->where('token', $token);
-      $updatePasswordResults = $this->db->delete('password_resets');
+      $updatePasswordResults = $this->db->delete('cmt_password_resets');
           
      
      

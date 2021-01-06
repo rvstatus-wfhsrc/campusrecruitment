@@ -49,7 +49,7 @@ class JobModel extends CI_Model {
 			'created_by' => $userName
 		);
 
-		$jobAddStatus = $this->db->insert('job_details', $jobAddData);
+		$jobAddStatus = $this->db->insert('cmt_job_details', $jobAddData);
 		return $jobAddStatus;
 	}
 
@@ -77,12 +77,12 @@ class JobModel extends CI_Model {
 					jd.lastApplyDate,
 					jd.created_date_time'
 				)
-			->from('job_details as jd')
+			->from('cmt_job_details as jd')
 			// this is the left join in codeigniter
-			->join('m_designation as dest','dest.designationId = jd.jobCategory','left')
-			->join('m_role as role','role.roleId = jd.role','left')
-			->join('m_skill as skill','skill.skillId = jd.requiredSkill','left')
-			->join('m_country as country','country.countryId = jd.jobLocation','left');
+			->join('cmt_m_designation as dest','dest.designationId = jd.jobCategory','left')
+			->join('cmt_m_role as role','role.roleId = jd.role','left')
+			->join('cmt_m_skill as skill','skill.skillId = jd.requiredSkill','left')
+			->join('cmt_m_country as country','country.countryId = jd.jobLocation','left');
 			
 			// filter process
 			if ($filterVal == 2) {
@@ -117,7 +117,7 @@ class JobModel extends CI_Model {
 	}
 
 	/**
-	 * This record_count method are used to get the total count of data from job_details table
+	 * This record_count method are used to get the total count of data from cmt_job_details table
 	 * @return to return the total count value to controller
 	 * @author kulasekaran.
 	 *
@@ -151,8 +151,8 @@ class JobModel extends CI_Model {
 			$this->db->order_by('jd.created_date_time', 'DESC');
 		}
 		$this->db->select('COUNT(jd.id) as numrows');
-		$this->db->from('job_details as jd');
-		$this->db->join('m_skill as skill', 'jd.requiredSkill = skill.skillId');
+		$this->db->from('cmt_job_details as jd');
+		$this->db->join('cmt_m_skill as skill', 'jd.requiredSkill = skill.skillId');
 		if ($this->session->userdata('flag') == 2) {
 			$this->db->where(array('jd.companyId' => $userName));	
 		} else {
@@ -176,16 +176,16 @@ class JobModel extends CI_Model {
 		// $delFlag => 1 ----> change delFlag = 0
 		if ($delFlag == 0) {
 			$this->db->where('id', $id);
-			$jobStatus = $this->db->update('job_details', array('delFlag' => 1,'updated_by' => $userName ));
+			$jobStatus = $this->db->update('cmt_job_details', array('delFlag' => 1,'updated_by' => $userName ));
 		} else {
 			$this->db->where('id', $id);
-			$jobStatus = $this->db->update('job_details', array('delFlag' => 0,'updated_by' => $userName ));
+			$jobStatus = $this->db->update('cmt_job_details', array('delFlag' => 0,'updated_by' => $userName ));
 		}
 		return $jobStatus;
 	}
 
 	/**
-	 * This jobDetail method are used to get the one row data from job_details table
+	 * This jobDetail method are used to get the one row data from cmt_job_details table
 	 * @param id value of specific job is passed from JobController
 	 * @return to return the jobDetail array to controller
 	 * @author kulasekaran.
@@ -213,15 +213,15 @@ class JobModel extends CI_Model {
 							cmpy.incharge,
 							ajd.id as jobApplyId'
 						)
-					->from('job_details as jd')
+					->from('cmt_job_details as jd')
 					 // this is the left join in codeigniter
-					->join('m_designation as dest','dest.designationId = jd.jobCategory','left')
-					->join('m_role as role','role.roleId = jd.role','left')
-					->join('m_skill as skill','skill.skillId = jd.requiredSkill','left')
-					->join('m_country as country','country.countryId = jd.jobLocation','left')
-					->join('m_min_qualification as minqual','minqual.minQualificationId = jd.minQualification','left')
-					->join('company as cmpy','cmpy.userName = jd.companyId','left')
-					->join('apply_job_details as ajd','ajd.jobId = jd.id','left');
+					->join('cmt_m_designation as dest','dest.designationId = jd.jobCategory','left')
+					->join('cmt_m_role as role','role.roleId = jd.role','left')
+					->join('cmt_m_skill as skill','skill.skillId = jd.requiredSkill','left')
+					->join('cmt_m_country as country','country.countryId = jd.jobLocation','left')
+					->join('cmt_m_min_qualification as minqual','minqual.minQualificationId = jd.minQualification','left')
+					->join('cmt_company as cmpy','cmpy.userName = jd.companyId','left')
+					->join('cmt_apply_job_details as ajd','ajd.jobId = jd.id','left');
 
 		$this->db->where(array('jd.id' => $id));
 		$jobDetail = $this->db->get();
@@ -229,7 +229,7 @@ class JobModel extends CI_Model {
 	}
 
 	/**
-	 * This jobEdit method are used to get the one row data from job_details table
+	 * This jobEdit method are used to get the one row data from cmt_job_details table
 	 * @return to return the jobEdit array to controller
 	 * @author kulasekaran.
 	 *
@@ -251,7 +251,7 @@ class JobModel extends CI_Model {
 							lastApplyDate'
 						);
 		$this->db->where(array('id' => $this->input->post('hiddenJobId')));
-		$jobEdit = $this->db->get('job_details');
+		$jobEdit = $this->db->get('cmt_job_details');
 		if(isset($jobEdit->result()[0])){
 			return $jobEdit->result()[0];
 		} else {
@@ -260,7 +260,7 @@ class JobModel extends CI_Model {
 	}
 
 	/**
-	 * This jobUpdate method are used to update the one row data into the job_details table
+	 * This jobUpdate method are used to update the one row data into the cmt_job_details table
 	 * @return to return the jobUpdateStatus with true or false value to controller according to database results
 	 * @author kulasekaran.
 	 *
@@ -284,12 +284,12 @@ class JobModel extends CI_Model {
 			'updated_by' => $userName
 		);
 		$this->db->where('id', $hiddenJobId);
-		$updateUser = $this->db->update('job_details', $jobUpdateData);
+		$updateUser = $this->db->update('cmt_job_details', $jobUpdateData);
 		return $updateUser;
 	}
 
 	/**
-	 * This jobLists method are used to retrieves the all data from job_details
+	 * This jobLists method are used to retrieves the all data from cmt_job_details
 	 * @param records limit and start value is passed by JobController
 	 * @return to return the jobLists array value to controller
 	 * @author kulasekaran.
@@ -313,13 +313,13 @@ class JobModel extends CI_Model {
 					jd.created_date_time,
 					ajd.id as jobApplyId'
 				)
-			->from('job_details as jd')
+			->from('cmt_job_details as jd')
 			// this is the left join in codeigniter
-			->join('m_designation as dest','dest.designationId = jd.jobCategory','left')
-			->join('m_role as role','role.roleId = jd.role','left')
-			->join('m_skill as skill','skill.skillId = jd.requiredSkill','left')
-			->join('m_country as country','country.countryId = jd.jobLocation','left')
-			->join('apply_job_details as ajd','ajd.jobId = jd.id','left');
+			->join('cmt_m_designation as dest','dest.designationId = jd.jobCategory','left')
+			->join('cmt_m_role as role','role.roleId = jd.role','left')
+			->join('cmt_m_skill as skill','skill.skillId = jd.requiredSkill','left')
+			->join('cmt_m_country as country','country.countryId = jd.jobLocation','left')
+			->join('cmt_apply_job_details as ajd','ajd.jobId = jd.id','left');
 
 			// search process
 			$hiddenSearch = $this->input->post('hiddenSearch');
@@ -348,7 +348,7 @@ class JobModel extends CI_Model {
 	}
 
 	/**
-	 * This jobApplyHistory method are used to retrieves the data from apply_job_details to data base
+	 * This jobApplyHistory method are used to retrieves the data from cmt_apply_job_details to data base
 	 * @param records limit and start value is passed by JobController
 	 * @return to return the jobApplyHistory array value to controller
 	 * @author kulasekaran.
@@ -374,13 +374,13 @@ class JobModel extends CI_Model {
 					user.name AS jobSeekerName,
 					user.contact AS jobSeekerContact'
 				)
-			->from('apply_job_details as ajd')
+			->from('cmt_apply_job_details as ajd')
 			// this is the left join in codeigniter
-			->join('company as cmpy','cmpy.userName = ajd.companyId','left')
-			->join('job_details as jd','jd.id = ajd.jobId','left')
-			->join('m_designation as dest','dest.designationId = jd.jobCategory','left')
-			->join('users as user','user.userName = ajd.jobSeekerId','left')
-			->join('job_result_details as jrd','jrd.applyJobId = ajd.id','left');
+			->join('cmt_company as cmpy','cmpy.userName = ajd.companyId','left')
+			->join('cmt_job_details as jd','jd.id = ajd.jobId','left')
+			->join('cmt_m_designation as dest','dest.designationId = jd.jobCategory','left')
+			->join('cmt_users as user','user.userName = ajd.jobSeekerId','left')
+			->join('cmt_job_result_details as jrd','jrd.applyJobId = ajd.id','left');
 			
 			// filter process
 			if ($filterVal == 2) {
@@ -391,8 +391,10 @@ class JobModel extends CI_Model {
 
 			// search process
 			$hiddenSearch = $this->input->post('hiddenSearch');
-			if($hiddenSearch != ""){
+			if($hiddenSearch != "" && $this->session->userdata('flag') == 3) {
 				$this->db->like('cmpy.companyName',trim($hiddenSearch));
+			} elseif ($hiddenSearch != "" && $this->session->userdata('flag') == 2) {
+				$this->db->like('user.name',trim($hiddenSearch));
 			}
 
 			// sorting process
@@ -404,8 +406,10 @@ class JobModel extends CI_Model {
 				$this->db->order_by('dest.designationName', $sortOptn);
 			} else if ($sortVal == 3) {
 				$this->db->order_by('ajd.applyDate', $sortOptn);
+			} else if ($sortVal == 4) {
+				$this->db->order_by('user.name', $sortOptn);
 			} else {
-				$this->db->order_by('cmpy.companyName', 'ASC');
+				$this->db->order_by('ajd.applyDate', 'DESC');
 			}
 			if ($this->session->userdata('flag') == 3) {
 				$this->db->where(array('ajd.jobSeekerId' => $userName));
@@ -417,7 +421,7 @@ class JobModel extends CI_Model {
 	}
 
 	/**
-	 * This jobApply method are used to add the data into apply_job_details table
+	 * This jobApply method are used to add the data into cmt_apply_job_details table
 	 * @return to the jobApplyStatus with true or false value to controller according to database results
 	 * @author kulasekaran.
 	 *
@@ -433,7 +437,7 @@ class JobModel extends CI_Model {
 			'delFlag' => 0
 		);
 
-		$jobAddStatus = $this->db->insert('apply_job_details', $jobAddData);
+		$jobAddStatus = $this->db->insert('cmt_apply_job_details', $jobAddData);
 		return $jobAddStatus;
 	}
 
@@ -448,12 +452,12 @@ class JobModel extends CI_Model {
 		$userName = $this->session->userdata('userName');
 		// $delFlag => 0 ----> change delFlag = 1
 		$this->db->where('id', $id);
-		$jobApplyCancelStatus = $this->db->update('apply_job_details', array('delFlag' => 1,'updated_by' => $userName ));
+		$jobApplyCancelStatus = $this->db->update('cmt_apply_job_details', array('delFlag' => 1,'updated_by' => $userName ));
 		return $jobApplyCancelStatus;
 	}
 
 	/**
-	 * This jobApplyDetail method are used to get the one row data from apply_job_details table
+	 * This jobApplyDetail method are used to get the one row data from cmt_apply_job_details table
 	 * @param id value of specific applied job is passed from JobController
 	 * @return to return the jobApplyDetail array to controller
 	 * @author kulasekaran.
@@ -485,16 +489,16 @@ class JobModel extends CI_Model {
 					user.contact AS jobSeekerContact,
 					jrd.applyJobId'
 				)
-			->from('apply_job_details as ajd')
+			->from('cmt_apply_job_details as ajd')
 			// this is the left join in codeigniter
-			->join('company as cmpy','cmpy.userName = ajd.companyId','left')
-			->join('job_details as jd','jd.id = ajd.jobId','left')
-			->join('m_role as role','role.roleId = jd.role','left')
-			->join('m_skill as skill','skill.skillId = jd.requiredSkill','left')
-			->join('m_country as country','country.countryId = jd.jobLocation','left')
-			->join('m_designation as dest','dest.designationId = jd.jobCategory','left')
-			->join('users as user','user.userName = ajd.jobSeekerId','left')
-			->join('job_result_details as jrd','jrd.applyJobId = ajd.id','left');
+			->join('cmt_company as cmpy','cmpy.userName = ajd.companyId','left')
+			->join('cmt_job_details as jd','jd.id = ajd.jobId','left')
+			->join('cmt_m_role as role','role.roleId = jd.role','left')
+			->join('cmt_m_skill as skill','skill.skillId = jd.requiredSkill','left')
+			->join('cmt_m_country as country','country.countryId = jd.jobLocation','left')
+			->join('cmt_m_designation as dest','dest.designationId = jd.jobCategory','left')
+			->join('cmt_users as user','user.userName = ajd.jobSeekerId','left')
+			->join('cmt_job_result_details as jrd','jrd.applyJobId = ajd.id','left');
 
 		$this->db->where(array('ajd.id' => $id));
 		$jobApplyDetail = $this->db->get();
@@ -502,7 +506,7 @@ class JobModel extends CI_Model {
 	}
 
 	/**
-	 * This record_count_for_job_apply method are used to get the total count of data from apply_job_details table
+	 * This record_count_for_job_apply method are used to get the total count of data from cmt_apply_job_details table
 	 * @return to return the total count value to controller
 	 * @author kulasekaran.
 	 *
@@ -537,10 +541,10 @@ class JobModel extends CI_Model {
 			$this->db->order_by('cmpy.companyName', 'ASC');
 		}
 		$this->db->select('COUNT(ajd.id) as numrows');
-		$this->db->from('apply_job_details as ajd');
-		$this->db->join('company as cmpy','cmpy.userName = ajd.companyId','left');
-		$this->db->join('job_details as jd','jd.id = ajd.jobId','left');
-		$this->db->join('m_designation as dest','dest.designationId = jd.jobCategory','left');
+		$this->db->from('cmt_apply_job_details as ajd');
+		$this->db->join('cmt_company as cmpy','cmpy.userName = ajd.companyId','left');
+		$this->db->join('cmt_job_details as jd','jd.id = ajd.jobId','left');
+		$this->db->join('cmt_m_designation as dest','dest.designationId = jd.jobCategory','left');
 		if ($this->session->userdata('flag') == 3) {
 			$this->db->where(array('ajd.jobSeekerId' => $userName));
 		} else if($this->session->userdata('flag') == 2) {
@@ -582,16 +586,16 @@ class JobModel extends CI_Model {
 					user.gender,
 					user.contact'
 				)
-			->from('apply_job_details as ajd')
+			->from('cmt_apply_job_details as ajd')
 			// this is the left join in codeigniter
-			->join('company as cmpy','cmpy.userName = ajd.companyId','left')
-			->join('job_details as jd','jd.id = ajd.jobId','left')
-			->join('m_skill as skill','skill.skillId = jd.requiredSkill','left')
-			->join('m_country as country','country.countryId = jd.jobLocation','left')
-			->join('m_designation as dest','dest.designationId = jd.jobCategory','left')
-			->join('m_role as role','role.roleId = jd.role','left')
-			->join('m_min_qualification as minqual','minqual.minQualificationId = jd.minQualification','left')
-			->join('users as user','user.userName = ajd.jobSeekerId','left');
+			->join('cmt_company as cmpy','cmpy.userName = ajd.companyId','left')
+			->join('cmt_job_details as jd','jd.id = ajd.jobId','left')
+			->join('cmt_m_skill as skill','skill.skillId = jd.requiredSkill','left')
+			->join('cmt_m_country as country','country.countryId = jd.jobLocation','left')
+			->join('cmt_m_designation as dest','dest.designationId = jd.jobCategory','left')
+			->join('cmt_m_role as role','role.roleId = jd.role','left')
+			->join('cmt_m_min_qualification as minqual','minqual.minQualificationId = jd.minQualification','left')
+			->join('cmt_users as user','user.userName = ajd.jobSeekerId','left');
 
 		$this->db->where(array('ajd.jobId' => $jobId));
 		$this->db->where(array('ajd.jobSeekerId' => $jobSeekerId));
@@ -600,7 +604,7 @@ class JobModel extends CI_Model {
 	}
 
 	/**
-	 * This jobResultAddForm method are used to add the data get from form and inserts into job_result_details table
+	 * This jobResultAddForm method are used to add the data get from form and inserts into cmt_job_result_details table
 	 * @return to the jobResultAddStatus with true or false value to controller according to database results
 	 * @author kulasekaran.
 	 *
@@ -620,12 +624,12 @@ class JobModel extends CI_Model {
 			'delFlag' => 0
 		);
 
-		$jobResultAddStatus = $this->db->insert('job_result_details', $jobResultAddData);
+		$jobResultAddStatus = $this->db->insert('cmt_job_result_details', $jobResultAddData);
 		return $jobResultAddStatus;
 	}
 
 	/**
-	 * This jobResultHistory method are used to retrieves the data from job_result_details
+	 * This jobResultHistory method are used to retrieves the data from cmt_job_result_details
 	 * @param records limit and start value is passed by JobController
 	 * @return to return the jobResultHistory array value to controller
 	 * @author kulasekaran.
@@ -656,13 +660,13 @@ class JobModel extends CI_Model {
 					user.gender,
 					user.contact AS jobSeekerContact'
 				)
-			->from('job_result_details as jrd')
+			->from('cmt_job_result_details as jrd')
 			// this is the left join in codeigniter
-			->join('company as cmpy','cmpy.userName = jrd.companyId','left')
-			->join('apply_job_details as ajd','ajd.id = jrd.applyJobId','left')
-			->join('job_details as jd','jd.id = jrd.jobId','left')
-			->join('m_designation as dest','dest.designationId = jd.jobCategory','left')
-			->join('users as user','user.userName = jrd.jobSeekerId','left');
+			->join('cmt_company as cmpy','cmpy.userName = jrd.companyId','left')
+			->join('cmt_apply_job_details as ajd','ajd.id = jrd.applyJobId','left')
+			->join('cmt_job_details as jd','jd.id = jrd.jobId','left')
+			->join('cmt_m_designation as dest','dest.designationId = jd.jobCategory','left')
+			->join('cmt_users as user','user.userName = jrd.jobSeekerId','left');
 			
 			// filter process
 			if ($filterVal == 2) {
@@ -702,7 +706,7 @@ class JobModel extends CI_Model {
 	}
 
 	/**
-	 * This record_count_for_job_result method are used to get the total count of data from job_result_details table
+	 * This record_count_for_job_result method are used to get the total count of data from cmt_job_result_details table
 	 * @return to the total count value to controller
 	 * @author kulasekaran.
 	 *
@@ -735,12 +739,12 @@ class JobModel extends CI_Model {
 			$this->db->order_by('user.name', 'ASC');
 		}
 		$this->db->select('COUNT(jrd.id) as numrows');
-		$this->db->from('job_result_details as jrd');
-		$this->db->join('company as cmpy','cmpy.userName = jrd.companyId','left');
-		$this->db->join('job_details as jd','jd.id = jrd.jobId','left');
-		$this->db->join('apply_job_details as ajd','ajd.id = jrd.applyJobId','left');
-		$this->db->join('m_designation as dest','dest.designationId = jd.jobCategory','left');
-		$this->db->join('users as user','user.userName = jrd.jobSeekerId','left');
+		$this->db->from('cmt_job_result_details as jrd');
+		$this->db->join('cmt_company as cmpy','cmpy.userName = jrd.companyId','left');
+		$this->db->join('cmt_job_details as jd','jd.id = jrd.jobId','left');
+		$this->db->join('cmt_apply_job_details as ajd','ajd.id = jrd.applyJobId','left');
+		$this->db->join('cmt_m_designation as dest','dest.designationId = jd.jobCategory','left');
+		$this->db->join('cmt_users as user','user.userName = jrd.jobSeekerId','left');
 		if ($this->session->userdata('flag') == 2) {
 			$this->db->where(array('jrd.companyId' => $userName));
 		} elseif($this->session->userdata('flag') == 3) {
@@ -755,7 +759,7 @@ class JobModel extends CI_Model {
 	}
 
 	/**
-	 * This jobResultDetail method are used to get the one row data from job_result_details table
+	 * This jobResultDetail method are used to get the one row data from cmt_job_result_details table
 	 * @param id value of specific job result is passed from JobController
 	 * @return to return the jobResultDetail array to controller
 	 * @author kulasekaran.
@@ -784,15 +788,15 @@ class JobModel extends CI_Model {
 					user.gender,
 					user.contact AS jobSeekerContact'
 				)
-			->from('job_result_details as jrd')
-			->join('company as cmpy','cmpy.userName = jrd.companyId','left')
-			->join('job_details as jd','jd.id = jrd.jobId','left')
-			->join('apply_job_details as ajd','ajd.jobId = jrd.jobId','left')
-			->join('m_role as role','role.roleId = jd.role','left')
-			->join('m_skill as skill','skill.skillId = jd.requiredSkill','left')
-			->join('m_country as country','country.countryId = jd.jobLocation','left')
-			->join('m_designation as dest','dest.designationId = jd.jobCategory','left')
-			->join('users as user','user.userName = jrd.jobSeekerId','left');
+			->from('cmt_job_result_details as jrd')
+			->join('cmt_company as cmpy','cmpy.userName = jrd.companyId','left')
+			->join('cmt_job_details as jd','jd.id = jrd.jobId','left')
+			->join('cmt_apply_job_details as ajd','ajd.jobId = jrd.jobId','left')
+			->join('cmt_m_role as role','role.roleId = jd.role','left')
+			->join('cmt_m_skill as skill','skill.skillId = jd.requiredSkill','left')
+			->join('cmt_m_country as country','country.countryId = jd.jobLocation','left')
+			->join('cmt_m_designation as dest','dest.designationId = jd.jobCategory','left')
+			->join('cmt_users as user','user.userName = jrd.jobSeekerId','left');
 
 		$this->db->where(array('jrd.id' => $id));
 		$jobResultDetail = $this->db->get();
@@ -800,7 +804,7 @@ class JobModel extends CI_Model {
 	}
 
 	/**
-	 * This jobResultEdit method are used to get the one row data from job_result_details table
+	 * This jobResultEdit method are used to get the one row data from cmt_job_result_details table
 	 * @return to return the jobResultEdit array to controller
 	 * @author kulasekaran.
 	 *
@@ -813,12 +817,12 @@ class JobModel extends CI_Model {
 							resultStatus'
 						);
 		$this->db->where(array('id' => $this->input->post('hiddenResultJobId')));
-		$jobResultEdit = $this->db->get('job_result_details');
+		$jobResultEdit = $this->db->get('cmt_job_result_details');
 		return $jobResultEdit->result()[0];
 	}
 
 	/**
-	 * This jobResultUpdate method are used to update the one row data into the job_result_details table
+	 * This jobResultUpdate method are used to update the one row data into the cmt_job_result_details table
 	 * @return to return the jobResultUpdateStatus with true or false value to controller according to database results
 	 * @author kulasekaran.
 	 *
@@ -832,12 +836,12 @@ class JobModel extends CI_Model {
 			'updated_by' => $userName
 		);
 		$this->db->where('id', $hiddenResultJobId);
-		$resultUpdate = $this->db->update('job_result_details', $jobResultUpdateData);
+		$resultUpdate = $this->db->update('cmt_job_result_details', $jobResultUpdateData);
 		return $resultUpdate;
 	}
 
 	/**
-	 * This jobResultGroupHistory method are used to retrieves the data from job_result_details
+	 * This jobResultGroupHistory method are used to retrieves the data from cmt_job_result_details
 	 * @param records limit and start value is passed by JobController
 	 * @return to return the jobResultGroupHistory array value to controller
 	 * @author kulasekaran.
@@ -869,13 +873,13 @@ class JobModel extends CI_Model {
 					user.gender,
 					user.contact AS jobSeekerContact'
 				)
-			->from('job_result_details as jrd')
+			->from('cmt_job_result_details as jrd')
 			// this is the left join in codeigniter
-			->join('company as cmpy','cmpy.userName = jrd.companyId','left')
-			->join('apply_job_details as ajd','ajd.id = jrd.applyJobId','left')
-			->join('job_details as jd','jd.id = jrd.jobId','left')
-			->join('m_designation as dest','dest.designationId = jd.jobCategory','left')
-			->join('users as user','user.userName = jrd.jobSeekerId','left');
+			->join('cmt_company as cmpy','cmpy.userName = jrd.companyId','left')
+			->join('cmt_apply_job_details as ajd','ajd.id = jrd.applyJobId','left')
+			->join('cmt_job_details as jd','jd.id = jrd.jobId','left')
+			->join('cmt_m_designation as dest','dest.designationId = jd.jobCategory','left')
+			->join('cmt_users as user','user.userName = jrd.jobSeekerId','left');
 			
 			// filter process
 			if ($filterVal == 2) {

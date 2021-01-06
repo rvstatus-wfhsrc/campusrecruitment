@@ -37,7 +37,7 @@ class DashBoardModel extends CI_Model {
 		$this->db->where(array('companyId' => $this->session->userdata('userName')));
 		$this->db->where(array('delFlag' => 0));
 		$this->db->group_by('date');
-		$companyAreaChart = $this->db->get('apply_job_details');
+		$companyAreaChart = $this->db->get('cmt_apply_job_details');
 		return $companyAreaChart->result();
 	}
 
@@ -54,7 +54,7 @@ class DashBoardModel extends CI_Model {
 		$this->db->where(array('companyId' => $this->session->userdata('userName')));
 		$this->db->where(array('delFlag' => 0));
 		$this->db->group_by('month');
-		$companyBarChart = $this->db->get('apply_job_details');
+		$companyBarChart = $this->db->get('cmt_apply_job_details');
 		return $companyBarChart->result();
 	}
 
@@ -66,8 +66,8 @@ class DashBoardModel extends CI_Model {
 	 */
 	function companyPieChart() {
 		$this->db->select("count(ajd.id) AS count,jrd.resultStatus")
-			->from('apply_job_details AS ajd')
-			->join('job_result_details as jrd','jrd.applyJobId = ajd.id','left');
+			->from('cmt_apply_job_details AS ajd')
+			->join('cmt_job_result_details as jrd','jrd.applyJobId = ajd.id','left');
 		$this->db->group_by('jrd.resultStatus');
 		$this->db->where(array('ajd.companyId' => $this->session->userdata('userName')));
 		$this->db->where(array('ajd.delFlag' => '0'));
@@ -85,7 +85,7 @@ class DashBoardModel extends CI_Model {
 		$this->db->select('count(id) AS activeJobSeeker');
 		$this->db->where(array('flag' => 3));
 		$this->db->where(array('delFlag' => 0));
-		$activeJobSeeker = $this->db->get('users');
+		$activeJobSeeker = $this->db->get('cmt_users');
 		return $activeJobSeeker->result()[0];
 	}
 
@@ -99,7 +99,7 @@ class DashBoardModel extends CI_Model {
 		$this->db->select('count(id) AS jobPosted');
 		$this->db->where(array('companyId' => $this->session->userdata('userName')));
 		$this->db->where(array('delFlag' => 0));
-		$totalJobPosted = $this->db->get('job_details');
+		$totalJobPosted = $this->db->get('cmt_job_details');
 		return $totalJobPosted->result()[0];
 	}
 
@@ -112,7 +112,7 @@ class DashBoardModel extends CI_Model {
 	function totalJobApplied() {
 		$this->db->select('count(id) AS jobApplied');
 		$this->db->where(array('companyId' => $this->session->userdata('userName')));
-		$totalJobApplied = $this->db->get('apply_job_details');
+		$totalJobApplied = $this->db->get('cmt_apply_job_details');
 		return $totalJobApplied->result()[0];
 	}
 
@@ -127,7 +127,7 @@ class DashBoardModel extends CI_Model {
 		$this->db->where(array('companyId' => $this->session->userdata('userName')));
 		$this->db->where(array('resultStatus' => 1));
 		$this->db->where(array('delFlag' => 0));
-		$totalPassResult = $this->db->get('job_result_details');
+		$totalPassResult = $this->db->get('cmt_job_result_details');
 		return $totalPassResult->result()[0];
 	}
 
@@ -142,7 +142,7 @@ class DashBoardModel extends CI_Model {
 		$this->db->where(array('companyId' => $this->session->userdata('userName')));
 		$this->db->where(array('resultStatus' => 2));
 		$this->db->where(array('delFlag' => 0));
-		$totalFailResult = $this->db->get('job_result_details');
+		$totalFailResult = $this->db->get('cmt_job_result_details');
 		return $totalFailResult->result()[0];
 	}
 
@@ -156,7 +156,7 @@ class DashBoardModel extends CI_Model {
 		$this->db->select('count(id) AS jobCancelled');
 		$this->db->where(array('companyId' => $this->session->userdata('userName')));
 		$this->db->where(array('delFlag' => 1));
-		$totalJobCancelled = $this->db->get('apply_job_details');
+		$totalJobCancelled = $this->db->get('cmt_apply_job_details');
 		return $totalJobCancelled->result()[0];
 	}
 
@@ -170,7 +170,7 @@ class DashBoardModel extends CI_Model {
 		$this->db->select('MAX(created_date_time) AS createdDateTime,MAX(updated_date_time) AS updatedDateTime');
 		$this->db->where(array('companyId' => $this->session->userdata('userName')));
 		$this->db->where(array('delFlag' => 0));
-		$maxJobAppliedDate = $this->db->get('apply_job_details');
+		$maxJobAppliedDate = $this->db->get('cmt_apply_job_details');
 		return $maxJobAppliedDate->result()[0];
 	}
 
@@ -184,7 +184,7 @@ class DashBoardModel extends CI_Model {
 		$this->db->select('count(id) AS activeCompany');
 		$this->db->where(array('flag' => 2));
 		$this->db->where(array('delFlag' => 0));
-		$activeCompany = $this->db->get('company');
+		$activeCompany = $this->db->get('cmt_company');
 		return $activeCompany->result()[0];
 	}
 
@@ -197,7 +197,7 @@ class DashBoardModel extends CI_Model {
 	function allCompanyJobPosted() {
 		$this->db->select('count(id) AS allJobPosted');
 		$this->db->where(array('delFlag' => 0));
-		$allCompanyJobPosted = $this->db->get('job_details');
+		$allCompanyJobPosted = $this->db->get('cmt_job_details');
 		return $allCompanyJobPosted->result()[0];
 	}
 
@@ -211,7 +211,7 @@ class DashBoardModel extends CI_Model {
 		$this->db->select('count(id) AS allPassResult');
 		$this->db->where(array('resultStatus' => 1));
 		$this->db->where(array('delFlag' => 0));
-		$allJobPassResult = $this->db->get('job_result_details');
+		$allJobPassResult = $this->db->get('cmt_job_result_details');
 		return $allJobPassResult->result()[0];
 	}
 
@@ -225,7 +225,7 @@ class DashBoardModel extends CI_Model {
 		$this->db->select('count(id) AS allFailResult');
 		$this->db->where(array('resultStatus' => 2));
 		$this->db->where(array('delFlag' => 0));
-		$allJobFailResult = $this->db->get('job_result_details');
+		$allJobFailResult = $this->db->get('cmt_job_result_details');
 		return $allJobFailResult->result()[0];
 	}
 
@@ -238,7 +238,7 @@ class DashBoardModel extends CI_Model {
 	function allCompanyJobCancelled() {
 		$this->db->select('count(id) AS allJobCancelled');
 		$this->db->where(array('delFlag' => 1));
-		$allCompanyJobCancelled = $this->db->get('apply_job_details');
+		$allCompanyJobCancelled = $this->db->get('cmt_apply_job_details');
 		return $allCompanyJobCancelled->result()[0];
 	}
 
@@ -253,7 +253,7 @@ class DashBoardModel extends CI_Model {
 		$this->db->select("count(id) AS count,DATE_FORMAT(created_date_time, '%b-%d') AS date");
 		$this->db->where(array('MONTH(created_date_time) =' => $currentMonth));
 		$this->db->group_by('date');
-		$adminAreaChart = $this->db->get('apply_job_details');
+		$adminAreaChart = $this->db->get('cmt_apply_job_details');
 		return $adminAreaChart->result();
 	}
 
@@ -268,7 +268,7 @@ class DashBoardModel extends CI_Model {
 		$this->db->select("count(id) AS count,DATE_FORMAT(created_date_time, '%M') AS month");
 		$this->db->where(array('YEAR(created_date_time)' => $currentYear));
 		$this->db->group_by('month');
-		$adminBarChart = $this->db->get('apply_job_details');
+		$adminBarChart = $this->db->get('cmt_apply_job_details');
 		return $adminBarChart->result();
 	}
 
@@ -280,8 +280,8 @@ class DashBoardModel extends CI_Model {
 	 */
 	function adminPieChart() {
 		$this->db->select("count(ajd.id) AS count,jrd.resultStatus")
-			->from('apply_job_details AS ajd')
-			->join('job_result_details as jrd','jrd.applyJobId = ajd.id','left');
+			->from('cmt_apply_job_details AS ajd')
+			->join('cmt_job_result_details as jrd','jrd.applyJobId = ajd.id','left');
 		$this->db->group_by('jrd.resultStatus');
 		$this->db->where(array('ajd.delFlag' => '0'));
 		$adminPieChart = $this->db->get();
@@ -296,7 +296,7 @@ class DashBoardModel extends CI_Model {
 	 */
 	function maxAllJobAppliedDate() {
 		$this->db->select('MAX(created_date_time) AS createdDateTime,MAX(updated_date_time) AS updatedDateTime');
-		$maxJobAppliedDate = $this->db->get('apply_job_details');
+		$maxJobAppliedDate = $this->db->get('cmt_apply_job_details');
 		return $maxJobAppliedDate->result()[0];
 	}
 }

@@ -10,15 +10,15 @@ Target Server Type    : MYSQL
 Target Server Version : 50625
 File Encoding         : 65001
 
-Date: 2021-01-06 10:25:20
+Date: 2021-01-06 18:24:16
 */
 
 SET FOREIGN_KEY_CHECKS=0;
 -- ----------------------------
--- Table structure for `apply_job_details`
+-- Table structure for `cmt_apply_job_details`
 -- ----------------------------
-DROP TABLE IF EXISTS `apply_job_details`;
-CREATE TABLE `apply_job_details` (
+DROP TABLE IF EXISTS `cmt_apply_job_details`;
+CREATE TABLE `cmt_apply_job_details` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `jobId` int(11) NOT NULL,
   `companyId` varchar(50) NOT NULL,
@@ -33,5 +33,5 @@ CREATE TABLE `apply_job_details` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
--- Records of apply_job_details
+-- Records of cmt_apply_job_details
 -- ----------------------------

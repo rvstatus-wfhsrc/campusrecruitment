@@ -140,7 +140,7 @@ class AdminController extends CI_Controller {
 													'max_length' => $this->lang->line("max_length")
 												)
 											);
-		$this->form_validation->set_rules( 'email', $this->lang->line("lbl_email"), 'required|valid_email|max_length[50]|callback_email_exist_check[users.email.'.$this->session->userdata('userName').']',
+		$this->form_validation->set_rules( 'email', $this->lang->line("lbl_email"), 'required|valid_email|max_length[50]|callback_email_exist_check[cmt_users.email.'.$this->session->userdata('userName').']',
 												array(
 													'required' => $this->lang->line("required"),
 													'valid_email' => $this->lang->line("valid_email"),

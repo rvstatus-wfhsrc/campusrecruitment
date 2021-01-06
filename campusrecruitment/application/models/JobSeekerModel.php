@@ -25,7 +25,7 @@ class JobSeekerModel extends CI_Model {
 	}
 
 	/**
-	 * This jobSeekerAdd method are used to inserts the form data into users table
+	 * This jobSeekerAdd method are used to inserts the form data into cmt_users table
 	 * @return the jobSeekerAddStatus with true or false value to controller according to database results
 	 * @author kulasekaran.
 	 *
@@ -77,7 +77,7 @@ class JobSeekerModel extends CI_Model {
 				'flag' => 3
 			);
 			$jobSeekerAddMergeData = array_merge($jobSeekerAddData, $imageData);
-			$jobSeekerAddStatus = $this->db->insert('users', $jobSeekerAddMergeData);
+			$jobSeekerAddStatus = $this->db->insert('cmt_users', $jobSeekerAddMergeData);
 			$this->db->trans_commit();
 		} catch (\Exception $e) {
 			$this->db->trans_rollback();
@@ -92,12 +92,12 @@ class JobSeekerModel extends CI_Model {
 	 *
 	 */
 	function lastJobSeekerUserName() {
-		$lastUserName = $this->db->query("SELECT userName FROM users WHERE userName LIKE 'JS%' ORDER BY id DESC");
+		$lastUserName = $this->db->query("SELECT userName FROM cmt_users WHERE userName LIKE 'JS%' ORDER BY id DESC");
 		return $lastUserName;
 	}
 
 	/**
-	 * This jobSeekerDetail method are used to get the one row data from users table
+	 * This jobSeekerDetail method are used to get the one row data from cmt_users table
 	 * @return to the jobSeekerDetail array to controller
 	 * @author kulasekaran.
 	 *
@@ -118,10 +118,10 @@ class JobSeekerModel extends CI_Model {
 					user.pincode,
 					user.image'
 				)
-			->from('users as user')
-			->join('m_country as country','country.countryId = user.country','left')
-			->join('m_state as state','state.stateId = user.state','left')
-			->join('m_city as city','city.cityId = user.city','left');
+			->from('cmt_users as user')
+			->join('cmt_m_country as country','country.countryId = user.country','left')
+			->join('cmt_m_state as state','state.stateId = user.state','left')
+			->join('cmt_m_city as city','city.cityId = user.city','left');
 		$jobSeekerUserName = $this->session->userdata('userName');
 		$this->db->where(array('userName' => $jobSeekerUserName));
 		$jobSeekerDetail = $this->db->get();
@@ -129,7 +129,7 @@ class JobSeekerModel extends CI_Model {
 	}
 
 	/**
-	 * This removeImage method are used to remove the job seeker profile image from users table
+	 * This removeImage method are used to remove the job seeker profile image from cmt_users table
 	 * @return to return the imageStatus to controller
 	 * @author kulasekaran.
 	 *
@@ -138,12 +138,12 @@ class JobSeekerModel extends CI_Model {
 		// Get the status
 		$userName = $this->session->userdata('userName');
 		$data = array('image' => null);
-		$imageStatus = $this->db->update('users',$data,array('userName' => $userName));
+		$imageStatus = $this->db->update('cmt_users',$data,array('userName' => $userName));
 		return $imageStatus;
 	}
 
 	/**
-	 * This jobSeekerEdit method are used to get the one row data from users table
+	 * This jobSeekerEdit method are used to get the one row data from cmt_users table
 	 * @return to return the profileEdit array to controller
 	 * @author kulasekaran.
 	 *
@@ -163,7 +163,7 @@ class JobSeekerModel extends CI_Model {
 							contact'
 						);
 		$this->db->where('userName',$this->session->userdata('userName'));
-		$profileEdit = $this->db->get('users');
+		$profileEdit = $this->db->get('cmt_users');
 		if(isset($profileEdit->result()[0])){
 			return $profileEdit->result()[0];
 		} else {
@@ -172,7 +172,7 @@ class JobSeekerModel extends CI_Model {
 	}
 
 	/**
-	 * This jobSeekerUpdate method are used to update the one row data into the users table
+	 * This jobSeekerUpdate method are used to update the one row data into the cmt_users table
 	 * @return to return the updateUser with true or false value to controller according to database results
 	 * @author kulasekaran.
 	 *
@@ -188,7 +188,7 @@ class JobSeekerModel extends CI_Model {
 				$blob = file_get_contents($_FILES['image']['tmp_name']);
 				$imageData = array('image' => $blob);
 				$this->db->where('userName', $userName);
-				$imageUpdate = $this->db->update('users', $imageData);
+				$imageUpdate = $this->db->update('cmt_users', $imageData);
 			}
 			$this->db->where('userName', $userName);
 			$profileUpdateData = array(
@@ -203,7 +203,7 @@ class JobSeekerModel extends CI_Model {
 				'contact' => $this->input->post('contact'),
 				'updated_by' => $userName
 			);
-			$updateUser = $this->db->update('users', $profileUpdateData);
+			$updateUser = $this->db->update('cmt_users', $profileUpdateData);
 			$this->db->trans_commit();
 			// $updateUser = true;
 		} catch (\Exception $e) {
@@ -213,7 +213,7 @@ class JobSeekerModel extends CI_Model {
 	}
 
 	/**
-	 * This jobSeekerQualificationAdd method are used to inserts the form data into t_qualification table
+	 * This jobSeekerQualificationAdd method are used to inserts the form data into cmt_qualification_details table
 	 * @return the jobSeekerQualificationAddStatus with true or false value to controller according to database results
 	 * @author kulasekaran.
 	 *
@@ -237,12 +237,12 @@ class JobSeekerModel extends CI_Model {
 			'created_by' => $jobSeekerUserName,
 			'delFlag' => 0
 		);
-		$jobSeekerQualificationAddStatus = $this->db->insert('t_qualification', $jobSeekerQualificationAddData);
+		$jobSeekerQualificationAddStatus = $this->db->insert('cmt_qualification_details', $jobSeekerQualificationAddData);
 		return $jobSeekerQualificationAddStatus;
 	}
 
 	/**
-	 * This jobSeekerQualificationDetail method are used to retrieve the qualification related data from t_qualification table
+	 * This jobSeekerQualificationDetail method are used to retrieve the qualification related data from cmt_qualification_details table
 	 * @return the qualificationDetail array to controller
 	 * @author kulasekaran.
 	 *
@@ -266,12 +266,12 @@ class JobSeekerModel extends CI_Model {
 					qual.extraSkill,
 					qual.delFlag'
 				)
-			->from('t_qualification as qual')
-			->join('m_skill as skill','skill.skillId = qual.skill','left')
-			->join('m_qualification as qualify','qualify.qualificationId = qual.qualification','left')
-			->join('m_department as branch','branch.departmentId = qual.branch','left')
-			->join('m_university as univ','univ.universityId = qual.university','left')
-			->join('users as user','user.userName = qual.jobSeekerId','left');
+			->from('cmt_qualification_details as qual')
+			->join('cmt_m_skill as skill','skill.skillId = qual.skill','left')
+			->join('cmt_m_qualification as qualify','qualify.qualificationId = qual.qualification','left')
+			->join('cmt_m_department as branch','branch.departmentId = qual.branch','left')
+			->join('cmt_m_university as univ','univ.universityId = qual.university','left')
+			->join('cmt_users as user','user.userName = qual.jobSeekerId','left');
 		$jobSeekerUserName = $this->session->userdata('userName');
 		$this->db->where(array('qual.jobSeekerId' => $jobSeekerUserName));
 		$this->db->where(array('qual.delFlag' => 0));
@@ -281,7 +281,7 @@ class JobSeekerModel extends CI_Model {
 	}
 
 	/**
-	 * This jobSeekerQualificationEdit method are used to get the one row data from t_qualification table
+	 * This jobSeekerQualificationEdit method are used to get the one row data from cmt_qualification_details table
 	 * @return to the jobSeekerQualificationEdit array to controller
 	 * @author kulasekaran.
 	 *
@@ -304,12 +304,12 @@ class JobSeekerModel extends CI_Model {
 							extraSkill'
 						);
 		$this->db->where('id',$id);
-		$jobSeekerQualificationEdit = $this->db->get('t_qualification');
+		$jobSeekerQualificationEdit = $this->db->get('cmt_qualification_details');
 		return $jobSeekerQualificationEdit->result()[0];
 	}
 
 	/**
-	 * This jobSeekerQualificationUpdate method are used to update the one row data into the t_qualification table
+	 * This jobSeekerQualificationUpdate method are used to update the one row data into the cmt_qualification_details table
 	 * @return to the updateQualification with true or false value to controller according to database results
 	 * @author kulasekaran.
 	 *
@@ -333,7 +333,7 @@ class JobSeekerModel extends CI_Model {
 			'extraSkill' => $this->input->post('extraSkill'),
 			'updated_by' => $jobSeekerUserName
 		);
-		$updateQualification = $this->db->update('t_qualification', $qualificationUpdateData);
+		$updateQualification = $this->db->update('cmt_qualification_details', $qualificationUpdateData);
 		return $updateQualification;
 	}
 

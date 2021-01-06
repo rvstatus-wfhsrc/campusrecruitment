@@ -56,7 +56,7 @@ class CompanyModel extends CI_Model {
 		} elseif ($filterVal == 3) {
             $this->db->where(array('delFlag' => 1));
         }
-		$companyHistory = $this->db->get('company');
+		$companyHistory = $this->db->get('cmt_company');
 		return $companyHistory->result();
 	}
 
@@ -72,10 +72,10 @@ class CompanyModel extends CI_Model {
 		// $delFlag => 1 ----> change delFlag = 0
 		if ($delFlag == 0) {
 			$this->db->where('id', $id);
-			$companyStatus = $this->db->update('company', array('delFlag' => 1,'updated_by' => $userName ));
+			$companyStatus = $this->db->update('cmt_company', array('delFlag' => 1,'updated_by' => $userName ));
 		} else {
 			$this->db->where('id', $id);
-			$companyStatus = $this->db->update('company', array('delFlag' => 0,'updated_by' => $userName ));
+			$companyStatus = $this->db->update('cmt_company', array('delFlag' => 0,'updated_by' => $userName ));
 		}
 		return $companyStatus;	
 	}
@@ -121,7 +121,7 @@ class CompanyModel extends CI_Model {
 			);
 		}
 		$companyAddMergeData = array_merge($companyAddData, $companyData);
-		$companyAddStatus = $this->db->insert('company', $companyAddMergeData);
+		$companyAddStatus = $this->db->insert('cmt_company', $companyAddMergeData);
 		if($companyAddStatus == "1") { 
 			$message = "Dear ".$this->input->post('incharge')."<br>Congratulations..!<br>Your Details has been successfully Registered in our webSite.<br>Please update other details in Company Domain.<br>Path : ".site_url('HomeController/index')."<br>Your Login Details :<br>User Name : ".$companyUserName."<br>Password : company<br><br><br>Thank And Regards,<br>Admin<br><br>Note : Please Dont reply to this mail.";
 			$this->email->set_newline("\r\n");
@@ -145,7 +145,7 @@ class CompanyModel extends CI_Model {
 	 *
 	 */
 	function companyProfileAdd($companyAddData) {
-		$companyAddStatus = $this->db->insert('company', $companyAddData);
+		$companyAddStatus = $this->db->insert('cmt_company', $companyAddData);
 		return $companyAddStatus;
 	}
 
@@ -163,7 +163,7 @@ class CompanyModel extends CI_Model {
 		} else {
 			$this->db->where(array('id' => $companyId));
 		}
-		$companyDetail = $this->db->get('company');
+		$companyDetail = $this->db->get('cmt_company');
 		return $companyDetail->result()[0];
 	}
 
@@ -176,7 +176,7 @@ class CompanyModel extends CI_Model {
 	function companyEdit($companyId) {
 		$this->db->select('id,companyName,incharge,contact,email,entryDate,address,website,delFlag');
 		$this->db->where(array('id' => $companyId));
-		$companyEdit = $this->db->get('company');
+		$companyEdit = $this->db->get('cmt_company');
 		return $companyEdit->result()[0];
 	}
 
@@ -200,7 +200,7 @@ class CompanyModel extends CI_Model {
 			'updated_by' => $userName
 		);
 		$this->db->where('id', $companyId);
-		$updateCompany = $this->db->update('company', $companyUpdateData);
+		$updateCompany = $this->db->update('cmt_company', $companyUpdateData);
 		return $updateCompany;
 	}
 
@@ -211,7 +211,7 @@ class CompanyModel extends CI_Model {
 	 *
 	 */
 	function lastCompanyUserName() {
-		$lastUserName = $this->db->query("SELECT userName FROM company WHERE userName LIKE 'CY%' ORDER BY id DESC");
+		$lastUserName = $this->db->query("SELECT userName FROM cmt_company WHERE userName LIKE 'CY%' ORDER BY id DESC");
 		return $lastUserName;
 	}
 
@@ -244,8 +244,8 @@ class CompanyModel extends CI_Model {
 		} elseif ($filterVal == 3) {
 			$this->db->where(array('delFlag' => 1));
 		}
-		$this->db->select('COUNT(company.id) as numrows');
-		$this->db->from('company');
+		$this->db->select('COUNT(cmt_company.id) as numrows');
+		$this->db->from('cmt_company');
 		$result = $this->db->get();
 		return $result->result()['0']->numrows;
 	}

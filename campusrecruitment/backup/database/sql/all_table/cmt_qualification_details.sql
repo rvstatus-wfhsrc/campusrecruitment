@@ -10,29 +10,29 @@ Target Server Type    : MYSQL
 Target Server Version : 50625
 File Encoding         : 65001
 
-Date: 2021-01-06 10:25:58
+Date: 2021-01-06 18:25:37
 */
 
 SET FOREIGN_KEY_CHECKS=0;
 -- ----------------------------
--- Table structure for `job_details`
+-- Table structure for `cmt_qualification_details`
 -- ----------------------------
-DROP TABLE IF EXISTS `job_details`;
-CREATE TABLE `job_details` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `companyId` varchar(50) DEFAULT NULL,
-  `jobCategory` int(10) NOT NULL,
-  `jobType` int(5) NOT NULL,
-  `requiredSkill` int(10) NOT NULL,
+DROP TABLE IF EXISTS `cmt_qualification_details`;
+CREATE TABLE `cmt_qualification_details` (
+  `id` int(10) NOT NULL AUTO_INCREMENT,
+  `jobSeekerId` varchar(50) NOT NULL,
+  `tenthMark` varchar(10) NOT NULL,
+  `twelvethMark` varchar(10) NOT NULL,
+  `specification` int(10) NOT NULL,
+  `qualification` int(10) NOT NULL,
+  `branch` int(10) NOT NULL,
+  `yearOfPassing` int(10) NOT NULL,
+  `monthOfPassing` int(10) NOT NULL,
+  `CGPA` varchar(10) NOT NULL,
+  `university` int(10) NOT NULL,
+  `collegeName` varchar(100) NOT NULL,
+  `skill` int(10) NOT NULL,
   `extraSkill` varchar(200) DEFAULT NULL,
-  `role` int(10) NOT NULL,
-  `minQualification` int(10) NOT NULL,
-  `maxAge` int(10) NOT NULL,
-  `salary` varchar(30) NOT NULL,
-  `jobLocation` int(10) NOT NULL,
-  `workingHour` int(10) NOT NULL,
-  `jobDescription` text,
-  `lastApplyDate` date NOT NULL,
   `created_date_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `created_by` varchar(50) NOT NULL,
   `updated_date_time` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
@@ -42,5 +42,5 @@ CREATE TABLE `job_details` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
--- Records of job_details
+-- Records of cmt_qualification_details
 -- ----------------------------
