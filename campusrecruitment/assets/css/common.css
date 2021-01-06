@@ -246,3 +246,21 @@
     color: #4285f4;
 }
 /* apply button and link color class end */
+
+/* user name color class start */
+.adminUserNameClr {
+	color: #04B404;
+}
+.companyUserNameClr {
+	color: #0000FF;
+}
+.jobSeekerUserNameClr {
+	color: #AC4E00;
+}
+/* user name color class end */
+
+/* name color class start */
+.nameClr {
+	color: #9C0000;
+}
+/* name color class end */
