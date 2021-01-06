@@ -95,16 +95,16 @@ class DashBoardController extends CI_Controller {
     } else if (!isset($result[2])) {
       if($result[0]->resultStatus != 1 && $result[1]->resultStatus != 1) {
         $test[0] = array('count' => $result[0]->count , 'resultStatus' => "");
-        $test[1] = array('count' => 0 , 'resultStatus' => 1);
+        $test[1] = array('count' => '0' , 'resultStatus' => 1);
         $test[2] = array('count' => $result[1]->count , 'resultStatus' => 2);
       } elseif ($result[0]->resultStatus != 2 && $result[1]->resultStatus != 2) {
         $test[0] = array('count' => $result[0]->count , 'resultStatus' => "");
-        $test[1] = array('count' => $result[0]->count , 'resultStatus' => 1);
+        $test[1] = array('count' => $result[1]->count , 'resultStatus' => 1);
         $test[2] = array('count' => '0' , 'resultStatus' => 2);
       } else {
         $test[0] = array('count' => '0', 'resultStatus' => "");
         $test[1] = array('count' => $result[0]->count , 'resultStatus' => 1);
-        $test[2] = array('count' => $result[0]->count , 'resultStatus' => 2);
+        $test[2] = array('count' => $result[1]->count , 'resultStatus' => 2);
       }
       $result = json_decode(json_encode($test), FALSE);
     }
@@ -177,16 +177,16 @@ class DashBoardController extends CI_Controller {
     } else if (!isset($result[2])) {
       if($result[0]->resultStatus != 1 && $result[1]->resultStatus != 1) {
         $test[0] = array('count' => $result[0]->count , 'resultStatus' => "");
-        $test[1] = array('count' => 0 , 'resultStatus' => 1);
+        $test[1] = array('count' => '0' , 'resultStatus' => 1);
         $test[2] = array('count' => $result[1]->count , 'resultStatus' => 2);
       } elseif ($result[0]->resultStatus != 2 && $result[1]->resultStatus != 2) {
         $test[0] = array('count' => $result[0]->count , 'resultStatus' => "");
-        $test[1] = array('count' => $result[0]->count , 'resultStatus' => 1);
+        $test[1] = array('count' => $result[1]->count , 'resultStatus' => 1);
         $test[2] = array('count' => '0' , 'resultStatus' => 2);
       } else {
         $test[0] = array('count' => '0', 'resultStatus' => "");
         $test[1] = array('count' => $result[0]->count , 'resultStatus' => 1);
-        $test[2] = array('count' => $result[0]->count , 'resultStatus' => 2);
+        $test[2] = array('count' => $result[1]->count , 'resultStatus' => 2);
       }
       $result = json_decode(json_encode($test), FALSE);
     }
