@@ -89,6 +89,8 @@ $lang['lbl_titleMark'] = 'Obtain Mark ( display as percentage only )';
 $lang['lbl_titleCompanyContact'] = '会社の電話番号';
 $lang['lbl_titleJobSeekerContact'] = '求職者の電話番号';
 $lang['lbl_resultGroupHistory'] = '結果グループ履歴';
+$lang['lbl_checkYourResult'] = '結果を確認してください';
+$lang['lbl_result'] = '結果';
 
 // home screen label
 $lang['lbl_findJobIntro'] = 'あなたの人生に合った仕事を見つけましょう';
@@ -136,7 +138,11 @@ $lang['lbl_login'] = 'ログイン';
 $lang['lbl_forgetYourPassword'] = 'パスワードをお忘れですか ？';
 $lang['lbl_newCompanyQuestion'] = 'あなたは新しい会社ですか？';
 $lang['lbl_signup'] = 'サインアップ ！';
-$lang['lbl_newJobSeekerQuestion'] = 'あなたは新しい求職者ですか？';
+$lang['lbl_newJobSeekerQuestion'] = 'あなたは新しい求職者ですか ？';
+$lang['lbl_resetPassword'] = 'パスワード再設定';
+$lang['lbl_forgotPassword'] = 'パスワードをお忘れですか ？';
+$lang['lbl_heading_forgotPassword'] = 'ここでパスワードをリセットできます。';
+$lang['lbl_sendPasswordResetLink'] = 'パスワードリセットリンクを送信する';
 
 // dashboard screen label
 $lang['lbl_dashboard'] = 'ダッシュボード';

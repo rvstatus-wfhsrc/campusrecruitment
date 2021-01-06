@@ -72,7 +72,7 @@
 						<i class="fa fa-edit fa-btn"></i>
 						<?php echo $this->lang->line("lbl_edit"); ?>
 					</a>
-				<?php } elseif($this->session->userdata('flag') == 3) { ?>
+				<?php } elseif($this->session->userdata('flag') == 3 && $jobDetail->jobApplyId == null) { ?>
 					<a class="btn apply_btn text-white editBtn" href="javascript:;" onclick="fnJobApply(<?php echo $jobDetail->id;?> , '<?php echo $jobDetail->companyId;?>')">
 						<i class="fa fa-check"></i>
 						<?php echo $this->lang->line("lbl_apply"); ?>

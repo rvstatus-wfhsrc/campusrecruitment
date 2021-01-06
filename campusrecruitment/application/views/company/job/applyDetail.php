@@ -95,7 +95,7 @@
 							<div class="leftSide"><?php echo $this->lang->line("lbl_contact"); ?> : </div>
 							<div class="rightSide"><?php echo $jobApplyDetail->contact; ?></div>
 						</div>
-					<?php } else { ?>
+					<?php } else if($this->session->userdata('flag') == 2) { ?>
 						<div>
 							<div class="leftSide"><?php echo $this->lang->line("lbl_jobSeekerName"); ?> : </div>
 							<div class="rightSide"><?php echo $jobApplyDetail->jobSeekerName; ?></div>

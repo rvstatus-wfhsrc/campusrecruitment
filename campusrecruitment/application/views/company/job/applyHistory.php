@@ -128,7 +128,7 @@
                                     <th><?php echo lang('lbl_appliedDate'); ?></th>
                                     <?php if ($this->session->userdata('flag') == 3) { ?>
                                         <th><?php echo lang('lbl_incharge'); ?> / <?php echo lang('lbl_contact'); ?></th>
-                                    <?php } else { ?>
+                                    <?php } else if($this->session->userdata('flag') == 2) { ?>
                                         <th title="<?php echo lang('lbl_jobSeekerName'); ?> / <?php echo lang('lbl_contact'); ?>"><?php echo lang('lbl_name'); ?> / <?php echo lang('lbl_contact'); ?></th>
                                     <?php } ?>
                                     <th></th>
@@ -147,7 +147,7 @@
                                             <td class="tac vam"><?php echo $history->applyDate; ?></td>
                                             <?php if ($this->session->userdata('flag') == 3) { ?>
                                                 <td class="vam"><?php echo $history->incharge; ?><br><?php echo $history->contact; ?></td>
-                                            <?php } else { ?>
+                                            <?php } else if($this->session->userdata('flag') == 2) { ?>
                                                 <td class="vam"><?php echo $history->jobSeekerName; ?><br><?php echo $history->jobSeekerContact; ?></td>
                                             <?php } ?>
                                             <td class="tac vam">
@@ -161,8 +161,8 @@
                                                             <?php echo lang('lbl_cancel'); ?>
                                                         </a>
                                                     <?php } else { ?>
-                                                        <a title="check your result" href="<?php echo site_url('JobController/jobResultHistory') ?>">
-                                                            <?php echo "Result"; ?>
+                                                        <a title="<?php echo lang('lbl_checkYourResult'); ?>" href="<?php echo site_url('JobController/jobResultHistory') ?>">
+                                                            <?php echo lang('lbl_result'); ?>
                                                         </a>
                                                     <?php } ?>
                                                 <?php } ?>

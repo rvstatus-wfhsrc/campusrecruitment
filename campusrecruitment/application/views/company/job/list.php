@@ -167,7 +167,7 @@
                                                             <?php echo lang('lbl_deactive'); ?>
                                                         </a>
                                                     <?php } ?>
-                                                <?php } else { ?>
+                                                <?php } else if ($this->session->userdata('flag') == 3 && $list->jobApplyId == null) { ?>
                                                     <a href="javascript:;" onclick="fnJobApply(<?php echo $list->id;?> , '<?php echo $list->companyId;?>')" class="apply_link">
                                                         <?php echo lang('lbl_apply'); ?>
                                                     </a>

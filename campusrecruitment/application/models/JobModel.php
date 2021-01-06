@@ -210,8 +210,8 @@ class JobModel extends CI_Model {
 							jd.extraSkill,
 							cmpy.contact,
 							cmpy.companyName,
-							cmpy.incharge'
-
+							cmpy.incharge,
+							ajd.id as jobApplyId'
 						)
 					->from('job_details as jd')
 					 // this is the left join in codeigniter
@@ -220,7 +220,8 @@ class JobModel extends CI_Model {
 					->join('m_skill as skill','skill.skillId = jd.requiredSkill','left')
 					->join('m_country as country','country.countryId = jd.jobLocation','left')
 					->join('m_min_qualification as minqual','minqual.minQualificationId = jd.minQualification','left')
-					->join('company as cmpy','cmpy.userName = jd.companyId','left');
+					->join('company as cmpy','cmpy.userName = jd.companyId','left')
+					->join('apply_job_details as ajd','ajd.jobId = jd.id','left');
 
 		$this->db->where(array('jd.id' => $id));
 		$jobDetail = $this->db->get();
@@ -309,14 +310,16 @@ class JobModel extends CI_Model {
 					jd.salary,
 					jd.workingHour,
 					jd.lastApplyDate,
-					jd.created_date_time'
+					jd.created_date_time,
+					ajd.id as jobApplyId'
 				)
 			->from('job_details as jd')
 			// this is the left join in codeigniter
 			->join('m_designation as dest','dest.designationId = jd.jobCategory','left')
 			->join('m_role as role','role.roleId = jd.role','left')
 			->join('m_skill as skill','skill.skillId = jd.requiredSkill','left')
-			->join('m_country as country','country.countryId = jd.jobLocation','left');
+			->join('m_country as country','country.countryId = jd.jobLocation','left')
+			->join('apply_job_details as ajd','ajd.jobId = jd.id','left');
 
 			// search process
 			$hiddenSearch = $this->input->post('hiddenSearch');

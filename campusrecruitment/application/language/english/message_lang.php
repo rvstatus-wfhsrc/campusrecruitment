@@ -89,6 +89,8 @@ $lang['lbl_titleMark'] = 'Obtain Mark ( display as percentage only )';
 $lang['lbl_titleCompanyContact'] = 'Company Phone Number';
 $lang['lbl_titleJobSeekerContact'] = 'Job Seeker Phone Number';
 $lang['lbl_resultGroupHistory'] = 'Result Group History';
+$lang['lbl_checkYourResult'] = 'check your result';
+$lang['lbl_result'] = 'Result';
 
 // home screen label
 $lang['lbl_findJobIntro'] = 'Find the job that fits your life';
@@ -137,6 +139,10 @@ $lang['lbl_forgetYourPassword'] = 'Forgot Your Password ?';
 $lang['lbl_newCompanyQuestion'] = 'Are you new Company ?';
 $lang['lbl_signup'] = ' Sign up !';
 $lang['lbl_newJobSeekerQuestion'] = 'Are you new Job Seeker ?';
+$lang['lbl_resetPassword'] = 'Reset Password';
+$lang['lbl_forgotPassword'] = 'Forgot Password ?';
+$lang['lbl_heading_forgotPassword'] = 'You can reset your password here.';
+$lang['lbl_sendPasswordResetLink'] = 'Send Password Reset Link';
 
 // dashboard screen label
 $lang['lbl_dashboard'] = 'Dashboard';

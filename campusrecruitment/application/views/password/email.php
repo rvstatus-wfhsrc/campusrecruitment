@@ -29,8 +29,8 @@
                             <?php } ?>
                             <div class="text-center">
                                 <h3><i class="fa fa-lock fa-4x"></i></h3>
-                                <h2 class="text-center">Forgot Password?</h2>
-                                <p>You can reset your password here.</p>
+                                <h2 class="text-center"><?php echo lang('lbl_forgotPassword'); ?></h2>
+                                <p><?php echo lang('lbl_heading_forgotPassword'); ?></p>
                                 <div class="panel-body">
                                     <?php echo form_open('LoginController/resentLinkSend',['method' => 'POST','id' => 'passwordResetForm','name' => 'passwordResetForm']); ?>
                                     <input type="hidden" id="baseUrl" name="baseUrl" value="<?php echo base_url(); ?>">
@@ -69,7 +69,7 @@
                                     </div>
                                     <div class="form-group">
                                         <button type="submit" class="btn btn-lg btn-primary">
-                                            <i class="fa fa-btn fa-envelope"></i> Send Password Reset Link
+                                            <i class="fa fa-btn fa-envelope"></i> <?php echo lang('lbl_sendPasswordResetLink'); ?>
                                         </button>
                                     </div>
                                     <?php echo form_close();?>
