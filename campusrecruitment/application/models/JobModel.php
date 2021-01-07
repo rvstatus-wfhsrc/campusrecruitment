@@ -524,8 +524,10 @@ class JobModel extends CI_Model {
 
 		// search process
 		$hiddenSearch = $this->input->post('hiddenSearch');
-		if($hiddenSearch != ""){
+		if($hiddenSearch != "" && $this->session->userdata('flag') == 3) {
 			$this->db->like('cmpy.companyName',trim($hiddenSearch));
+		} elseif ($hiddenSearch != "" && $this->session->userdata('flag') == 2) {
+			$this->db->like('user.name',trim($hiddenSearch));
 		}
 
 		// sorting process
@@ -537,8 +539,10 @@ class JobModel extends CI_Model {
 			$this->db->order_by('dest.designationName', $sortOptn);
 		} else if ($sortVal == 3) {
 			$this->db->order_by('ajd.applyDate', $sortOptn);
+		} else if ($sortVal == 4) {
+			$this->db->order_by('user.name', $sortOptn);
 		} else {
-			$this->db->order_by('cmpy.companyName', 'ASC');
+			$this->db->order_by('ajd.applyDate', 'DESC');
 		}
 		$this->db->select('COUNT(ajd.id) as numrows');
 		$this->db->from('cmt_apply_job_details as ajd');

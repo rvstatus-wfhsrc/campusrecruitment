@@ -206,11 +206,11 @@ class CompanyController extends CI_Controller {
 	public function companyProfileAddForm() {
 		$companyAddStatus = $this->CompanyModel->companyAdd();
 		if($companyAddStatus == "1") { 
-			$this->session->set_flashdata(array('message' => 'Company Successfully Registered','type' => 'success','hiddenCompanyId' => $this->session->userdata('userName')));
-			redirect('LoginController/CompanyLogin');
+			$this->session->set_flashdata(array('message' => 'Company Successfully Registered','type' => 'success'));
+			redirect('LoginController/companyLogin');
 		} else {
 			$this->session->set_flashdata(array('message' => 'Sorry, Something Went Wrong. Please Try Again Later','type' => 'danger'));
-			redirect('CompanyController/companyDetail');
+			redirect('LoginController/companyLogin');
 		}
 	}
 
