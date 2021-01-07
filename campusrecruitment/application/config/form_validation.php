@@ -183,7 +183,7 @@ $config = array(
                                     array(
                                         'field' => 'contact',
                                         'label' => 'lang:lbl_contact',
-                                        'rules' => 'required|ten_digit_only',
+                                        'rules' => 'required|is_natural|exact_length[10]',
                                             array(
                                                 'required' => 'lang:required'
                                             )
@@ -264,7 +264,7 @@ $config = array(
                                     array(
                                         'field' => 'contact',
                                         'label' => 'lang:lbl_contact',
-                                        'rules' => 'required|ten_digit_only',
+                                        'rules' => 'required|is_natural|exact_length[10]',
                                             array(
                                                 'required' => 'lang:required'
                                             )
@@ -339,12 +339,12 @@ $config = array(
                                     array(
                                         'field' => 'pincode',
                                         'label' => 'lang:lbl_pincode',
-                                        'rules' => 'required|six_digit_only'
+                                        'rules' => 'required|is_natural|exact_length[6]'
                                     ),
                                     array(
                                         'field' => 'contact',
                                         'label' => 'lang:lbl_contact',
-                                        'rules' => 'required|ten_digit_only'
+                                        'rules' => 'required|is_natural|exact_length[10]'
                                     ),
                                     array(
                                         'field' => 'password',
@@ -399,12 +399,12 @@ $config = array(
                                     array(
                                         'field' => 'pincode',
                                         'label' => 'lang:lbl_pincode',
-                                        'rules' => 'required|six_digit_only'
+                                        'rules' => 'required|is_natural|exact_length[6]'
                                     ),
                                     array(
                                         'field' => 'contact',
                                         'label' => 'lang:lbl_contact',
-                                        'rules' => 'required|ten_digit_only'
+                                        'rules' => 'required|is_natural|exact_length[10]'
                                     )
                                 ),
                 'jobSeekerQualificationAddEdit' => array(

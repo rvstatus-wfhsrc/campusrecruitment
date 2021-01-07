@@ -48,19 +48,6 @@ class MY_Form_validation extends CI_Form_validation{
 	}
 
 	/**
-	 * This ten_digit_only method are used to validate field have ten digit or not
-	 * @param value is integer value gets from contact field
-	 * @return true or false to companyProfileFormValidation method
-	 * @author kulasekaran.
-	 *
-	 */
-	function ten_digit_only($value) {
-		$pattern = "/\b\d{10}\b/";
-		$match = preg_match($pattern,$value);
-		return ($match == 0) ? FALSE : TRUE;
-	}
-
-	/**
 	 * This exist_company_name method are used to validate company name is already exist or not
 	 * @param companyName is string value gets from companyName field
 	 * @return true or false to companyProfileFormValidation method
@@ -145,19 +132,6 @@ class MY_Form_validation extends CI_Form_validation{
 		$lastApplyDate = $this->CI->input->post('lastApplyDate');
 		$currentDate = date('Y-m-d');
 		return ($currentDate >= $lastApplyDate) ? FALSE : TRUE;
-	}
-
-	/**
-	 * This six_digit_only method are used to validate field have six digit or not
-	 * @param value is integer value gets from pincode field
-	 * @return true or false to jobSeekerProfileFormValidation method
-	 * @author kulasekaran.
-	 *
-	 */
-	function six_digit_only($value) {
-		$pattern = "/\b\d{6}\b/";
-		$match = preg_match($pattern,$value);
-		return ($match == 0) ? FALSE : TRUE;
 	}
 
 	/**

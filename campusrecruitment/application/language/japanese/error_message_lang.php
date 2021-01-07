@@ -31,4 +31,7 @@ $lang['jobSeeker_email_existing_check'] = 'The {field} already exists.';
 
 $lang['numeric'] = 'The {field} field must be a number.';
 
+$lang['is_natural'] = 'The {field} must be a digits.';
+$lang['exact_length'] = 'The {field} field must be exactly {param} characters in length.';
+
 ?>

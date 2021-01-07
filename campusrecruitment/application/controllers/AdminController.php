@@ -172,16 +172,14 @@ class AdminController extends CI_Controller {
 		// 											'required' => $this->lang->line("required")
 		// 										)
 		// 									);
-		$this->form_validation->set_rules( 'pincode', $this->lang->line("lbl_pincode"), 'required|regex_match[/\b\d{6}\b/]',
+		$this->form_validation->set_rules( 'pincode', $this->lang->line("lbl_pincode"), 'required|is_natural|exact_length[6]',
 												array(
-													'required' => $this->lang->line("required"),
-													'regex_match' => $this->lang->line("pincode_digit")
+													'required' => $this->lang->line("required")
 												)
 											);
-		$this->form_validation->set_rules( 'contact', $this->lang->line("lbl_contact"), 'required|regex_match[/\b\d{10}\b/]',
+		$this->form_validation->set_rules( 'contact', $this->lang->line("lbl_contact"), 'required|is_natural|exact_length[10]',
 												array(
-													'required' => $this->lang->line("required"),
-													'regex_match' => $this->lang->line("contact_digit")
+													'required' => $this->lang->line("required")
 												)
 											);
 		if ($this->form_validation->run() == FALSE){
