@@ -8,20 +8,20 @@ class CommonModel extends CI_Model {
 	}
 
 	// to get the country name
-	// function country()
-	// {
-	// 	$this->db->select('countryId,countryName');
-	// 	$this->db->where(array('delFlag' => 0));
-	// 	$this->db->order_by('countryName', 'asc');
-	// 	$this->db->group_by(array("countryName", "countryId"));
-	// 	$country = $this->db->get('cmt_m_country');
-	// 	$countryArray = array( '' => 'Select Country');
-	// 	foreach($country->result_array() as $row)
-	//     {
-	//         $countryArray[$row['countryId']] = $row['countryName']; // add each user id to the array
-	//     }
-	// 	return $countryArray;
-	// }
+	function country()
+	{
+		$this->db->select('countryId,countryName');
+		$this->db->where(array('delFlag' => 0));
+		$this->db->order_by('countryName', 'asc');
+		$this->db->group_by(array("countryName", "countryId"));
+		$country = $this->db->get('cmt_m_country');
+		$countryArray = array( '' => 'Select Country');
+		foreach($country->result_array() as $row)
+		{
+			$countryArray[$row['countryId']] = $row['countryName']; // add each user id to the array
+		}
+		return $countryArray;
+	}
 
 	// to get the state name
 	// public function state($countryId = null)

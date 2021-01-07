@@ -131,10 +131,10 @@ class JobSeekerModel extends CI_Model {
 					user.pincode,
 					user.image'
 				)
-			->from('cmt_users as user')
-			->join('cmt_m_country as country','country.countryId = user.country','left')
-			->join('cmt_m_state as state','state.stateId = user.state','left')
-			->join('cmt_m_city as city','city.cityId = user.city','left');
+			->from('cmt_users as user');
+			// ->join('cmt_m_country as country','country.countryId = user.country','left')
+			// ->join('cmt_m_state as state','state.stateId = user.state','left')
+			// ->join('cmt_m_city as city','city.cityId = user.city','left');
 		$jobSeekerUserName = $this->session->userdata('userName');
 		$this->db->where(array('userName' => $jobSeekerUserName));
 		$jobSeekerDetail = $this->db->get();
