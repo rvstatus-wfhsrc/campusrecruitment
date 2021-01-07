@@ -549,6 +549,7 @@ class JobModel extends CI_Model {
 		$this->db->join('cmt_company as cmpy','cmpy.userName = ajd.companyId','left');
 		$this->db->join('cmt_job_details as jd','jd.id = ajd.jobId','left');
 		$this->db->join('cmt_m_designation as dest','dest.designationId = jd.jobCategory','left');
+		$this->db->join('cmt_users as user','user.userName = ajd.jobSeekerId','left');
 		if ($this->session->userdata('flag') == 3) {
 			$this->db->where(array('ajd.jobSeekerId' => $userName));
 		} else if($this->session->userdata('flag') == 2) {
