@@ -329,5 +329,19 @@ class CommonModel extends CI_Model {
 	  	return $yearArray;
 	}
 
+	/**
+	 * This getMaxAge method are used get the all available age 
+	 * @return a $maxAgeArray value to called function on any controller
+	 * @author kulasekaran.
+	 *
+	 */
+	public function getMaxAge()
+	{
+	  	$inserted = array('' => 'Select Maximum Age');
+	  	$original = array_combine(range(18, 26), range(18, 26));
+	  	$maxAgeArray = $inserted+$original;
+	  	return $maxAgeArray;
+	}
+
 }
 ?>

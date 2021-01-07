@@ -62,15 +62,15 @@ class JobSeekerModel extends CI_Model {
 				$imageData = array('image' => $blob);
 			}
 			$jobSeekerAddData = array(
-				'name' => $this->input->post('name'),
-				'email' => $this->input->post('email'),
+				'name' => trim($this->input->post('name')),
+				'email' => trim($this->input->post('email')),
 				'gender' => $this->input->post('gender'),
-				'address' => $this->input->post('address'),
+				'address' => trim($this->input->post('address')),
 				'country' => $this->input->post('country'),
 				'state' => $this->input->post('state'),
 				'city' => $this->input->post('city'),
-				'pincode' => $this->input->post('pincode'),
-				'contact' => $this->input->post('contact'),
+				'pincode' => trim($this->input->post('pincode')),
+				'contact' => trim($this->input->post('contact')),
 				'password' => md5($this->input->post('password')),
 				'userName' => $jobSeekerUserName,
 				'created_by' => $jobSeekerUserName,
@@ -192,15 +192,15 @@ class JobSeekerModel extends CI_Model {
 			}
 			$this->db->where('userName', $userName);
 			$profileUpdateData = array(
-				'name' => $this->input->post('name'),
-				'email' => $this->input->post('email'),
+				'name' => trim($this->input->post('name')),
+				'email' => trim($this->input->post('email')),
 				'gender' => $this->input->post('gender'),
-				'address' => $this->input->post('address'),
+				'address' => trim($this->input->post('address')),
 				'country' => $this->input->post('country'),
 				'state' => $this->input->post('state'),
 				'city' => $this->input->post('city'),
-				'pincode' => $this->input->post('pincode'),
-				'contact' => $this->input->post('contact'),
+				'pincode' => trim($this->input->post('pincode')),
+				'contact' => trim($this->input->post('contact')),
 				'updated_by' => $userName
 			);
 			$updateUser = $this->db->update('cmt_users', $profileUpdateData);
@@ -222,18 +222,18 @@ class JobSeekerModel extends CI_Model {
 		$jobSeekerUserName = $this->session->userdata('userName');
 		$jobSeekerQualificationAddData = array(
 			'jobSeekerId' => $jobSeekerUserName,
-			'tenthMark' => $this->input->post('tenthMark'),
-			'twelvethMark' => $this->input->post('twelvethMark'),
+			'tenthMark' => trim($this->input->post('tenthMark')),
+			'twelvethMark' => trim($this->input->post('twelvethMark')),
 			'specification' => $this->input->post('specification'),
 			'qualification' => $this->input->post('qualification'),
 			'branch' => $this->input->post('branch'),
 			'yearOfPassing' => $this->input->post('yearOfPassing'),
 			'monthOfPassing' => $this->input->post('monthOfPassing'),
-			'collegeName' => $this->input->post('collegeName'),
+			'collegeName' => trim($this->input->post('collegeName')),
 			'university' => $this->input->post('university'),
-			'cgpa' => $this->input->post('cgpa'),
+			'cgpa' => trim($this->input->post('cgpa')),
 			'skill' => $this->input->post('skill'),
-			'extraSkill' => $this->input->post('extraSkill'),
+			'extraSkill' => trim($this->input->post('extraSkill')),
 			'created_by' => $jobSeekerUserName,
 			'delFlag' => 0
 		);
@@ -319,18 +319,18 @@ class JobSeekerModel extends CI_Model {
 		$id = $this->input->post('hiddenJobSeekerQualificationId');
 		$this->db->where('id', $id);
 		$qualificationUpdateData = array(
-			'tenthMark' => $this->input->post('tenthMark'),
-			'twelvethMark' => $this->input->post('twelvethMark'),
+			'tenthMark' => trim($this->input->post('tenthMark')),
+			'twelvethMark' => trim($this->input->post('twelvethMark')),
 			'specification' => $this->input->post('specification'),
 			'qualification' => $this->input->post('qualification'),
 			'branch' => $this->input->post('branch'),
 			'yearOfPassing' => $this->input->post('yearOfPassing'),
 			'monthOfPassing' => $this->input->post('monthOfPassing'),
-			'collegeName' => $this->input->post('collegeName'),
+			'collegeName' => trim($this->input->post('collegeName')),
 			'university' => $this->input->post('university'),
-			'cgpa' => $this->input->post('cgpa'),
+			'cgpa' => trim($this->input->post('cgpa')),
 			'skill' => $this->input->post('skill'),
-			'extraSkill' => $this->input->post('extraSkill'),
+			'extraSkill' => trim($this->input->post('extraSkill')),
 			'updated_by' => $jobSeekerUserName
 		);
 		$updateQualification = $this->db->update('cmt_qualification_details', $qualificationUpdateData);

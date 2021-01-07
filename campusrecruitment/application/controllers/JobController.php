@@ -12,7 +12,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class JobController extends CI_Controller {
 
-	public $maxAgeArray = array('' => 'Select Maximum Age','18'=>'18','19'=>'19','20'=>'20','21'=>'21','22'=>'22','23'=>'23','24'=>'24','25'=>'25','26'=>'26');
 	public $layout_view = 'layouts/default';
 	/**
 	 * Job Controller __construct
@@ -81,7 +80,7 @@ class JobController extends CI_Controller {
 	public function jobAdd() {
 		$data = array();
 
-		$data['maxAgeArray'] = $this->maxAgeArray;
+		$data['maxAgeArray'] = $data['maxAgeArray'] = $this->CommonModel->getMaxAge();
 		$data['jobCategoryArray'] = $this->CommonModel->designation();
 		$data['requiredSkillArray'] = $this->CommonModel->skill();
 		$data['roleArray'] = $this->CommonModel->role();
@@ -164,7 +163,7 @@ class JobController extends CI_Controller {
 		if($this->input->post('hiddenJobId') == null) {
 			redirect('JobController/jobList');
 		}
-		$data['maxAgeArray'] = $this->maxAgeArray;
+		$data['maxAgeArray'] = $this->CommonModel->getMaxAge();
 		$data['jobEdit'] = $this->JobModel->jobEdit();
 		$data['jobCategoryArray'] = $this->CommonModel->designation();
 		$data['requiredSkillArray'] = $this->CommonModel->skill();

@@ -101,15 +101,15 @@ class AdminController extends CI_Controller {
 	public function profileUpdate() {
 			$userName = $this->session->userdata('userName');
 			$profileUpdateData = array(
-				'name' => $this->input->post('name'),
-				'email' => $this->input->post('email'),
+				'name' => trim($this->input->post('name')),
+				'email' => trim($this->input->post('email')),
 				'gender' => $this->input->post('gender'),
-				'address' => $this->input->post('address'),
+				'address' => trim($this->input->post('address')),
 				'country' => $this->input->post('country'),
 				'state' => $this->input->post('state'),
 				'city' => $this->input->post('city'),
-				'pincode' => $this->input->post('pincode'),
-				'contact' => $this->input->post('contact'),
+				'pincode' => trim($this->input->post('pincode')),
+				'contact' => trim($this->input->post('contact')),
 				'updated_by' => $userName
 			);
 			$profileUpdateStatus = $this->AdminModel->profileUpdate($userName,$profileUpdateData);

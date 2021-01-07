@@ -37,14 +37,14 @@ class JobModel extends CI_Model {
 			'jobCategory' => $this->input->post('jobCategory'),
 			'jobType' => $this->input->post('jobType'),
 			'requiredSkill' => $this->input->post('requiredSkill'),
-			'extraSkill' => $this->input->post('extraSkill'),
+			'extraSkill' => trim($this->input->post('extraSkill')),
 			'role' => $this->input->post('role'),
 			'minQualification' => $this->input->post('minQualification'),
 			'maxAge' => $this->input->post('maxAge'),
-			'salary' => $this->input->post('salary'),
+			'salary' => trim($this->input->post('salary')),
 			'jobLocation' => $this->input->post('jobLocation'),
-			'workingHour' => $this->input->post('workingHour'),
-			'jobDescription' => $this->input->post('jobDescription'),
+			'workingHour' => trim($this->input->post('workingHour')),
+			'jobDescription' => trim($this->input->post('jobDescription')),
 			'lastApplyDate' => $this->input->post('lastApplyDate'),
 			'created_by' => $userName
 		);
@@ -272,14 +272,14 @@ class JobModel extends CI_Model {
 			'jobCategory' => $this->input->post('jobCategory'),
 			'jobType' => $this->input->post('jobType'),
 			'requiredSkill' => $this->input->post('requiredSkill'),
-			'extraSkill' => $this->input->post('extraSkill'),
+			'extraSkill' => trim($this->input->post('extraSkill')),
 			'role' => $this->input->post('role'),
 			'minQualification' => $this->input->post('minQualification'),
 			'maxAge' => $this->input->post('maxAge'),
-			'salary' => $this->input->post('salary'),
+			'salary' => trim($this->input->post('salary')),
 			'jobLocation' => $this->input->post('jobLocation'),
-			'workingHour' => $this->input->post('workingHour'),
-			'jobDescription' => $this->input->post('jobDescription'),
+			'workingHour' => trim($this->input->post('workingHour')),
+			'jobDescription' => trim($this->input->post('jobDescription')),
 			'lastApplyDate' => $this->input->post('lastApplyDate'),
 			'updated_by' => $userName
 		);
@@ -618,7 +618,7 @@ class JobModel extends CI_Model {
 			'jobSeekerId' => $this->input->post('hiddenJobSeekerId'),
 			'resultDate' => date('Y-m-d'),
 			// 'totalMark' => $this->input->post('totalMark'),
-			'obtainMark' => $this->input->post('obtainMark'),
+			'obtainMark' => trim($this->input->post('obtainMark')),
 			'resultStatus' => $this->input->post('resultStatus'),
 			'created_by' => $userName,
 			'delFlag' => 0
@@ -831,7 +831,7 @@ class JobModel extends CI_Model {
 		$userName = $this->session->userdata('userName');
 		$hiddenResultJobId = $this->input->post('hiddenResultJobId');
 		$jobResultUpdateData = array(
-			'obtainMark' => $this->input->post('obtainMark'),
+			'obtainMark' => trim($this->input->post('obtainMark')),
 			'resultStatus' => $this->input->post('resultStatus'),
 			'updated_by' => $userName
 		);

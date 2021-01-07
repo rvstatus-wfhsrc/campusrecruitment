@@ -6,6 +6,7 @@ class MY_Form_validation extends CI_Form_validation{
 
 	/**
 	 * This email_exist_check method are used to validate the email for already exist or not
+	 * @param email is string value gets from email field
 	 * @return true or false to companyProfileFormValidation method
 	 * @author Kulasekaran.
 	 *
@@ -16,7 +17,7 @@ class MY_Form_validation extends CI_Form_validation{
 		if ($hiddenCompanyId != null) {
 			$existCompanyId = "NOT id = '".$hiddenCompanyId."' AND";
 		}
-		$query = $this->CI->db->query("SELECT COUNT(id) AS count FROM company WHERE ".$existCompanyId." email = '".$email."'");
+		$query = $this->CI->db->query("SELECT COUNT(id) AS count FROM cmt_company WHERE ".$existCompanyId." email = '".$email."'");
 		$row = $query->row();
 		return ($row->count > 0) ? FALSE : TRUE;
 	}
@@ -35,6 +36,7 @@ class MY_Form_validation extends CI_Form_validation{
 
 	/**
 	 * This alphabetic method are used to validate the field are alphabetic or not
+	 *@param value is string value
 	 * @return true or false to companyProfileFormValidation method
 	 * @author kulasekaran.
 	 *
@@ -47,6 +49,7 @@ class MY_Form_validation extends CI_Form_validation{
 
 	/**
 	 * This ten_digit_only method are used to validate field have ten digit or not
+	 * @param value is integer value gets from contact field
 	 * @return true or false to companyProfileFormValidation method
 	 * @author kulasekaran.
 	 *
@@ -59,6 +62,7 @@ class MY_Form_validation extends CI_Form_validation{
 
 	/**
 	 * This exist_company_name method are used to validate company name is already exist or not
+	 * @param companyName is string value gets from companyName field
 	 * @return true or false to companyProfileFormValidation method
 	 * @author kulasekaran.
 	 *
@@ -69,13 +73,14 @@ class MY_Form_validation extends CI_Form_validation{
 		if ($hiddenCompanyId != null) {
 			$existCompanyId = "NOT id = '".$hiddenCompanyId."' AND";
 		}
-		$query = $this->CI->db->query("SELECT COUNT(id) AS count FROM company WHERE ".$existCompanyId." companyName LIKE '".$companyName."'");
+		$query = $this->CI->db->query("SELECT COUNT(id) AS count FROM cmt_company WHERE ".$existCompanyId." companyName LIKE '".$companyName."'");
 		$row = $query->row();
 		return ($row->count > 0) ? FALSE : TRUE;
 	}
 
 	/**
 	 * This exist_company_website method are used to validate company website is already exist or not
+	 * @param website is string value gets from website field
 	 * @return true or false to companyProfileFormValidation method
 	 * @author kulasekaran.
 	 *
@@ -86,13 +91,14 @@ class MY_Form_validation extends CI_Form_validation{
 		if ($hiddenCompanyId != null) {
 			$existCompanyId = "NOT id = '".$hiddenCompanyId."' AND";
 		}
-		$query = $this->CI->db->query("SELECT COUNT(id) AS count FROM company WHERE ".$existCompanyId." website LIKE '".$website."'");
+		$query = $this->CI->db->query("SELECT COUNT(id) AS count FROM cmt_company WHERE ".$existCompanyId." website LIKE '".$website."'");
 		$row = $query->row();
 		return ($row->count > 0) ? FALSE : TRUE;
 	}
 
 	/**
 	 * This valid_url method are used to validate company website format is correct or not
+	 * @param website is string value gets from website field
 	 * @return to view
 	 * @author Kulasekaran.
 	 *
@@ -105,6 +111,7 @@ class MY_Form_validation extends CI_Form_validation{
 
     /**
 	 * This password_confirmation method are used to validate password field and confirm password is same or not
+	 * @param password is gets from password field
 	 * @return to view
 	 * @author Kulasekaran.
 	 *
@@ -117,6 +124,7 @@ class MY_Form_validation extends CI_Form_validation{
 
     /**
 	 * This extra_skill method are used to validate the field are special characters except comma(,) or not
+	 * @param skill is string value gets from extraSkill field
 	 * @return true or false to jobAddEditFormValidation method
 	 * @author kulasekaran.
 	 *
@@ -141,6 +149,7 @@ class MY_Form_validation extends CI_Form_validation{
 
 	/**
 	 * This six_digit_only method are used to validate field have six digit or not
+	 * @param value is integer value gets from pincode field
 	 * @return true or false to jobSeekerProfileFormValidation method
 	 * @author kulasekaran.
 	 *
@@ -153,6 +162,7 @@ class MY_Form_validation extends CI_Form_validation{
 
 	/**
 	 * This jobSeeker_email_existing_check method are used to validate the email for already exist or not
+	 * @param email is string value gets from email field
 	 * @return true or false to jobSeekerProfileFormValidation method
 	 * @author kulasekaran.
 	 *

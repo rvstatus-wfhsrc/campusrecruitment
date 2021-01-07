@@ -102,12 +102,12 @@ class CompanyModel extends CI_Model {
 	    $companyUserName = $label.$padCount;
 		$userName = $this->session->userdata('userName');
 		$companyAddData = array(
-			'companyName' => $this->input->post('companyName'),
-			'incharge' => $this->input->post('incharge'),
-			'address' => $this->input->post('address'),
-			'contact' => $this->input->post('contact'),
-			'email' => $this->input->post('email'),
-			'website' => $this->input->post('website'),
+			'companyName' => trim($this->input->post('companyName')),
+			'incharge' => trim($this->input->post('incharge')),
+			'address' => trim($this->input->post('address')),
+			'contact' => trim($this->input->post('contact')),
+			'email' => trim($this->input->post('email')),
+			'website' => trim($this->input->post('website')),
 			'userName' => $companyUserName,
 			'password' => md5('company'),
 			'entryDate' => $this->input->post('entryDate'),
@@ -190,12 +190,12 @@ class CompanyModel extends CI_Model {
 		$userName = $this->session->userdata('userName');
 		$companyId = $this->input->post('hiddenCompanyId');
 		$companyUpdateData = array(
-			'companyName' => $this->input->post('companyName'),
-			'incharge' => $this->input->post('incharge'),
-			'address' => $this->input->post('address'),
-			'contact' => $this->input->post('contact'),
-			'email' => $this->input->post('email'),
-			'website' => $this->input->post('website'),
+			'companyName' => trim($this->input->post('companyName')),
+			'incharge' => trim($this->input->post('incharge')),
+			'address' => trim($this->input->post('address')),
+			'contact' => trim($this->input->post('contact')),
+			'email' => trim($this->input->post('email')),
+			'website' => trim($this->input->post('website')),
 			'entryDate' => $this->input->post('entryDate'),
 			'updated_by' => $userName
 		);
