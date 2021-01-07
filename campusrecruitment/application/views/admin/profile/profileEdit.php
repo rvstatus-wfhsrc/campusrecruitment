@@ -96,32 +96,32 @@
                                     </div>
                                 </div>
                                 <!-- country -->
-                                <div class="form-group form-inline">
+                                <!-- <div class="form-group form-inline">
                                     <?php echo lang('lbl_country', 'country', array('class' => 'col-md-4 control-label required')); ?>
                                     <div class="col-md-8">
                                         <?php
                                             echo form_dropdown('country', $countryArray,set_value('country', $profileEdit->country, false),'class = "form-control autowidth h-25" id = "country" name = "country" placeholder = "Select Country"');
                                         ?>
                                     </div>
-                                </div>
+                                </div> -->
                                 <!-- state -->
-                                <div class="form-group form-inline">
+                                <!-- <div class="form-group form-inline">
                                     <?php echo lang('lbl_state', 'state', array('class' => 'col-md-4 control-label required')); ?>
                                     <div class="col-md-8">
                                         <?php 
                                             echo form_dropdown('state', $stateArray,set_value('state', $profileEdit->state, false),'class = "form-control autowidth h-25" id = "state" name = "state"');
                                         ?>
                                     </div>
-                                </div>
+                                </div> -->
                                 <!-- city -->
-                                <div class="form-group form-inline">
+                                <!-- <div class="form-group form-inline">
                                     <?php echo lang('lbl_city', 'city', array('class' => 'col-md-4 control-label required')); ?>
                                     <div class="col-md-8">
                                         <?php
                                             echo form_dropdown('city', $cityArray,set_value('city', $profileEdit->city, false),'class = "form-control autowidth h-25" id = "city" name = "city"');
                                         ?>
                                     </div>
-                                </div>
+                                </div> -->
                                 <!-- pincode -->
                                 <div class="form-group form-inline">
                                     <?php echo lang('lbl_pincode', 'pincode', array('class' => 'col-md-4 control-label required')); ?>

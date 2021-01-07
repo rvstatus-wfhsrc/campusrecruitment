@@ -1,0 +1,4 @@
+ALTER TABLE cmt_users
+DROP COLUMN country,
+DROP COLUMN state,
+DROP COLUMN city;

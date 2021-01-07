@@ -36,10 +36,10 @@ class JobSeekerController extends CI_Controller {
 	 *
 	 */
 	public function jobSeekerProfileAdd() {
-		$data['countryArray'] = $this->CommonModel->country();
-		$data['stateArray'] = $this->CommonModel->state();
-		$data['cityArray'] = $this->CommonModel->city();
-		$this->layouts->view('jobSeeker/profile/addEdit',$data);
+		// $data['countryArray'] = $this->CommonModel->country();
+		// $data['stateArray'] = $this->CommonModel->state();
+		// $data['cityArray'] = $this->CommonModel->city();
+		$this->layouts->view('jobSeeker/profile/addEdit');
 	}
 
 	/**
@@ -133,9 +133,9 @@ class JobSeekerController extends CI_Controller {
 		if($this->input->post('hiddenJobSeekerId') == null) {
 			redirect('JobSeekerController/jobSeekerDetail');
 		}
-		$data['countryArray'] = $this->CommonModel->country();
-		$data['stateArray'] = $this->CommonModel->state();
-		$data['cityArray'] = $this->CommonModel->city();
+		// $data['countryArray'] = $this->CommonModel->country();
+		// $data['stateArray'] = $this->CommonModel->state();
+		// $data['cityArray'] = $this->CommonModel->city();
 		$data['jobSeekerEdit'] = $this->JobSeekerModel->jobSeekerEdit();
 
 		$this->layouts->view('jobSeeker/profile/addEdit',$data);

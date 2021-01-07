@@ -207,10 +207,10 @@ class CompanyController extends CI_Controller {
 		$companyAddStatus = $this->CompanyModel->companyAdd();
 		if($companyAddStatus == "1") { 
 			$this->session->set_flashdata(array('message' => 'Company Successfully Registered','type' => 'success'));
-			redirect('LoginController/companyLogin');
+			redirect('LoginController/CompanyLogin');
 		} else {
 			$this->session->set_flashdata(array('message' => 'Sorry, Something Went Wrong. Please Try Again Later','type' => 'danger'));
-			redirect('LoginController/companyLogin');
+			redirect('LoginController/CompanyLogin');
 		}
 	}
 

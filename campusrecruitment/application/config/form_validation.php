@@ -321,21 +321,21 @@ $config = array(
                                         'label' => 'lang:lbl_address',
                                         'rules' => 'required'
                                     ),
-                                    array(
-                                        'field' => 'country',
-                                        'label' => 'lang:lbl_country',
-                                        'rules' => 'required'
-                                    ),
-                                    array(
-                                        'field' => 'state',
-                                        'label' => 'lang:lbl_state',
-                                        'rules' => 'required'
-                                    ),
-                                    array(
-                                        'field' => 'city',
-                                        'label' => 'lang:lbl_city',
-                                        'rules' => 'required'
-                                    ),
+                                    // array(
+                                    //     'field' => 'country',
+                                    //     'label' => 'lang:lbl_country',
+                                    //     'rules' => 'required'
+                                    // ),
+                                    // array(
+                                    //     'field' => 'state',
+                                    //     'label' => 'lang:lbl_state',
+                                    //     'rules' => 'required'
+                                    // ),
+                                    // array(
+                                    //     'field' => 'city',
+                                    //     'label' => 'lang:lbl_city',
+                                    //     'rules' => 'required'
+                                    // ),
                                     array(
                                         'field' => 'pincode',
                                         'label' => 'lang:lbl_pincode',
@@ -381,21 +381,21 @@ $config = array(
                                         'label' => 'lang:lbl_address',
                                         'rules' => 'required'
                                     ),
-                                    array(
-                                        'field' => 'country',
-                                        'label' => 'lang:lbl_country',
-                                        'rules' => 'required'
-                                    ),
-                                    array(
-                                        'field' => 'state',
-                                        'label' => 'lang:lbl_state',
-                                        'rules' => 'required'
-                                    ),
-                                    array(
-                                        'field' => 'city',
-                                        'label' => 'lang:lbl_city',
-                                        'rules' => 'required'
-                                    ),
+                                    // array(
+                                    //     'field' => 'country',
+                                    //     'label' => 'lang:lbl_country',
+                                    //     'rules' => 'required'
+                                    // ),
+                                    // array(
+                                    //     'field' => 'state',
+                                    //     'label' => 'lang:lbl_state',
+                                    //     'rules' => 'required'
+                                    // ),
+                                    // array(
+                                    //     'field' => 'city',
+                                    //     'label' => 'lang:lbl_city',
+                                    //     'rules' => 'required'
+                                    // ),
                                     array(
                                         'field' => 'pincode',
                                         'label' => 'lang:lbl_pincode',

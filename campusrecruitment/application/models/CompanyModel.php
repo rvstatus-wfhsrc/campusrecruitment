@@ -123,7 +123,11 @@ class CompanyModel extends CI_Model {
 		$companyAddMergeData = array_merge($companyAddData, $companyData);
 		$companyAddStatus = $this->db->insert('cmt_company', $companyAddMergeData);
 		if($companyAddStatus == "1") { 
-			$message = "Dear ".$this->input->post('incharge')."<br>Congratulations..!<br>Your Details has been successfully Registered in our webSite.<br>Please update other details in Company Domain.<br>Path : ".site_url('HomeController/index')."<br>Your Login Details :<br>User Name : ".$companyUserName."<br>Password : company<br><br><br>Thank And Regards,<br>Admin<br><br>Note : Please Dont reply to this mail.";
+			$password = 'company';
+			if ($this->input->post('password') != null) {
+				$password = $this->input->post('password');
+			}
+			$message = "Dear ".$this->input->post('incharge')."<br>Congratulations..!<br>Your Details has been successfully Registered in our webSite.<br>Please update other details in Company Domain.<br>Path : ".site_url('LoginController/CompanyLogin')."<br>Your Login Details :<br>User Name : ".$companyUserName."<br>Password : ".$password."<br><br><br>Thank And Regards,<br>Admin<br><br>Note : Please Dont reply to this mail.";
 			$this->email->set_newline("\r\n");
 			$this->load->config('email');
 			$from = $this->config->item('smtp_user');

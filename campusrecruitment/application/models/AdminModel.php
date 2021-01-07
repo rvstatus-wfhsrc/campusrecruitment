@@ -9,7 +9,8 @@ class AdminModel extends CI_Model {
 
 	// retrieves profile data
 	function profileDetail($userName) {
-		$this->db->select('userName,name,gender,address,city,state,country,pincode,email,contact,image');
+		// $this->db->select('userName,name,gender,address,city,state,country,pincode,email,contact,image');
+		$this->db->select('userName,name,gender,address,pincode,email,contact,image');
 		$this->db->where(array('userName' => $userName));
 		$profileDetail = $this->db->get('cmt_users');
 		return $profileDetail->result()[0];
@@ -26,7 +27,8 @@ class AdminModel extends CI_Model {
 
 	// retrieves profile data for edit
 	function profileEdit($userName) {
-		$this->db->select('userName,name,gender,address,city,state,country,pincode,email,contact,image');
+		// $this->db->select('userName,name,gender,address,city,state,country,pincode,email,contact,image');
+		$this->db->select('userName,name,gender,address,pincode,email,contact,image');
 		$this->db->where(array('userName' => $userName));
 		$profileEdit = $this->db->get('cmt_users');
 		return $profileEdit->result()[0];

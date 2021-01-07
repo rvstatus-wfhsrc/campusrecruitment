@@ -60,7 +60,7 @@ class HomeModel extends CI_Model {
 	}
 
 	/**
-	 * This record_count method are used to get the total count of data from job_details table
+	 * This record_count method are used to get the total count of data from cmt_job_details table
 	 * @return to return the total count value to controller
 	 * @author Ragav.
 	 *

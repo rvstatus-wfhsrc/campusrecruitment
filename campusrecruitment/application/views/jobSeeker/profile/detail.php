@@ -121,21 +121,21 @@
 						<div class="leftSide"><?php echo lang('lbl_address', 'address'); ?> : </div>
 						<div class="rightSide vat"><?php echo nl2br($jobSeekerDetail->address); ?></div>
 					</div>
-					<div>
+					<!-- <div> -->
 						<!-- city -->
-						<div class="leftSide"><?php echo lang('lbl_city', 'city'); ?> : </div>
+						<!-- <div class="leftSide"><?php echo lang('lbl_city', 'city'); ?> : </div>
 						<div class="rightSide"><?php echo $jobSeekerDetail->city; ?></div>
-					</div>
-					<div>
+					</div> -->
+					<!-- <div> -->
 						<!-- state -->
-						<div class="leftSide"><?php echo lang('lbl_state', 'state'); ?> : </div>
-						<div class="rightSide"><?php echo $jobSeekerDetail->state; ?></div>
-					</div>
-					<div>
+						<!-- <div class="leftSide"><?php echo lang('lbl_state', 'state'); ?> : </div>
+						<div class="rightSide"><?php echo $jobSeekerDetail->state; ?></div> -->
+					<!-- </div>
+					<div> -->
 						<!-- country -->
-						<div class="leftSide"><?php echo lang('lbl_country', 'country'); ?> : </div>
+						<!-- <div class="leftSide"><?php echo lang('lbl_country', 'country'); ?> : </div>
 						<div class="rightSide"><?php echo $jobSeekerDetail->country; ?></div>
-					</div>
+					</div> -->
 					<div>
 						<!-- pincode -->
 						<div class="leftSide"><?php echo lang('lbl_pincode', 'pincode'); ?> : </div>

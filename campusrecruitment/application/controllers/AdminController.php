@@ -39,9 +39,9 @@ class AdminController extends CI_Controller {
 	public function profile() {
 		$userName = $this->session->userdata('userName');
 		$data['profileDetail'] = $this->AdminModel->profileDetail($userName);
-		$data['countryArray'] = $this->CommonModel->country();
-		$data['stateArray'] = $this->CommonModel->state();
-		$data['cityArray'] = $this->CommonModel->city();
+		// $data['countryArray'] = $this->CommonModel->country();
+		// $data['stateArray'] = $this->CommonModel->state();
+		// $data['cityArray'] = $this->CommonModel->city();
 		$this->layouts->view('admin/profile/profileDetail',$data);
 	}
 
@@ -91,9 +91,9 @@ class AdminController extends CI_Controller {
 	{
 		$userName = $this->session->userdata('userName');
 		$data['profileEdit'] = $this->AdminModel->profileEdit($userName);
-		$data['countryArray'] = $this->CommonModel->country();
-		$data['stateArray'] = $this->CommonModel->state();
-		$data['cityArray'] = $this->CommonModel->city();
+		// $data['countryArray'] = $this->CommonModel->country();
+		// $data['stateArray'] = $this->CommonModel->state();
+		// $data['cityArray'] = $this->CommonModel->city();
 		$this->layouts->view('admin/profile/profileEdit',$data);
 	}
 
@@ -105,9 +105,9 @@ class AdminController extends CI_Controller {
 				'email' => trim($this->input->post('email')),
 				'gender' => $this->input->post('gender'),
 				'address' => trim($this->input->post('address')),
-				'country' => $this->input->post('country'),
-				'state' => $this->input->post('state'),
-				'city' => $this->input->post('city'),
+				// 'country' => $this->input->post('country'),
+				// 'state' => $this->input->post('state'),
+				// 'city' => $this->input->post('city'),
 				'pincode' => trim($this->input->post('pincode')),
 				'contact' => trim($this->input->post('contact')),
 				'updated_by' => $userName
@@ -157,21 +157,21 @@ class AdminController extends CI_Controller {
 													'required' => $this->lang->line("required")
 												)
 											);
-		$this->form_validation->set_rules( 'country', $this->lang->line("lbl_country"), 'required',
-												array(
-													'required' => $this->lang->line("required")
-												)
-											);
-		$this->form_validation->set_rules( 'state', $this->lang->line("lbl_state"), 'required',
-												array(
-													'required' => $this->lang->line("required")
-												)
-											);
-		$this->form_validation->set_rules( 'city', $this->lang->line("lbl_city"), 'required',
-												array(
-													'required' => $this->lang->line("required")
-												)
-											);
+		// $this->form_validation->set_rules( 'country', $this->lang->line("lbl_country"), 'required',
+		// 										array(
+		// 											'required' => $this->lang->line("required")
+		// 										)
+		// 									);
+		// $this->form_validation->set_rules( 'state', $this->lang->line("lbl_state"), 'required',
+		// 										array(
+		// 											'required' => $this->lang->line("required")
+		// 										)
+		// 									);
+		// $this->form_validation->set_rules( 'city', $this->lang->line("lbl_city"), 'required',
+		// 										array(
+		// 											'required' => $this->lang->line("required")
+		// 										)
+		// 									);
 		$this->form_validation->set_rules( 'pincode', $this->lang->line("lbl_pincode"), 'required|regex_match[/\b\d{6}\b/]',
 												array(
 													'required' => $this->lang->line("required"),
@@ -202,15 +202,15 @@ class AdminController extends CI_Controller {
 		return ($row->count > 0) ? FALSE : TRUE;
 	}
 
-	function getState() {
-		$countryId = $this->input->get('countryId');
-        $stateArray = $this->CommonModel->state($countryId);
-        echo json_encode($stateArray);exit;
-    }
+	// function getState() {
+	// 	$countryId = $this->input->get('countryId');
+ //        $stateArray = $this->CommonModel->state($countryId);
+ //        echo json_encode($stateArray);exit;
+ //    }
 
-    function getCity() {
-    	$stateId = $this->input->get('stateId');
-        $cityArray = $this->CommonModel->city($stateId);
-        echo json_encode($cityArray);exit;
-    }
+ //    function getCity() {
+ //    	$stateId = $this->input->get('stateId');
+ //        $cityArray = $this->CommonModel->city($stateId);
+ //        echo json_encode($cityArray);exit;
+ //    }
 }

@@ -66,9 +66,9 @@ class JobSeekerModel extends CI_Model {
 				'email' => trim($this->input->post('email')),
 				'gender' => $this->input->post('gender'),
 				'address' => trim($this->input->post('address')),
-				'country' => $this->input->post('country'),
-				'state' => $this->input->post('state'),
-				'city' => $this->input->post('city'),
+				// 'country' => $this->input->post('country'),
+				// 'state' => $this->input->post('state'),
+				// 'city' => $this->input->post('city'),
 				'pincode' => trim($this->input->post('pincode')),
 				'contact' => trim($this->input->post('contact')),
 				'password' => md5($this->input->post('password')),
@@ -79,6 +79,19 @@ class JobSeekerModel extends CI_Model {
 			$jobSeekerAddMergeData = array_merge($jobSeekerAddData, $imageData);
 			$jobSeekerAddStatus = $this->db->insert('cmt_users', $jobSeekerAddMergeData);
 			$this->db->trans_commit();
+			if($jobSeekerAddStatus == "1") { 
+				$message = "Dear ".$this->input->post('name')."<br>Congratulations..!<br>Your Details has been successfully Registered in our webSite.<br>Please update other details in Job Seeker Domain.<br>Path : ".site_url('LoginController/jobSeekerLogin')."<br>Your Login Details :<br>User Name : ".$jobSeekerUserName."<br>Password : ".$this->input->post('password')."<br><br><br>Thank And Regards,<br>Admin<br><br>Note : Please Dont reply to this mail.";
+				$this->email->set_newline("\r\n");
+				$this->load->config('email');
+				$from = $this->config->item('smtp_user');
+				$to = $this->input->post('email');
+				$subject = "Login Details";
+				$this->email->from($from);
+				$this->email->to($to);
+				$this->email->subject($subject);
+				$this->email->message($message);
+				$this->email->send();
+			}
 		} catch (\Exception $e) {
 			$this->db->trans_rollback();
 		}
@@ -104,10 +117,10 @@ class JobSeekerModel extends CI_Model {
 	 */
 	public function jobSeekerDetail() {
 		$this->db->select(
-					'country.countryName as country,
-					state.stateName as state,
-					city.cityName as city,
-					user.id,
+					// 'country.countryName as country,
+					// state.stateName as state,
+					// city.cityName as city,
+					'user.id,
 					user.name,
 					user.gender,
 					user.contact,
@@ -149,15 +162,25 @@ class JobSeekerModel extends CI_Model {
 	 *
 	 */
 	function jobSeekerEdit() {
+		// $this->db->select(
+		// 					'userName,
+		// 					id,
+		// 					name,
+		// 					gender,
+		// 					address,
+		// 					country,
+		// 					state,
+		// 					city,
+		// 					pincode,
+		// 					email,
+		// 					contact'
+		// 				);
 		$this->db->select(
 							'userName,
 							id,
 							name,
 							gender,
 							address,
-							city,
-							state,
-							country,
 							pincode,
 							email,
 							contact'
@@ -196,9 +219,9 @@ class JobSeekerModel extends CI_Model {
 				'email' => trim($this->input->post('email')),
 				'gender' => $this->input->post('gender'),
 				'address' => trim($this->input->post('address')),
-				'country' => $this->input->post('country'),
-				'state' => $this->input->post('state'),
-				'city' => $this->input->post('city'),
+				// 'country' => $this->input->post('country'),
+				// 'state' => $this->input->post('state'),
+				// 'city' => $this->input->post('city'),
 				'pincode' => trim($this->input->post('pincode')),
 				'contact' => trim($this->input->post('contact')),
 				'updated_by' => $userName

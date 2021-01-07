@@ -8,57 +8,57 @@ class CommonModel extends CI_Model {
 	}
 
 	// to get the country name
-	function country()
-	{
-		$this->db->select('countryId,countryName');
-		$this->db->where(array('delFlag' => 0));
-		$this->db->order_by('countryName', 'asc');
-		$this->db->group_by(array("countryName", "countryId"));
-		$country = $this->db->get('cmt_m_country');
-		$countryArray = array( '' => 'Select Country');
-		foreach($country->result_array() as $row)
-	    {
-	        $countryArray[$row['countryId']] = $row['countryName']; // add each user id to the array
-	    }
-		return $countryArray;
-	}
+	// function country()
+	// {
+	// 	$this->db->select('countryId,countryName');
+	// 	$this->db->where(array('delFlag' => 0));
+	// 	$this->db->order_by('countryName', 'asc');
+	// 	$this->db->group_by(array("countryName", "countryId"));
+	// 	$country = $this->db->get('cmt_m_country');
+	// 	$countryArray = array( '' => 'Select Country');
+	// 	foreach($country->result_array() as $row)
+	//     {
+	//         $countryArray[$row['countryId']] = $row['countryName']; // add each user id to the array
+	//     }
+	// 	return $countryArray;
+	// }
 
 	// to get the state name
-	public function state($countryId = null)
-	{
+	// public function state($countryId = null)
+	// {
 
-		$this->db->select('stateId,stateName');
-		$this->db->where(array('delFlag' => 0));
-		if(isset($countryId) && $countryId != "") {
-			$this->db->where(array('countryId' => $countryId));
-		}
-		$this->db->order_by('stateName', 'asc');
-		$this->db->group_by(array("stateName", "stateId"));
-		$state = $this->db->get('cmt_m_state');
-		foreach($state->result_array() as $row)
-	    {
-	        $stateArray[$row['stateId']] = $row['stateName']; // add each user id to the array
-	    }
-		return $stateArray;
-	}
+	// 	$this->db->select('stateId,stateName');
+	// 	$this->db->where(array('delFlag' => 0));
+	// 	if(isset($countryId) && $countryId != "") {
+	// 		$this->db->where(array('countryId' => $countryId));
+	// 	}
+	// 	$this->db->order_by('stateName', 'asc');
+	// 	$this->db->group_by(array("stateName", "stateId"));
+	// 	$state = $this->db->get('cmt_m_state');
+	// 	foreach($state->result_array() as $row)
+	//     {
+	//         $stateArray[$row['stateId']] = $row['stateName']; // add each user id to the array
+	//     }
+	// 	return $stateArray;
+	// }
 
 	// to get the city name
-	public function city($stateId = null)
-	{
-		$this->db->select('cityId,cityName');
-		$this->db->where(array('delFlag' => 0));
-		if(isset($stateId) && $stateId != "") {
-			$this->db->where(array('stateId' => $stateId));
-		}
-		$this->db->order_by('cityName', 'asc');
-		$this->db->group_by(array("cityName", "cityId"));
-		$city = $this->db->get('cmt_m_city');
-		foreach($city->result_array() as $row)
-	    {
-	        $cityArray[$row['cityId']] = $row['cityName']; // add each user id to the array
-	    }
-		return $cityArray;
-	}
+	// public function city($stateId = null)
+	// {
+	// 	$this->db->select('cityId,cityName');
+	// 	$this->db->where(array('delFlag' => 0));
+	// 	if(isset($stateId) && $stateId != "") {
+	// 		$this->db->where(array('stateId' => $stateId));
+	// 	}
+	// 	$this->db->order_by('cityName', 'asc');
+	// 	$this->db->group_by(array("cityName", "cityId"));
+	// 	$city = $this->db->get('cmt_m_city');
+	// 	foreach($city->result_array() as $row)
+	//     {
+	//         $cityArray[$row['cityId']] = $row['cityName']; // add each user id to the array
+	//     }
+	// 	return $cityArray;
+	// }
 	
 	// to get the main department name
 	public static function mainDept()

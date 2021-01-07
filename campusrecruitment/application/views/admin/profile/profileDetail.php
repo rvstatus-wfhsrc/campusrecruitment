@@ -114,21 +114,21 @@
 						<div class="leftSide"><?php echo lang('lbl_address', 'address'); ?> : </div>
 						<div class="rightSide vat"><?php echo nl2br($profileDetail->address); ?></div>
 					</div>
-					<div>
+					<!-- <div> -->
 						<!-- city -->
-						<div class="leftSide"><?php echo lang('lbl_city', 'city'); ?> : </div>
+						<!-- <div class="leftSide"><?php echo lang('lbl_city', 'city'); ?> : </div>
 						<div class="rightSide"><?php echo $cityArray[$profileDetail->city]; ?></div>
 					</div>
-					<div>
+					<div> -->
 						<!-- state -->
-						<div class="leftSide"><?php echo lang('lbl_state', 'state'); ?> : </div>
+						<!-- <div class="leftSide"><?php echo lang('lbl_state', 'state'); ?> : </div>
 						<div class="rightSide"><?php echo $stateArray[$profileDetail->state]; ?></div>
 					</div>
-					<div>
+					<div> -->
 						<!-- country -->
-						<div class="leftSide"><?php echo lang('lbl_country', 'country'); ?> : </div>
+						<!-- <div class="leftSide"><?php echo lang('lbl_country', 'country'); ?> : </div>
 						<div class="rightSide"><?php echo $countryArray[$profileDetail->country]; ?></div>
-					</div>
+					</div> -->
 					<div>
 						<!-- pincode -->
 						<div class="leftSide"><?php echo lang('lbl_pincode', 'pincode'); ?> : </div>
