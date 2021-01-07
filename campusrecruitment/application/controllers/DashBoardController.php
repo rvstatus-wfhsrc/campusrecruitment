@@ -31,7 +31,7 @@ class DashBoardController extends CI_Controller {
 
   /**
    * This companyDashBoard method are used to call the company dash board screen
-   * @return to view [ company/dashBoard/index ]
+   * @return to view [ company/dashboard/index ]
    * @author kulasekaran.
    *
    */
@@ -43,7 +43,7 @@ class DashBoardController extends CI_Controller {
     $data['maxJobAppliedDate'] = $this->DashBoardModel->maxJobAppliedDate();
     $data['totalFailResult'] = $this->DashBoardModel->totalFailResult();
     $data['totalJobCancelled'] = $this->DashBoardModel->totalJobCancelled();
-    $this->layouts->view('company/dashBoard/index',$data);
+    $this->layouts->view('company/dashboard/index',$data);
   }
 
   /**
@@ -113,7 +113,7 @@ class DashBoardController extends CI_Controller {
 
   /**
    * This adminDashBoard method are used to call the admin dash board screen
-   * @return to view [ admin/dashBoard/index ]
+   * @return to view [ admin/dashboard/index ]
    * @author kulasekaran.
    *
    */
@@ -125,7 +125,7 @@ class DashBoardController extends CI_Controller {
     $data['allJobFailResult'] = $this->DashBoardModel->allJobFailResult();
     $data['allCompanyJobCancelled'] = $this->DashBoardModel->allCompanyJobCancelled();
     $data['maxAllJobAppliedDate'] = $this->DashBoardModel->maxAllJobAppliedDate();
-    $this->layouts->view('admin/dashBoard/index',$data);
+    $this->layouts->view('admin/dashboard/index',$data);
   }
 
   /**
