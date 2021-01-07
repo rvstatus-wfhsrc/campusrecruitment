@@ -195,14 +195,14 @@
                                     <?php echo lang('lbl_profile'); ?>
                                 </a>
                                 <div class="sb-sidenav-menu-heading">Education</div>
-                                <a class="nav-link <?php echo ($this->uri->segment(2)=='jobSeekerQualificationDetail' || $this->uri->segment(2)=='jobSeekerQualificationAdd' || $this->uri->segment(2)=='jobSeekerQualificationEdit')?'active':'collapsed'; ?>" data-toggle="collapse" data-target="#collapseQualification" aria-expanded="false" aria-controls="collapseLayouts">
+                                <a class="nav-link <?php echo ($this->uri->segment(2)=='qualificationDetail' || $this->uri->segment(2)=='qualificationAdd' || $this->uri->segment(2)=='qualificationEdit')?'active':'collapsed'; ?>" data-toggle="collapse" data-target="#collapseQualification" aria-expanded="false" aria-controls="collapseLayouts">
                                     <div class="sb-nav-link-icon"><i class="fa fa-mortar-board"></i></div>
                                     <?php echo lang('lbl_qualification'); ?>
                                     <div class="sb-sidenav-collapse-arrow"><i class="fa fa-angle-down"></i></div>
                                 </a>
-                                <div class="collapse <?php echo ($this->uri->segment(2)=='jobSeekerQualificationDetail' || $this->uri->segment(2)=='jobSeekerQualificationAdd' || $this->uri->segment(2)=='jobSeekerQualificationEdit')?'show':''; ?>" id="collapseQualification" aria-labelledby="headingOne" data-parent="#sidenavAccordion">
+                                <div class="collapse <?php echo ($this->uri->segment(2)=='qualificationDetail' || $this->uri->segment(2)=='qualificationAdd' || $this->uri->segment(2)=='qualificationEdit')?'show':''; ?>" id="collapseQualification" aria-labelledby="headingOne" data-parent="#sidenavAccordion">
                                     <nav class="sb-sidenav-menu-nested nav">
-                                        <a class="nav-link <?php echo ($this->uri->segment(2)=='jobSeekerQualificationDetail')?'active':''; ?>" href="<?php echo site_url('jobSeekerController/jobSeekerQualificationDetail') ?>"><?php echo lang('lbl_detail'); ?></a>
+                                        <a class="nav-link <?php echo ($this->uri->segment(2)=='qualificationDetail')?'active':''; ?>" href="<?php echo site_url('jobSeekerController/qualificationDetail') ?>"><?php echo lang('lbl_detail'); ?></a>
                                     </nav>
                                 </div>
                                 <div class="sb-sidenav-menu-heading">Interface</div>

@@ -43,10 +43,10 @@
         <div class="row">
             <div class="col-xl-12">
                 <div class="container-fluid">
-                    <a class="btn btn-success mb-1" href="<?php echo site_url('JobSeekerController/jobSeekerQualificationAdd') ?>">
+                    <a class="btn btn-success mb-1" href="<?php echo site_url('JobSeekerController/qualificationAdd') ?>">
                         <i class="fa fa-btn fa-plus"></i><?php echo lang('lbl_qualificationAdd'); ?>
                     </a>
-                    <?php echo form_open('JobSeekerController/jobSeekerQualificationEdit',['method' => 'POST','id' => 'detailForm','name' => 'detailForm']); ?>
+                    <?php echo form_open('JobSeekerController/qualificationEdit',['method' => 'POST','id' => 'detailForm','name' => 'detailForm']); ?>
                         <input type="hidden" id="baseUrl" value="<?php echo base_url(); ?>">
                         <input type="hidden" id="hiddenJobSeekerQualificationId" name="hiddenJobSeekerQualificationId">
                         <?php if ($this->session->userdata('flag') != 3) { ?>

@@ -213,12 +213,12 @@ class JobSeekerModel extends CI_Model {
 	}
 
 	/**
-	 * This jobSeekerQualificationAdd method are used to inserts the form data into cmt_qualification_details table
+	 * This qualificationAdd method are used to inserts the form data into cmt_qualification_details table
 	 * @return the jobSeekerQualificationAddStatus with true or false value to controller according to database results
 	 * @author kulasekaran.
 	 *
 	 */
-	function jobSeekerQualificationAdd() {
+	function qualificationAdd() {
 		$jobSeekerUserName = $this->session->userdata('userName');
 		$jobSeekerQualificationAddData = array(
 			'jobSeekerId' => $jobSeekerUserName,
@@ -242,12 +242,12 @@ class JobSeekerModel extends CI_Model {
 	}
 
 	/**
-	 * This jobSeekerQualificationDetail method are used to retrieve the qualification related data from cmt_qualification_details table
+	 * This qualificationDetail method are used to retrieve the qualification related data from cmt_qualification_details table
 	 * @return the qualificationDetail array to controller
 	 * @author kulasekaran.
 	 *
 	 */
-	function jobSeekerQualificationDetail() {
+	function qualificationDetail() {
 		$this->db->select(
 					'skill.skillName as skill,
 					user.name as name,
@@ -276,17 +276,17 @@ class JobSeekerModel extends CI_Model {
 		$this->db->where(array('qual.jobSeekerId' => $jobSeekerUserName));
 		$this->db->where(array('qual.delFlag' => 0));
 		$this->db->order_by('qual.created_date_time', 'DESC');
-		$jobSeekerQualificationDetail = $this->db->get();
-		return $jobSeekerQualificationDetail->result();
+		$qualificationDetail = $this->db->get();
+		return $qualificationDetail->result();
 	}
 
 	/**
-	 * This jobSeekerQualificationEdit method are used to get the one row data from cmt_qualification_details table
-	 * @return to the jobSeekerQualificationEdit array to controller
+	 * This qualificationEdit method are used to get the one row data from cmt_qualification_details table
+	 * @return to the qualificationEdit array to controller
 	 * @author kulasekaran.
 	 *
 	 */
-	function jobSeekerQualificationEdit() {
+	function qualificationEdit() {
 		$id = $this->input->post('hiddenJobSeekerQualificationId');
 		$this->db->select(
 							'id,
@@ -304,8 +304,8 @@ class JobSeekerModel extends CI_Model {
 							extraSkill'
 						);
 		$this->db->where('id',$id);
-		$jobSeekerQualificationEdit = $this->db->get('cmt_qualification_details');
-		return $jobSeekerQualificationEdit->result()[0];
+		$qualificationEdit = $this->db->get('cmt_qualification_details');
+		return $qualificationEdit->result()[0];
 	}
 
 	/**

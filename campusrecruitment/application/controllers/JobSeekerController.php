@@ -169,29 +169,29 @@ class JobSeekerController extends CI_Controller {
 	}
 
 	/**
-	 * This jobSeekerQualificationDetail method are used to get the qualification detail from database for specific job seeker
+	 * This qualificationDetail method are used to get the qualification detail from database for specific job seeker
 	 * @return to view[jobSeeker/qualification/detail]
 	 * @author kulasekaran.
 	 *
 	 */
-	public function jobSeekerQualificationDetail() {
+	public function qualificationDetail() {
 		$data['qualificationArray'] = $this->CommonModel->qualification();
 		$data['specificationArray'] = $this->specificationArray;
 		$data['yearOfPassingArray'] = $this->CommonModel->getYear();
 		$data['monthOfPassingArray'] = $this->monthOfPassingArray;
 		$data['branchArray'] = $this->CommonModel->department();
 		$data['universityArray'] = $this->CommonModel->university();
-		$data['qualificationDetail'] = $this->JobSeekerModel->jobSeekerQualificationDetail();
+		$data['qualificationDetail'] = $this->JobSeekerModel->qualificationDetail();
 		$this->layouts->view('jobSeeker/qualification/detail',$data);
 	}
 
 	/**
-	 * This jobSeekerQualificationAdd method are used to display the qualification add screen
+	 * This qualificationAdd method are used to display the qualification add screen
 	 * @return to view[jobSeeker/qualification/addEdit] 
 	 * @author kulasekaran.
 	 *
 	 */
-	public function jobSeekerQualificationAdd() {
+	public function qualificationAdd() {
 		$data['skillArray'] = $this->CommonModel->skill();
 		$data['qualificationArray'] = $this->CommonModel->qualification();
 		$data['specificationArray'] = $this->specificationArray;
@@ -222,12 +222,12 @@ class JobSeekerController extends CI_Controller {
 
 	/**
 	 * This jobSeekerQualificationAddForm method are used to get qualification data from form and pass it to model for the specfic job seeker
-	 * @return the redirect to the JobSeekerController/jobSeekerQualificationDetail
+	 * @return the redirect to the JobSeekerController/qualificationDetail
 	 * @author kulasekaran.
 	 *
 	 */
 	public function jobSeekerQualificationAddForm() {
-		$jobSeekerQualificationAddStatus = $this->JobSeekerModel->jobSeekerQualificationAdd();
+		$jobSeekerQualificationAddStatus = $this->JobSeekerModel->qualificationAdd();
 		if($jobSeekerQualificationAddStatus){
 			$this->session->set_flashdata([
 				'message'  => 'Job Seeker Qualification Details Add Successfully',
@@ -239,18 +239,18 @@ class JobSeekerController extends CI_Controller {
 				'type' => 'danger'
 			]);
 		}
-		redirect('JobSeekerController/jobSeekerQualificationDetail');
+		redirect('JobSeekerController/qualificationDetail');
 	}
 
 	/**
-	 * This jobSeekerQualificationEdit method are used to get the data from model for the specfic job seeker's qualification details to edit
+	 * This qualificationEdit method are used to get the data from model for the specfic job seeker's qualification details to edit
 	 * @return to view screen [ jobSeeker/qualification/addEdit ]
 	 * @author kulasekaran.
 	 *
 	 */
-	public function jobSeekerQualificationEdit() {
+	public function qualificationEdit() {
 		if($this->input->post('hiddenJobSeekerQualificationId') == null) {
-			redirect('JobSeekerController/jobSeekerQualificationDetail');
+			redirect('JobSeekerController/qualificationDetail');
 		}
 		$data['skillArray'] = $this->CommonModel->skill();
 		$data['qualificationArray'] = $this->CommonModel->qualification();
@@ -259,13 +259,13 @@ class JobSeekerController extends CI_Controller {
 		$data['monthOfPassingArray'] = $this->monthOfPassingArray;
 		$data['branchArray'] = $this->CommonModel->department();
 		$data['universityArray'] = $this->CommonModel->university();
-		$data['qualificationEdit'] = $this->JobSeekerModel->jobSeekerQualificationEdit();
+		$data['qualificationEdit'] = $this->JobSeekerModel->qualificationEdit();
 		$this->layouts->view('jobSeeker/qualification/addEdit',$data);
 	}
 
 	/**
 	 * This jobSeekerQualificationUpdate method are used to get the data from form and pass it to model for update process
-	 * @return the redirect to JobSeekerController/jobSeekerQualificationDetail method 
+	 * @return the redirect to JobSeekerController/qualificationDetail method 
 	 * @author kulasekaran.
 	 *
 	 */
@@ -278,7 +278,7 @@ class JobSeekerController extends CI_Controller {
 					'type' => 'success'
 				)
 			);
-			redirect('JobSeekerController/jobSeekerQualificationDetail');
+			redirect('JobSeekerController/qualificationDetail');
 		} else {
 			$this->session->set_flashdata(
 				array(
@@ -286,7 +286,7 @@ class JobSeekerController extends CI_Controller {
 					'type' => 'danger'
 				)
 			);
-			redirect('JobSeekerController/jobSeekerQualificationDetail');
+			redirect('JobSeekerController/qualificationDetail');
 		}
 	}
 
