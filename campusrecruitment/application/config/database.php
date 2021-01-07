@@ -74,14 +74,14 @@ $active_group = 'default';
 $query_builder = TRUE;
 
 $db['default'] = array(
-	'dsn'	=> '',
+	'dsn'	=> 'mysql:host=localhost; dbname=campusrecruitment; charset=utf8;',
 	'hostname' => 'localhost',
 	// 'username' => '',
 	'username' => 'root',
 	'password' => '',
 	// 'database' => '',
 	'database' => 'campusrecruitment',
-	'dbdriver' => 'mysqli',
+	'dbdriver' => 'pdo',
 	'dbprefix' => '',
 	'pconnect' => FALSE,
 	'db_debug' => (ENVIRONMENT !== 'production'),
