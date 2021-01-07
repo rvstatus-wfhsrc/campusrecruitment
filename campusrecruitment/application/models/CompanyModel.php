@@ -91,11 +91,9 @@ class CompanyModel extends CI_Model {
 		$lastAddCompanyUser = $this->CompanyModel->lastCompanyUserName();
         $label = 'CY';
         $lastCompanyInArray = $lastAddCompanyUser->result_array();
-        $lastCompanyUserName = $lastCompanyInArray[0];
-        $lastCompanyID = $lastCompanyUserName['userName'];
         $companyCount = 1;
-	    if (isset($lastCompanyID) && $lastCompanyID != "") {
-	        $companyCount = substr($lastCompanyID, -4);
+	    if (isset($lastCompanyInArray[0]['userName']) && $lastCompanyInArray[0]['userName'] != "") {
+	        $companyCount = substr($lastCompanyInArray[0]['userName'], -4);
 	       	$companyCount = $companyCount + 1;
 	    }
 	    $padCount = str_pad($companyCount, 4, '0', STR_PAD_LEFT);
