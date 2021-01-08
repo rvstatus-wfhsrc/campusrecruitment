@@ -4,7 +4,7 @@ $lang['required'] = '{field}フィールドは必須です。';
 $lang['min_length'] = '{field}は{param}文字以上があります。';
 $lang['credentials_do_not_match'] = 'These credentials do not match our records.';
 $lang['valid_email'] = 'The {field} is invalid.';
-$lang['max_length'] = 'The {field} must be less than {param} characters.';
+$lang['max_length'] = 'The {field} must be less than {param} letters.';
 
 
 $lang['alphabetic'] = 'Please enter only alphabetical letter.';

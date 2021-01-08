@@ -58,7 +58,7 @@
                                                 'id' => 'email',
                                                 'name' => 'email',
                                                 'placeholder' => 'Enter E-Mail Address',
-                                                'class' => 'input_box col-md-12 form-control w43 h-25',
+                                                'class' => 'input_box col-md-12 form-control w40 h-25',
                                                 'value' => set_value('email',$profileEdit->email)
                                             );
                                             echo form_input($data);
