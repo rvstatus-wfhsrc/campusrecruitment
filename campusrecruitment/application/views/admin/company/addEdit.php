@@ -101,7 +101,7 @@
                                                 'id' => 'contact',
                                                 'name' => 'contact',
                                                 'placeholder' => 'Enter Contact',
-                                                'class' => 'input_box col-md-12 form-control w30 h-25',
+                                                'class' => 'input_box col-md-12 form-control w28 h-25',
                                                 'value' => isset($companyEdit) ? set_value("contact", $companyEdit->contact) : set_value("contact")
                                             );
                                             echo form_input($data);
