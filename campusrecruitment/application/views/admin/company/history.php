@@ -127,7 +127,7 @@
                                             <td class="tac vam">
                                                 <a href="javascript:;" onclick="fnCompanyDetail(<?php echo $history->id;?>)" class="m3">
                                                     <img style="width: 20px;"
-                                                    src="<?php echo base_url(); ?>assets/images/details.png" title="details view">
+                                                    src="<?php echo base_url(); ?>assets/images/details.png" title="<?php echo lang('lbl_detailIconTitle'); ?>">
                                                 </a>
                                                 <?php if($history->delFlag == 0) { ?>
                                                     <a href="javascript:;" onclick="fnCompanyActiveOrDeactive(<?php echo $history->id;?> , <?php echo $history->delFlag;?>)"><?php echo lang('lbl_active'); ?></a>

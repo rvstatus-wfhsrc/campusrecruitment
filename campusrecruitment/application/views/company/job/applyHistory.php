@@ -158,7 +158,7 @@
                                             <td class="tac vam">
                                                 <a href="javascript:;" onclick="fnJobApplyDetail(<?php echo $history->id;?>)" class="m3">
                                                     <img class="w20" 
-                                                        src="<?php echo base_url(); ?>assets/images/details.png" title="details view">
+                                                        src="<?php echo base_url(); ?>assets/images/details.png" title="<?php echo lang('lbl_detailIconTitle'); ?>">
                                                 </a>
                                                 <?php if ($history->delFlag == 0 && $this->session->userdata('flag') == 3) { ?>
                                                     <?php if($history->jobResultId == null) { ?>

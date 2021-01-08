@@ -4,7 +4,7 @@ $lang['required'] = '{field}フィールドは必須です。';
 $lang['min_length'] = '{field}は{param}文字以上があります。';
 $lang['credentials_do_not_match'] = 'These credentials do not match our records.';
 $lang['valid_email'] = 'The {field} is invalid.';
-$lang['max_length'] = 'The {field} may not be greater than 50 characters.';
+$lang['max_length'] = 'The {field} must be less than {param} characters.';
 
 
 $lang['alphabetic'] = 'Please enter only alphabetical letter.';
@@ -26,6 +26,7 @@ $lang['working_hours'] = 'The {field} is invalid format.';
 $lang['after_today'] = 'The {field} must be a date after today.';
 $lang['greater_than'] = 'The {field} must be greater than {param}.';
 $lang['less_than_equal_to'] = 'The {field} must be less than {param}.';
+$lang['greater_than_equal_to'] = 'The {field} must be greater than equal to {param}.';
 
 $lang['jobSeeker_email_existing_check'] = 'The {field} already exists.';
 

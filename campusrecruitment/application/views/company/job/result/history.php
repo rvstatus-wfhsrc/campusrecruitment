@@ -191,7 +191,7 @@
                                                 <td class="tac vam">
                                                     <a href="javascript:;" onclick="fnJobResultDetail(<?php echo $history->id;?>)" class="m3">
                                                         <img class="w20" 
-                                                            src="<?php echo base_url(); ?>assets/images/details.png" title="details view">
+                                                            src="<?php echo base_url(); ?>assets/images/details.png" title="<?php echo lang('lbl_detailIconTitle'); ?>">
                                                     </a>
                                                 </td>
                                             <?php } ?>

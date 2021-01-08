@@ -155,7 +155,7 @@
                                             <td class="tac vam">
                                                 <a href="javascript:;" onclick="fnJobDetail(<?php echo $list->id;?>)" class="m3">
                                                     <img class="w20" 
-                                                        src="<?php echo base_url(); ?>assets/images/details.png" title="details view">
+                                                        src="<?php echo base_url(); ?>assets/images/details.png" title="<?php echo lang('lbl_detailIconTitle'); ?>">
                                                 </a>
                                                 <?php if ($this->session->userdata('flag') == 2) { ?>
                                                     <?php if($list->delFlag == 0) { ?>

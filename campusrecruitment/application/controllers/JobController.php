@@ -334,6 +334,9 @@ class JobController extends CI_Controller {
 	 *
 	 */
 	public function getJobAppliedDetail() {
+		if($this->input->post('hiddenJobId') == null){
+			redirect('JobController/jobApplyHistory');
+		}
 		$data['jobResultAdd'] = $this->JobModel->getJobAppliedDetail();
 		$this->layouts->view('company/job/result/addEdit', $data);
 	}

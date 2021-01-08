@@ -487,6 +487,7 @@ class JobModel extends CI_Model {
 					user.name AS jobSeekerName,
 					user.gender,
 					user.contact AS jobSeekerContact,
+					jrd.id as jobResultId,
 					jrd.applyJobId'
 				)
 			->from('cmt_apply_job_details as ajd')
