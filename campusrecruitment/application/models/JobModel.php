@@ -221,7 +221,7 @@ class JobModel extends CI_Model {
 					->join('cmt_m_country as country','country.countryId = jd.jobLocation','left')
 					->join('cmt_m_min_qualification as minqual','minqual.minQualificationId = jd.minQualification','left')
 					->join('cmt_company as cmpy','cmpy.userName = jd.companyId','left')
-					->join('cmt_apply_job_details as ajd','ajd.jobId = jd.id','left');
+					->join('cmt_apply_job_details as ajd','ajd.jobId = jd.id AND ajd.jobSeekerId = "'.$this->session->userdata("userName").'"','left');
 
 		$this->db->where(array('jd.id' => $id));
 		$jobDetail = $this->db->get();
@@ -319,7 +319,7 @@ class JobModel extends CI_Model {
 			->join('cmt_m_role as role','role.roleId = jd.role','left')
 			->join('cmt_m_skill as skill','skill.skillId = jd.requiredSkill','left')
 			->join('cmt_m_country as country','country.countryId = jd.jobLocation','left')
-			->join('cmt_apply_job_details as ajd','ajd.jobId = jd.id','left');
+			->join('cmt_apply_job_details as ajd','ajd.jobId = jd.id AND ajd.jobSeekerId = "'.$this->session->userdata("userName").'"','left');
 
 			// search process
 			$hiddenSearch = $this->input->post('hiddenSearch');
