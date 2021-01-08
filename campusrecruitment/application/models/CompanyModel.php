@@ -48,7 +48,7 @@ class CompanyModel extends CI_Model {
 		} else if ($sortVal == 3) {
 			$this->db->order_by('entryDate', $sortOptn);
 		} else {
-			$this->db->order_by('companyName', 'ASC');
+			$this->db->order_by('companyName', 'DESC');
 		}
 		// filter process
 		if ($filterVal == 2) {
@@ -237,7 +237,7 @@ class CompanyModel extends CI_Model {
 		} else if ($sortVal == 3) {
 			$this->db->order_by('entryDate', $sortOptn);
 		} else {
-			$this->db->order_by('companyName', 'ASC');
+			$this->db->order_by('companyName', 'DESC');
 		}
 		// filter process
 		$filterVal = $this->input->post('filterVal');
