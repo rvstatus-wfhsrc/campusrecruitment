@@ -86,7 +86,7 @@
 						<div style="width: 100%">
 							<?php if(!empty($profileDetail->image)) { ?>
 								<div class="image">
-									<img src="<?php echo 'data:image/jpg;base64,'.base64_encode($profileDetail->image); ?>" >
+									<img src="<?php echo base_url().$profileDetail->image; ?>" >
 									<div class="tac"><a href="javascript:;" onclick="fnRemoveImage()" title="Remove Image" ><i class="fa fa-trash"></i></a></div>
 								</div>
 							<?php } ?>

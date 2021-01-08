@@ -89,7 +89,7 @@
 						<div style="width: 100%">
 							<?php if(!empty($jobSeekerDetail->image)) { ?>
 								<div class="image">
-									<img src="<?php echo 'data:image/jpg;base64,'.base64_encode($jobSeekerDetail->image); ?>" >
+									<img src="<?php echo base_url().$jobSeekerDetail->image; ?>" >
 									<div class="tac">
 										<a href="javascript:;" onclick="fnRemoveImage()" title="Remove Image" >
 											<i class="fa fa-trash"></i>

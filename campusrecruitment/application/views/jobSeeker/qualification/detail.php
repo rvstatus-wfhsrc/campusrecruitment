@@ -83,7 +83,7 @@
                                                 <div class="ml50">
                                                     <div><span class='teal'><?php echo lang("lbl_branch")." : ";?></span><?php echo $detail->departmentName; ?></div>
                                                     <div><span class='teal'><?php echo lang("lbl_university")." : ";?></span><?php echo $detail->universityName; ?></div>
-                                                    <div><span class='teal'><?php echo lang("lbl_cgpa")." : ";?></span><?php echo $detail->CGPA; ?>%</div>
+                                                    <div><span class='teal'><?php echo lang("lbl_cgpa")." : ";?></span><?php echo $detail->CGPA; ?></div>
                                                     <div><span class='teal'><?php echo lang("lbl_extraSkill")." : ";?></span><?php echo ($detail->extraSkill != null) ? $detail->extraSkill : "Nil"; ?></div>
                                                 </div>
                                             </td>

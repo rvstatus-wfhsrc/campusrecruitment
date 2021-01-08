@@ -36,16 +36,21 @@ class AdminModel extends CI_Model {
 
 	//update the user profile data
 	function profileUpdate($userName,$profileUpdateData) {
-		// Get the status
 		$image = $_FILES['image']['tmp_name'];
-		$blob = null;
+		$file_path = null;
 		$updateUser = null;
 		$this->db->trans_begin();
 		try {
-			// for further use
 			if($image != null) {
-				$blob = file_get_contents($_FILES['image']['tmp_name']);
-				$imageData = array('image' => $blob);
+				$upload_path = 'assets/images/upload/admin/';
+				$file_name = $_FILES['image']['name'];
+				$ext = pathinfo($file_name, PATHINFO_EXTENSION);
+				if (!file_exists($upload_path)) {
+					mkdir($upload_path, 0777, true);
+				}
+				$file_path = $upload_path.$userName.".".$ext;
+				move_uploaded_file($_FILES['image']['tmp_name'],$file_path);
+				$imageData = array('image' => $file_path);
 				$this->db->where('userName', $userName);
 				$imageUpdate = $this->db->update('cmt_users', $imageData);
 			}

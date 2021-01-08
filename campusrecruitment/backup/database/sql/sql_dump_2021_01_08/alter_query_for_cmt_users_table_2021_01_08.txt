@@ -1,0 +1,1 @@
+ALTER TABLE cmt_users MODIFY COLUMN image varchar(100); 

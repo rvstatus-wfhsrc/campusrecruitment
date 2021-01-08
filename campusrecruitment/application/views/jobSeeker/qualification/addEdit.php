@@ -51,8 +51,8 @@
                                             $data= array(
                                                 'id' => 'tenthMark',
                                                 'name' => 'tenthMark',
-                                                'placeholder' => 'Tenth Percentage',
-                                                'class' => 'input_box col-md-12 form-control w37 h-25 tenthMark',
+                                                'placeholder' => '10th Percentage',
+                                                'class' => 'input_box col-md-12 form-control w30 h-25 tenthMark',
                                                 'value' => isset($qualificationEdit) ? set_value("tenthMark", $qualificationEdit->tenthMark) : set_value("tenthMark")
                                             );
                                             echo form_input($data);
@@ -68,8 +68,8 @@
                                             $data= array(
                                                 'id' => 'twelvethMark',
                                                 'name' => 'twelvethMark',
-                                                'placeholder' => 'Twelveth Percentage',
-                                                'class' => 'input_box col-md-12 form-control w37 h-25 twelvethMark',
+                                                'placeholder' => '12th Percentage',
+                                                'class' => 'input_box col-md-12 form-control w30 h-25 twelvethMark',
                                                 'value' => isset($qualificationEdit) ? set_value("twelvethMark", $qualificationEdit->twelvethMark) : set_value("twelvethMark")
                                             );
                                             echo form_input($data);

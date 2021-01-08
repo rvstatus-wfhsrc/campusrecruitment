@@ -32,9 +32,7 @@ class JobSeekerModel extends CI_Model {
 	 */
 	function jobSeekerAdd() {
 		$image = $_FILES['image']['tmp_name'];
-		$blob = null;
-		$addJobSeeker = null;
-		$imageData = array();
+		$file_path = null;
 		
 		// create job seeker userName
 		$lastAddJobSeekerUser = $this->JobSeekerModel->lastJobSeekerUserName();
@@ -56,10 +54,15 @@ class JobSeekerModel extends CI_Model {
 		
 		$this->db->trans_begin();
 		try {
-			// $image not null convert the image data into blob in array
 			if($image != null) {
-				$blob = file_get_contents($_FILES['image']['tmp_name']);
-				$imageData = array('image' => $blob);
+				$upload_path = 'assets/images/upload/jobseeker/';
+				$file_name = $_FILES['image']['name'];
+				$ext = pathinfo($file_name, PATHINFO_EXTENSION);
+				if (!file_exists($upload_path)) {
+					mkdir($upload_path, 0777, true);
+				}
+				$file_path = $upload_path.$jobSeekerUserName.".".$ext;
+				move_uploaded_file($_FILES['image']['tmp_name'],$file_path);
 			}
 			$jobSeekerAddData = array(
 				'name' => trim($this->input->post('name')),
@@ -73,11 +76,11 @@ class JobSeekerModel extends CI_Model {
 				'contact' => trim($this->input->post('contact')),
 				'password' => md5($this->input->post('password')),
 				'userName' => $jobSeekerUserName,
+				'image' => $file_path,
 				'created_by' => $jobSeekerUserName,
 				'flag' => 3
 			);
-			$jobSeekerAddMergeData = array_merge($jobSeekerAddData, $imageData);
-			$jobSeekerAddStatus = $this->db->insert('cmt_users', $jobSeekerAddMergeData);
+			$jobSeekerAddStatus = $this->db->insert('cmt_users', $jobSeekerAddData);
 			$this->db->trans_commit();
 			if($jobSeekerAddStatus == "1") { 
 				$message = "Dear ".$this->input->post('name')."<br>Congratulations..!<br>Your Details has been successfully Registered in our webSite.<br>Please update other details in Job Seeker Domain.<br>Path : ".site_url('LoginController/jobSeekerLogin')."<br>Your Login Details :<br>User Name : ".$jobSeekerUserName."<br>Password : ".$this->input->post('password')."<br><br><br>Thank And Regards,<br>Admin<br><br>Note : Please Dont reply to this mail.";
@@ -202,14 +205,20 @@ class JobSeekerModel extends CI_Model {
 	 */
 	function jobSeekerUpdate() {
 		$image = $_FILES['image']['tmp_name'];
-		$blob = null;
 		$updateUser = false;
 		$userName = $this->session->userdata('userName');
 		$this->db->trans_begin();
 		try {
 			if($image != null) {
-				$blob = file_get_contents($_FILES['image']['tmp_name']);
-				$imageData = array('image' => $blob);
+				$upload_path = 'assets/images/upload/jobseeker/';
+				$file_name = $_FILES['image']['name'];
+				$ext = pathinfo($file_name, PATHINFO_EXTENSION);
+				if (!file_exists($upload_path)) {
+					mkdir($upload_path, 0777, true);
+				}
+				$file_path = $upload_path.$userName.".".$ext;
+				move_uploaded_file($_FILES['image']['tmp_name'],$file_path);
+				$imageData = array('image' => $file_path);
 				$this->db->where('userName', $userName);
 				$imageUpdate = $this->db->update('cmt_users', $imageData);
 			}

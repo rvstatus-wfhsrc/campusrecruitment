@@ -25,7 +25,7 @@ $lang['extra_skill'] = 'The {field} is invalid format.';
 $lang['working_hours'] = 'The {field} is invalid format.';
 $lang['after_today'] = 'The {field} must be a date after today.';
 $lang['greater_than'] = 'The {field} must be greater than {param}.';
-$lang['less_than_equal_to'] = 'The {field} must be less than {param}.';
+$lang['less_than_equal_to'] = 'The {field} must be less than equal to {param}.';
 $lang['greater_than_equal_to'] = 'The {field} must be greater than equal to {param}.';
 
 $lang['jobSeeker_email_existing_check'] = 'The {field} already exists.';
