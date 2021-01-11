@@ -1,5 +1,9 @@
 <html>
-	<head></head>
+	<head>
+		<link rel="stylesheet" type="text/css" href="../webroot/css/login/login.css">
+		<script type="text/javascript" src="../webroot/js/jquery.min.js" ></script>
+		<script type="text/javascript" src="../webroot/js/login/login.js" ></script>
+	</head>
 	<body>
 		<form action="" method="POST">
 			<label>Username</label>
