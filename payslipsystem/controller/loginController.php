@@ -2,7 +2,7 @@
 	$object = new loginController();
 
 	/**
-	 * Login Controller
+	 * login Controller
 	 *
 	 * This Controller are used to perform the login related process
 	 * 
@@ -12,7 +12,7 @@
 	class loginController {
 		
 		/**
-		 * Login Controller __construct
+		 * login Controller __construct
 		 *
 		 * This __construct are used to call the methods based on screen name
 		 * 
