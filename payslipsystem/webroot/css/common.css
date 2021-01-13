@@ -1,0 +1,69 @@
+/* width design class start*/
+.autowidth {
+	width: auto;
+}
+/* width design class end*/
+
+/* height class start */
+.h34 {
+	height: 34px !important;
+}
+/* height class end */
+
+/* error or validation message class start */
+.error {
+    display: inline-block;
+    font-size: 13px;
+    color: #9C0000;
+    line-height: 0px !important;
+}
+/* error or validation message class end */
+
+/* text align design class start */
+.tac {
+	text-align: center;
+}
+/* text align design class end */
+
+/* no data found color class start */
+.noDataFoundClr {
+	color: red;
+}
+/* no data found color class end */
+
+/* table design start */
+/*setting table head background color and value center*/
+.thead {
+    text-align: center;
+    background: #7daedf;
+}
+/*setting the background color for odd row*/
+.odd {
+    background: #ffffff ;
+}
+
+/*setting the background color for Even row*/
+.even {
+    background: #ddeeff;
+}
+
+/* setting the table position and font values class start */
+.table-position {
+    font-family: 'Arial', sans-serif;
+    font-size: 15px;
+}
+/* setting the table position and font values class end */
+/*table design end*/
+
+/* search button class start */
+.searchBtn {
+    float: right;
+    width: 27%;        
+}
+/* search button class end */
+
+/* display design class start */
+.inb {
+	display: inline-block !important;
+}
+/* display design class end */

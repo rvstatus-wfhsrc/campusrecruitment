@@ -6,6 +6,7 @@
 		<title>Pay Slip | Login</title>
 		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 		<link rel="stylesheet" type="text/css" href="../webroot/css/login/login.css">
+		<link rel="stylesheet" type="text/css" href="../webroot/css/common.css">
 	</head>
 	<body class="my-login-page">
 		<section class="h-100">
@@ -24,13 +25,13 @@
 									<div class="form-group">
 										<label for="userName">Username</label>
 										<input id="userName" type="text" class="form-control" name="userName" pattern=".{0}|.{5}" value="" required autofocus>
-										<p id="userNameValidationMsg"></p>
+										<p class="error" id="userNameValidationMsg"></p>
 									</div>
 									<!-- password -->
 									<div class="form-group">
 										<label for="password">Password</label>
 										<input id="password" type="password" class="form-control" name="password" pattern=".{0}|.{5}" required data-eye>
-										<p id="passwordValidationMsg"></p>
+										<p class="error" id="passwordValidationMsg"></p>
 									</div>
 									<!-- login button -->
 									<div class="form-group m-0">
