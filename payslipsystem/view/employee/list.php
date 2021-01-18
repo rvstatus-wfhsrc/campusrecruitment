@@ -50,24 +50,33 @@
 			<form action="../controller/employeeController.php" method="POST" id="listForm" name="listForm">
 				<input type="hidden" id="screenName" name="screenName">
 				<input type="hidden" id="hiddenSearch" name="hiddenSearch" value="<?php echo $employeeListArray['search']?>">
+				<input type="hidden" id="pageno" name="pageno" value="<?php echo $pageno; ?>">
 				<div id="content" class="p-4 p-md-5 pt-5">
 					<h2 class="mb-4">Employee List</h2>
-					<!-- sorting process -->
-					<div class="inb float-left">
-						<select name="sortProcess" id="sortProcess" class="form-control autowidth h34 inb mr-2">
-							<option value='1'>Employee Id</option>
-							<option value='2'>Employee Name</option>
-						</select>
-						<input type="hidden" id="sortVal" name="sortVal" value="<?php echo $employeeListArray['sortVal']?>">
-						<input type="hidden" id="sortOptn" name="sortOptn" value="<?php echo $sortOptn; ?>">
-					</div>
-					<!-- searching process -->
-					<div class="input-group searchBtn">
-						<input type="text" id="search" name="search" placeholder="Search Employee Name" class="input_box form-control h34" value="<?php echo $employeeListArray['search']?>">
-						<div class="input-group-append">
-							<a class="btn btn-secondary h34" href="javascript:;" onclick="fnSearch()">
-								<i class="fa fa-search" title="Search"></i>
+					<div class="float-right mb5">
+						<!-- clear search -->
+						<div  class="inb mt-1">
+							<a href="javascript:;" onclick="fnClearSearch()">
+								<img style="width: 25px;" src="../webroot/images/clearsearch.png" title="Clear Search">
 							</a>
+						</div>
+						<!-- sorting process -->
+						<div class="inb">
+							<select name="sortProcess" id="sortProcess" class="form-control autowidth h34 inb mr-2 CMN_sorting <?php echo $sortStyle; ?>">
+								<option value='1'>Employee Id</option>
+								<option value='2'>Employee Name</option>
+							</select>
+							<input type="hidden" id="sortVal" name="sortVal" value="<?php echo $employeeListArray['sortVal']?>">
+							<input type="hidden" id="sortOptn" name="sortOptn" value="<?php echo $sortOptn; ?>">
+						</div>
+						<!-- searching process -->
+						<div class="input-group searchBtn">
+							<input type="text" id="search" name="search" placeholder="Search Employee Id" class="input_box form-control h34" value="<?php echo $employeeListArray['search']?>">
+							<div class="input-group-append">
+								<a class="btn btn-secondary h34" href="javascript:;" onclick="fnSearch()">
+									<i class="fa fa-search" title="Search"></i>
+								</a>
+							</div>
 						</div>
 					</div>
 					<table class="table table-bordered table-position">
@@ -112,18 +121,30 @@
 						<?php } ?>
 					</table>
 					<?php if (isset($employeeListArray)) { ?>
-						<ul class="pagination">
-							<li><a href="?$pageno = 1&screenName=employeeList">First</a></li>
-							<li class="<?php if($pageno <= 1){ echo 'disabled'; } ?>">
-								<a href="<?php if($pageno <= 1){ echo '#'; } else { echo "?pageno=".($pageno - 1); } ?>&screenName=employeeList">Prev</a>
-							</li>
-							<li class="<?php if($pageno >= $totalPages){ echo 'disabled'; } ?>">
-								<a href="<?php if($pageno >= $totalPages){ echo '#'; } else { echo "?pageno=".($pageno + 1); } ?>&screenName=employeeList">Next</a>
-							</li>
-							<li><a href="?pageno=<?php echo $totalPages; ?>&screenName=employeeList">Last</a></li>
-						</ul>
+						<div class="pagination">
+							<div class="<?php if($pageno == 1){ echo 'disabled'; } ?>">
+								<a href="javascript:;" onclick="fnPagination(1)">&laquo;</a>
+							</div>
+							<div class="<?php if($pageno <= 1){ echo 'disabled'; } ?>">
+								<a href="javascript:;" onclick="fnPagination(<?php if($pageno <= 1){ echo '#'; } else { echo ($pageno - 1); } ?>)">Prev</a>
+							</div>
+							<?php
+								$pagLink = "<div>";
+								for ($i=1; $i<=3; $i++) {  
+									$pagLink .= "<a onclick=fnPagination(".$i.") href='javascript:;'>".$i."</a>";  
+								};
+								echo $pagLink . "</div>";
+							?>
+							<div class="<?php if($pageno >= $totalPages){ echo 'disabled'; } ?>">
+								<a href="javascript:;" onclick="fnPagination(<?php if($pageno >= $totalPages){ echo '#'; } else { echo ($pageno + 1); } ?>)" >Next</a>
+							</div>
+							<div>
+								<a href="javascript:;" onclick="fnPagination(<?php echo $totalPages; ?>)">&raquo;</a>
+							</div>
+						</div>
 					<?php } ?>
 				</div>
+			</form>
 		</div>
 		<script type="text/javascript" src="../webroot/js/jquery.min.js" ></script>
 		<script type="text/javascript" src="../webroot/js/popper.js" ></script>

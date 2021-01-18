@@ -23,12 +23,6 @@ class employeeController {
 	function __construct() {
 		if($_REQUEST["screenName"] == "employeeList") {
 			Self::employeeList();
-		} else if($_REQUEST["screenName"] == "sort") {
-			Self::fnsort();
-		} else if ($_REQUEST["screenName"] == "searching") {
-			Self::fnsearching();
-		} else if ($_REQUEST["screenName"] == "filtering") {
-			Self::fnfiltering();
 		}
 	}
 
@@ -40,8 +34,8 @@ class employeeController {
 	 */
 	function employeeList() {
 		$employeeModel = new employeeModel();
-		if (isset($_GET['pageno'])) {
-   			$pageno = $_GET['pageno'];
+		if (isset($_REQUEST['pageno'])) {
+			$pageno = $_REQUEST['pageno'];
 		} else {
 			$pageno = 1;
 		}
@@ -52,33 +46,20 @@ class employeeController {
 		} else {
 			$sortOptn = "DESC";
 		}
-        $sortStyle = "sort_desc";
-        if(isset($sortOptn) && $sortOptn == "ASC") {
-            $sortStyle = "sort_asc";
-        } elseif(isset($sortOptn) && $sortOptn == "DESC") {
-            $sortStyle = "sort_desc";
-        }
+		$sortStyle = "sort_desc";
+		if(isset($sortOptn) && $sortOptn == "ASC") {
+			$sortStyle = "sort_asc";
+		} elseif(isset($sortOptn) && $sortOptn == "DESC") {
+			$sortStyle = "sort_desc";
+		}
 
-        // pagination process
+		// pagination process
 		$resultsPerPage = 5;
 		$startResult = ($pageno - 1) * $resultsPerPage;
 		$numOfResults = $employeeModel->fnGetCount();
 		$totalPages = ceil($numOfResults / $resultsPerPage);
 		$employeeListArray = $employeeModel->employeeList($startResult,$resultsPerPage);
 		require_once '../view/employee/list.php';
-	}
-	function fnsort() {
-		$sorting = $_REQUEST["sort"];
-		$processModelObject = new ProcessModel();
-		$processModelObject->fnSort("$sorting");
-	}
-	function fnsearching() {
-		$processModelObject = new ProcessModel();
-		$processModelObject->fnSearch($_REQUEST["searchValue"]);
-	}
-	function fnfiltering() {
-		$processModelObject = new ProcessModel();
-		$processModelObject->fnfilter($_REQUEST["genderid"],$_REQUEST["genderid1"]);	
 	}
 }
 ?>

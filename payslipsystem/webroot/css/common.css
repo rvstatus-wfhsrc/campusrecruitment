@@ -1,4 +1,4 @@
-/* width design class start*/
+ width design class start*/
 .autowidth {
 	width: auto;
 }
@@ -58,7 +58,7 @@
 /* search button class start */
 .searchBtn {
     float: right;
-    width: 27%;        
+    width: 46%;        
 }
 /* search button class end */
 
@@ -67,3 +67,55 @@
 	display: inline-block !important;
 }
 /* display design class end */
+
+/* margin bottom class start */
+.mb5 {
+    margin-bottom: 5px !important;
+}
+/* margin bottom class end */
+
+/* pagination design class start */
+.pagination {
+    justify-content:center;
+}
+.pagination a {
+    color: black;
+    float: left;
+    padding: 8px 16px;
+    text-decoration: none;
+    transition: background-color .3s;
+    border: 1px solid #ddd;
+}
+.pagination a.active {
+    background-color: #4CAF50;
+    color: white;
+    border: 1px solid #4CAF50;
+}
+.pagination a:hover:not(.active) {
+    background-color: #ddd;
+}
+/* pagination design class end */
+/* sorting arrow class start */
+.CMN_sorting {
+    width: 145px  !important;
+    /*width: 125px  !important;*/
+    /*height: 30px ! important;*/
+    line-height: 14px !important;
+    /*font-size: 12px !important;*/
+    padding: 0px !important;
+    padding-left: 10px !important; 
+    background-repeat: no-repeat; 
+    background-position:right;
+    background-color: white !important;
+    background-position: right; 
+    -webkit-appearance: none !important;
+    -moz-appearance: none !important;
+    appearance: none !important; 
+}
+.sort_asc {
+    background-image:url(../images/upArrow.png) !important;
+}
+.sort_desc {
+    background-image:url(../images/downArrow.png) !important;
+}
+/* sorting arrow class end 

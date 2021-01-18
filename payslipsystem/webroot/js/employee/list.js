@@ -35,3 +35,22 @@ function fnSortProcess() {
 	}
 	$( "#listForm" ).submit();
 }
+
+// clear search process
+function fnClearSearch() {
+	$( "#pageno" ).val(1);
+	$("#sortVal").val(1);
+	$("#sortProcess").val(1);
+	$("#sortOptn").val("DESC");
+	$("#search").val("");
+	$("#hiddenSearch").val("");
+	$( "#screenName" ).val('employeeList');
+	$('#listForm').submit();
+}
+
+// pagination process
+function fnPagination(pageno) {
+	$( "#pageno" ).val(pageno);
+	$( "#screenName" ).val('employeeList');
+	$( "#listForm" ).submit();
+}
