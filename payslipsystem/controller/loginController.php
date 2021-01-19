@@ -1,4 +1,5 @@
 <?php
+	session_start();
 	$object = new loginController();
 
 	/**
@@ -47,6 +48,9 @@
 		 *
 		 */
 		function employeeList() {
+			$_SESSION["userName"] = $_REQUEST['userName'];
+			$_SESSION["flag"] = 1;
+			$_SESSION["logged_in"] = true;
 			require_once '../view/employee/list.php';
 		}
 	}

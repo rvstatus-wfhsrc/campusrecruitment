@@ -47,25 +47,49 @@ class employeeModel {
       $sortVal = $_REQUEST['sortVal'];
     }
     if ($sortVal == 1) {
-      $sort = 'Emp_ID $sortOptn';
+      $sort = 'Emp_ID '.$sortOptn;
     } else if ($sortVal == 2) {
-      $sort = 'FirstName $sortOptn';
+      $sort = 'FirstName '.$sortOptn;
     } else {
       $sort = 'Emp_ID DESC';
     }
 
-		$result = mysql_query("SELECT Emp_ID,FirstName,LastName,Mobile,Emailpersonal FROM emp_mstemployees WHERE Emp_ID LIKE '%$search%' ORDER BY $sort LIMIT $start,$end",$this->con);
-    $getUser = array();
+    // search process
+    $searchSqlQuery = "AND mstemp.Emp_ID LIKE '%$search%'";
+
+    $year = date('Y');
+    if (isset($_REQUEST['year'])) {
+      $year = $_REQUEST['year'];
+    }
+    $month = date('m');
+    if (isset($_REQUEST['month'])) {
+      $month = $_REQUEST['month'];
+    }
+    $yearSqlQuery = " AND salary.Year = '$year'";
+    $monthSqlQuery = " AND salary.Month = '$month'";
+
+    $sql = "SELECT
+              mstemp.Emp_ID,
+              mstemp.FirstName,
+              mstemp.LastName,
+              mstemp.Mobile,
+              mstemp.Emailpersonal,
+              salary.Total AS totalSalary
+              FROM emp_mstemployees AS mstemp
+              LEFT JOIN emp_salary AS salary ON salary.Emp_ID = mstemp.Emp_ID
+              WHERE mstemp.delFlg = 0 ".$searchSqlQuery."".$yearSqlQuery."".$monthSqlQuery." ORDER BY ".$sort." LIMIT $start,$end";
+		$result = mysql_query($sql,$this->con);
+    $getEmployee = array();
     $i = 0;
     while($row = mysql_fetch_array($result)) {
-  		$getUser[$i]["Emp_ID"] = $row["Emp_ID"];
-  		$getUser[$i]["FirstName"] = $row["FirstName"];
-    	$getUser[$i]["LastName"] = $row["LastName"];
-      $getUser[$i]["Mobile"] = $row["Mobile"];
-      $getUser[$i]["Emailpersonal"] = $row["Emailpersonal"];
+  		$getEmployee[$i]["Emp_ID"] = $row["Emp_ID"];
+  		$getEmployee[$i]["FirstName"] = $row["FirstName"];
+    	$getEmployee[$i]["LastName"] = $row["LastName"];
+      $getEmployee[$i]["Mobile"] = $row["Mobile"];
+      $getEmployee[$i]["Emailpersonal"] = $row["Emailpersonal"];
   		$i++;
     }
-    return array('employeeList' => $getUser,'search' => $search,'sortVal' => $sortVal);
+    return array('employeeList' => $getEmployee,'search' => $search,'sortVal' => $sortVal,'year' => $year,'month' => $month);
 	}
 
   /**
@@ -78,6 +102,20 @@ class employeeModel {
 		$count = mysql_query("SELECT count(id) as count FROM emp_mstemployees",$this->con);
 		$row = mysql_fetch_array($count);
 		return $row["count"];
-	}      	
+	}
+
+  /**
+   * This getYear method are used get the all available years 
+   * @return a $yearArray value to called function on any controller
+   * @author kulasekaran.
+   *
+   */
+  public function getYear()
+  {
+    $inserted = array('' => 'Select Year');
+    $original = array_combine(range(date("Y"), 1991), range(date("Y"), 1991));
+    $yearArray = $inserted+$original;
+    return $yearArray;
+  }
 }
 ?>

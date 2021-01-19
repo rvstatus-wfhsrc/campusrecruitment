@@ -39,11 +39,10 @@ function fnSortProcess() {
 // clear search process
 function fnClearSearch() {
 	$( "#pageno" ).val(1);
-	$("#sortVal").val(1);
-	$("#sortProcess").val(1);
-	$("#sortOptn").val("DESC");
 	$("#search").val("");
 	$("#hiddenSearch").val("");
+	$("#sortVal").val("");
+	$("#sortOptn").val("");
 	$( "#screenName" ).val('employeeList');
 	$('#listForm').submit();
 }

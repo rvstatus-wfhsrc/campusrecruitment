@@ -47,12 +47,44 @@
 				</div>
 			</nav>
 			<!-- Page Content  -->
-			<form action="../controller/employeeController.php" method="POST" id="listForm" name="listForm">
+			<form action="../controller/employeeController.php?time=<?php echo(date('YmdHis')); ?>" method="POST" id="listForm" name="listForm">
 				<input type="hidden" id="screenName" name="screenName">
 				<input type="hidden" id="hiddenSearch" name="hiddenSearch" value="<?php echo $employeeListArray['search']?>">
 				<input type="hidden" id="pageno" name="pageno" value="<?php echo $pageno; ?>">
 				<div id="content" class="p-4 p-md-5 pt-5">
 					<h2 class="mb-4">Employee List</h2>
+					<div class="float-left" style="display:block ruby;">
+						<label for="year">Year : </label>
+						<select id="year" name="year" class="form-control h34 inb autowidth">
+					        <?php
+					        	$selectedYear = "";
+					        	if($employeeListArray['year'] != null ) {
+					        		$selectedYear = $employeeListArray['year'];
+					        	}
+						        foreach($getYear as $years) {
+						            $yearOption = "<option value=".$years;
+						            if($selectedYear == $years) {$yearOption .= " selected";}$yearOption .= ">".$years."</option>";
+						            echo $yearOption;
+						        }
+					        ?> 
+					    </select>
+					</div>
+					<div class="float-left" style="display:block ruby;">
+						<label for="month">Month : </label>
+						<select id="month" name="month" class="form-control h34 inb autowidth">
+					        <?php
+					        	$selectedMonth = "";
+					        	if($employeeListArray['month'] != null ) {
+					        		$selectedMonth = $employeeListArray['month'];
+					        	}
+						        foreach($getMonth as $key => $months) {
+						            $monthOption = "<option value=".$key;
+						            if($selectedMonth == $key) {$monthOption .= " selected";}$monthOption .= ">".$months."</option>";
+						            echo $monthOption;
+						        }
+					        ?>
+					    </select>
+					</div>
 					<div class="float-right mb5">
 						<!-- clear search -->
 						<div  class="inb mt-1">
@@ -63,8 +95,8 @@
 						<!-- sorting process -->
 						<div class="inb">
 							<select name="sortProcess" id="sortProcess" class="form-control autowidth h34 inb mr-2 CMN_sorting <?php echo $sortStyle; ?>">
-								<option value='1'>Employee Id</option>
-								<option value='2'>Employee Name</option>
+								<option value='1' <?php if($employeeListArray['sortVal'] == 1) { ?>selected <?php } ?>>Employee Id</option>
+								<option value='2' <?php if($employeeListArray['sortVal'] == 2) { ?>selected <?php } ?>>Employee Name</option>
 							</select>
 							<input type="hidden" id="sortVal" name="sortVal" value="<?php echo $employeeListArray['sortVal']?>">
 							<input type="hidden" id="sortOptn" name="sortOptn" value="<?php echo $sortOptn; ?>">
@@ -82,7 +114,7 @@
 					<table class="table table-bordered table-position">
 						<colgroup>
 							<col width="1%">
-							<col width="12%">
+							<col width="13%">
 							<col>
 							<col width="9%">
 							<col width="12%">
@@ -100,27 +132,41 @@
 								<th></th>
 							</tr>
 						</thead>
-						<?php if ($employeeListArray['employeeList'] != null) { ?>
+						<?php
+							if ($employeeListArray['employeeList'] != null) { ?>
 							<?php
-								$i = 0; 
-								for ($i = 0 ; $i < 5 ; $i++) { ?>
+								$i = 0;
+								foreach ($employeeListArray['employeeList'] as $key => $employeeList) { ?>
+									<?php $class = $key % 2 === 0 ? 'odd' : 'even'; ?>
+									<tr class="<?php echo $class; ?>">
+										<td class="tac"><?php echo ($pageno - 1) * $resultsPerPage + $key + 1 ?></td>
+										<td class="tac"><?php echo $employeeListArray['employeeList'][$i]["Emp_ID"]; ?></td>
+										<td><?php echo $employeeListArray['employeeList'][$i]["FirstName"]." ".$employeeListArray['employeeList'][$i]["LastName"]; ?></td>
+										<td class="tac"><?php echo $employeeListArray['employeeList'][$i]["Mobile"]; ?></td>
+										<td class="tac">
+											<?php
+												if(isset($employeeListArray['employeeList'][$i]["totalSalary"])) {
+													echo ($employeeListArray['employeeList'][$i]["totalSalary"]);
+												} else {
+													echo ("-");
+												}
+											?>
+										</td>
+										<td><?php echo $employeeListArray['employeeList'][$i]["Emailpersonal"]; ?></td>
+										<td>Send E-Mail</td>
+									</tr>
+								<?php
+									$i++;
+									}
+									} else {
+								?>
 								<tr>
-									<td><?php echo $i+1; ?></td>
-									<td><?php echo $employeeListArray['employeeList'][$i]["Emp_ID"]; ?></td>
-									<td><?php echo $employeeListArray['employeeList'][$i]["FirstName"]." ".$employeeListArray['employeeList'][$i]["LastName"]; ?></td>
-									<td><?php echo $employeeListArray['employeeList'][$i]["Mobile"]; ?></td>
-									<td><?php echo "10,000"; ?></td>
-									<td><?php echo $employeeListArray['employeeList'][$i]["Emailpersonal"]; ?></td>
-									<td></td>
+									<td colspan="7" class="tac noDataFoundClr">No data found</td>
 								</tr>
 							<?php } ?>
-						<?php } else { ?>
-							<tr>
-								<td colspan="7" class="tac noDataFoundClr">No data found</td>
-							</tr>
-						<?php } ?>
+						
 					</table>
-					<?php if (isset($employeeListArray)) { ?>
+					<?php if ($employeeListArray['employeeList'] != null) { ?>
 						<div class="pagination">
 							<div class="<?php if($pageno == 1){ echo 'disabled'; } ?>">
 								<a href="javascript:;" onclick="fnPagination(1)">&laquo;</a>
@@ -130,8 +176,10 @@
 							</div>
 							<?php
 								$pagLink = "<div>";
-								for ($i=1; $i<=3; $i++) {  
-									$pagLink .= "<a onclick=fnPagination(".$i.") href='javascript:;'>".$i."</a>";  
+								$startPageNo = $pageno;
+								$endPageNo = $pageno + 2;
+								for ($i=$startPageNo; $i<=$endPageNo; $i++) {  
+									$pagLink .= "<a ";if($pageno == $i) {$pagLink .="class = active";}$pagLink .= " onclick=fnPagination(".$i.") href='javascript:;'>".$i."</a>";  
 								};
 								echo $pagLink . "</div>";
 							?>
