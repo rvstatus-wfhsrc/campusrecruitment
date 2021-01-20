@@ -118,4 +118,36 @@
 .sort_desc {
     background-image:url(../images/downArrow.png) !important;
 }
-/* sorting arrow class end 
+/* sorting arrow class end
+
+/* edit button class start */
+.editBtn {
+    height: 30px;
+    font-size: 12px;
+}
+/* edit button class end */
+
+.container{
+    line-height: 40px;
+    font-size: 16px;
+}
+.leftSide{
+    font-family: 'Arial', sans-serif;
+    display: inline-block;
+    width: 19%;
+    text-align: right;
+    color: #000;
+    font-weight: bold;
+}
+.rightSide{
+    font-family: 'Arial', sans-serif;
+    display: inline-block;
+    width: 79%;
+    margin-left: 5px;
+}
+.box{
+    width: 95%;
+    padding: 30px;
+    border: 3px solid #D1E1DF;
+    border-radius: 15px;
+}

@@ -10,6 +10,14 @@ $(document).ready(function() {
 		 fnSortProcess();
 			cc = -1;
 	});
+	$('#month').change(function () {
+		$( "#screenName" ).val('employeeList');
+		$( "#listForm" ).submit();
+	});
+	$('#year').change(function () {
+		$( "#screenName" ).val('employeeList');
+		$( "#listForm" ).submit();
+	});
 });
 
 function fnSearch() {
@@ -51,5 +59,13 @@ function fnClearSearch() {
 function fnPagination(pageno) {
 	$( "#pageno" ).val(pageno);
 	$( "#screenName" ).val('employeeList');
+	$( "#listForm" ).submit();
+}
+
+// pay slip view process
+function fnPaySlipView(salaryId) {
+	$( "#hiddenSalaryId" ).val(salaryId);
+	$( "#screenName" ).val('paySlipView');
+	$("#listForm").attr("action", "../controller/paySlipController.php?time="+dateTime);
 	$( "#listForm" ).submit();
 }

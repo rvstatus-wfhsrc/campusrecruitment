@@ -7,6 +7,9 @@
 		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 		<link rel="stylesheet" href="../webroot/css/style.css">
 		<link rel="stylesheet" href="../webroot/css/common.css">
+		<script type="text/javascript">
+			var dateTime = "<?php echo date('Ymdhis'); ?>";
+		</script>
 	</head>
 	<body>
 		<div class="wrapper d-flex align-items-stretch">
@@ -49,41 +52,46 @@
 			<!-- Page Content  -->
 			<form action="../controller/employeeController.php?time=<?php echo(date('YmdHis')); ?>" method="POST" id="listForm" name="listForm">
 				<input type="hidden" id="screenName" name="screenName">
+				<input type="hidden" id="hiddenSalaryId" name="hiddenSalaryId">
 				<input type="hidden" id="hiddenSearch" name="hiddenSearch" value="<?php echo $employeeListArray['search']?>">
 				<input type="hidden" id="pageno" name="pageno" value="<?php echo $pageno; ?>">
 				<div id="content" class="p-4 p-md-5 pt-5">
 					<h2 class="mb-4">Employee List</h2>
-					<div class="float-left" style="display:block ruby;">
-						<label for="year">Year : </label>
+					<div class="float-left" style="display:flex;">
+					<div><label for="year">Year : </label></div>
+					<div>
 						<select id="year" name="year" class="form-control h34 inb autowidth">
-					        <?php
-					        	$selectedYear = "";
-					        	if($employeeListArray['year'] != null ) {
-					        		$selectedYear = $employeeListArray['year'];
-					        	}
-						        foreach($getYear as $years) {
-						            $yearOption = "<option value=".$years;
-						            if($selectedYear == $years) {$yearOption .= " selected";}$yearOption .= ">".$years."</option>";
-						            echo $yearOption;
-						        }
-					        ?> 
-					    </select>
+							<?php
+								$selectedYear = "";
+								if($employeeListArray['year'] != null ) {
+									$selectedYear = $employeeListArray['year'];
+								}
+								foreach($getYear as $years) {
+									$yearOption = "<option value=".$years;
+									if($selectedYear == $years) {$yearOption .= " selected";}$yearOption .= ">".$years."</option>";
+									echo $yearOption;
+								}
+							?> 
+						</select>
 					</div>
-					<div class="float-left" style="display:block ruby;">
-						<label for="month">Month : </label>
+					</div>
+					<div class="float-left" style="display:flex;">
+					<div><label for="month">Month : </label></div>
+					<div>
 						<select id="month" name="month" class="form-control h34 inb autowidth">
-					        <?php
-					        	$selectedMonth = "";
-					        	if($employeeListArray['month'] != null ) {
-					        		$selectedMonth = $employeeListArray['month'];
-					        	}
-						        foreach($getMonth as $key => $months) {
-						            $monthOption = "<option value=".$key;
-						            if($selectedMonth == $key) {$monthOption .= " selected";}$monthOption .= ">".$months."</option>";
-						            echo $monthOption;
-						        }
-					        ?>
-					    </select>
+							<?php
+								$selectedMonth = "";
+								if($employeeListArray['month'] != null ) {
+									$selectedMonth = $employeeListArray['month'];
+								}
+								foreach($getMonth as $key => $months) {
+									$monthOption = "<option value=".$key;
+									if($selectedMonth == $key) {$monthOption .= " selected";}$monthOption .= ">".$months."</option>";
+									echo $monthOption;
+								}
+							?>
+						</select>
+					</div>
 					</div>
 					<div class="float-right mb5">
 						<!-- clear search -->
@@ -153,7 +161,11 @@
 											?>
 										</td>
 										<td><?php echo $employeeListArray['employeeList'][$i]["Emailpersonal"]; ?></td>
-										<td>Send E-Mail</td>
+										<td class="tac">
+											<a href="javascript:;" onclick="fnPaySlipView(<?php echo $employeeListArray['employeeList'][$i]['salaryId']; ?>)">
+												<img style="width: 20px;" src="../webroot/images/details.png" title="Pay Slip View">
+											</a>
+										</td>
 									</tr>
 								<?php
 									$i++;

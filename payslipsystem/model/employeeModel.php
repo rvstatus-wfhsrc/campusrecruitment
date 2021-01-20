@@ -74,6 +74,7 @@ class employeeModel {
               mstemp.LastName,
               mstemp.Mobile,
               mstemp.Emailpersonal,
+              salary.id AS salaryId,
               salary.Total AS totalSalary
               FROM emp_mstemployees AS mstemp
               LEFT JOIN emp_salary AS salary ON salary.Emp_ID = mstemp.Emp_ID
@@ -87,6 +88,8 @@ class employeeModel {
     	$getEmployee[$i]["LastName"] = $row["LastName"];
       $getEmployee[$i]["Mobile"] = $row["Mobile"];
       $getEmployee[$i]["Emailpersonal"] = $row["Emailpersonal"];
+      $getEmployee[$i]["salaryId"] = $row["salaryId"];
+      $getEmployee[$i]["totalSalary"] = $row["totalSalary"];
   		$i++;
     }
     return array('employeeList' => $getEmployee,'search' => $search,'sortVal' => $sortVal,'year' => $year,'month' => $month);
