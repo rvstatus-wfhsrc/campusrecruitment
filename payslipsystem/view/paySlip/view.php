@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en">
 	<head>
-		<title>Pay Slip | View</title>
+		<title>Pay Slip | Mail View</title>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -27,9 +27,9 @@
 					<ul class="list-unstyled components mb-5">
 						<li class="active">
 							<a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Employee</a>
-							<ul class="collapse list-unstyled" id="homeSubmenu">
+							<ul class="collapse list-unstyled <?php if($mainMenu == 'paySlipView') { echo('show'); } ?>" id="homeSubmenu">
 								<li>
-									<a class="active" href="#">List</a>
+									<a class="active" href="javascript:;" onclick="fnEmployeeList()">List</a>
 								</li>
 							</ul>
 						</li>
@@ -52,53 +52,46 @@
 			<!-- page content -->
 			<div id="content" class="p-4 p-md-5 pt-5">
 				<form action="../controller/paySlipController.php?time=<?php echo(date('YmdHis')); ?>" method="POST" id="viewForm" name="viewForm">
-					<h2 class="mb-4">Pay Slip View</h2>
+					<h2 class="mb-4">Pay Slip Mail View</h2>
 					<input type="hidden" id="screenName" name="screenName">
 					<input type="hidden" id="hiddenSalaryId" name="hiddenSalaryId">
 					<div class="mb-1">
 						<a class="btn btn-info editBtn" href="javascript:;" onclick="fnBackBtn()">
 							<i class="fa fa-chevron-left fa-btn"></i>Back
 						</a>
-						<a class="btn bg-warning text-white editBtn" href="javascript:;" onclick="fnSendMail()">
+						<a class="btn bg-warning text-white editBtn" href="javascript:;" onclick="fnSendMail(<?php echo $paySlipDetail[0]['salaryId']; ?>)">
 							<i class="fa fa-edit fa-btn"></i>Send Mail
 						</a>
 					</div>
+					<?php
+						$month = date('m',$paySlipDetail[0]['Month']);
+						$date = date('d');
+					?>
 					<div class="box">
 						<div class="container">
-							<!-- employee id -->
-							<div>
-								<div class="leftSide"> Company Name : </div>
-								<div class="rightSide"><?php echo "Sathi Systems Pvt. Ltd."; ?></div>
-							</div>
-							<!-- name -->
 							<div>
 								<div class="leftSide"> Employee Name : </div>
-								<div class="rightSide"><?php echo $paySlipDetail[0]['FirstName']." ".$paySlipDetail[0]['LastName']; ?></div>
+								<div class="rightSide nameClr"><?php echo $paySlipDetail[0]['FirstName']." ".$paySlipDetail[0]['LastName']; ?></div>
 							</div>
-							<!-- name -->
 							<div>
 								<div class="leftSide"> To : </div>
 								<div class="rightSide"><?php echo $paySlipDetail[0]['Emailoffice']; ?></div>
 							</div>
-							<!-- designation -->
 							<div>
 								<div class="leftSide"> CC : </div>
 								<div class="rightSide"><?php echo "Nil"; ?></div>
 							</div>
-							<!-- gender -->
 							<div>
 								<div class="leftSide"> Subject : </div>
-								<div class="rightSide"><?php echo "Salary Pay Slip"; ?></div>
+								<div class="rightSide"><?php echo "Pay Slip_".$paySlipDetail[0]['Year']."_".$month."_".$date; ?></div>
 							</div>
-							<!-- date of birth -->
 							<div>
 								<div class="leftSide"> Content : </div>
 								<div class="rightSide"><?php echo "Please find attached your Pay Slip for the previous month."; ?></div>
 							</div>
-							<!-- date of joining -->
 							<div>
 								<div class="leftSide"> Attachment : </div>
-								<div class="rightSide"><a href="javascript:;" onclick="downloadPaySlip(<?php echo $paySlipDetail[0]['salaryId']; ?>)">Download Pay Slip</a></div>
+								<div class="rightSide"><a href="javascript:;" title="To Download Salary Pay Slip" onclick="downloadPaySlip(<?php echo $paySlipDetail[0]['salaryId']; ?>)"><?php echo "pay_slip_".$paySlipDetail[0]['Emp_ID']."_".$paySlipDetail[0]['Year'].$month.$date; ?></a></div>
 							</div>
 						</div>
 					</div>

@@ -27,9 +27,9 @@
 					<ul class="list-unstyled components mb-5">
 						<li class="active">
 							<a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Employee</a>
-							<ul class="collapse list-unstyled" id="homeSubmenu">
-								<li>
-									<a class="active" href="#">List</a>
+							<ul class="collapse list-unstyled <?php if($mainMenu == 'employeeList') { echo('show'); } ?>" id="homeSubmenu">
+								<li class="<?php if($mainMenu == 'employeeList') { echo('active'); } ?>">
+									<a href="javascript:;" onclick="fnEmployeeList()">List</a>
 								</li>
 							</ul>
 						</li>
@@ -57,9 +57,10 @@
 				<input type="hidden" id="pageno" name="pageno" value="<?php echo $pageno; ?>">
 				<div id="content" class="p-4 p-md-5 pt-5">
 					<h2 class="mb-4">Employee List</h2>
-					<div class="float-left" style="display:flex;">
-					<div><label for="year">Year : </label></div>
-					<div>
+					<div class="float-left mt-1 mr-1">
+						<label for="year">Year : </label>
+					</div>
+					<div class="float-left">
 						<select id="year" name="year" class="form-control h34 inb autowidth">
 							<?php
 								$selectedYear = "";
@@ -74,10 +75,10 @@
 							?> 
 						</select>
 					</div>
+					<div class="float-left mt-1 mr-1">
+						<label for="month">Month : </label>
 					</div>
-					<div class="float-left" style="display:flex;">
-					<div><label for="month">Month : </label></div>
-					<div>
+					<div class="float-left">
 						<select id="month" name="month" class="form-control h34 inb autowidth">
 							<?php
 								$selectedMonth = "";
@@ -91,7 +92,6 @@
 								}
 							?>
 						</select>
-					</div>
 					</div>
 					<div class="float-right mb5">
 						<!-- clear search -->
@@ -124,9 +124,8 @@
 							<col width="1%">
 							<col width="13%">
 							<col>
-							<col width="9%">
 							<col width="12%">
-							<col width="9%">
+							<col width="11%">
 							<col width="11%">
 						</colgroup>
 						<thead class="thead">
@@ -134,7 +133,6 @@
 								<th>S.No.</th>
 								<th>Employee Id</th>
 								<th>Name</th>
-								<th>Contact</th>
 								<th title="Net Salary">Salary</th>
 								<th title="Personal E-Mail Address">E-Mail</th>
 								<th></th>
@@ -148,14 +146,13 @@
 									<?php $class = $key % 2 === 0 ? 'odd' : 'even'; ?>
 									<tr class="<?php echo $class; ?>">
 										<td class="tac"><?php echo ($pageno - 1) * $resultsPerPage + $key + 1 ?></td>
-										<td class="tac"><?php echo $employeeListArray['employeeList'][$i]["Emp_ID"]; ?></td>
-										<td><?php echo $employeeListArray['employeeList'][$i]["FirstName"]." ".$employeeListArray['employeeList'][$i]["LastName"]; ?></td>
-										<td class="tac"><?php echo $employeeListArray['employeeList'][$i]["Mobile"]; ?></td>
+										<td class="tac employeeUserNameClr"><?php echo $employeeListArray['employeeList'][$i]["Emp_ID"]; ?></td>
+										<td class="nameClr"><?php echo $employeeListArray['employeeList'][$i]["FirstName"]." ".$employeeListArray['employeeList'][$i]["LastName"]; ?></td>
 										<td class="tac">
 											<?php
 												if(isset($employeeListArray['employeeList'][$i]["totalSalary"])) {
-													echo ($employeeListArray['employeeList'][$i]["totalSalary"]);
-												} else {
+													echo number_format($employeeListArray['employeeList'][$i]["totalSalary"]); ?> &#8377;
+												<?php } else {
 													echo ("-");
 												}
 											?>
@@ -173,12 +170,13 @@
 									} else {
 								?>
 								<tr>
-									<td colspan="7" class="tac noDataFoundClr">No data found</td>
+									<td colspan="6" class="tac noDataFoundClr">No data found</td>
 								</tr>
 							<?php } ?>
 						
 					</table>
 					<?php if ($employeeListArray['employeeList'] != null) { ?>
+						<?php if ($numOfResults > 5) { ?>
 						<div class="pagination">
 							<div class="<?php if($pageno == 1){ echo 'disabled'; } ?>">
 								<a href="javascript:;" onclick="fnPagination(1)">&laquo;</a>
@@ -188,8 +186,12 @@
 							</div>
 							<?php
 								$pagLink = "<div>";
+								$j = $totalPages;
+								if($totalPages >= 2) {
+									$j = 1;
+								}
 								$startPageNo = $pageno;
-								$endPageNo = $pageno + 2;
+								$endPageNo = $pageno + $j;
 								for ($i=$startPageNo; $i<=$endPageNo; $i++) {  
 									$pagLink .= "<a ";if($pageno == $i) {$pagLink .="class = active";}$pagLink .= " onclick=fnPagination(".$i.") href='javascript:;'>".$i."</a>";  
 								};
@@ -202,6 +204,7 @@
 								<a href="javascript:;" onclick="fnPagination(<?php echo $totalPages; ?>)">&raquo;</a>
 							</div>
 						</div>
+						<?php } ?>
 					<?php } ?>
 				</div>
 			</form>

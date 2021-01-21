@@ -51,7 +51,7 @@
 			$_SESSION["userName"] = $_REQUEST['userName'];
 			$_SESSION["flag"] = 1;
 			$_SESSION["logged_in"] = true;
-			require_once '../view/employee/list.php';
+			header("Location: employeeController.php?time=" . date(YmdHis));
 		}
 	}
 	

@@ -1,6 +1,8 @@
 <?php
 require_once "\common\PHPExcel.php";
 require_once "../model/paySlipModel.php";
+require_once "\common\phpmailer\phpmailer.php";
+require_once "\common\phpmailer\PHPMailerAutoload.php";
 $object = new paySlipController();
 
 /**
@@ -26,6 +28,8 @@ class paySlipController {
 			Self::paySlipView();
 		} elseif ($_REQUEST["screenName"] == "downloadPaySlip") {
 			Self::downloadPaySlip();
+		} elseif ($_REQUEST["screenName"] == "sendPaySlip") {
+			Self::sendPaySlip();
 		}
 	}
 
@@ -38,6 +42,7 @@ class paySlipController {
 	function paySlipView() {
 		$paySlipModel = new paySlipModel();
 		$paySlipDetail = $paySlipModel->paySlipDetail();
+		$mainMenu = "paySlipView";
 		require_once '../view/paySlip/view.php';
 	}
 
@@ -55,16 +60,18 @@ class paySlipController {
 		date_default_timezone_set('Asia/Calcutta');
 		$currentDate = date("Y/m/d");
 		date_default_timezone_set($getDefaultTimeZone);
+		$month = date('m',$paySlipDetail[0]['Month']);
+		$date = date('d');
 		$totalAddition = $paySlip[0]['BasicSalary'] + $paySlip[0]['Insentive'] + $paySlip[0]['DA'] + $paySlip[0]['MA'];
 		$totalDeduction = $paySlip[0]['IT_TAX'] + $paySlip[0]['PF'] + $paySlip[0]['Penalty'];
 		$netSalary = $totalAddition - $totalDeduction;
-		$fileName = $paySlip[0]['Emp_ID'].'.xlsx';
+		$fileName = 'pay_slip_'.$paySlip[0]['Emp_ID'].'_'.$paySlip[0]['Year'].$month.$date.'.xlsx';
 		$excelObject = new PHPExcel();
 		$excelObject = PHPExcel_IOFactory::load($filePath);
 		$excelObject->setActiveSheetIndex(0)
-										->setCellValue("D6",$paySlip[0]['FirstName']." ".$paySlip[0]['LastName'])
-										->setCellValue("C8",$paySlip[0]['Month'])
-										->setCellValue("C10",$paySlip[0]['Year'])
+										->setCellValue("E6",$paySlip[0]['FirstName']." ".$paySlip[0]['LastName'])
+										->setCellValue("D8",$paySlip[0]['Month'])
+										->setCellValue("D10",$paySlip[0]['Year'])
 										->setCellValue("F14",$paySlip[0]['BasicSalary'])
 										->setCellValue("F15",$paySlip[0]['Insentive'])
 										->setCellValue("F16",$paySlip[0]['DA'])
@@ -75,12 +82,12 @@ class paySlipController {
 										->setCellValue("F19",$totalAddition)
 										->setCellValue("K19",$totalDeduction)
 										->setCellValue("K20",$netSalary)
-										->setCellValue("M6",$currentDate);
+										->setCellValue("L6",$currentDate);
 		$writerObject = PHPExcel_IOFactory::createwriter($excelObject,"Excel5");
 		ob_end_clean();
 		header("Content-Type: application/vnd.ms-excel");
 		header("Content-Disposition: attachment; filename= $fileName");
-		$writerObject->save("php://output");
+		$writerObject->save(str_replace(__FILE__,'C:\Users\SSLAP066\Downloads\php_excel_download\pay_slip_'.$paySlip[0]['Emp_ID'].'_'.$paySlip[0]['Year'].$month.$date.'.xlsx',__FILE__));
 		if($insertResults) {
 			echo "Successfully Registered";
 		} else {
@@ -88,5 +95,38 @@ class paySlipController {
 		}
 	}
 
+	/**
+	 * This sendPaySlip method are used to send the mail with pay slip excel
+	 * @return it does not return anything
+	 * @author kulasekaran.
+	 *
+	 */
+	function sendPaySlip() {
+		$paySlipModel = new paySlipModel();
+		$sendPaySlip = $paySlipModel->sendPaySlip();
+		$month = date('m',$sendPaySlip[0]['Month']);
+		$date = date('d');
+		$mail = new PHPMailer();
+		$mail->isSMTP();
+		$mail->SMTPDebug = 0;
+		$mail->Debugoutput = 'html';
+		$mail->Host = 'smtp.gmail.com';
+		$mail->Port = 587;
+		$mail->SMTPSecure = 'tls';
+		$mail->SMTPAuth = true;
+		$mail->Username = "";
+		$mail->Password = "";
+		$mail->setFrom('kulasekaran337@gmail.com', 'Kulasekaran A');
+		$mail->addReplyTo('kulasekaran337@gmail.com', 'Kulasekaran A');
+		$mail->addAddress($sendPaySlip[0]['Emailoffice'], $sendPaySlip[0]['FirstName']." ".$sendPaySlip[0]['LastName']);
+		$mail->Subject = 'Salary Pay Slip';
+		$mail->Body = 'This is a plain text message body';
+		$mail->addAttachment('C:\Users\SSLAP066\Downloads\php_excel_download\pay_slip_'.$sendPaySlip[0]['Emp_ID'].'_'.$sendPaySlip[0]['Year'].$month.$date.'.xlsx');
+		if (!$mail->send()) {
+    		echo 'Mailer Error: ' . $mail->ErrorInfo;
+		} else {
+    		header("Location: employeeController.php?time=" . date(YmdHis));
+		}
+	}
 }
 ?>

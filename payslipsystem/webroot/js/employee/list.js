@@ -69,3 +69,10 @@ function fnPaySlipView(salaryId) {
 	$("#listForm").attr("action", "../controller/paySlipController.php?time="+dateTime);
 	$( "#listForm" ).submit();
 }
+
+// employee list process
+function fnEmployeeList() {
+	$( "#pageno" ).val(1);
+	$( "#screenName" ).val('employeeList');
+	$( "#listForm" ).submit();
+}

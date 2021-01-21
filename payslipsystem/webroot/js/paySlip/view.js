@@ -13,6 +13,15 @@ function fnBackBtn() {
 }
 
 // send mail button process
-function fnSendMail() {
-	alert('This is an underprocess');
+function fnSendMail(salaryId) {
+	$( "#hiddenSalaryId" ).val(salaryId);
+	$( "#screenName" ).val('sendPaySlip');
+	$( "#viewForm" ).submit();
+}
+
+//employee list process
+function fnEmployeeList() {
+	$( "#screenName" ).val('employeeList');
+	$("#viewForm").attr("action", "../controller/employeeController.php?time="+dateTime);
+	$( "#viewForm" ).submit();
 }

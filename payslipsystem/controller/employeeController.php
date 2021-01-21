@@ -1,5 +1,7 @@
 <?php
 require_once "../model/employeeModel.php";
+require_once "../model/commonModel.php";
+session_start();
 $object = new employeeController();
 
 /**
@@ -21,7 +23,7 @@ class employeeController {
 	　*
 	 */
 	function __construct() {
-		if($_REQUEST["screenName"] == "employeeList") {
+		if($_SESSION["logged_in"] == "true" || $_REQUEST["screenName"] == "employeeList") {
 			Self::employeeList();
 		}
 	}
@@ -34,6 +36,7 @@ class employeeController {
 	 */
 	function employeeList() {
 		$employeeModel = new employeeModel();
+		$commonModel = new commonModel();
 		if (isset($_REQUEST['pageno'])) {
 			$pageno = $_REQUEST['pageno'];
 		} else {
@@ -58,9 +61,10 @@ class employeeController {
 		$startResult = ($pageno - 1) * $resultsPerPage;
 		$numOfResults = $employeeModel->fnGetCount();
 		$totalPages = ceil($numOfResults / $resultsPerPage);
-		$getYear = $employeeModel->getYear();
+		$getYear = $commonModel->getYear();
 		$getMonth = array('' => 'Select Month','1'=>'January','2'=>'February','3'=>'March','4'=>'April','5'=>'May','6'=>'June','7'=>'July','8'=>'August','9'=>'September','10'=>'October','11'=>'November','12'=>'December');
 		$employeeListArray = $employeeModel->employeeList($startResult,$resultsPerPage);
+		$mainMenu = "employeeList";
 		require_once '../view/employee/list.php';
 	}
 

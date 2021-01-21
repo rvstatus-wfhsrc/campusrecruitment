@@ -1,12 +1,12 @@
- width design class start*/
+/* width design class start */
 .autowidth {
-	width: auto;
+    width: auto;
 }
-/* width design class end*/
+/* width design class end */
 
 /* height class start */
 .h34 {
-	height: 34px !important;
+    height: 34px !important;
 }
 /* height class end */
 
@@ -21,13 +21,13 @@
 
 /* text align design class start */
 .tac {
-	text-align: center;
+    text-align: center;
 }
 /* text align design class end */
 
 /* no data found color class start */
 .noDataFoundClr {
-	color: red;
+    color: red;
 }
 /* no data found color class end */
 
@@ -58,13 +58,13 @@
 /* search button class start */
 .searchBtn {
     float: right;
-    width: 46%;        
+    width: 55%;
 }
 /* search button class end */
 
 /* display design class start */
 .inb {
-	display: inline-block !important;
+    display: inline-block !important;
 }
 /* display design class end */
 
@@ -151,3 +151,15 @@
     border: 3px solid #D1E1DF;
     border-radius: 15px;
 }
+
+/* user name color class start */
+.employeeUserNameClr {
+    color: #AC4E00;
+}
+/* user name color class end */
+
+/* name color class start */
+.nameClr {
+    color: #9C0000;
+}
+/* name color class end */
