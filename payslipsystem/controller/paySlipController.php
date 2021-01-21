@@ -1,4 +1,5 @@
 <?php
+session_start();
 require_once "\common\PHPExcel.php";
 require_once "../model/paySlipModel.php";
 require_once "\common\phpmailer\phpmailer.php";
@@ -87,7 +88,7 @@ class paySlipController {
 		ob_end_clean();
 		header("Content-Type: application/vnd.ms-excel");
 		header("Content-Disposition: attachment; filename= $fileName");
-		$writerObject->save(str_replace(__FILE__,'C:\Users\SSLAP066\Downloads\php_excel_download\pay_slip_'.$paySlip[0]['Emp_ID'].'_'.$paySlip[0]['Year'].$month.$date.'.xlsx',__FILE__));
+		$writerObject->save(str_replace(__FILE__,'C:\xampp\htdocs\github\campusgit\payslipsystem\webroot\download\payslip\pay_slip_'.$paySlip[0]['Emp_ID'].'_'.$paySlip[0]['Year'].$month.$date.'.xlsx',__FILE__));
 		if($insertResults) {
 			echo "Successfully Registered";
 		} else {
@@ -116,19 +117,21 @@ class paySlipController {
 		$mail->Port = 587;
 		$mail->SMTPSecure = 'tls';
 		$mail->SMTPAuth = true;
-		$mail->Username = "kulasekaran337@gmail.com";
-		$mail->Password = "ALWARrani";
-		$mail->setFrom('kulasekaran337@gmail.com', 'Kulasekaran A');
-		$mail->addReplyTo('kulasekaran337@gmail.com', 'Kulasekaran A');
-		$mail->addAddress('kulasekaran337@gmail.com', 'Kulasekaran A');
-		// $mail->addAddress($sendPaySlip[0]['Emailoffice'], $sendPaySlip[0]['FirstName']." ".$sendPaySlip[0]['LastName']);
+		$mail->Username = "c.krishnaragav@gmail.com";
+		$mail->Password = "pvictulryihbwpjn";
+		$mail->setFrom('c.krishnaragav@gmail.com', 'krishna Ragav');
+		$mail->addReplyTo('c.krishnaragav@gmail.com', 'krishna Ragav');
+		$mail->addAddress('kulasekaran337@gmail.com','Kulasekaran A');
+		// $mail->addAddress($sendPaySlip[0]['Emailpersonal'], $sendPaySlip[0]['FirstName']." ".$sendPaySlip[0]['LastName']);
 		$mail->Subject = $subject;
 		$mail->Body = $content;
-		$mail->addAttachment('C:\Users\SSLAP066\Downloads\php_excel_download\pay_slip_'.$sendPaySlip[0]['Emp_ID'].'_'.$sendPaySlip[0]['Year'].$month.$date.'.xlsx');
+		$mail->addAttachment('C:\xampp\htdocs\github\campusgit\payslipsystem\webroot\download\payslip\pay_slip_'.$sendPaySlip[0]['Emp_ID'].'_'.$sendPaySlip[0]['Year'].$month.$date.'.xlsx');
 		if (!$mail->send()) {
     		echo 'Mailer Error: ' . $mail->ErrorInfo;
 		} else {
 			$paySlipDetailAdd = $paySlipModel->paySlipDetailAdd($sendPaySlip,$subject,$content);
+			$_SESSION['message'] = "Pay Slip Mail Send Successfully";
+			$_SESSION['status'] = "success";
     		header("Location: employeeController.php?time=" . date(YmdHis));
 		}
 	}

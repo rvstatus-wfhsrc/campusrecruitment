@@ -21,7 +21,6 @@ class paySlipModel {
 	function __construct() {
 		$this->con = mysql_connect("localhost","root","") or die("Connection failed : ".mysql_error());
 		mysql_select_db("payslip",$this->con);
-    session_start();
 	}
 
   /**
@@ -36,7 +35,7 @@ class paySlipModel {
               mstemp.Emp_ID,
               mstemp.FirstName,
               mstemp.LastName,
-              mstemp.Emailoffice,
+              mstemp.Emailpersonal,
               salary.id AS salaryId,
               salary.Total AS totalSalary,
               salary.Month AS Month,
@@ -51,7 +50,7 @@ class paySlipModel {
       $getPaySlip[$i]["Emp_ID"] = $row["Emp_ID"];
       $getPaySlip[$i]["FirstName"] = $row["FirstName"];
       $getPaySlip[$i]["LastName"] = $row["LastName"];
-      $getPaySlip[$i]["Emailoffice"] = $row["Emailoffice"];
+      $getPaySlip[$i]["Emailpersonal"] = $row["Emailpersonal"];
       $getPaySlip[$i]["salaryId"] = $row["salaryId"];
       $getPaySlip[$i]["totalSalary"] = $row["totalSalary"];
       $getPaySlip[$i]["Month"] = $row["Month"];
@@ -117,7 +116,7 @@ class paySlipModel {
     $salaryId = $_REQUEST['hiddenSalaryId'];
     $sql = "SELECT
               mstemp.Emp_ID,
-              mstemp.Emailoffice,
+              mstemp.Emailpersonal,
               mstemp.FirstName,
               mstemp.LastName,
               salary.Month AS Month,
@@ -130,7 +129,7 @@ class paySlipModel {
     $i = 0;
     while($row = mysql_fetch_array($result)) {
       $sendPaySlip[$i]["Emp_ID"] = $row["Emp_ID"];
-      $sendPaySlip[$i]["Emailoffice"] = $row["Emailoffice"];
+      $sendPaySlip[$i]["Emailpersonal"] = $row["Emailpersonal"];
       $sendPaySlip[$i]["FirstName"] = $row["FirstName"];
       $sendPaySlip[$i]["LastName"] = $row["LastName"];
       $sendPaySlip[$i]["Month"] = $row["Month"];
@@ -148,17 +147,30 @@ class paySlipModel {
    */
   function paySlipDetailAdd($paySlipDetails,$subject,$content) {
     $salaryId = $_REQUEST['hiddenSalaryId'];
-    $sql = "INSERT INTO pay_payslip_details (Emp_Id,salaryId,toMail,subject,content,year,month,mailSendStatus,created_by,delFlag)
-              VALUES ('".$paySlipDetails[0]['Emp_ID']."',
-                      '".$salaryId."',
-                      '".$paySlipDetails[0]['Emailoffice']."',
-                      '".$subject."',
-                      '".$content."',
-                      '".$paySlipDetails[0]['Year']."',
-                      '".$paySlipDetails[0]['Month']."',
-                      '1',
-                      '".$_SESSION['userName']."',
-                      '0')";
+    $sql = "INSERT INTO pay_payslip_details (
+                                              Emp_Id,
+                                              salaryId,
+                                              toMail,
+                                              subject,
+                                              content,
+                                              year,
+                                              month,
+                                              mailSendStatus,
+                                              created_by,
+                                              delFlag
+                                            )
+                                    VALUES (
+                                              '".$paySlipDetails[0]['Emp_ID']."',
+                                              '".$salaryId."',
+                                              '".$paySlipDetails[0]['Emailpersonal']."',
+                                              '".$subject."',
+                                              '".$content."',
+                                              '".$paySlipDetails[0]['Year']."',
+                                              '".$paySlipDetails[0]['Month']."',
+                                              '1',
+                                              '".$_SESSION['userName']."',
+                                              '0'
+                                            )";
     $paySlipDetailAddStatus = mysql_query($sql,$this->con);
     return $paySlipDetailAddStatus;
   }

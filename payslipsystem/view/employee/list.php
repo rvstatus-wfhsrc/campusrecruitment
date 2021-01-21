@@ -11,6 +11,17 @@
 			var dateTime = "<?php echo date('Ymdhis'); ?>";
 		</script>
 	</head>
+	<style>
+			/* session flash message design */
+            .fmsg {
+                font-size: 14px;
+                margin-left: 280px;
+                width: 35%;
+                margin-bottom: 0px;
+                padding-top: 1px;
+                padding-bottom: 1px;
+            }
+	</style>
 	<body>
 		<div class="wrapper d-flex align-items-stretch">
 			<nav id="sidebar">
@@ -57,6 +68,16 @@
 				<input type="hidden" id="pageno" name="pageno" value="<?php echo $pageno; ?>">
 				<div id="content" class="p-4 p-md-5 pt-5">
 					<h2 class="mb-4">Employee List</h2>
+					<!-- session message -->
+					<?php if(isset($_SESSION['message'])): ?>
+				     <div class="alert alert-<?php echo $_SESSION['status']; ?> fmsg tac">
+				     	<?php echo $_SESSION['message']; ?>
+				     </div>
+					<?php
+						endif;
+						unset($_SESSION['message']);
+						unset($_SESSION['status']);
+					?>
 					<div class="float-left mt-1 mr-1">
 						<label for="year">Year : </label>
 					</div>

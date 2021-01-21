@@ -75,7 +75,7 @@
 							</div>
 							<div>
 								<div class="leftSide"> To : </div>
-								<div class="rightSide"><?php echo $paySlipDetail[0]['Emailoffice']; ?></div>
+								<div class="rightSide"><?php echo $paySlipDetail[0]['Emailpersonal']; ?></div>
 							</div>
 							<div>
 								<div class="leftSide"> CC : </div>
