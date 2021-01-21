@@ -106,6 +106,8 @@ class paySlipController {
 		$sendPaySlip = $paySlipModel->sendPaySlip();
 		$month = date('m',$sendPaySlip[0]['Month']);
 		$date = date('d');
+		$subject = "Pay Slip_".$sendPaySlip[0]['Year']."_".$month."_".$date;
+		$content = 'This is a plain text message body';
 		$mail = new PHPMailer();
 		$mail->isSMTP();
 		$mail->SMTPDebug = 0;
@@ -114,17 +116,19 @@ class paySlipController {
 		$mail->Port = 587;
 		$mail->SMTPSecure = 'tls';
 		$mail->SMTPAuth = true;
-		$mail->Username = "";
-		$mail->Password = "";
+		$mail->Username = "kulasekaran337@gmail.com";
+		$mail->Password = "ALWARrani";
 		$mail->setFrom('kulasekaran337@gmail.com', 'Kulasekaran A');
 		$mail->addReplyTo('kulasekaran337@gmail.com', 'Kulasekaran A');
-		$mail->addAddress($sendPaySlip[0]['Emailoffice'], $sendPaySlip[0]['FirstName']." ".$sendPaySlip[0]['LastName']);
-		$mail->Subject = 'Salary Pay Slip';
-		$mail->Body = 'This is a plain text message body';
+		$mail->addAddress('kulasekaran337@gmail.com', 'Kulasekaran A');
+		// $mail->addAddress($sendPaySlip[0]['Emailoffice'], $sendPaySlip[0]['FirstName']." ".$sendPaySlip[0]['LastName']);
+		$mail->Subject = $subject;
+		$mail->Body = $content;
 		$mail->addAttachment('C:\Users\SSLAP066\Downloads\php_excel_download\pay_slip_'.$sendPaySlip[0]['Emp_ID'].'_'.$sendPaySlip[0]['Year'].$month.$date.'.xlsx');
 		if (!$mail->send()) {
     		echo 'Mailer Error: ' . $mail->ErrorInfo;
 		} else {
+			$paySlipDetailAdd = $paySlipModel->paySlipDetailAdd($sendPaySlip,$subject,$content);
     		header("Location: employeeController.php?time=" . date(YmdHis));
 		}
 	}

@@ -21,6 +21,7 @@ class paySlipModel {
 	function __construct() {
 		$this->con = mysql_connect("localhost","root","") or die("Connection failed : ".mysql_error());
 		mysql_select_db("payslip",$this->con);
+    session_start();
 	}
 
   /**
@@ -137,6 +138,29 @@ class paySlipModel {
       $i++;
     }
     return $sendPaySlip;
+  }
+
+  /**
+   * This paySlipDetailAdd method are used to inserts the pay slip details into payslip_details table
+   * @return the $paySlipDetailAddStatus variable
+   * @author kulasekaran.
+   *
+   */
+  function paySlipDetailAdd($paySlipDetails,$subject,$content) {
+    $salaryId = $_REQUEST['hiddenSalaryId'];
+    $sql = "INSERT INTO pay_payslip_details (Emp_Id,salaryId,toMail,subject,content,year,month,mailSendStatus,created_by,delFlag)
+              VALUES ('".$paySlipDetails[0]['Emp_ID']."',
+                      '".$salaryId."',
+                      '".$paySlipDetails[0]['Emailoffice']."',
+                      '".$subject."',
+                      '".$content."',
+                      '".$paySlipDetails[0]['Year']."',
+                      '".$paySlipDetails[0]['Month']."',
+                      '1',
+                      '".$_SESSION['userName']."',
+                      '0')";
+    $paySlipDetailAddStatus = mysql_query($sql,$this->con);
+    return $paySlipDetailAddStatus;
   }
 }
 ?>
