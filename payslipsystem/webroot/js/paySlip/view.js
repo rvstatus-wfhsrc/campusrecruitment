@@ -20,8 +20,8 @@ function fnSendMail(salaryId) {
 }
 
 //employee list process
-function fnEmployeeHistory() {
-	$( "#screenName" ).val('employeeHistory');
+function fnEmployeeList() {
+	$( "#screenName" ).val('employeeList');
 	$("#viewForm").attr("action", "../controller/employeeController.php?time="+dateTime);
 	$( "#viewForm" ).submit();
 }

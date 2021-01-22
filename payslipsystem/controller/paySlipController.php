@@ -31,7 +31,7 @@ class paySlipController {
 			Self::downloadPaySlip();
 		} elseif (isset($_REQUEST["screenName"]) && $_REQUEST["screenName"] == "sendPaySlip") {
 			Self::sendPaySlip();
-		} elseif ($_SESSION['screenName'] == "paySlipEmployeeHistory") {
+		} elseif (isset($_REQUEST["screenName"]) && $_REQUEST["screenName"] == "paySlipEmployeeHistory") {
 			Self::detailView();
 		}
 	}
@@ -69,7 +69,7 @@ class paySlipController {
 		$totalAddition = $paySlip[0]['BasicSalary'] + $paySlip[0]['Insentive'] + $paySlip[0]['DA'] + $paySlip[0]['MA'];
 		$totalDeduction = $paySlip[0]['IT_TAX'] + $paySlip[0]['PF'] + $paySlip[0]['Penalty'];
 		$netSalary = $totalAddition - $totalDeduction;
-		$fileName = 'pay_slip_'.$paySlip[0]['Emp_ID'].'_'.$paySlip[0]['Year'].$month.$date.'.xlsx';
+		$fileName = 'pay_slip_'.$paySlip[0]['Emp_ID'].'_'.$paySlip[0]['Year'].$month.$date.'.xls';
 		$excelObject = new PHPExcel();
 		$excelObject = PHPExcel_IOFactory::load($filePath);
 		$excelObject->setActiveSheetIndex(0)
@@ -92,8 +92,8 @@ class paySlipController {
 		// header("Content-Type: application/vnd.ms-excel");
 		// header("Content-Disposition: attachment; filename= $fileName");
 
-		$file = 'pay_slip_'.$paySlip[0]['Emp_ID'].'_'.$paySlip[0]['Year'].$month.$date.'.xlsx';
-		$writerObject->save(str_replace('.php', '.xlsx', 'C:/xampp/htdocs/github/campusgit/payslipsystem/webroot/download/payslip/' . $file));
+		$file = 'pay_slip_'.$paySlip[0]['Emp_ID'].'_'.$paySlip[0]['Year'].$month.$date.'.xls';
+		$writerObject->save(str_replace('.php', '.xls', '../webroot/download/payslip/' . $file));
     	// header('Location:C:/xampp/htdocs/github/campusgit/payslipsystem/webroot/download/payslip/' . $file);
 		// $writerObject->save(str_replace(__FILE__,'C:\xampp\htdocs\github\campusgit\payslipsystem\webroot\download\payslip\pay_slip_'.$paySlip[0]['Emp_ID'].'_'.$paySlip[0]['Year'].$month.$date.'.xlsx',__FILE__));
 	}
@@ -110,7 +110,7 @@ class paySlipController {
 		$month = date('m',$sendPaySlip[0]['Month']);
 		$date = date('d');
 		$subject = "Pay Slip_".$sendPaySlip[0]['Year']."_".$month."_".$date;
-		$content = 'This is a plain text message body';
+		$content = $_REQUEST['content'];
 		$mail = new PHPMailer();
 		$mail->isSMTP();
 		$mail->SMTPDebug = 0;
@@ -127,16 +127,14 @@ class paySlipController {
 		// $mail->addAddress($sendPaySlip[0]['Emailpersonal'], $sendPaySlip[0]['FirstName']." ".$sendPaySlip[0]['LastName']);
 		$mail->Subject = $subject;
 		$mail->Body = $content;
-		$mail->addAttachment('C:\xampp\htdocs\github\campusgit\payslipsystem\webroot\download\payslip\pay_slip_'.$sendPaySlip[0]['Emp_ID'].'_'.$sendPaySlip[0]['Year'].$month.$date.'.xlsx');
+		$mail->addAttachment('../webroot/download/payslip/pay_slip_'.$sendPaySlip[0]['Emp_ID'].'_'.$sendPaySlip[0]['Year'].$month.$date.'.xls');
 		if (!$mail->send()) {
     		echo 'Mailer Error: ' . $mail->ErrorInfo;
 		} else {
 			$paySlipDetailAdd = $paySlipModel->paySlipDetailAdd($sendPaySlip,$subject,$content);
 			$_SESSION['message'] = "Pay Slip Mail Send Successfully";
 			$_SESSION['status'] = "success";
-			$_SESSION['screenName'] = "paySlipEmployeeHistory";
-			$this->detailView($sendPaySlip[0]['Emp_ID']);
-    		// header("Location: paySlipController.php?time=" . date(YmdHis));
+    		header("Location: employeeController.php?time=" . date(YmdHis));
 		}
 	}
 
@@ -146,8 +144,7 @@ class paySlipController {
 	 * @author kulasekaran.
 	 *
 	 */
-	function detailView($empId) {
-		unset($_SESSION['screenName']);
+	function detailView() {
 		$paySlipModel = new paySlipModel();
 		if (isset($_REQUEST['pageno'])) {
 			$pageno = $_REQUEST['pageno'];
@@ -158,9 +155,10 @@ class paySlipController {
 		// pagination process
 		$resultsPerPage = 5;
 		$startResult = ($pageno - 1) * $resultsPerPage;
-		$numOfResults = $paySlipModel->recordCountForDetailView($empId);
+		$numOfResults = $paySlipModel->recordCountForDetailView();
 		$totalPages = ceil($numOfResults / $resultsPerPage);
-		$detailView = $paySlipModel->detailView($empId);
+		$detailView = $paySlipModel->detailView();
+		$mainMenu = "paySlipEmployeeHistory";
 		require_once '../view/paySlip/employeeHistory.php';
 	}
 }

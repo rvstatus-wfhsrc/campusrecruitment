@@ -76,3 +76,11 @@ function fnEmployeeList() {
 	$( "#screenName" ).val('employeeList');
 	$( "#listForm" ).submit();
 }
+
+// pay slip employee history process
+function fnPaySlipEmployeeHistory(employeeId) {
+	$( "#screenName" ).val('paySlipEmployeeHistory');
+	$( "#hiddenEmployeeId" ).val(employeeId);
+	$("#listForm").attr("action", "../controller/paySlipController.php?time="+dateTime);
+	$( "#listForm" ).submit();
+}

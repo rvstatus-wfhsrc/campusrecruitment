@@ -2,6 +2,9 @@
 .autowidth {
     width: auto;
 }
+.w43 {
+    width: 43% !important;
+}
 /* width design class end */
 
 /* height class start */
@@ -163,3 +166,9 @@
     color: #9C0000;
 }
 /* name color class end */
+
+/* vertical align class start */
+.vat {
+    vertical-align: top;
+}
+/* vertical align class end */

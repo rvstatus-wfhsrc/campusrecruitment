@@ -29,15 +29,7 @@
 							<a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Employee</a>
 							<ul class="collapse list-unstyled <?php if($mainMenu == 'paySlipView') { echo('show'); } ?>" id="homeSubmenu">
 								<li>
-									<a class="active" href="javascript:;" onclick="fnEmployeeHistory()">List</a>
-								</li>
-							</ul>
-						</li>
-						<li>
-							<a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Pay Slip</a>
-							<ul class="collapse list-unstyled" id="pageSubmenu">
-								<li>
-									<a href="#">History</a>
+									<a class="active" href="javascript:;" onclick="fnEmployeeList()">List</a>
 								</li>
 							</ul>
 						</li>
@@ -87,7 +79,9 @@
 							</div>
 							<div>
 								<div class="leftSide"> Content : </div>
-								<div class="rightSide"><?php echo "Please find attached your Pay Slip for the previous month."; ?></div>
+								<div class="rightSide vat">
+									<textarea id="content" name="content" rows="3" cols="46" class="w43" style="min-height:0">Please find attached your Pay Slip for the previous month.</textarea>
+								</div>
 							</div>
 							<div>
 								<div class="leftSide"> Attachment : </div>

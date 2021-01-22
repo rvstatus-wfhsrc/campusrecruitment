@@ -10,18 +10,18 @@
 		<script type="text/javascript">
 			var dateTime = "<?php echo date('Ymdhis'); ?>";
 		</script>
-	</head>
-	<style>
+		<style>
 			/* session flash message design */
-            .fmsg {
-                font-size: 14px;
-                margin-left: 280px;
-                width: 35%;
-                margin-bottom: 0px;
-                padding-top: 1px;
-                padding-bottom: 1px;
-            }
-	</style>
+			.fmsg {
+				font-size: 14px;
+				margin-left: 280px;
+				width: 35%;
+				margin-bottom: 0px;
+				padding-top: 1px;
+				padding-bottom: 1px;
+			}
+		</style>
+	</head>
 	<body>
 		<div class="wrapper d-flex align-items-stretch">
 			<nav id="sidebar">
@@ -44,14 +44,6 @@
 								</li>
 							</ul>
 						</li>
-						<li>
-							<a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Pay Slip</a>
-							<ul class="collapse list-unstyled" id="pageSubmenu">
-								<li>
-									<a href="#">History</a>
-								</li>
-							</ul>
-						</li>
 					</ul>
 					<div class="footer">
 						<p>
@@ -64,11 +56,21 @@
 			<form action="../controller/employeeController.php?time=<?php echo(date('YmdHis')); ?>" method="POST" id="listForm" name="listForm">
 				<input type="hidden" id="screenName" name="screenName">
 				<input type="hidden" id="hiddenSalaryId" name="hiddenSalaryId">
-				<input type="hidden" id="hiddenEmpId" name="hiddenEmpId">
+				<input type="hidden" id="hiddenEmployeeId" name="hiddenEmployeeId">
 				<input type="hidden" id="hiddenSearch" name="hiddenSearch" value="<?php echo $employeeListArray['search']?>">
 				<input type="hidden" id="pageno" name="pageno" value="<?php echo $pageno; ?>">
 				<div id="content" class="p-4 p-md-5 pt-5">
 					<h2 class="mb-4">Employee List</h2>
+					<!-- session message -->
+					<?php if(isset($_SESSION['message'])): ?>
+				     <div class="alert alert-<?php echo $_SESSION['status']; ?> fmsg tac">
+				     	<?php echo $_SESSION['message']; ?>
+				     </div>
+					<?php
+						endif;
+						unset($_SESSION['message']);
+						unset($_SESSION['status']);
+					?>
 					<div class="float-left mt-1 mr-1">
 						<label for="year">Year : </label>
 					</div>
@@ -158,7 +160,11 @@
 									<?php $class = $key % 2 === 0 ? 'odd' : 'even'; ?>
 									<tr class="<?php echo $class; ?>">
 										<td class="tac"><?php echo ($pageno - 1) * $resultsPerPage + $key + 1 ?></td>
-										<td class="tac employeeUserNameClr"><?php echo $employeeListArray['employeeList'][$i]["Emp_ID"]; ?></td>
+										<td class="tac">
+											<a href="javascript:;" onclick="fnPaySlipEmployeeHistory('<?php echo $employeeListArray['employeeList'][$i]['Emp_ID']; ?>')" class="employeeUserNameClr">
+												<?php echo $employeeListArray['employeeList'][$i]["Emp_ID"]; ?>
+											</a>
+										</td>
 										<td class="nameClr"><?php echo $employeeListArray['employeeList'][$i]["FirstName"]." ".$employeeListArray['employeeList'][$i]["LastName"]; ?></td>
 										<td class="tac">
 											<?php

@@ -181,8 +181,8 @@ class paySlipModel {
    * @author kulasekaran.
    *
    */
-  function detailView($empId) {
-    $employeeId = $empId;
+  function detailView() {
+    $employeeId = $_REQUEST['hiddenEmployeeId'];
     $sql = "SELECT
               mstemp.FirstName,
               mstemp.LastName,
@@ -223,8 +223,8 @@ class paySlipModel {
    * @author kulasekaran.
    *
    */
-  function recordCountForDetailView($empId) {
-    $employeeId = $empId;
+  function recordCountForDetailView() {
+    $employeeId = $_REQUEST['hiddenEmployeeId'];
     $sql = "SELECT
               count(psdetails.Emp_Id) AS count
               FROM pay_payslip_details AS psdetails
