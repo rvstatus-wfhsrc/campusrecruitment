@@ -64,20 +64,11 @@
 			<form action="../controller/employeeController.php?time=<?php echo(date('YmdHis')); ?>" method="POST" id="listForm" name="listForm">
 				<input type="hidden" id="screenName" name="screenName">
 				<input type="hidden" id="hiddenSalaryId" name="hiddenSalaryId">
+				<input type="hidden" id="hiddenEmpId" name="hiddenEmpId">
 				<input type="hidden" id="hiddenSearch" name="hiddenSearch" value="<?php echo $employeeListArray['search']?>">
 				<input type="hidden" id="pageno" name="pageno" value="<?php echo $pageno; ?>">
 				<div id="content" class="p-4 p-md-5 pt-5">
 					<h2 class="mb-4">Employee List</h2>
-					<!-- session message -->
-					<?php if(isset($_SESSION['message'])): ?>
-				     <div class="alert alert-<?php echo $_SESSION['status']; ?> fmsg tac">
-				     	<?php echo $_SESSION['message']; ?>
-				     </div>
-					<?php
-						endif;
-						unset($_SESSION['message']);
-						unset($_SESSION['status']);
-					?>
 					<div class="float-left mt-1 mr-1">
 						<label for="year">Year : </label>
 					</div>
@@ -194,7 +185,6 @@
 									<td colspan="6" class="tac noDataFoundClr">No data found</td>
 								</tr>
 							<?php } ?>
-						
 					</table>
 					<?php if ($employeeListArray['employeeList'] != null) { ?>
 						<?php if ($numOfResults > 5) { ?>

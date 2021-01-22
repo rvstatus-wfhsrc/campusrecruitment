@@ -25,12 +25,14 @@ class paySlipController {
 	　*
 	 */
 	function __construct() {
-		if($_REQUEST["screenName"] == "paySlipView") {
+		if(isset($_REQUEST["screenName"]) && $_REQUEST["screenName"] == "paySlipView") {
 			Self::paySlipView();
-		} elseif ($_REQUEST["screenName"] == "downloadPaySlip") {
+		} elseif (isset($_REQUEST["screenName"]) && $_REQUEST["screenName"] == "downloadPaySlip") {
 			Self::downloadPaySlip();
-		} elseif ($_REQUEST["screenName"] == "sendPaySlip") {
+		} elseif (isset($_REQUEST["screenName"]) && $_REQUEST["screenName"] == "sendPaySlip") {
 			Self::sendPaySlip();
+		} elseif ($_SESSION['screenName'] == "paySlipEmployeeHistory") {
+			Self::detailView();
 		}
 	}
 
@@ -41,6 +43,7 @@ class paySlipController {
 	 *
 	 */
 	function paySlipView() {
+		$this->downloadPaySlip();
 		$paySlipModel = new paySlipModel();
 		$paySlipDetail = $paySlipModel->paySlipDetail();
 		$mainMenu = "paySlipView";
@@ -86,14 +89,13 @@ class paySlipController {
 										->setCellValue("L6",$currentDate);
 		$writerObject = PHPExcel_IOFactory::createwriter($excelObject,"Excel5");
 		ob_end_clean();
-		header("Content-Type: application/vnd.ms-excel");
-		header("Content-Disposition: attachment; filename= $fileName");
-		$writerObject->save(str_replace(__FILE__,'C:\xampp\htdocs\github\campusgit\payslipsystem\webroot\download\payslip\pay_slip_'.$paySlip[0]['Emp_ID'].'_'.$paySlip[0]['Year'].$month.$date.'.xlsx',__FILE__));
-		if($insertResults) {
-			echo "Successfully Registered";
-		} else {
-			echo "Mysql Error";
-		}
+		// header("Content-Type: application/vnd.ms-excel");
+		// header("Content-Disposition: attachment; filename= $fileName");
+
+		$file = 'pay_slip_'.$paySlip[0]['Emp_ID'].'_'.$paySlip[0]['Year'].$month.$date.'.xlsx';
+		$writerObject->save(str_replace('.php', '.xlsx', 'C:/xampp/htdocs/github/campusgit/payslipsystem/webroot/download/payslip/' . $file));
+    	// header('Location:C:/xampp/htdocs/github/campusgit/payslipsystem/webroot/download/payslip/' . $file);
+		// $writerObject->save(str_replace(__FILE__,'C:\xampp\htdocs\github\campusgit\payslipsystem\webroot\download\payslip\pay_slip_'.$paySlip[0]['Emp_ID'].'_'.$paySlip[0]['Year'].$month.$date.'.xlsx',__FILE__));
 	}
 
 	/**
@@ -132,8 +134,34 @@ class paySlipController {
 			$paySlipDetailAdd = $paySlipModel->paySlipDetailAdd($sendPaySlip,$subject,$content);
 			$_SESSION['message'] = "Pay Slip Mail Send Successfully";
 			$_SESSION['status'] = "success";
-    		header("Location: employeeController.php?time=" . date(YmdHis));
+			$_SESSION['screenName'] = "paySlipEmployeeHistory";
+			$this->detailView($sendPaySlip[0]['Emp_ID']);
+    		// header("Location: paySlipController.php?time=" . date(YmdHis));
 		}
+	}
+
+	/**
+	 * This detailView method are used to call the pay slip employee history screen
+	 * @return to view [ paySlip/employeeHistory ]
+	 * @author kulasekaran.
+	 *
+	 */
+	function detailView($empId) {
+		unset($_SESSION['screenName']);
+		$paySlipModel = new paySlipModel();
+		if (isset($_REQUEST['pageno'])) {
+			$pageno = $_REQUEST['pageno'];
+		} else {
+			$pageno = 1;
+		}
+
+		// pagination process
+		$resultsPerPage = 5;
+		$startResult = ($pageno - 1) * $resultsPerPage;
+		$numOfResults = $paySlipModel->recordCountForDetailView($empId);
+		$totalPages = ceil($numOfResults / $resultsPerPage);
+		$detailView = $paySlipModel->detailView($empId);
+		require_once '../view/paySlip/employeeHistory.php';
 	}
 }
 ?>

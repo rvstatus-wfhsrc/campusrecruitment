@@ -29,7 +29,7 @@
 							<a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Employee</a>
 							<ul class="collapse list-unstyled <?php if($mainMenu == 'paySlipView') { echo('show'); } ?>" id="homeSubmenu">
 								<li>
-									<a class="active" href="javascript:;" onclick="fnEmployeeList()">List</a>
+									<a class="active" href="javascript:;" onclick="fnEmployeeHistory()">List</a>
 								</li>
 							</ul>
 						</li>

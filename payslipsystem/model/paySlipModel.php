@@ -174,5 +174,64 @@ class paySlipModel {
     $paySlipDetailAddStatus = mysql_query($sql,$this->con);
     return $paySlipDetailAddStatus;
   }
+
+  /**
+   * This detailView method are used to retreives the data from database related to individual employee pay slip detail 
+   * @return the $detailViewArray variable
+   * @author kulasekaran.
+   *
+   */
+  function detailView($empId) {
+    $employeeId = $empId;
+    $sql = "SELECT
+              mstemp.FirstName,
+              mstemp.LastName,
+              salary.Total AS totalSalary,
+              psdetails.Emp_Id,
+              psdetails.salaryId,
+              psdetails.toMail,
+              psdetails.subject,
+              psdetails.content,
+              psdetails.year,
+              psdetails.month
+              FROM pay_payslip_details AS psdetails
+              LEFT JOIN emp_mstemployees AS mstemp ON mstemp.Emp_ID = psdetails.Emp_Id
+              LEFT JOIN emp_salary AS salary ON salary.Emp_Id = psdetails.Emp_Id
+              WHERE psdetails.delFlag = 0 AND psdetails.Emp_Id = '".$employeeId."'";
+    $result = mysql_query($sql,$this->con);
+    $detailViewArray = array();
+    $i = 0;
+    while($row = mysql_fetch_array($result)) {
+      $detailViewArray[$i]["FirstName"] = $row["FirstName"];
+      $detailViewArray[$i]["LastName"] = $row["LastName"];
+      $detailViewArray[$i]["totalSalary"] = $row["totalSalary"];
+      $detailViewArray[$i]["Emp_Id"] = $row["Emp_Id"];
+      $detailViewArray[$i]["salaryId"] = $row["salaryId"];
+      $detailViewArray[$i]["toMail"] = $row["toMail"];
+      $detailViewArray[$i]["subject"] = $row["subject"];
+      $detailViewArray[$i]["content"] = $row["content"];
+      $detailViewArray[$i]["year"] = $row["year"];
+      $detailViewArray[$i]["month"] = $row["month"];
+      $i++;
+    }
+    return $detailViewArray;
+  }
+
+  /**
+   * This recordCountForDetailView method are used to gets the count of emp_mstemployees table data
+   * @return the $row variable which contains count
+   * @author kulasekaran.
+   *
+   */
+  function recordCountForDetailView($empId) {
+    $employeeId = $empId;
+    $sql = "SELECT
+              count(psdetails.Emp_Id) AS count
+              FROM pay_payslip_details AS psdetails
+              WHERE psdetails.delFlag = 0 AND psdetails.Emp_Id = '".$employeeId."'";
+    $count = mysql_query($sql,$this->con);
+    $row = mysql_fetch_array($count);
+    return $row["count"];
+  }
 }
 ?>
