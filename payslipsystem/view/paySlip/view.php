@@ -92,7 +92,7 @@
 							<div>
 								<div class="leftSide"> Attachment : </div>
 								<div class="rightSide">
-									<a href="javascript:;" title="To Download Salary Pay Slip" onclick="downloadPaySlip(<?php echo $paySlipDetail[0]['salaryId']; ?>)">
+									<a href="javascript:;" title="To Download Salary Pay Slip" onclick="downloadPaySlipOnView(<?php echo $paySlipDetail[0]['salaryId']; ?>)">
 										<?php echo "pay_slip_".$paySlipDetail[0]['Emp_ID']."_".$paySlipDetail[0]['Year'].$month.$date; ?>
 									</a>
 								</div>

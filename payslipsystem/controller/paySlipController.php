@@ -35,6 +35,8 @@ class paySlipController {
 			Self::detailView();
 		} elseif (isset($_REQUEST["screenName"]) && $_REQUEST["screenName"] == "viewFormValidation") {
 			Self::viewFormValidation();
+		} elseif (isset($_REQUEST["screenName"]) && $_REQUEST["screenName"] == "downloadPaySlipOnView") {
+			Self::downloadPaySlipOnView();
 		}
 	}
 
@@ -91,13 +93,8 @@ class paySlipController {
 										->setCellValue("L6",$currentDate);
 		$writerObject = PHPExcel_IOFactory::createwriter($excelObject,"Excel5");
 		ob_end_clean();
-		// header("Content-Type: application/vnd.ms-excel");
-		// header("Content-Disposition: attachment; filename= $fileName");
-
 		$file = 'pay_slip_'.$paySlip[0]['Emp_ID'].'_'.$paySlip[0]['Year'].$month.$date.'.xls';
 		$writerObject->save(str_replace('.php', '.xls', '../webroot/download/payslip/' . $file));
-    	// header('Location:C:/xampp/htdocs/github/campusgit/payslipsystem/webroot/download/payslip/' . $file);
-		// $writerObject->save(str_replace(__FILE__,'C:\xampp\htdocs\github\campusgit\payslipsystem\webroot\download\payslip\pay_slip_'.$paySlip[0]['Emp_ID'].'_'.$paySlip[0]['Year'].$month.$date.'.xlsx',__FILE__));
 	}
 
 	/**
@@ -129,7 +126,7 @@ class paySlipController {
 		$mail->addAddress($_REQUEST['toMail'], $sendPaySlip[0]['FirstName']." ".$sendPaySlip[0]['LastName']);
 		$mail->Subject = $subject;
 		$mail->Body = $content;
-		$mail->CC = $cc;
+		$mail->AddCC($cc);
 		$mail->addAttachment('../webroot/download/payslip/pay_slip_'.$sendPaySlip[0]['Emp_ID'].'_'.$sendPaySlip[0]['Year'].$month.$date.'.xls');
 		if (!$mail->send()) {
     		echo 'Mailer Error: ' . $mail->ErrorInfo;
@@ -186,14 +183,32 @@ class paySlipController {
 				if(!empty($_SERVER['HTTP_X_REQUESTED_WITH']) &&  strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest') {
 					echo json_encode($_SESSION['errors']); exit;
 				}
-				echo "<ul>";
-				foreach($_SESSION['errors'] as $key => $value){
-					echo "<li>" . $value . "</li>";
-				}
-				echo "</ul>";exit;
 			}else{
 				echo json_encode(true); exit;
 			}
+		}
+	}
+
+	/**
+	 * This downloadPaySlipOnView method are used to download the excel
+	 * @return it does not return anything
+	 * @author kulasekaran.
+	 *
+	 */
+	function downloadPaySlipOnView() {
+		$excelObject = new PHPExcel();
+		$paySlipModel = new paySlipModel();
+		$downloadPaySlipOnView = $paySlipModel->downloadPaySlipOnView();
+		$month = date('m',$downloadPaySlipOnView[0]['Month']);
+		$date = date('d');
+		$filePath = '../webroot/download/payslip/pay_slip_'.$downloadPaySlipOnView[0]['Emp_ID'].'_'.$downloadPaySlipOnView[0]['Year'].$month.$date.'.xls';
+		$fileName = 'pay_slip_'.$downloadPaySlipOnView[0]['Emp_ID'].'_'.$downloadPaySlipOnView[0]['Year'].$month.$date.'.xls';
+		if(file_exists($filePath)) {
+			header("Content-Type: application/vnd.ms-excel");
+			header("Content-Disposition: attachment; filename= $fileName");
+			readfile($filePath);
+		} else {
+			echo "This File does not exist.";
 		}
 	}
 }

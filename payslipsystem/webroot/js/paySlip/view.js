@@ -15,10 +15,13 @@ function fnSendMail(salaryId) {
 		data: $('#viewForm').serialize(),
 		success: function(resp) {
 			if (resp === true) {
-				$( "#hiddenSalaryId" ).val(salaryId);
-				$( "#screenName" ).val('sendPaySlip');
-				$( "#viewForm" ).submit();
-				return false;
+				var confRegMsg = "Are You Confirm To Send Pay Slip Mail ?";
+                if(confirm(confRegMsg)) {
+					$( "#hiddenSalaryId" ).val(salaryId);
+					$( "#screenName" ).val('sendPaySlip');
+					$( "#viewForm" ).submit();
+					return false;
+				}
 			} else {
 				$.each(resp, function(i, v) {
 					console.log(i + " => " + v);
@@ -41,9 +44,9 @@ function resetErrors() {
 }
 
 // pay slip view process
-function downloadPaySlip(salaryId) {
+function downloadPaySlipOnView(salaryId) {
 	$( "#hiddenSalaryId" ).val(salaryId);
-	$( "#screenName" ).val('downloadPaySlip');
+	$( "#screenName" ).val('downloadPaySlipOnView');
 	$( "#viewForm" ).submit();
 }
 

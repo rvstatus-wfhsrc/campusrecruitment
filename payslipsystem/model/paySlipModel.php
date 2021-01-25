@@ -233,5 +233,32 @@ class paySlipModel {
     $row = mysql_fetch_array($count);
     return $row["count"];
   }
+
+  /**
+   * This downloadPaySlipOnView method are used to retreives the data from database related to download pay slip on view
+   * @return the $downloadPaySlipOnView variable
+   * @author kulasekaran.
+   *
+   */
+  function downloadPaySlipOnView() {
+    $salaryId = $_REQUEST['hiddenSalaryId'];
+    $sql = "SELECT
+              mstemp.Emp_ID,
+              salary.Month AS Month,
+              salary.Year AS Year
+              FROM emp_salary AS salary
+              LEFT JOIN emp_mstemployees AS mstemp ON mstemp.Emp_ID = salary.Emp_ID
+              WHERE mstemp.delFlg = 0 AND salary.id = ".$salaryId;
+    $result = mysql_query($sql,$this->con);
+    $downloadPaySlipOnView = array();
+    $i = 0;
+    while($row = mysql_fetch_array($result)) {
+      $downloadPaySlipOnView[$i]["Emp_ID"] = $row["Emp_ID"];
+      $downloadPaySlipOnView[$i]["Month"] = $row["Month"];
+      $downloadPaySlipOnView[$i]["Year"] = $row["Year"];
+      $i++;
+    }
+    return $downloadPaySlipOnView;
+  }
 }
 ?>
