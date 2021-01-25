@@ -33,6 +33,8 @@ class paySlipController {
 			Self::sendPaySlip();
 		} elseif (isset($_REQUEST["screenName"]) && $_REQUEST["screenName"] == "paySlipEmployeeHistory") {
 			Self::detailView();
+		} elseif (isset($_REQUEST["screenName"]) && $_REQUEST["screenName"] == "viewFormValidation") {
+			Self::viewFormValidation();
 		}
 	}
 
@@ -109,8 +111,9 @@ class paySlipController {
 		$sendPaySlip = $paySlipModel->sendPaySlip();
 		$month = date('m',$sendPaySlip[0]['Month']);
 		$date = date('d');
-		$subject = "Pay Slip_".$sendPaySlip[0]['Year']."_".$month."_".$date;
+		$subject = $_REQUEST['subject'];
 		$content = $_REQUEST['content'];
+		$cc = $_REQUEST['cc'];
 		$mail = new PHPMailer();
 		$mail->isSMTP();
 		$mail->SMTPDebug = 0;
@@ -123,10 +126,10 @@ class paySlipController {
 		$mail->Password = "pvictulryihbwpjn";
 		$mail->setFrom('c.krishnaragav@gmail.com', 'krishna Ragav');
 		$mail->addReplyTo('c.krishnaragav@gmail.com', 'krishna Ragav');
-		$mail->addAddress('kulasekaran337@gmail.com','Kulasekaran A');
-		// $mail->addAddress($sendPaySlip[0]['Emailpersonal'], $sendPaySlip[0]['FirstName']." ".$sendPaySlip[0]['LastName']);
+		$mail->addAddress($_REQUEST['toMail'], $sendPaySlip[0]['FirstName']." ".$sendPaySlip[0]['LastName']);
 		$mail->Subject = $subject;
 		$mail->Body = $content;
+		$mail->CC = $cc;
 		$mail->addAttachment('../webroot/download/payslip/pay_slip_'.$sendPaySlip[0]['Emp_ID'].'_'.$sendPaySlip[0]['Year'].$month.$date.'.xls');
 		if (!$mail->send()) {
     		echo 'Mailer Error: ' . $mail->ErrorInfo;
@@ -160,6 +163,38 @@ class paySlipController {
 		$detailView = $paySlipModel->detailView();
 		$mainMenu = "paySlipEmployeeHistory";
 		require_once '../view/paySlip/employeeHistory.php';
+	}
+
+	function viewFormValidation() {
+		unset($_SESSION['errors']);
+		if(isset($_POST)){
+			if (empty($_POST['toMail'])) {
+				$_SESSION['errors']['toMail'] = "The To field is required";
+			} elseif (!filter_var($_POST['toMail'], FILTER_VALIDATE_EMAIL)) {
+				$_SESSION['errors']['toMail'] = "The E-Mail Address is invalid.";
+			}
+			if (empty($_POST['cc'])) {
+				$_SESSION['errors']['cc'] = "The CC field is required";
+			}
+			if (empty($_POST['subject'])) {
+				$_SESSION['errors']['subject'] = "The Subject field is required";
+			}
+			if (empty($_POST['content'])) {
+				$_SESSION['errors']['content'] = "The Content field is required";
+			}
+			if(isset($_SESSION['errors']) && count($_SESSION['errors']) > 0){
+				if(!empty($_SERVER['HTTP_X_REQUESTED_WITH']) &&  strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest') {
+					echo json_encode($_SESSION['errors']); exit;
+				}
+				echo "<ul>";
+				foreach($_SESSION['errors'] as $key => $value){
+					echo "<li>" . $value . "</li>";
+				}
+				echo "</ul>";exit;
+			}else{
+				echo json_encode(true); exit;
+			}
+		}
 	}
 }
 ?>

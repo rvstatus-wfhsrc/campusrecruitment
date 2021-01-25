@@ -1,3 +1,45 @@
+var data = {};
+// send mail button process
+function fnSendMail(salaryId) {
+	resetErrors();
+	var url = 'paySlipController.php';
+	$.each($('form input, form hidden, form textarea'), function(i, v) {
+		if (v.type !== 'submit') {
+			data[v.name] = v.value;
+		}
+	});
+	$.ajax({
+		dataType: 'json',
+		type: 'POST',
+		url: url,
+		data: $('#viewForm').serialize(),
+		success: function(resp) {
+			if (resp === true) {
+				$( "#hiddenSalaryId" ).val(salaryId);
+				$( "#screenName" ).val('sendPaySlip');
+				$( "#viewForm" ).submit();
+				return false;
+			} else {
+				$.each(resp, function(i, v) {
+					console.log(i + " => " + v);
+					var msg = '<label class="error" style="color:#9C0000; font-size:13px; padding-left: 5px; display:inline-block;" for="'+i+'">'+v+'</label>';
+					$('input[name="' + i + '"], textarea[name="' + i + '"]').addClass('inputTxtError').after(msg);
+				});
+			}
+			return false;
+		},
+		error: function() {
+			console.log('there was a problem checking the fields');
+		}
+	});
+	return false;
+}
+
+function resetErrors() {
+	$('form input').removeClass('inputTxtError');
+	$('label.error').remove();
+}
+
 // pay slip view process
 function downloadPaySlip(salaryId) {
 	$( "#hiddenSalaryId" ).val(salaryId);
@@ -9,13 +51,6 @@ function downloadPaySlip(salaryId) {
 function fnBackBtn() {
 	$( "#screenName" ).val('employeeList');
 	$("#viewForm").attr("action", "../controller/employeeController.php?time="+dateTime);
-	$( "#viewForm" ).submit();
-}
-
-// send mail button process
-function fnSendMail(salaryId) {
-	$( "#hiddenSalaryId" ).val(salaryId);
-	$( "#screenName" ).val('sendPaySlip');
 	$( "#viewForm" ).submit();
 }
 

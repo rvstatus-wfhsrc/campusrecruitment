@@ -45,7 +45,7 @@
 			<div id="content" class="p-4 p-md-5 pt-5">
 				<form action="../controller/paySlipController.php?time=<?php echo(date('YmdHis')); ?>" method="POST" id="viewForm" name="viewForm">
 					<h2 class="mb-4">Pay Slip Mail View</h2>
-					<input type="hidden" id="screenName" name="screenName">
+					<input type="hidden" id="screenName" name="screenName" value="viewFormValidation">
 					<input type="hidden" id="hiddenSalaryId" name="hiddenSalaryId">
 					<div class="mb-1">
 						<a class="btn btn-info editBtn" href="javascript:;" onclick="fnBackBtn()">
@@ -67,15 +67,21 @@
 							</div>
 							<div>
 								<div class="leftSide"> To : </div>
-								<div class="rightSide"><?php echo $paySlipDetail[0]['Emailpersonal']; ?></div>
+								<div class="rightSide">
+									<input type="text" id="toMail" name="toMail" class="w43 h34" value="<?php echo $paySlipDetail[0]['Emailpersonal']; ?>">
+								</div>
 							</div>
 							<div>
 								<div class="leftSide"> CC : </div>
-								<div class="rightSide"><?php echo "Nil"; ?></div>
+								<div class="rightSide">
+									<input type="text" id="cc" name="cc" class="w43 h34" value="Nil">
+								</div>
 							</div>
 							<div>
 								<div class="leftSide"> Subject : </div>
-								<div class="rightSide"><?php echo "Pay Slip_".$paySlipDetail[0]['Year']."_".$month."_".$date; ?></div>
+								<div class="rightSide">
+									<input type="text" id="subject" name="subject" class="w43 h34" value="<?php echo "Pay Slip_".$paySlipDetail[0]['Year']."_".$month."_".$date; ?>">
+								</div>
 							</div>
 							<div>
 								<div class="leftSide"> Content : </div>
@@ -85,7 +91,11 @@
 							</div>
 							<div>
 								<div class="leftSide"> Attachment : </div>
-								<div class="rightSide"><a href="javascript:;" title="To Download Salary Pay Slip" onclick="downloadPaySlip(<?php echo $paySlipDetail[0]['salaryId']; ?>)"><?php echo "pay_slip_".$paySlipDetail[0]['Emp_ID']."_".$paySlipDetail[0]['Year'].$month.$date; ?></a></div>
+								<div class="rightSide">
+									<a href="javascript:;" title="To Download Salary Pay Slip" onclick="downloadPaySlip(<?php echo $paySlipDetail[0]['salaryId']; ?>)">
+										<?php echo "pay_slip_".$paySlipDetail[0]['Emp_ID']."_".$paySlipDetail[0]['Year'].$month.$date; ?>
+									</a>
+								</div>
 							</div>
 						</div>
 					</div>
