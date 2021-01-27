@@ -80,7 +80,7 @@
 							<div>
 								<div class="leftSide"> Subject : </div>
 								<div class="rightSide">
-									<input type="text" id="subject" name="subject" class="w43 h34" value="<?php echo "Pay Slip_".$paySlipDetail[0]['Year']."_".$month."_".$date; ?>">
+									<input type="text" id="subject" name="subject" class="w43 h34" value="<?php echo "Pay Slip ".$paySlipDetail[0]['Year']."/".$month."/".$date; ?>">
 								</div>
 							</div>
 							<div>

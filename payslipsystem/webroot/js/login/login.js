@@ -95,7 +95,7 @@ $(function() {
 		var userNameVal = document.getElementById("userName").value;
 		var passwordVal = document.getElementById("password").value;
 		if ((userNameVal == "admin") && (passwordVal == "admin")) {
-			$( "#screenName" ).val('employeeList');
+			$( "#screenName" ).val('loginProcess');
 			document.getElementById("loginForm").action = "../controller/loginController.php?time="+dateTime;
 			$( "#loginForm" ).submit();
 		} else if((userName.checkValidity() == true) && (password.checkValidity() == true) && ((userNameVal != "admin") || (passwordVal != "admin"))) {

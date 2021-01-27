@@ -10,6 +10,13 @@ $(document).ready(function() {
 		 fnSortProcess();
 			cc = -1;
 	});
+	$('#listForm').keydown(function (e) {
+	    if (e.keyCode == 13) {
+	    	$( "#screenName" ).val('employeeList');
+			$("#hiddenSearch").val($("#search").val());
+			$( "#listForm" ).submit();
+	    }
+	});
 	$('#month').change(function () {
 		$( "#screenName" ).val('employeeList');
 		$( "#listForm" ).submit();

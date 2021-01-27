@@ -23,9 +23,8 @@
 		function __construct() {
 			if(!empty($_REQUEST['screenName']) && $_REQUEST['screenName'] == "loginform") {
 				Self::loginform();
-			} elseif (!empty($_REQUEST['screenName']) && $_REQUEST['screenName'] == "employeeList") {
-				// print_r($_REQUEST['screenName']);exit();
-				Self::employeeList();
+			} elseif (!empty($_REQUEST['screenName']) && $_REQUEST['screenName'] == "loginProcess") {
+				Self::loginProcess();
 			} else {
 				Self::index();
 			}
@@ -42,12 +41,12 @@
 		}
 
 		/**
-		 * This employeeList method are used to call the employee list screen
-		 * @return to view [ employee/list ]
+		 * This loginProcess method are used to sets the session and redirects into employeeController
+		 * @return it does not returns anything
 		 * @author kulasekaran.
 		 *
 		 */
-		function employeeList() {
+		function loginProcess() {
 			$_SESSION["userName"] = $_REQUEST['userName'];
 			$_SESSION["flag"] = 1;
 			$_SESSION["logged_in"] = true;
