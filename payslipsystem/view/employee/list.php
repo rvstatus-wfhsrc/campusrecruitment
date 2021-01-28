@@ -57,6 +57,8 @@
 				<input type="hidden" id="screenName" name="screenName">
 				<input type="hidden" id="hiddenSalaryId" name="hiddenSalaryId">
 				<input type="hidden" id="hiddenEmployeeId" name="hiddenEmployeeId">
+				<input type="hidden" id="hiddenYear" name="hiddenYear">
+				<input type="hidden" id="hiddenMonth" name="hiddenMonth">
 				<input type="hidden" id="hiddenSearch" name="hiddenSearch" value="<?php echo $employeeListArray['search']?>">
 				<input type="hidden" id="pageno" name="pageno" value="<?php echo $pageno; ?>">
 				<div id="content" class="p-4 p-md-5 pt-5">
@@ -161,7 +163,7 @@
 									<tr class="<?php echo $class; ?>">
 										<td class="tac"><?php echo ($pageno - 1) * $resultsPerPage + $key + 1 ?></td>
 										<td class="tac">
-											<a href="javascript:;" onclick="fnPaySlipEmployeeHistory('<?php echo $employeeListArray['employeeList'][$i]['Emp_ID']; ?>')" class="employeeUserNameClr">
+											<a href="javascript:;" onclick="fnPaySlipEmployeeHistory('<?php echo $employeeListArray['employeeList'][$i]['Emp_ID']; ?>',<?php echo $employeeListArray['month']; ?>,<?php echo $employeeListArray['year']; ?>)" class="employeeUserNameClr">
 												<?php echo $employeeListArray['employeeList'][$i]["Emp_ID"]; ?>
 											</a>
 										</td>
@@ -177,7 +179,7 @@
 										</td>
 										<td><?php echo $employeeListArray['employeeList'][$i]["Emailpersonal"]; ?></td>
 										<td class="tac">
-											<a href="javascript:;" onclick="fnPaySlipView(<?php echo $employeeListArray['employeeList'][$i]['salaryId']; ?>)">
+											<a href="javascript:;" onclick="fnPaySlipView(<?php echo $employeeListArray['employeeList'][$i]['salaryId']; ?>,<?php echo $employeeListArray['month']; ?>,<?php echo $employeeListArray['year']; ?>)">
 												<img style="width: 20px;" src="../webroot/images/details.png" title="Pay Slip View">
 											</a>
 										</td>
@@ -194,33 +196,44 @@
 					</table>
 					<?php if ($employeeListArray['employeeList'] != null) { ?>
 						<?php if ($numOfResults > 5) { ?>
-						<div class="pagination">
-							<div class="<?php if($pageno == 1){ echo 'disabled'; } ?>">
-								<a href="javascript:;" onclick="fnPagination(1)">&laquo;</a>
-							</div>
-							<div class="<?php if($pageno <= 1){ echo 'disabled'; } ?>">
-								<a href="javascript:;" onclick="fnPagination(<?php if($pageno <= 1){ echo '#'; } else { echo ($pageno - 1); } ?>)">Prev</a>
-							</div>
-							<?php
-								$pagLink = "<div>";
-								$j = $totalPages;
-								if($totalPages >= 2) {
-									$j = 1;
+							<div class="pagination">
+								<?php if($pageno > 1) {
+									$prev = $pageno - 1;
+									echo '<a href="javascript:;" onclick="fnPagination(1)">&laquo;</a>';
+									echo '<a href="javascript:;" onclick="fnPagination('.$prev.')">Prev</a>&nbsp';
+								} else {
+									echo '<a>&laquo</a>';
+									echo '<a>Prev</a>';
 								}
-								$startPageNo = $pageno;
-								$endPageNo = $pageno + $j;
-								for ($i=$startPageNo; $i<=$endPageNo; $i++) {  
-									$pagLink .= "<a ";if($pageno == $i) {$pagLink .="class = active";}$pagLink .= " onclick=fnPagination(".$i.") href='javascript:;'>".$i."</a>";  
-								};
-								echo $pagLink . "</div>";
-							?>
-							<div class="<?php if($pageno >= $totalPages){ echo 'disabled'; } ?>">
-								<a href="javascript:;" onclick="fnPagination(<?php if($pageno >= $totalPages){ echo '#'; } else { echo ($pageno + 1); } ?>)" >Next</a>
+								$start = $pageno;
+								$end = $start + 2;
+								if($end > $totalPages) {
+									$end = $totalPages;
+								}
+								if($pageno > 3) {
+									$start = $pageno - 1;
+									$end = $pageno + 1;
+									if($end > $totalPages) {
+										$start = $totalPages - 2; 
+										$end = $totalPages; 
+									}
+								}
+								for ($i = $start; $i <= $end; $i++) {
+									if($i == $pageno)
+										echo '<a class = "active">'.$i.'</a>&nbsp;';
+									else
+										echo '<a href="javascript:;" onclick="fnPagination('.$i.')">'.$i.'</a>&nbsp;';
+								}
+								if ($pageno < $totalPages) {
+									$next = $pageno + 1;
+									echo '<a href="javascript:;" onclick="fnPagination('.$next.')">Next</a>';
+									echo '<a href="javascript:;" onclick="fnPagination('.$totalPages.')">&raquo;</a>&nbsp';
+								} else {
+									echo '<a>Next</a>';
+									echo '<a>&raquo</a>';
+								}
+								?>
 							</div>
-							<div>
-								<a href="javascript:;" onclick="fnPagination(<?php echo $totalPages; ?>)">&raquo;</a>
-							</div>
-						</div>
 						<?php } ?>
 					<?php } ?>
 				</div>
@@ -228,7 +241,6 @@
 		</div>
 		<script type="text/javascript" src="../webroot/js/jquery.min.js" ></script>
 		<script type="text/javascript" src="../webroot/js/popper.js" ></script>
-		<script type="text/javascript" src="../webroot/js/bootstrap.min.js" ></script>
 		<script type="text/javascript" src="../webroot/js/main.js" ></script>
 		<script type="text/javascript" src="../webroot/js/employee/list.js" ></script>
 	</body>

@@ -1,6 +1,6 @@
 var data = {};
 // send mail button process
-function fnSendMail(salaryId) {
+function fnSendMail(salaryId,month,year) {
 	resetErrors();
 	var url = 'paySlipController.php';
 	$.each($('form input, form hidden, form textarea'), function(i, v) {
@@ -19,6 +19,8 @@ function fnSendMail(salaryId) {
                 if(confirm(confRegMsg)) {
 					$( "#hiddenSalaryId" ).val(salaryId);
 					$( "#screenName" ).val('sendPaySlip');
+					$( "#month" ).val(month);
+					$( "#year" ).val(year);
 					$( "#viewForm" ).submit();
 					return false;
 				}
@@ -51,8 +53,10 @@ function downloadPaySlipOnView(salaryId) {
 }
 
 // back button process
-function fnBackBtn() {
+function fnBackBtn(month,year) {
 	$( "#screenName" ).val('employeeList');
+	$( "#month" ).val(month);
+	$( "#year" ).val(year);
 	$("#viewForm").attr("action", "../controller/employeeController.php?time="+dateTime);
 	$( "#viewForm" ).submit();
 }

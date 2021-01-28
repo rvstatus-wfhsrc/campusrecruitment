@@ -181,7 +181,7 @@ class paySlipModel {
    * @author kulasekaran.
    *
    */
-  function detailView() {
+  function detailView($start,$end) {
     $employeeId = $_REQUEST['hiddenEmployeeId'];
     $sql = "SELECT
               mstemp.FirstName,
@@ -197,7 +197,7 @@ class paySlipModel {
               FROM pay_payslip_details AS psdetails
               LEFT JOIN emp_mstemployees AS mstemp ON mstemp.Emp_ID = psdetails.Emp_Id
               LEFT JOIN emp_salary AS salary ON salary.Emp_Id = psdetails.Emp_Id
-              WHERE psdetails.delFlag = 0 AND psdetails.Emp_Id = '".$employeeId."'";
+              WHERE psdetails.delFlag = 0 AND psdetails.Emp_Id = '".$employeeId."' LIMIT $start,$end";
     $result = mysql_query($sql,$this->con);
     $detailViewArray = array();
     $i = 0;

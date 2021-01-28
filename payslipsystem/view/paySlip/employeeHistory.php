@@ -45,10 +45,13 @@
 			<div id="content" class="p-4 p-md-5 pt-5">
 				<form action="../controller/employeeController.php?time=<?php echo(date('YmdHis')); ?>" method="POST" id="employeeHistoryForm" name="employeeHistoryForm">
 					<input type="hidden" id="screenName" name="screenName">
+					<input type="hidden" id="month" name="month" value="<?php echo $month; ?>">
+					<input type="hidden" id="year" name="year" value="<?php echo $year; ?>">
 					<input type="hidden" id="pageno" name="pageno" value="<?php echo $pageno; ?>">
+					<input type="hidden" id="hiddenEmployeeId" name="hiddenEmployeeId" value="<?php echo $detailView[0]["Emp_Id"]; ?>">
 					<h2 class="mb-4">Pay Slip Employee History</h2>
 					<div class="mb-1">
-						<a class="btn btn-info editBtn" href="javascript:;" onclick="fnBackBtn()">
+						<a class="btn btn-info editBtn" href="javascript:;" onclick="fnBackBtn(<?php echo $month; ?>,<?php echo $year; ?>)">
 							<i class="fa fa-chevron-left fa-btn"></i>Back
 						</a>
 					</div>
@@ -68,11 +71,11 @@
 						<colgroup>
 							<col width="1%">
 							<col width="18%">
-							<col width="15%">
+							<col width="18%">
 							<col>
 							<col width="13%">
-							<col width="12%">
-							<col width="5%">
+							<col width="9%">
+							<col width="4%">
 						</colgroup>
 						<thead class="thead">
 							<tr>
@@ -116,6 +119,48 @@
 							</tr>
 						<?php } ?>
 					</table>
+					<?php if ($detailView != null) { ?>
+						<?php if ($numOfResults > 5) { ?>
+							<div class="pagination">
+								<?php if($pageno > 1) {
+									$prev = $pageno - 1;
+									echo '<a href="javascript:;" onclick="fnPagination(1)">&laquo;</a>';
+									echo '<a href="javascript:;" onclick="fnPagination('.$prev.')">Prev</a>&nbsp';
+								} else {
+									echo '<a>&laquo</a>';
+									echo '<a>Prev</a>';
+								}
+								$start = $pageno;
+								$end = $start + 2;
+								if($end > $totalPages) {
+									$end = $totalPages;
+								}
+								if($pageno > 3) {
+									$start = $pageno - 1;
+									$end = $pageno + 1;
+									if($end > $totalPages) {
+										$start = $totalPages - 2; 
+										$end = $totalPages; 
+									}
+								}
+								for ($i = $start; $i <= $end; $i++) {
+									if($i == $pageno)
+										echo '<a class = "active">'.$i.'</a>&nbsp;';
+									else
+										echo '<a href="javascript:;" onclick="fnPagination('.$i.')">'.$i.'</a>&nbsp;';
+								}
+								if ($pageno < $totalPages) {
+									$next = $pageno + 1;
+									echo '<a href="javascript:;" onclick="fnPagination('.$next.')">Next</a>';
+									echo '<a href="javascript:;" onclick="fnPagination('.$totalPages.')">&raquo;</a>&nbsp';
+								} else {
+									echo '<a>Next</a>';
+									echo '<a>&raquo</a>';
+								}
+								?>
+							</div>
+						<?php } ?>
+					<?php } ?>
 				</form>
 			</div>
 		</div>

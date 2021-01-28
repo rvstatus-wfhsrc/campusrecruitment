@@ -47,12 +47,14 @@
 					<h2 class="mb-4">Pay Slip Mail View</h2>
 					<input type="hidden" id="screenName" name="screenName" value="viewFormValidation">
 					<input type="hidden" id="hiddenSalaryId" name="hiddenSalaryId">
+					<input type="hidden" id="month" name="month">
+					<input type="hidden" id="year" name="year">
 					<div class="mb-1">
-						<a class="btn btn-info editBtn" href="javascript:;" onclick="fnBackBtn()">
+						<a class="btn btn-info editBtn" href="javascript:;" onclick="fnBackBtn(<?php echo $month; ?>,<?php echo $year; ?>)">
 							<i class="fa fa-chevron-left fa-btn"></i>Back
 						</a>
-						<a class="btn bg-warning text-white editBtn" href="javascript:;" onclick="fnSendMail(<?php echo $paySlipDetail[0]['salaryId']; ?>)">
-							<i class="fa fa-edit fa-btn"></i>Send Mail
+						<a class="btn bg-warning text-white editBtn" href="javascript:;" onclick="fnSendMail(<?php echo $paySlipDetail[0]['salaryId']; ?>,<?php echo $month; ?>,<?php echo $year; ?>)">
+							<i class="fa fa-envelope fa-btn"></i>Send Mail
 						</a>
 					</div>
 					<?php
@@ -93,7 +95,7 @@
 								<div class="leftSide"> Attachment : </div>
 								<div class="rightSide">
 									<a href="javascript:;" title="To Download Salary Pay Slip" onclick="downloadPaySlipOnView(<?php echo $paySlipDetail[0]['salaryId']; ?>)">
-										<?php echo "pay_slip_".$paySlipDetail[0]['Emp_ID']."_".$paySlipDetail[0]['Year'].$month.$date; ?>
+										<?php echo "pay_slip_".$paySlipDetail[0]['Emp_ID']."_".$paySlipDetail[0]['Year'].$month.$date.".xls"; ?>
 									</a>
 								</div>
 							</div>
@@ -104,7 +106,6 @@
 		</div>
 		<script type="text/javascript" src="../webroot/js/jquery.min.js" ></script>
 		<script type="text/javascript" src="../webroot/js/popper.js" ></script>
-		<script type="text/javascript" src="../webroot/js/bootstrap.min.js" ></script>
 		<script type="text/javascript" src="../webroot/js/main.js" ></script>
 		<script type="text/javascript" src="../webroot/js/paySlip/view.js" ></script>
 	</body>

@@ -50,6 +50,8 @@ class paySlipController {
 		$this->downloadPaySlip();
 		$paySlipModel = new paySlipModel();
 		$paySlipDetail = $paySlipModel->paySlipDetail();
+		$month = $_REQUEST['hiddenMonth'];
+		$year = $_REQUEST['hiddenYear'];
 		$mainMenu = "paySlipView";
 		require_once '../view/paySlip/view.php';
 	}
@@ -157,7 +159,17 @@ class paySlipController {
 		$startResult = ($pageno - 1) * $resultsPerPage;
 		$numOfResults = $paySlipModel->recordCountForDetailView();
 		$totalPages = ceil($numOfResults / $resultsPerPage);
-		$detailView = $paySlipModel->detailView();
+		if(isset($_REQUEST['hiddenMonth'])) {
+			$month = $_REQUEST['hiddenMonth'];
+		} else {
+			$month = $_REQUEST['month'];
+		}
+		if (isset($_REQUEST['hiddenYear'])) {
+			$year = $_REQUEST['hiddenYear'];
+		} else {
+			$year = $_REQUEST['year'];
+		}
+		$detailView = $paySlipModel->detailView($startResult,$resultsPerPage);
 		$mainMenu = "paySlipEmployeeHistory";
 		require_once '../view/paySlip/employeeHistory.php';
 	}
