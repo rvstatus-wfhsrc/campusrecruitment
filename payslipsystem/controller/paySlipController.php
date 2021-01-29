@@ -136,6 +136,8 @@ class paySlipController {
 			$paySlipDetailAdd = $paySlipModel->paySlipDetailAdd($sendPaySlip,$subject,$content);
 			$_SESSION['message'] = "Pay Slip Mail Send Successfully";
 			$_SESSION['status'] = "success";
+			$_SESSION['month'] = $_REQUEST['month'];
+			$_SESSION['year'] = $_REQUEST['year'];
     		header("Location: employeeController.php?time=" . date(YmdHis));
 		}
 	}

@@ -14,7 +14,7 @@
 			/* session flash message design */
 			.fmsg {
 				font-size: 14px;
-				margin-left: 280px;
+				margin-left: 300px;
 				width: 35%;
 				margin-bottom: 0px;
 				padding-top: 1px;
@@ -65,7 +65,7 @@
 					<h2 class="mb-4">Employee List</h2>
 					<!-- session message -->
 					<?php if(isset($_SESSION['message'])): ?>
-				     <div class="alert alert-<?php echo $_SESSION['status']; ?> fmsg tac">
+				     <div class="alert alert-<?php echo $_SESSION['status']; ?> fmsg tac mb-2">
 				     	<?php echo $_SESSION['message']; ?>
 				     </div>
 					<?php
@@ -73,47 +73,47 @@
 						unset($_SESSION['message']);
 						unset($_SESSION['status']);
 					?>
-					<div class="float-left mt-1 mr-1">
+					<div class="inb float-left">
 						<label for="year">Year : </label>
+						<span>
+							<select id="year" name="year" class="form-control h34 inb autowidth">
+								<?php
+									$selectedYear = "";
+									if($employeeListArray['year'] != null ) {
+										$selectedYear = $employeeListArray['year'];
+									}
+									foreach($getYear as $years) {
+										$yearOption = "<option value=".$years;
+										if($selectedYear == $years) {$yearOption .= " selected";}$yearOption .= ">".$years."</option>";
+										echo $yearOption;
+									}
+								?> 
+							</select>
+						</span>
 					</div>
-					<div class="float-left">
-						<select id="year" name="year" class="form-control h34 inb autowidth">
-							<?php
-								$selectedYear = "";
-								if($employeeListArray['year'] != null ) {
-									$selectedYear = $employeeListArray['year'];
-								}
-								foreach($getYear as $years) {
-									$yearOption = "<option value=".$years;
-									if($selectedYear == $years) {$yearOption .= " selected";}$yearOption .= ">".$years."</option>";
-									echo $yearOption;
-								}
-							?> 
-						</select>
-					</div>
-					<div class="float-left mt-1 mr-1">
+					<div class="inb ml-2 float-left">
 						<label for="month">Month : </label>
-					</div>
-					<div class="float-left">
-						<select id="month" name="month" class="form-control h34 inb autowidth">
-							<?php
-								$selectedMonth = "";
-								if($employeeListArray['month'] != null ) {
-									$selectedMonth = $employeeListArray['month'];
-								}
-								foreach($getMonth as $key => $months) {
-									$monthOption = "<option value=".$key;
-									if($selectedMonth == $key) {$monthOption .= " selected";}$monthOption .= ">".$months."</option>";
-									echo $monthOption;
-								}
-							?>
-						</select>
+						<span>
+							<select id="month" name="month" class="form-control h34 inb autowidth">
+								<?php
+									$selectedMonth = "";
+									if($employeeListArray['month'] != null ) {
+										$selectedMonth = $employeeListArray['month'];
+									}
+									foreach($getMonth as $key => $months) {
+										$monthOption = "<option value=".$key;
+										if($selectedMonth == $key) {$monthOption .= " selected";}$monthOption .= ">".$months."</option>";
+										echo $monthOption;
+									}
+								?>
+							</select>
+						</span>
 					</div>
 					<div class="float-right mb5">
 						<!-- clear search -->
 						<div  class="inb mt-1">
 							<a href="javascript:;" onclick="fnClearSearch()">
-								<img style="width: 25px;" src="../webroot/images/clearsearch.png" title="Clear Search">
+								<img style="width: 26px;" src="../webroot/images/clearsearch.png" title="Clear Search">
 							</a>
 						</div>
 						<!-- sorting process -->
@@ -179,9 +179,9 @@
 										</td>
 										<td><?php echo $employeeListArray['employeeList'][$i]["Emailpersonal"]; ?></td>
 										<td class="tac">
-											<a href="javascript:;" onclick="fnPaySlipView(<?php echo $employeeListArray['employeeList'][$i]['salaryId']; ?>,<?php echo $employeeListArray['month']; ?>,<?php echo $employeeListArray['year']; ?>)">
-												<img style="width: 20px;" src="../webroot/images/details.png" title="Pay Slip View">
-											</a>
+												<a href="javascript:;" onclick="fnPaySlipView(<?php echo $employeeListArray['employeeList'][$i]['salaryId']; ?>,<?php echo $employeeListArray['month']; ?>,<?php echo $employeeListArray['year']; ?>)">
+													<img style="width: 20px;" src="../webroot/images/details.png" title="Pay Slip View">
+												</a>
 										</td>
 									</tr>
 								<?php

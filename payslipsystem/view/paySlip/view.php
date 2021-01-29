@@ -53,9 +53,11 @@
 						<a class="btn btn-info editBtn" href="javascript:;" onclick="fnBackBtn(<?php echo $month; ?>,<?php echo $year; ?>)">
 							<i class="fa fa-chevron-left fa-btn"></i>Back
 						</a>
-						<a class="btn bg-warning text-white editBtn" href="javascript:;" onclick="fnSendMail(<?php echo $paySlipDetail[0]['salaryId']; ?>,<?php echo $month; ?>,<?php echo $year; ?>)">
-							<i class="fa fa-envelope fa-btn"></i>Send Mail
-						</a>
+						<?php if($paySlipDetail[0]['totalSalary'] != 0) { ?>
+							<a class="btn bg-warning text-white editBtn" href="javascript:;" onclick="fnSendMail(<?php echo $paySlipDetail[0]['salaryId']; ?>,<?php echo $month; ?>,<?php echo $year; ?>)">
+								<i class="fa fa-envelope fa-btn"></i>Send Mail
+							</a>
+						<?php } ?>
 					</div>
 					<?php
 						$month = date('m',$paySlipDetail[0]['Month']);
@@ -82,13 +84,14 @@
 							<div>
 								<div class="leftSide"> Subject : </div>
 								<div class="rightSide">
-									<input type="text" id="subject" name="subject" class="w43 h34" value="<?php echo "Pay Slip ".$paySlipDetail[0]['Year']."/".$month."/".$date; ?>">
+									<input type="text" id="subject" name="subject" class="w43 h34" value="<?php echo "Reg : Pay Slip ".$paySlipDetail[0]['Year']."/".$month."/".$date; ?>">
 								</div>
 							</div>
 							<div>
 								<div class="leftSide"> Content : </div>
+								<?php $content = $paySlipDetail[0]['FirstName']." ".$paySlipDetail[0]['LastName'].",\n Please find attached salary slip of ".$paySlipDetail[0]['FirstName']." ".$paySlipDetail[0]['LastName']." for ".date('F',$month)."-".$paySlipDetail[0]['Year'].".\nIf you have any question,do not hesitate to contact us.\nRegards,\nHR Department,\nSathi Systems Pvt. Ltd." ?>
 								<div class="rightSide vat">
-									<textarea id="content" name="content" rows="3" cols="46" class="w43" style="min-height:0">Please find attached your Pay Slip for the previous month.</textarea>
+									<textarea id="content" name="content" rows="3" cols="46" class="w43" style="min-height:0">Dear <?php echo $content ; ?></textarea>
 								</div>
 							</div>
 							<div>

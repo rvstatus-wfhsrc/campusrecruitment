@@ -60,10 +60,16 @@ class employeeModel {
     $year = date('Y');
     if (isset($_REQUEST['year'])) {
       $year = $_REQUEST['year'];
+    } else if (isset($_SESSION['year'])) {
+      $year = $_SESSION['year'];
+      unset($_SESSION['year']);
     }
     $month = date('m');
     if (isset($_REQUEST['month'])) {
       $month = $_REQUEST['month'];
+    } else if (isset($_SESSION['month'])) {
+      $month = $_SESSION['month'];
+      unset($_SESSION['month']);
     }
     $yearSqlQuery = "AND salary.Year = '$year' ";
     $monthSqlQuery = "AND salary.Month = '$month' ";
@@ -129,10 +135,14 @@ class employeeModel {
     $year = date('Y');
     if (isset($_REQUEST['year'])) {
       $year = $_REQUEST['year'];
+    } else if (isset($_SESSION['year'])) {
+      $year = $_SESSION['year'];
     }
     $month = date('m');
     if (isset($_REQUEST['month'])) {
       $month = $_REQUEST['month'];
+    } else if (isset($_SESSION['month'])) {
+      $month = $_SESSION['month'];
     }
     $yearSqlQuery = "AND salary.Year = '$year' ";
     $monthSqlQuery = "AND salary.Month = '$month' ";
