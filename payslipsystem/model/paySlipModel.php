@@ -147,6 +147,7 @@ class paySlipModel {
    */
   function paySlipDetailAdd($paySlipDetails,$subject,$content) {
     $salaryId = $_REQUEST['hiddenSalaryId'];
+    $fileName = $_REQUEST['hiddenFileName'];
     $sql = "INSERT INTO pay_payslip_details (
                                               Emp_Id,
                                               salaryId,
@@ -155,6 +156,7 @@ class paySlipModel {
                                               content,
                                               year,
                                               month,
+                                              fileName,
                                               mailSendStatus,
                                               created_by,
                                               delFlag
@@ -167,6 +169,7 @@ class paySlipModel {
                                               '".$content."',
                                               '".$paySlipDetails[0]['Year']."',
                                               '".$paySlipDetails[0]['Month']."',
+                                              '".$fileName."',
                                               '1',
                                               '".$_SESSION['userName']."',
                                               '0'
@@ -193,7 +196,8 @@ class paySlipModel {
               psdetails.subject,
               psdetails.content,
               psdetails.year,
-              psdetails.month
+              psdetails.month,
+              psdetails.fileName
               FROM pay_payslip_details AS psdetails
               LEFT JOIN emp_mstemployees AS mstemp ON mstemp.Emp_ID = psdetails.Emp_Id
               LEFT JOIN emp_salary AS salary ON salary.Emp_Id = psdetails.Emp_Id
@@ -212,6 +216,7 @@ class paySlipModel {
       $detailViewArray[$i]["content"] = $row["content"];
       $detailViewArray[$i]["year"] = $row["year"];
       $detailViewArray[$i]["month"] = $row["month"];
+      $detailViewArray[$i]["fileName"] = $row["fileName"];
       $i++;
     }
     return $detailViewArray;
@@ -234,31 +239,5 @@ class paySlipModel {
     return $row["count"];
   }
 
-  /**
-   * This downloadPaySlipOnView method are used to retreives the data from database related to download pay slip on view
-   * @return the $downloadPaySlipOnView variable
-   * @author kulasekaran.
-   *
-   */
-  function downloadPaySlipOnView() {
-    $salaryId = $_REQUEST['hiddenSalaryId'];
-    $sql = "SELECT
-              mstemp.Emp_ID,
-              salary.Month AS Month,
-              salary.Year AS Year
-              FROM emp_salary AS salary
-              LEFT JOIN emp_mstemployees AS mstemp ON mstemp.Emp_ID = salary.Emp_ID
-              WHERE mstemp.delFlg = 0 AND salary.id = ".$salaryId;
-    $result = mysql_query($sql,$this->con);
-    $downloadPaySlipOnView = array();
-    $i = 0;
-    while($row = mysql_fetch_array($result)) {
-      $downloadPaySlipOnView[$i]["Emp_ID"] = $row["Emp_ID"];
-      $downloadPaySlipOnView[$i]["Month"] = $row["Month"];
-      $downloadPaySlipOnView[$i]["Year"] = $row["Year"];
-      $i++;
-    }
-    return $downloadPaySlipOnView;
-  }
 }
 ?>

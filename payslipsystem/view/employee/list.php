@@ -44,6 +44,9 @@
 								</li>
 							</ul>
 						</li>
+						<li>
+							<a href="javascript:;" onclick="fnLogout()">Logout</a>
+						</li>
 					</ul>
 					<div class="footer">
 						<p>
@@ -57,9 +60,10 @@
 				<input type="hidden" id="screenName" name="screenName">
 				<input type="hidden" id="hiddenSalaryId" name="hiddenSalaryId">
 				<input type="hidden" id="hiddenEmployeeId" name="hiddenEmployeeId">
+				<input type="hidden" id="hiddenEmployeeName" name="hiddenEmployeeName">
 				<input type="hidden" id="hiddenYear" name="hiddenYear">
 				<input type="hidden" id="hiddenMonth" name="hiddenMonth">
-				<input type="hidden" id="hiddenSearch" name="hiddenSearch" value="<?php echo $employeeListArray['search']?>">
+				<input type="hidden" id="hiddenSearch" name="hiddenSearch" value="<?php if(isset($_REQUEST['search'])) { echo $_REQUEST['search']; } ?>">
 				<input type="hidden" id="pageno" name="pageno" value="<?php echo $pageno; ?>">
 				<div id="content" class="p-4 p-md-5 pt-5">
 					<h2 class="mb-4">Employee List</h2>
@@ -78,9 +82,9 @@
 						<span>
 							<select id="year" name="year" class="form-control h34 inb autowidth">
 								<?php
-									$selectedYear = "";
-									if($employeeListArray['year'] != null ) {
-										$selectedYear = $employeeListArray['year'];
+									$selectedYear = date('Y');
+									if($_REQUEST['year'] != null ) {
+										$selectedYear = $_REQUEST['year'];
 									}
 									foreach($getYear as $years) {
 										$yearOption = "<option value=".$years;
@@ -96,9 +100,9 @@
 						<span>
 							<select id="month" name="month" class="form-control h34 inb autowidth">
 								<?php
-									$selectedMonth = "";
-									if($employeeListArray['month'] != null ) {
-										$selectedMonth = $employeeListArray['month'];
+									$selectedMonth = date('m');
+									if($_REQUEST['month'] != null ) {
+										$selectedMonth = $_REQUEST['month'];
 									}
 									foreach($getMonth as $key => $months) {
 										$monthOption = "<option value=".$key;
@@ -119,15 +123,15 @@
 						<!-- sorting process -->
 						<div class="inb">
 							<select name="sortProcess" id="sortProcess" class="form-control autowidth h34 inb mr-2 CMN_sorting <?php echo $sortStyle; ?>">
-								<option value='1' <?php if($employeeListArray['sortVal'] == 1) { ?>selected <?php } ?>>Employee Id</option>
-								<option value='2' <?php if($employeeListArray['sortVal'] == 2) { ?>selected <?php } ?>>Employee Name</option>
+								<option value='1' <?php if(isset($_REQUEST['sortVal']) && $_REQUEST['sortVal'] == 1) { ?>selected <?php } ?>>Employee Id</option>
+								<option value='2' <?php if(isset($_REQUEST['sortVal']) && $_REQUEST['sortVal'] == 2) { ?>selected <?php } ?>>Employee Name</option>
 							</select>
-							<input type="hidden" id="sortVal" name="sortVal" value="<?php echo $employeeListArray['sortVal']?>">
+							<input type="hidden" id="sortVal" name="sortVal" value="<?php echo $_REQUEST['sortVal']?>">
 							<input type="hidden" id="sortOptn" name="sortOptn" value="<?php echo $sortOptn; ?>">
 						</div>
 						<!-- searching process -->
 						<div class="input-group searchBtn">
-							<input type="text" id="search" name="search" placeholder="Search Employee Id" class="input_box form-control h34" value="<?php echo $employeeListArray['search']?>">
+							<input type="text" id="search" name="search" placeholder="Search Employee Id" class="input_box form-control h34" value="<?php if(isset($_REQUEST['search'])) { echo $_REQUEST['search']; } ?>">
 							<div class="input-group-append">
 								<a class="btn btn-secondary h34" href="javascript:;" onclick="fnSearch()">
 									<i class="fa fa-search" title="Search"></i>
@@ -155,33 +159,39 @@
 							</tr>
 						</thead>
 						<?php
-							if ($employeeListArray['employeeList'] != null) { ?>
+							if ($employeeListArray != null) { ?>
 							<?php
 								$i = 0;
-								foreach ($employeeListArray['employeeList'] as $key => $employeeList) { ?>
+								foreach ($employeeListArray as $key => $employeeList) { ?>
 									<?php $class = $key % 2 === 0 ? 'odd' : 'even'; ?>
 									<tr class="<?php echo $class; ?>">
 										<td class="tac"><?php echo ($pageno - 1) * $resultsPerPage + $key + 1 ?></td>
 										<td class="tac">
-											<a href="javascript:;" onclick="fnPaySlipEmployeeHistory('<?php echo $employeeListArray['employeeList'][$i]['Emp_ID']; ?>',<?php echo $employeeListArray['month']; ?>,<?php echo $employeeListArray['year']; ?>)" class="employeeUserNameClr">
-												<?php echo $employeeListArray['employeeList'][$i]["Emp_ID"]; ?>
+											<a href="javascript:;" onclick="fnPaySlipEmployeeHistory('<?php echo $employeeListArray[$i]['Emp_ID']; ?>','<?php echo $employeeListArray[$i]['FirstName']." ".$employeeListArray[$i]['LastName']; ?>',<?php echo $_REQUEST['month']; ?>,<?php echo $_REQUEST['year']; ?>)" class="employeeUserNameClr">
+												<?php echo $employeeListArray[$i]["Emp_ID"]; ?>
 											</a>
 										</td>
-										<td class="nameClr"><?php echo $employeeListArray['employeeList'][$i]["FirstName"]." ".$employeeListArray['employeeList'][$i]["LastName"]; ?></td>
+										<td class="nameClr"><?php echo $employeeListArray[$i]["FirstName"]." ".$employeeListArray[$i]["LastName"]; ?></td>
 										<td class="tac">
 											<?php
-												if(isset($employeeListArray['employeeList'][$i]["totalSalary"])) {
-													echo number_format($employeeListArray['employeeList'][$i]["totalSalary"]); ?> &#8377;
+												if(isset($employeeListArray[$i]["totalSalary"])) {
+													echo number_format($employeeListArray[$i]["totalSalary"]); ?> &#8377;
 												<?php } else {
 													echo ("-");
 												}
 											?>
 										</td>
-										<td><?php echo $employeeListArray['employeeList'][$i]["Emailpersonal"]; ?></td>
+										<td><?php echo $employeeListArray[$i]["Emailpersonal"]; ?></td>
 										<td class="tac">
-												<a href="javascript:;" onclick="fnPaySlipView(<?php echo $employeeListArray['employeeList'][$i]['salaryId']; ?>,<?php echo $employeeListArray['month']; ?>,<?php echo $employeeListArray['year']; ?>)">
+											<?php if(isset($employeeListArray[$i]["paySlipId"])) { ?>
+												<a href="javascript:;">
+													<img style="width: 20px;" src="../webroot/images/tick.png" title="Already Mail Sended">
+												</a>
+											<?php } else { ?>
+												<a href="javascript:;" onclick="fnPaySlipView(<?php echo $employeeListArray[$i]['salaryId']; ?>,<?php echo $_REQUEST['month']; ?>,<?php echo $_REQUEST['year']; ?>)">
 													<img style="width: 20px;" src="../webroot/images/details.png" title="Pay Slip View">
 												</a>
+											<?php } ?>
 										</td>
 									</tr>
 								<?php
@@ -194,7 +204,7 @@
 								</tr>
 							<?php } ?>
 					</table>
-					<?php if ($employeeListArray['employeeList'] != null) { ?>
+					<?php if ($employeeListArray != null) { ?>
 						<?php if ($numOfResults > 5) { ?>
 							<div class="pagination">
 								<?php if($pageno > 1) {

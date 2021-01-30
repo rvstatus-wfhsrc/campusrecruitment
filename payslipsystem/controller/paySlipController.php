@@ -211,12 +211,8 @@ class paySlipController {
 	 */
 	function downloadPaySlipOnView() {
 		$excelObject = new PHPExcel();
-		$paySlipModel = new paySlipModel();
-		$downloadPaySlipOnView = $paySlipModel->downloadPaySlipOnView();
-		$month = date('m',$downloadPaySlipOnView[0]['Month']);
-		$date = date('d');
-		$filePath = '../webroot/download/payslip/pay_slip_'.$downloadPaySlipOnView[0]['Emp_ID'].'_'.$downloadPaySlipOnView[0]['Year'].$month.$date.'.xls';
-		$fileName = 'pay_slip_'.$downloadPaySlipOnView[0]['Emp_ID'].'_'.$downloadPaySlipOnView[0]['Year'].$month.$date.'.xls';
+		$fileName = $_REQUEST['hiddenFileName'];
+		$filePath = '../webroot/download/payslip/'.$fileName;
 		if(file_exists($filePath)) {
 			header("Content-Type: application/vnd.ms-excel");
 			header("Content-Disposition: attachment; filename= $fileName");

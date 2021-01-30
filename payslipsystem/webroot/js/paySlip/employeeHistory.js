@@ -15,9 +15,12 @@ function fnEmployeeList() {
 	$("#employeeHistoryForm").submit();
 }
 
-// pay slip open process
-function fnOpenPaySlip() {
-	alert("This page is in an underprocess");
+// pay slip download process
+function fnDownloadPaySlip(fileName) {
+	$( "#screenName" ).val('downloadPaySlipOnView');
+	$( "#hiddenFileName" ).val(fileName);
+	$("#employeeHistoryForm").attr("action", "../controller/paySlipController.php?time="+dateTime);
+	$( "#employeeHistoryForm" ).submit();
 }
 
 // pagination process
@@ -25,5 +28,12 @@ function fnPagination(pageno) {
 	$( "#pageno" ).val(pageno);
 	$( "#screenName" ).val('paySlipEmployeeHistory');
 	$("#employeeHistoryForm").attr("action", "../controller/paySlipController.php?time="+dateTime);
+	$( "#employeeHistoryForm" ).submit();
+}
+
+// logout process
+function fnLogout() {
+	$( "#screenName" ).val('logout');
+	$("#employeeHistoryForm").attr("action", "../controller/loginController.php?time="+dateTime);
 	$( "#employeeHistoryForm" ).submit();
 }

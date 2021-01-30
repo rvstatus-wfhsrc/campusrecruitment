@@ -21,10 +21,10 @@
 		 *
 		 */
 		function __construct() {
-			if(!empty($_REQUEST['screenName']) && $_REQUEST['screenName'] == "loginform") {
-				Self::loginform();
-			} elseif (!empty($_REQUEST['screenName']) && $_REQUEST['screenName'] == "loginProcess") {
+			if (isset($_REQUEST['screenName']) && $_REQUEST['screenName'] == "loginProcess") {
 				Self::loginProcess();
+			} else if (isset($_REQUEST['screenName']) && $_REQUEST['screenName'] == "logout") {
+				Self::logoutProcess();
 			} else {
 				Self::index();
 			}
@@ -51,6 +51,19 @@
 			$_SESSION["flag"] = 1;
 			$_SESSION["logged_in"] = true;
 			header("Location: employeeController.php?time=" . date(YmdHis));
+		}
+
+		/**
+		 * This logoutProcess method are used to unsets the session and calls index method to display login screen
+		 * @return it does not returns anything
+		 * @author kulasekaran.
+		 *
+		 */
+		function logoutProcess() {
+			unset($_SESSION['userName']);
+			unset($_SESSION['flag']);
+			unset($_SESSION['logged_in']);
+			Self::index();
 		}
 	}
 	

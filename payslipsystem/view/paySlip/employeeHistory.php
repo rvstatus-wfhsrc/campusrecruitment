@@ -33,6 +33,9 @@
 								</li>
 							</ul>
 						</li>
+						<li>
+							<a href="javascript:;" onclick="fnLogout()">Logout</a>
+						</li>
 					</ul>
 					<div class="footer">
 						<p>
@@ -49,6 +52,7 @@
 					<input type="hidden" id="year" name="year" value="<?php echo $year; ?>">
 					<input type="hidden" id="pageno" name="pageno" value="<?php echo $pageno; ?>">
 					<input type="hidden" id="hiddenEmployeeId" name="hiddenEmployeeId" value="<?php echo $detailView[0]["Emp_Id"]; ?>">
+					<input type="hidden" id="hiddenFileName" name="hiddenFileName">
 					<h2 class="mb-4">Pay Slip Employee History</h2>
 					<div class="mb-1">
 						<a class="btn btn-info editBtn" href="javascript:;" onclick="fnBackBtn(<?php echo $month; ?>,<?php echo $year; ?>)">
@@ -58,13 +62,13 @@
 					<div class="inb">
 						<label> Employee Id :</label>
 						<span class="employeeUserNameClr">
-							<?php echo $detailView[0]["Emp_Id"]; ?>
+							<?php echo $_REQUEST['hiddenEmployeeId']; ?>
 						</span>
 					</div>
 					<div class="inb ml-5">
 						<label> Employee Name :</label>
 						<span class="nameClr">
-							<?php echo $detailView[0]["FirstName"]." ".$detailView[0]["LastName"]; ?>
+							<?php echo $_REQUEST['hiddenEmployeeName']; ?>
 						</span>
 					</div>
 					<table class="table table-bordered table-position">
@@ -93,21 +97,21 @@
 							foreach ($detailView as $key => $details) { ?>
 								<?php $class = $key % 2 === 0 ? 'odd' : 'even'; ?>
 								<tr class="<?php echo $class; ?>">
-									<td class="tac"><?php echo ($pageno - 1) * $resultsPerPage + $key + 1 ?></td>
-									<td><?php echo $detailView[$i]["toMail"]; ?></td>
-									<td><?php echo $detailView[$i]["subject"]; ?></td>
+									<td class="tac vam"><?php echo ($pageno - 1) * $resultsPerPage + $key + 1 ?></td>
+									<td class="vam"><?php echo $detailView[$i]["toMail"]; ?></td>
+									<td class="vam"><?php echo $detailView[$i]["subject"]; ?></td>
 									<td><?php echo nl2br($detailView[$i]["content"]); ?></td>
-									<td class="tac"><?php echo $detailView[$i]["year"]." / ".$detailView[$i]["month"]; ?></td>
-									<td class="tac">
+									<td class="tac vam"><?php echo $detailView[$i]["year"]." / ".$detailView[$i]["month"]; ?></td>
+									<td class="tac vam">
 										<?php if(isset($detailView[$i]["totalSalary"])) {
 											echo number_format($detailView[$i]["totalSalary"]); ?> &#8377;
 										<?php } else {
 											echo ("-");
 										} ?>
 									</td>
-									<td class="tac">
-										<a href="javascript:;" onclick="fnOpenPaySlip()">
-											<img style="width: 20px;" src="../webroot/images/details.png" title="Pay Slip View">
+									<td class="tac vam">
+										<a href="javascript:;" onclick="fnDownloadPaySlip('<?php echo $detailView[$i]['fileName']; ?>')">
+											<img style="width: 20px;" src="../webroot/images/excel.png" title="To Download Salary Pay Slip">
 										</a>
 									</td>
 								</tr>

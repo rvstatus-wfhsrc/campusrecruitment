@@ -80,9 +80,11 @@ class employeeModel {
               mstemp.LastName,
               mstemp.Emailpersonal,
               salary.id AS salaryId,
-              salary.Total AS totalSalary
+              salary.Total AS totalSalary,
+              psdetails.id AS paySlipId
               FROM emp_mstemployees AS mstemp
               LEFT JOIN emp_salary AS salary ON salary.Emp_ID = mstemp.Emp_ID
+              LEFT JOIN pay_payslip_details AS psdetails ON psdetails.salaryId = salary.id
               WHERE mstemp.delFlg = 0 ".$searchSqlQuery.$yearSqlQuery.$monthSqlQuery." ORDER BY ".$sort." LIMIT $start,$end";
 		$result = mysql_query($sql,$this->con);
     $getEmployee = array();
@@ -94,10 +96,11 @@ class employeeModel {
       $getEmployee[$i]["Emailpersonal"] = $row["Emailpersonal"];
       $getEmployee[$i]["salaryId"] = $row["salaryId"];
       $getEmployee[$i]["totalSalary"] = $row["totalSalary"];
+      $getEmployee[$i]["paySlipId"] = $row["paySlipId"];
   		$i++;
     }
-    return array('employeeList' => $getEmployee,'search' => $search,'sortVal' => $sortVal,'year' => $year,'month' => $month);
-	}
+    return $getEmployee;
+  }
 
   /**
    * This fnGetCount method are used to gets the count of emp_mstemployees table data

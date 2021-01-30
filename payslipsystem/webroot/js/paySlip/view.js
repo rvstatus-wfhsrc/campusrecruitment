@@ -1,6 +1,6 @@
 var data = {};
 // send mail button process
-function fnSendMail(salaryId,month,year) {
+function fnSendMail(salaryId,month,year,fileName) {
 	resetErrors();
 	var url = 'paySlipController.php';
 	$.each($('form input, form hidden, form textarea'), function(i, v) {
@@ -17,10 +17,12 @@ function fnSendMail(salaryId,month,year) {
 			if (resp === true) {
 				var confRegMsg = "Are You Confirm To Send Pay Slip Mail ?";
                 if(confirm(confRegMsg)) {
+                	alert(fileName);
 					$( "#hiddenSalaryId" ).val(salaryId);
 					$( "#screenName" ).val('sendPaySlip');
 					$( "#month" ).val(month);
 					$( "#year" ).val(year);
+					$( "#hiddenFileName" ).val(fileName);
 					$( "#viewForm" ).submit();
 					return false;
 				}
@@ -46,8 +48,8 @@ function resetErrors() {
 }
 
 // pay slip view process
-function downloadPaySlipOnView(salaryId) {
-	$( "#hiddenSalaryId" ).val(salaryId);
+function downloadPaySlipOnView(fileName) {
+	$( "#hiddenFileName" ).val(fileName);
 	$( "#screenName" ).val('downloadPaySlipOnView');
 	$( "#viewForm" ).submit();
 }
@@ -65,5 +67,12 @@ function fnBackBtn(month,year) {
 function fnEmployeeList() {
 	$( "#screenName" ).val('employeeList');
 	$("#viewForm").attr("action", "../controller/employeeController.php?time="+dateTime);
+	$( "#viewForm" ).submit();
+}
+
+// logout process
+function fnLogout() {
+	$( "#screenName" ).val('logout');
+	$("#viewForm").attr("action", "../controller/loginController.php?time="+dateTime);
 	$( "#viewForm" ).submit();
 }

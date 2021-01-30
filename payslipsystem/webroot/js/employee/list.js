@@ -87,11 +87,20 @@ function fnEmployeeList() {
 }
 
 // pay slip employee history process
-function fnPaySlipEmployeeHistory(employeeId,month,year) {
+function fnPaySlipEmployeeHistory(employeeId,employeeName,month,year) {
+	$( "#pageno" ).val(1);
 	$( "#screenName" ).val('paySlipEmployeeHistory');
 	$( "#hiddenEmployeeId" ).val(employeeId);
+	$( "#hiddenEmployeeName" ).val(employeeName);
 	$( "#hiddenMonth" ).val(month);
 	$( "#hiddenYear" ).val(year);
 	$("#listForm").attr("action", "../controller/paySlipController.php?time="+dateTime);
+	$( "#listForm" ).submit();
+}
+
+// logout process
+function fnLogout() {
+	$( "#screenName" ).val('logout');
+	$("#listForm").attr("action", "../controller/loginController.php?time="+dateTime);
 	$( "#listForm" ).submit();
 }
