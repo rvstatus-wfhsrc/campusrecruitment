@@ -53,10 +53,6 @@
 					<input type="hidden" id="hiddenFileName" name="hiddenFileName">
 					<input type="hidden" id="month" name="month">
 					<input type="hidden" id="year" name="year">
-					<?php
-						$month = date('m',$paySlipDetail[0]['Month']);
-						$date = date('d');
-					?>
 					<div class="mb-1">
 						<a class="btn btn-info editBtn" href="javascript:;" onclick="fnBackBtn(<?php echo $month; ?>,<?php echo $year; ?>)">
 							<i class="fa fa-chevron-left fa-btn"></i>Back
@@ -67,6 +63,10 @@
 							</a>
 						<?php } ?>
 					</div>
+					<?php
+						$month = date('m',$paySlipDetail[0]['Month']);
+						$date = date('d');
+					?>
 					<div class="box">
 						<div class="container">
 							<div>

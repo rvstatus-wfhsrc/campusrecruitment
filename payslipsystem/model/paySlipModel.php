@@ -1,4 +1,5 @@
 <?php
+require_once "../model/database.php";
 
 /**
 　* paySlip Model
@@ -9,20 +10,6 @@
 　*
 　*/
 class paySlipModel {
-	public $con;
-  /**
-  　* paySlip Model __construct
-  　*
-  　* This __construct are used to gets the database connection
-  　* 
-  　* @author kulasekaran.
-  　*
-   */
-	function __construct() {
-		$this->con = mysql_connect("localhost","root","") or die("Connection failed : ".mysql_error());
-		mysql_select_db("payslip",$this->con);
-	}
-
   /**
    * This paySlipDetail method are used to retreives the data from database related to pay slip
    * @return the $getPaySlip variable
@@ -30,6 +17,8 @@ class paySlipModel {
    *
    */
 	function paySlipDetail() {
+    $database = new database();
+    $this->con = $database->databaseConnection();
     $salaryId = $_REQUEST['hiddenSalaryId'];
     $sql = "SELECT
               mstemp.Emp_ID,
@@ -67,6 +56,8 @@ class paySlipModel {
    *
    */
   function downloadPaySlip() {
+    $database = new database();
+    $this->con = $database->databaseConnection();
     $salaryId = $_REQUEST['hiddenSalaryId'];
     $sql = "SELECT
               mstemp.Emp_ID,
@@ -113,6 +104,8 @@ class paySlipModel {
    *
    */
   function sendPaySlip() {
+    $database = new database();
+    $this->con = $database->databaseConnection();
     $salaryId = $_REQUEST['hiddenSalaryId'];
     $sql = "SELECT
               mstemp.Emp_ID,
@@ -146,6 +139,8 @@ class paySlipModel {
    *
    */
   function paySlipDetailAdd($paySlipDetails,$subject,$content) {
+    $database = new database();
+    $this->con = $database->databaseConnection();
     $salaryId = $_REQUEST['hiddenSalaryId'];
     $fileName = $_REQUEST['hiddenFileName'];
     $sql = "INSERT INTO pay_payslip_details (
@@ -185,6 +180,8 @@ class paySlipModel {
    *
    */
   function detailView($start,$end) {
+    $database = new database();
+    $this->con = $database->databaseConnection();
     $employeeId = $_REQUEST['hiddenEmployeeId'];
     $sql = "SELECT
               mstemp.FirstName,
@@ -229,6 +226,8 @@ class paySlipModel {
    *
    */
   function recordCountForDetailView() {
+    $database = new database();
+    $this->con = $database->databaseConnection();
     $employeeId = $_REQUEST['hiddenEmployeeId'];
     $sql = "SELECT
               count(psdetails.Emp_Id) AS count

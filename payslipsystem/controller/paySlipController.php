@@ -95,8 +95,12 @@ class paySlipController {
 										->setCellValue("L6",$currentDate);
 		$writerObject = PHPExcel_IOFactory::createwriter($excelObject,"Excel5");
 		ob_end_clean();
+		$path = '../webroot/download/payslip';
+		if(!is_dir($path)) {
+			mkdir($path, 0755, true);
+		}
 		$file = 'pay_slip_'.$paySlip[0]['Emp_ID'].'_'.$paySlip[0]['Year'].$month.$date.'.xls';
-		$writerObject->save(str_replace('.php', '.xls', '../webroot/download/payslip/' . $file));
+		$writerObject->save(str_replace('.php', '.xls', $path.'/'. $file));
 	}
 
 	/**

@@ -1,4 +1,5 @@
 <?php
+require_once "../model/database.php";
 
 /**
 　* employee Model
@@ -9,20 +10,6 @@
 　*
 　*/
 class employeeModel {
-	public $con;
-  /**
-  　* employee Model __construct
-  　*
-  　* This __construct are used to gets the database connection
-  　* 
-  　* @author kulasekaran.
-  　*
-   */
-	function __construct() {
-		$this->con = mysql_connect("localhost","root","") or die("Connection failed : ".mysql_error());
-		mysql_select_db("payslip",$this->con);
-	}
-
   /**
    * This employeeList method are used to retreives the data from database related to employee
    * @param start and end is integer values,data retreived between start value and end value
@@ -31,6 +18,9 @@ class employeeModel {
    *
    */
 	function employeeList($start,$end) {
+    $database = new database();
+    $this->con = $database->databaseConnection();
+
     // search process
     $search = "";
     if (isset($_REQUEST['hiddenSearch'])) {
@@ -109,6 +99,9 @@ class employeeModel {
    *
    */
 	function fnGetCount() {
+    $database = new database();
+    $this->con = $database->databaseConnection();
+
     // search process
     $search = "";
     if (isset($_REQUEST['hiddenSearch'])) {
