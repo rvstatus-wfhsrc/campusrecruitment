@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en">
 	<head>
-		<title>Pay Slip | Employee List</title>
+		<title>Pay Slip | Salary List</title>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -10,17 +10,6 @@
 		<script type="text/javascript">
 			var dateTime = "<?php echo date('Ymdhis'); ?>";
 		</script>
-		<style>
-			/* session flash message design */
-			.fmsg {
-				font-size: 14px;
-				margin-left: 300px;
-				width: 35%;
-				margin-bottom: 0px;
-				padding-top: 1px;
-				padding-bottom: 1px;
-			}
-		</style>
 	</head>
 	<body>
 		<div class="wrapper d-flex align-items-stretch">
@@ -38,7 +27,7 @@
 					<ul class="list-unstyled components mb-5">
 						<li class="active">
 							<a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Employee</a>
-							<ul class="collapse list-unstyled <?php if($mainMenu == 'employeeList') { echo('show'); } ?>" id="homeSubmenu">
+							<ul class="collapse list-unstyled show" id="homeSubmenu">
 								<li class="<?php if($mainMenu == 'employeeList') { echo('active'); } ?>">
 									<a href="javascript:;" onclick="fnEmployeeList()">List</a>
 								</li>
@@ -46,7 +35,7 @@
 						</li>
 						<li class="">
 							<a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Salary</a>
-							<ul class="collapse list-unstyled show" id="homeSubmenu">
+							<ul class="collapse list-unstyled <?php if($mainMenu == 'salaryList') { echo('show'); } ?>" id="homeSubmenu">
 								<li class="<?php if($mainMenu == 'salaryList') { echo('active'); } ?>">
 									<a href="javascript:;" onclick="fnSalaryList()">List</a>
 								</li>
@@ -64,9 +53,8 @@
 				</div>
 			</nav>
 			<!-- Page Content  -->
-			<form action="../controller/employeeController.php?time=<?php echo(date('YmdHis')); ?>" method="POST" id="listForm" name="listForm">
+			<form action="../controller/salaryController.php?time=<?php echo(date('YmdHis')); ?>" method="POST" id="listForm" name="listForm">
 				<input type="hidden" id="screenName" name="screenName">
-				<input type="hidden" id="hiddenSalaryId" name="hiddenSalaryId">
 				<input type="hidden" id="hiddenEmployeeId" name="hiddenEmployeeId">
 				<input type="hidden" id="hiddenEmployeeName" name="hiddenEmployeeName">
 				<input type="hidden" id="hiddenYear" name="hiddenYear">
@@ -74,17 +62,7 @@
 				<input type="hidden" id="hiddenSearch" name="hiddenSearch" value="<?php if(isset($_REQUEST['search'])) { echo $_REQUEST['search']; } ?>">
 				<input type="hidden" id="pageno" name="pageno" value="<?php echo $pageno; ?>">
 				<div id="content" class="p-4 p-md-5 pt-5">
-					<h2 class="mb-4">Employee List</h2>
-					<!-- session message -->
-					<?php if(isset($_SESSION['message'])): ?>
-				     <div class="alert alert-<?php echo $_SESSION['status']; ?> fmsg tac mb-2">
-				     	<?php echo $_SESSION['message']; ?>
-				     </div>
-					<?php
-						endif;
-						unset($_SESSION['message']);
-						unset($_SESSION['status']);
-					?>
+					<h2 class="mb-4">Salary List</h2>
 					<div class="inb float-left">
 						<label for="year">Year : </label>
 						<span>
@@ -154,24 +132,22 @@
 					<table class="table table-bordered table-position">
 						<colgroup>
 							<col width="1%">
-							<col width="13%">
+							<col width="17%">
 							<col>
 							<col width="12%">
-							<col width="11%">
-							<col width="11%">
+							<col width="12%">
 						</colgroup>
 						<thead class="thead">
 							<tr>
 								<th>S.No.</th>
 								<th>Employee Id</th>
 								<th>Name</th>
-								<th title="Net Salary">Salary</th>
-								<th title="Personal E-Mail Address">E-Mail</th>
-								<th></th>
+								<th>Net Salary</th>
+								<th>Total Salary</th>
 							</tr>
 						</thead>
 						<?php
-							if ($employeeListArray != null) { ?>
+							if ($salaryList != null) { ?>
 							<?php
 								if(isset($_REQUEST['month'])) {
 									$month = $_REQUEST['month'];
@@ -184,36 +160,30 @@
 									$year = $year;
 								}
 								$i = 0;
-								foreach ($employeeListArray as $key => $employeeList) { ?>
+								foreach ($salaryList as $key => $list) { ?>
 									<?php $class = $key % 2 === 0 ? 'odd' : 'even'; ?>
 									<tr class="<?php echo $class; ?>">
 										<td class="tac"><?php echo ($pageno - 1) * $resultsPerPage + $key + 1 ?></td>
 										<td class="tac">
-											<a href="javascript:;" onclick="fnPaySlipEmployeeHistory('<?php echo $employeeListArray[$i]['Emp_ID']; ?>','<?php echo $employeeListArray[$i]['FirstName']." ".$employeeListArray[$i]['LastName']; ?>',<?php echo $month; ?>,<?php echo $year; ?>)" class="employeeUserNameClr">
-												<?php echo $employeeListArray[$i]["Emp_ID"]; ?>
+											<a href="javascript:;" onclick="fnSalaryEmployeeHistory('<?php echo $salaryList[$i]['Emp_ID']; ?>','<?php echo $salaryList[$i]['FirstName']." ".$salaryList[$i]['LastName']; ?>',<?php echo $month; ?>,<?php echo $year; ?>)" class="employeeUserNameClr">
+												<?php echo $salaryList[$i]["Emp_ID"]; ?>
 											</a>
 										</td>
-										<td class="nameClr"><?php echo $employeeListArray[$i]["FirstName"]." ".$employeeListArray[$i]["LastName"]; ?></td>
-										<td class="tac">
-											<?php
-												if(isset($employeeListArray[$i]["totalSalary"])) {
-													echo number_format($employeeListArray[$i]["totalSalary"]); ?> &#8377;
-												<?php } else {
-													echo ("-");
-												}
-											?>
+										<td class="nameClr"><?php echo $salaryList[$i]["FirstName"]." ".$salaryList[$i]["LastName"]; ?>
 										</td>
-										<td><?php echo $employeeListArray[$i]["Emailpersonal"]; ?></td>
-										<td class="tac">
-											<?php if(isset($employeeListArray[$i]["paySlipId"])) { ?>
-												<a href="javascript:;">
-													<img style="width: 20px;" src="../webroot/images/tick.png" title="Already Mail Sended">
-												</a>
-											<?php } else { ?>
-												<a href="javascript:;" onclick="fnPaySlipView(<?php echo $employeeListArray[$i]['salaryId']; ?>,<?php echo $month; ?>,<?php echo $year; ?>)">
-													<img style="width: 20px;" src="../webroot/images/details.png" title="Pay Slip View">
-												</a>
-											<?php } ?>
+										<td class="tac vam">
+											<?php if (isset($salaryList[$i]["netSalary"])) {
+												echo $salaryList[$i]["netSalary"];
+											} else {
+												echo '-';
+											} ?>
+										</td>
+										<td class="tac vam">
+											<?php if (isset($salaryList[$i]["totalSalary"])) {
+												echo $salaryList[$i]["totalSalary"];
+											} else {
+												echo '-';
+											} ?>
 										</td>
 									</tr>
 								<?php
@@ -222,11 +192,11 @@
 									} else {
 								?>
 								<tr>
-									<td colspan="6" class="tac noDataFoundClr">No data found</td>
+									<td colspan="5" class="tac noDataFoundClr">No data found</td>
 								</tr>
 							<?php } ?>
 					</table>
-					<?php if ($employeeListArray != null) { ?>
+					<?php if ($salaryList != null) { ?>
 						<?php if ($numOfResults > 5) { ?>
 							<div class="pagination">
 								<?php if($pageno > 1) {
@@ -274,6 +244,6 @@
 		<script type="text/javascript" src="../webroot/js/jquery.min.js" ></script>
 		<script type="text/javascript" src="../webroot/js/popper.js" ></script>
 		<script type="text/javascript" src="../webroot/js/main.js" ></script>
-		<script type="text/javascript" src="../webroot/js/employee/list.js" ></script>
+		<script type="text/javascript" src="../webroot/js/salary/list.js" ></script>
 	</body>
 </html>

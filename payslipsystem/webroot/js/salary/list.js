@@ -18,24 +18,24 @@ $(document).ready(function() {
 	    }
 	});
 	$('#month').change(function () {
-		$( "#screenName" ).val('employeeList');
+		$( "#screenName" ).val('salaryList');
 		$( "#listForm" ).submit();
 	});
 	$('#year').change(function () {
-		$( "#screenName" ).val('employeeList');
+		$( "#screenName" ).val('salaryList');
 		$( "#listForm" ).submit();
 	});
 });
 
 function fnSearch() {
-	$( "#screenName" ).val('employeeList');
+	$( "#screenName" ).val('salaryList');
 	$("#hiddenSearch").val($("#search").val());
 	$( "#listForm" ).submit();
 }
 
 // sorting process
 function fnSortProcess() {
-	$( "#screenName" ).val('employeeList');
+	$( "#screenName" ).val('salaryList');
 	$("#search").val($("#hiddenSearch").val());
 	var alreadySortOptn = $("#sortOptn").val();
 	var sortVal = $("#sortProcess").val();
@@ -58,24 +58,14 @@ function fnClearSearch() {
 	$("#hiddenSearch").val("");
 	$("#sortVal").val("");
 	$("#sortOptn").val("");
-	$( "#screenName" ).val('employeeList');
+	$( "#screenName" ).val('salaryList');
 	$('#listForm').submit();
 }
 
 // pagination process
 function fnPagination(pageno) {
 	$( "#pageno" ).val(pageno);
-	$( "#screenName" ).val('employeeList');
-	$( "#listForm" ).submit();
-}
-
-// pay slip view process
-function fnPaySlipView(salaryId,month,year) {
-	$( "#hiddenSalaryId" ).val(salaryId);
-	$( "#screenName" ).val('paySlipView');
-	$( "#hiddenMonth" ).val(month);
-	$( "#hiddenYear" ).val(year);
-	$("#listForm").attr("action", "../controller/paySlipController.php?time="+dateTime);
+	$( "#screenName" ).val('salaryList');
 	$( "#listForm" ).submit();
 }
 
@@ -83,18 +73,18 @@ function fnPaySlipView(salaryId,month,year) {
 function fnEmployeeList() {
 	$( "#pageno" ).val(1);
 	$( "#screenName" ).val('employeeList');
+	$("#listForm").attr("action", "../controller/employeeController.php?time="+dateTime);
 	$( "#listForm" ).submit();
 }
 
-// pay slip employee history process
-function fnPaySlipEmployeeHistory(employeeId,employeeName,month,year) {
+// salary employee history process
+function fnSalaryEmployeeHistory(employeeId,employeeName,month,year) {
 	$( "#pageno" ).val(1);
-	$( "#screenName" ).val('paySlipEmployeeHistory');
+	$( "#screenName" ).val('salaryEmployeeHistory');
 	$( "#hiddenEmployeeId" ).val(employeeId);
 	$( "#hiddenEmployeeName" ).val(employeeName);
 	$( "#hiddenMonth" ).val(month);
 	$( "#hiddenYear" ).val(year);
-	$("#listForm").attr("action", "../controller/paySlipController.php?time="+dateTime);
 	$( "#listForm" ).submit();
 }
 
@@ -109,6 +99,5 @@ function fnLogout() {
 function fnSalaryList() {
 	$( "#pageno" ).val(1);
 	$( "#screenName" ).val('salaryList');
-	$("#listForm").attr("action", "../controller/salaryController.php?time="+dateTime);
 	$( "#listForm" ).submit();
 }

@@ -11,6 +11,19 @@ require_once "../model/database.php";
 　*/
 class employeeModel {
   /**
+   * employee Model __construct
+   *
+   * This __construct is used to get the database connection
+   *
+   * @author kulasekaran.
+   *
+   */
+  function __construct() {
+    $database = new database();
+    $this->con = $database->databaseConnection();
+  }
+
+  /**
    * This employeeList method are used to retreives the data from database related to employee
    * @param start and end is integer values,data retreived between start value and end value
    * @return a array which contains employeeList,search and sortVal
@@ -18,9 +31,6 @@ class employeeModel {
    *
    */
 	function employeeList($start,$end) {
-    $database = new database();
-    $this->con = $database->databaseConnection();
-
     // search process
     $search = "";
     if (isset($_REQUEST['hiddenSearch'])) {
@@ -99,9 +109,6 @@ class employeeModel {
    *
    */
 	function fnGetCount() {
-    $database = new database();
-    $this->con = $database->databaseConnection();
-
     // search process
     $search = "";
     if (isset($_REQUEST['hiddenSearch'])) {
