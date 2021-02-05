@@ -53,20 +53,20 @@
 					<input type="hidden" id="hiddenFileName" name="hiddenFileName">
 					<input type="hidden" id="month" name="month">
 					<input type="hidden" id="year" name="year">
+					<?php
+						$months = date('m',$paySlipDetail[0]['Month']);
+						$dates = date('d');
+					?>
 					<div class="mb-1">
 						<a class="btn btn-info editBtn" href="javascript:;" onclick="fnBackBtn(<?php echo $month; ?>,<?php echo $year; ?>)">
-							<i class="fa fa-chevron-left fa-btn"></i>Back
+							<i class="fa fa-chevron-left fa-btn mr-1"></i>Back
 						</a>
 						<?php if($paySlipDetail[0]['totalSalary'] != 0) { ?>
-							<a class="btn bg-warning text-white editBtn" href="javascript:;" onclick="fnSendMail(<?php echo $paySlipDetail[0]['salaryId']; ?>,<?php echo $month; ?>,<?php echo $year; ?>,'<?php echo "pay_slip_".$paySlipDetail[0]['Emp_ID']."_".$paySlipDetail[0]['Year'].$month.$date.".xls"; ?>')">
-								<i class="fa fa-envelope fa-btn"></i>Send Mail
+							<a class="btn bg-warning text-white editBtn" href="javascript:;" onclick="fnSendMail(<?php echo $paySlipDetail[0]['salaryId']; ?>,<?php echo $month; ?>,<?php echo $year; ?>,'<?php echo "pay_slip_".$paySlipDetail[0]['Emp_ID']."_".$paySlipDetail[0]['Year'].$months.$dates.".xls"; ?>')">
+								<i class="fa fa-envelope fa-btn mr-1"></i>Send Mail
 							</a>
 						<?php } ?>
 					</div>
-					<?php
-						$month = date('m',$paySlipDetail[0]['Month']);
-						$date = date('d');
-					?>
 					<div class="box">
 						<div class="container">
 							<div>
@@ -88,7 +88,7 @@
 							<div>
 								<div class="leftSide"> Subject : </div>
 								<div class="rightSide">
-									<input type="text" id="subject" name="subject" class="w43 h34" value="<?php echo "Reg : Pay Slip ".$paySlipDetail[0]['Year']."/".$month."/".$date; ?>">
+									<input type="text" id="subject" name="subject" class="w43 h34" value="<?php echo "Reg : Pay Slip ".$paySlipDetail[0]['Year']."/".$months."/".$dates; ?>">
 								</div>
 							</div>
 							<div>
@@ -101,8 +101,8 @@
 							<div>
 								<div class="leftSide"> Attachment : </div>
 								<div class="rightSide">
-									<a href="javascript:;" title="To Download Salary Pay Slip" onclick="downloadPaySlipOnView('<?php echo "pay_slip_".$paySlipDetail[0]['Emp_ID']."_".$paySlipDetail[0]['Year'].$month.$date.".xls"; ?>')">
-										<?php echo "pay_slip_".$paySlipDetail[0]['Emp_ID']."_".$paySlipDetail[0]['Year'].$month.$date.".xls"; ?>
+									<a href="javascript:;" title="To Download Salary Pay Slip" onclick="downloadPaySlipOnView('<?php echo "pay_slip_".$paySlipDetail[0]['Emp_ID']."_".$paySlipDetail[0]['Year'].$months.$dates.".xls"; ?>')">
+										<?php echo "pay_slip_".$paySlipDetail[0]['Emp_ID']."_".$paySlipDetail[0]['Year'].$months.$dates.".xls"; ?>
 									</a>
 								</div>
 							</div>

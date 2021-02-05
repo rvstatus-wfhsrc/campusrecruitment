@@ -17,7 +17,7 @@
 				<div class="row justify-content-md-center h-100">
 					<div class="card-wrapper">
 						<div class="brand">
-							<!-- <img src="img/logo.jpg" alt="logo"> -->
+							<img src="../webroot/images/login.png" title="Pay Slip View">
 						</div>
 						<div class="card fat">
 							<div class="card-body">

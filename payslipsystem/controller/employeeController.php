@@ -42,6 +42,12 @@ class employeeController {
 		} else {
 			$pageno = 1;
 		}
+		if(isset($_SESSION['month'])) {
+			$month = $_SESSION['month'];
+		}
+		if(isset($_SESSION['year'])) {
+			$year = $_SESSION['year'];
+		}
 
 		// sorting process style
 		if (isset($_REQUEST["sortOptn"])) {

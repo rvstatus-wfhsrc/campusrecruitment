@@ -17,7 +17,6 @@ function fnSendMail(salaryId,month,year,fileName) {
 			if (resp === true) {
 				var confRegMsg = "Are You Confirm To Send Pay Slip Mail ?";
                 if(confirm(confRegMsg)) {
-                	alert(fileName);
 					$( "#hiddenSalaryId" ).val(salaryId);
 					$( "#screenName" ).val('sendPaySlip');
 					$( "#month" ).val(month);

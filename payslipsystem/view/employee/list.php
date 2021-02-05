@@ -85,6 +85,8 @@
 									$selectedYear = date('Y');
 									if($_REQUEST['year'] != null ) {
 										$selectedYear = $_REQUEST['year'];
+									} else if(isset($year)) {
+										$selectedYear = $year;
 									}
 									foreach($getYear as $years) {
 										$yearOption = "<option value=".$years;
@@ -103,6 +105,8 @@
 									$selectedMonth = date('m');
 									if($_REQUEST['month'] != null ) {
 										$selectedMonth = $_REQUEST['month'];
+									} else if(isset($month)) {
+										$selectedMonth = $month;
 									}
 									foreach($getMonth as $key => $months) {
 										$monthOption = "<option value=".$key;
@@ -161,13 +165,23 @@
 						<?php
 							if ($employeeListArray != null) { ?>
 							<?php
+								if(isset($_REQUEST['month'])) {
+									$month = $_REQUEST['month'];
+								} else if (isset($month)) {
+									$month = $month;
+								}
+								if(isset($_REQUEST['year'])) {
+									$year = $_REQUEST['year'];
+								} else if (isset($year)) {
+									$year = $year;
+								}
 								$i = 0;
 								foreach ($employeeListArray as $key => $employeeList) { ?>
 									<?php $class = $key % 2 === 0 ? 'odd' : 'even'; ?>
 									<tr class="<?php echo $class; ?>">
 										<td class="tac"><?php echo ($pageno - 1) * $resultsPerPage + $key + 1 ?></td>
 										<td class="tac">
-											<a href="javascript:;" onclick="fnPaySlipEmployeeHistory('<?php echo $employeeListArray[$i]['Emp_ID']; ?>','<?php echo $employeeListArray[$i]['FirstName']." ".$employeeListArray[$i]['LastName']; ?>',<?php echo $_REQUEST['month']; ?>,<?php echo $_REQUEST['year']; ?>)" class="employeeUserNameClr">
+											<a href="javascript:;" onclick="fnPaySlipEmployeeHistory('<?php echo $employeeListArray[$i]['Emp_ID']; ?>','<?php echo $employeeListArray[$i]['FirstName']." ".$employeeListArray[$i]['LastName']; ?>',<?php echo $month; ?>,<?php echo $year; ?>)" class="employeeUserNameClr">
 												<?php echo $employeeListArray[$i]["Emp_ID"]; ?>
 											</a>
 										</td>
@@ -188,7 +202,7 @@
 													<img style="width: 20px;" src="../webroot/images/tick.png" title="Already Mail Sended">
 												</a>
 											<?php } else { ?>
-												<a href="javascript:;" onclick="fnPaySlipView(<?php echo $employeeListArray[$i]['salaryId']; ?>,<?php echo $_REQUEST['month']; ?>,<?php echo $_REQUEST['year']; ?>)">
+												<a href="javascript:;" onclick="fnPaySlipView(<?php echo $employeeListArray[$i]['salaryId']; ?>,<?php echo $month; ?>,<?php echo $year; ?>)">
 													<img style="width: 20px;" src="../webroot/images/details.png" title="Pay Slip View">
 												</a>
 											<?php } ?>

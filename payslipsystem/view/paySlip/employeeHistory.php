@@ -56,7 +56,7 @@
 					<h2 class="mb-4">Pay Slip Employee History</h2>
 					<div class="mb-1">
 						<a class="btn btn-info editBtn" href="javascript:;" onclick="fnBackBtn(<?php echo $month; ?>,<?php echo $year; ?>)">
-							<i class="fa fa-chevron-left fa-btn"></i>Back
+							<i class="fa fa-chevron-left fa-btn mr-1"></i>Back
 						</a>
 					</div>
 					<div class="inb">

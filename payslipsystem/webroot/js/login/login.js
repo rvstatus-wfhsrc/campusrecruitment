@@ -70,6 +70,16 @@ $(function() {
 	});
 
 	$('#loginbtn').on('click', function() {
+		loginProcess();
+	});
+	$(document).ready(function() {
+		$('#loginForm').keydown(function (e) {
+		    if (e.keyCode == 13) {
+		    	loginProcess();
+		    }
+		});
+	});
+	function loginProcess() {
 		var userName = document.getElementById("userName");
 		if (!userName.checkValidity()) {
 			if (userName.validity.patternMismatch) {
@@ -102,5 +112,5 @@ $(function() {
 			var userNameValidationMessage = "These credentials do not match our records.";
 			document.getElementById("userNameValidationMsg").innerHTML = userNameValidationMessage;
 		}
-	});
+	}
 });
