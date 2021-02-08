@@ -77,6 +77,18 @@
 }
 /* margin bottom class end */
 
+/* margin left class start */
+.ml13 {
+    margin-left: 13px !important;
+}
+/* margin left class end */
+
+/* margin right class start */
+.mr19 {
+    margin-right: 19% !important;
+}
+/* margin right class end */
+
 /* pagination design class start */
 .pagination {
     justify-content:center;

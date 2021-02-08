@@ -65,6 +65,15 @@
 						<a class="btn btn-info editBtn" href="javascript:;" onclick="fnBackBtn(<?php echo $month; ?>,<?php echo $year; ?>)">
 							<i class="fa fa-chevron-left fa-btn mr-1"></i>Back
 						</a>
+						<?php if($_REQUEST['hiddenSalaryId'] != null) { ?>
+							<a class="btn btn-warning text-white editBtn" href="javascript:;" onclick="fnSalaryEditBtn(<?php echo $_REQUEST['hiddenSalaryId']; ?>)">
+								<i class="fa fa-edit fa-btn mr-1"></i>Edit Salary
+							</a>
+						<?php } else { ?>
+							<a class="btn btn-success editBtn" href="javascript:;" onclick="fnSalaryAddBtn()">
+								<i class="fa fa-plus fa-btn mr-1"></i>Add Salary
+							</a>
+						<?php } ?>
 					</div>
 					<div class="inb">
 						<label> Employee Id :</label>
@@ -108,15 +117,15 @@
 							foreach ($salaryEmployeeHistory as $key => $history) { ?>
 								<?php $class = $key % 2 === 0 ? 'odd' : 'even'; ?>
 								<tr class="<?php echo $class; ?>">
-									<td class="tac vam"><?php echo ($pageno - 1) * $resultsPerPage + $key + 1 ?></td>
-									<td class="vam"><?php echo $salaryEmployeeHistory[$i]["BasicSalary"]; ?></td>
-									<td class="vam"><?php echo $salaryEmployeeHistory[$i]["Insentive"]; ?></td>
-									<td class="vam"><?php echo $salaryEmployeeHistory[$i]["DA"]; ?></td>
-									<td class="vam"><?php echo $salaryEmployeeHistory[$i]["MA"]; ?></td>
-									<td class="vam"><?php echo $salaryEmployeeHistory[$i]["PF"]; ?></td>
-									<td class="vam"><?php echo $salaryEmployeeHistory[$i]["itTax"]; ?></td>
-									<td class="vam"><?php echo $salaryEmployeeHistory[$i]["Penalty"]; ?></td>
-									<td class="tac vam">
+									<td class="tac"><?php echo ($pageno - 1) * $resultsPerPage + $key + 1 ?></td>
+									<td class="tac"><?php echo $salaryEmployeeHistory[$i]["BasicSalary"]; ?></td>
+									<td class="tac"><?php echo $salaryEmployeeHistory[$i]["Insentive"]; ?></td>
+									<td class="tac"><?php echo $salaryEmployeeHistory[$i]["DA"]; ?></td>
+									<td class="tac"><?php echo $salaryEmployeeHistory[$i]["MA"]; ?></td>
+									<td class="tac"><?php echo $salaryEmployeeHistory[$i]["PF"]; ?></td>
+									<td class="tac"><?php echo $salaryEmployeeHistory[$i]["itTax"]; ?></td>
+									<td class="tac"><?php echo $salaryEmployeeHistory[$i]["Penalty"]; ?></td>
+									<td class="tac">
 										<?php if(isset($detailView[$i]["totalSalary"])) {
 											echo number_format($detailView[$i]["totalSalary"]); ?> &#8377;
 										<?php } else {

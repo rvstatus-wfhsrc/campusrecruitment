@@ -34,3 +34,13 @@ function fnSalaryList() {
 	$( "#screenName" ).val('salaryList');
 	$( "#listForm" ).submit();
 }
+
+// salary Add button process
+function fnSalaryAddBtn() {
+	alert('This screen is an under the process');
+}
+
+// salary edit button process
+function fnSalaryEditBtn(salaryId) {
+	alert('This screen is an under the process');
+}

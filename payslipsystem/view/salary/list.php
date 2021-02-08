@@ -10,6 +10,11 @@
 		<script type="text/javascript">
 			var dateTime = "<?php echo date('Ymdhis'); ?>";
 		</script>
+		<style>
+		.table {
+			width: 75%;
+		}
+		</style>
 	</head>
 	<body>
 		<div class="wrapper d-flex align-items-stretch">
@@ -59,6 +64,7 @@
 				<input type="hidden" id="hiddenEmployeeName" name="hiddenEmployeeName">
 				<input type="hidden" id="hiddenYear" name="hiddenYear">
 				<input type="hidden" id="hiddenMonth" name="hiddenMonth">
+				<input type="hidden" id="hiddenSalaryId" name="hiddenSalaryId">
 				<input type="hidden" id="hiddenSearch" name="hiddenSearch" value="<?php if(isset($_REQUEST['search'])) { echo $_REQUEST['search']; } ?>">
 				<input type="hidden" id="pageno" name="pageno" value="<?php echo $pageno; ?>">
 				<div id="content" class="p-4 p-md-5 pt-5">
@@ -103,7 +109,7 @@
 							</select>
 						</span>
 					</div>
-					<div class="float-right mb5">
+					<div class="float-left mb5 ml13">
 						<!-- clear search -->
 						<div  class="inb mt-1">
 							<a href="javascript:;" onclick="fnClearSearch()">
@@ -132,18 +138,18 @@
 					<table class="table table-bordered table-position">
 						<colgroup>
 							<col width="1%">
-							<col width="17%">
+							<col width="15%">
 							<col>
-							<col width="12%">
-							<col width="12%">
+							<!-- <col width="12%"> -->
+							<col width="15%">
 						</colgroup>
 						<thead class="thead">
 							<tr>
 								<th>S.No.</th>
 								<th>Employee Id</th>
 								<th>Name</th>
-								<th>Net Salary</th>
-								<th>Total Salary</th>
+								<!-- <th>Net Salary</th> -->
+								<th title="Total Salary">Salary</th>
 							</tr>
 						</thead>
 						<?php
@@ -165,19 +171,19 @@
 									<tr class="<?php echo $class; ?>">
 										<td class="tac"><?php echo ($pageno - 1) * $resultsPerPage + $key + 1 ?></td>
 										<td class="tac">
-											<a href="javascript:;" onclick="fnSalaryEmployeeHistory('<?php echo $salaryList[$i]['Emp_ID']; ?>','<?php echo $salaryList[$i]['FirstName']." ".$salaryList[$i]['LastName']; ?>',<?php echo $month; ?>,<?php echo $year; ?>)" class="employeeUserNameClr">
+											<a href="javascript:;" onclick="fnSalaryEmployeeHistory('<?php echo $salaryList[$i]['Emp_ID']; ?>','<?php echo $salaryList[$i]['FirstName']." ".$salaryList[$i]['LastName']; ?>',<?php echo $month; ?>,<?php echo $year; ?>,<?php echo $salaryList[$i]["salaryId"]; ?>)" class="employeeUserNameClr">
 												<?php echo $salaryList[$i]["Emp_ID"]; ?>
 											</a>
 										</td>
 										<td class="nameClr"><?php echo $salaryList[$i]["FirstName"]." ".$salaryList[$i]["LastName"]; ?>
 										</td>
-										<td class="tac vam">
+										<!-- <td class="tac vam">
 											<?php if (isset($salaryList[$i]["netSalary"])) {
 												echo $salaryList[$i]["netSalary"];
 											} else {
 												echo '-';
 											} ?>
-										</td>
+										</td> -->
 										<td class="tac vam">
 											<?php if (isset($salaryList[$i]["totalSalary"])) {
 												echo $salaryList[$i]["totalSalary"];
@@ -192,13 +198,13 @@
 									} else {
 								?>
 								<tr>
-									<td colspan="5" class="tac noDataFoundClr">No data found</td>
+									<td colspan="4" class="tac noDataFoundClr">No data found</td>
 								</tr>
 							<?php } ?>
 					</table>
 					<?php if ($salaryList != null) { ?>
 						<?php if ($numOfResults > 5) { ?>
-							<div class="pagination">
+							<div class="pagination mr19">
 								<?php if($pageno > 1) {
 									$prev = $pageno - 1;
 									echo '<a href="javascript:;" onclick="fnPagination(1)">&laquo;</a>';

@@ -54,7 +54,7 @@ class salaryModel {
       $sort = 'Emp_ID DESC';
     }
 
-    $searchSqlQuery = "AND mstemp.Emp_ID LIKE '%$search%' ";
+    $searchSqlQuery = "AND mstemp.Emp_ID LIKE '%$search%' OR mstemp.LastName LIKE '%$search%' ";
     $year = date('Y');
     if (isset($_REQUEST['year'])) {
       $year = $_REQUEST['year'];
@@ -89,6 +89,7 @@ class salaryModel {
   		$getSalary[$i]["Emp_ID"] = $row["Emp_ID"];
   		$getSalary[$i]["FirstName"] = $row["FirstName"];
     	$getSalary[$i]["LastName"] = $row["LastName"];
+      $getSalary[$i]["salaryId"] = $row["salaryId"];
       $getSalary[$i]["netSalary"] = $row["netSalary"];
       $getSalary[$i]["totalSalary"] = $row["totalSalary"];
   		$i++;

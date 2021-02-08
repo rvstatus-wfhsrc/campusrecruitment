@@ -78,13 +78,14 @@ function fnEmployeeList() {
 }
 
 // salary employee history process
-function fnSalaryEmployeeHistory(employeeId,employeeName,month,year) {
+function fnSalaryEmployeeHistory(employeeId,employeeName,month,year,salaryId) {
 	$( "#pageno" ).val(1);
 	$( "#screenName" ).val('salaryEmployeeHistory');
 	$( "#hiddenEmployeeId" ).val(employeeId);
 	$( "#hiddenEmployeeName" ).val(employeeName);
 	$( "#hiddenMonth" ).val(month);
 	$( "#hiddenYear" ).val(year);
+	$( "#hiddenSalaryId" ).val(salaryId);
 	$( "#listForm" ).submit();
 }
 
