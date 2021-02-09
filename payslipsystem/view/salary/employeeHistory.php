@@ -59,7 +59,8 @@
 					<input type="hidden" id="month" name="month" value="<?php echo $month; ?>">
 					<input type="hidden" id="year" name="year" value="<?php echo $year; ?>">
 					<input type="hidden" id="pageno" name="pageno" value="<?php echo $pageno; ?>">
-					<input type="hidden" id="hiddenEmployeeId" name="hiddenEmployeeId" value="<?php echo $detailView[0]["Emp_Id"]; ?>">
+					<input type="hidden" id="hiddenEmployeeId" name="hiddenEmployeeId" value="<?php echo $employeeId; ?>">
+					<input type="hidden" id="hiddenEmployeeName" name="hiddenEmployeeName" value="<?php echo $employeeName; ?>">
 					<h2 class="mb-4">Salary Employee History</h2>
 					<div class="mb-1">
 						<a class="btn btn-info editBtn" href="javascript:;" onclick="fnBackBtn(<?php echo $month; ?>,<?php echo $year; ?>)">

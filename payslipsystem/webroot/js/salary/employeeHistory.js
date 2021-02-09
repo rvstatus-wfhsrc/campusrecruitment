@@ -32,12 +32,13 @@ function fnLogout() {
 function fnSalaryList() {
 	$( "#pageno" ).val(1);
 	$( "#screenName" ).val('salaryList');
-	$( "#listForm" ).submit();
+	$( "#employeeHistoryForm" ).submit();
 }
 
 // salary Add button process
 function fnSalaryAddBtn() {
-	alert('This screen is an under the process');
+	$( "#screenName" ).val('salaryAdd');
+	$( "#employeeHistoryForm" ).submit();
 }
 
 // salary edit button process

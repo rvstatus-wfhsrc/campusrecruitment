@@ -27,6 +27,8 @@ class salaryController {
 			Self::salaryList();
 		} else if (isset($_REQUEST["screenName"]) && $_REQUEST["screenName"] == "salaryEmployeeHistory") {
 			Self::salaryEmployeeHistory();
+		} else if (isset($_REQUEST["screenName"]) && $_REQUEST["screenName"] == "salaryAdd") {
+			Self::salaryAdd();
 		}
 	}
 
@@ -107,9 +109,27 @@ class salaryController {
 		} else {
 			$year = $_REQUEST['year'];
 		}
+		$employeeId = $_REQUEST['hiddenEmployeeId'];
+		$employeeName = $_REQUEST['hiddenEmployeeName'];
 		$salaryEmployeeHistory = $salaryModel->salaryEmployeeHistory($startResult,$resultsPerPage);
 		$mainMenu = "salaryEmployeeHistory";
 		require_once '../view/salary/employeeHistory.php';
+	}
+
+	/**
+	 * This salaryAdd method are used to add the employee salary for specific month
+	 * @return to view [ salary/addEdit ]
+	 * @author kulasekaran.
+	 *
+	 */
+	function salaryAdd() {
+		$salaryModel = new salaryModel();
+		$employeeId = $_REQUEST['hiddenEmployeeId'];
+		$employeeName = $_REQUEST['hiddenEmployeeName'];
+		$month = $_REQUEST['month'];
+		$year = $_REQUEST['year'];
+		$mainMenu = "salaryList";
+		require_once '../view/salary/addEdit.php';
 	}
 
 }

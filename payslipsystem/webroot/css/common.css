@@ -187,3 +187,9 @@
     vertical-align: middle !important;
 }
 /* vertical align class end */
+
+/* border class start */
+.border-revert {
+    border: revert !important;
+}
+/* border class end */
