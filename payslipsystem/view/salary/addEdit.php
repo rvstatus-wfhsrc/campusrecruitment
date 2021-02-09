@@ -63,9 +63,12 @@
 								<div class="card-body">
 									<?php if(isset($salaryEdit)) { ?>
 										<form action="../controller/salaryController.php?time=<?php echo(date('YmdHis')); ?>" method="POST" id="editForm" name="editForm">
+											<input type="hidden" id="screenFlag" name="screenFlag" value="2">
 									<?php } else { ?>
 										<form action="../controller/salaryController.php?time=<?php echo(date('YmdHis')); ?>" method="POST" id="addForm" name="addForm">
+											<input type="hidden" id="screenFlag" name="screenFlag" value="1">
 									<?php } ?>
+										<input type="hidden" id="screenName" name="screenName" value="salaryAddEditFormValidation">
 										<!-- employee Id -->
 										<div class="form-group form-inline">
 											<label for='employeeIdLbl' class="col-md-4 control-label required">Employee Id</label>
@@ -133,12 +136,12 @@
 											<div class="offset-md-4 col-md-6">
 												<?php if(isset($salaryEdit)) { ?>
 													<!-- edit button -->
-													<button class="btn btn-warning text-white editBtn addprocess">
+													<button class="btn btn-warning text-white editBtn addEditprocess" onclick="fnSalaryAddEdit()">
 														<i class="fa fa-btn fa-edit mr-1"></i>Update
 													</button>
 												<?php } else { ?>
 													<!-- add button -->
-													<button class="btn btn-success editBtn addprocess">
+													<button class="btn btn-success editBtn addEditprocess" onclick="fnSalaryAddEdit()">
 														<i class="fa fa-btn fa-plus mr-1"></i>Add
 													</button>
 												<?php } ?>

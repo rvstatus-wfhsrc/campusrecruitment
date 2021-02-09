@@ -1,7 +1,7 @@
 <?php
+session_start();
 require_once "../model/salaryModel.php";
 require_once "../model/commonModel.php";
-session_start();
 $object = new salaryController();
 
 /**
@@ -29,6 +29,8 @@ class salaryController {
 			Self::salaryEmployeeHistory();
 		} else if (isset($_REQUEST["screenName"]) && $_REQUEST["screenName"] == "salaryAdd") {
 			Self::salaryAdd();
+		} else if (isset($_REQUEST["screenName"]) && $_REQUEST["screenName"] == "salaryAddEditFormValidation") {
+			Self::salaryAddEditFormValidation();
 		}
 	}
 
@@ -130,6 +132,37 @@ class salaryController {
 		$year = $_REQUEST['year'];
 		$mainMenu = "salaryList";
 		require_once '../view/salary/addEdit.php';
+	}
+
+	/**
+	 * This salaryAddEditFormValidation method are used to validate the fields of salary add and edit screen
+	 * @return a json value to js in salary/addedit.js
+	 * @author kulasekaran.
+	 *
+	 */
+	function salaryAddEditFormValidation() {
+		unset($_SESSION['errors']);
+		if(isset($_POST)){
+			if (empty($_POST['basicSalary'])) {
+				$_SESSION['errors']['basicSalary'] = "The Basic Salary field is required";
+			}
+			if (empty($_POST['insentive'])) {
+				$_SESSION['errors']['insentive'] = "The Insentive field is required";
+			}
+			if (empty($_POST['pf'])) {
+				$_SESSION['errors']['pf'] = "The PF field is required";
+			}
+			if (empty($_POST['esi'])) {
+				$_SESSION['errors']['esi'] = "The ESI field is required";
+			}
+			if(isset($_SESSION['errors']) && count($_SESSION['errors']) > 0) {
+				if(!empty($_SERVER['HTTP_X_REQUESTED_WITH']) &&  strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest') {
+					echo json_encode($_SESSION['errors']); exit;
+				}
+			} else {
+				echo json_encode(true); exit;
+			}
+		}
 	}
 
 }
