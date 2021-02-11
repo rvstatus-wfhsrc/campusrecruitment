@@ -1,9 +1,14 @@
 var data = {};
-// add and edit button process
-function fnSalaryAddEdit() {
+// salary and edit button process
+function fnSalaryAddEdit(employeeId,employeeName,month,year) {
 	resetErrors();
 	var url = 'salaryController.php';
-	$.each($('form input, form hidden'), function(i, v) {
+	if ($("#screenFlag").val() == '1') {
+		var formName = '#addForm';
+	} else {
+		var formName = '#editForm';
+	}
+	$.each($('form input, form hidden, form textarea'), function(i, v) {
 		if (v.type !== 'submit') {
 			data[v.name] = v.value;
 		}
@@ -12,30 +17,33 @@ function fnSalaryAddEdit() {
 		dataType: 'json',
 		type: 'POST',
 		url: url,
-		data: $('#addForm').serialize(),
+		data: $(formName).serialize(),
 		success: function(resp) {
 			if (resp === true) {
 				//screenFlag => 1 ----> register
-                if($("#screenFlag").val() == '1') {
-                    var confRegMsg = "Are You Confirm To Add The Salary ?";
-                    if(confirm(confRegMsg)) {
-						// $( "#screenName" ).val('sendPaySlip');
-						// $( "#month" ).val(month);
-						// $( "#year" ).val(year);
+				if($("#screenFlag").val() == '1') {
+					var confRegMsg = "Are You Confirm To Add The Salary ?";
+	                if(confirm(confRegMsg)) {
+						$( "#screenName" ).val('salaryAddForm');
+						$( "#hiddenEmployeeId" ).val(employeeId);
+						$( "#hiddenEmployeeName" ).val(employeeName);
+						$( "#month" ).val(month);
+						$( "#year" ).val(year);
 						$( "#addForm" ).submit();
 						return false;
 					}
-                } else {
-                    var confUpdateMsg = "Are You Confirm To Update The Salary ?";
+				} else {
+					var confUpdateMsg = "Are You Confirm To Update The Salary ?";
                     if(confirm(confUpdateMsg)) {
-      					// $( "#hiddenSalaryId" ).val(salaryId);
-						// $( "#screenName" ).val('sendPaySlip');
-						// $( "#month" ).val(month);
-						// $( "#year" ).val(year);
+                    	$( "#screenName" ).val('salaryEditForm');
+						$( "#hiddenEmployeeId" ).val(employeeId);
+						$( "#hiddenEmployeeName" ).val(employeeName);
+						$( "#month" ).val(month);
+						$( "#year" ).val(year);
 						$( "#editForm" ).submit();
 						return false;
-                    }
-                }
+					}
+				}
 			} else {
 				$.each(resp, function(i, v) {
 					console.log(i + " => " + v);
@@ -57,23 +65,17 @@ function resetErrors() {
 	$('label.error').remove();
 }
 
-//employee list process
-function fnEmployeeList() {
-	$("#screenName").val('employeeList');
-	$("#addForm").attr("action", "../controller/employeeController.php?time="+dateTime);
-	$("#addForm").submit();
-}
-
-// salary list process
-function fnSalaryList() {
-	$( "#pageno" ).val(1);
-	$( "#screenName" ).val('salaryList');
-	$( "#addForm" ).submit();
-}
-
-// logout process
-function fnLogout() {
-	$( "#screenName" ).val('logout');
-	$("#addForm").attr("action", "../controller/loginController.php?time="+dateTime);
-	$( "#addForm" ).submit();
-}
+$(document).ready(function() {
+    // Total Salary process
+    $("#esi").on('input',function() {
+    	var basicSalary = parseInt($("#basicSalary").val());
+	    var insentive = parseInt($("#insentive").val());
+	    var pf = parseInt($("#pf").val());
+	    var esi = parseInt($("#esi").val());
+	    var totalSalary = 0;
+        if (/^\d+$/.test($("#esi").val())) {
+            totalSalary = basicSalary + insentive + pf + esi;
+        }
+        $("#totalSalary").val(totalSalary);
+    });
+});

@@ -31,6 +31,12 @@ class salaryController {
 			Self::salaryAdd();
 		} else if (isset($_REQUEST["screenName"]) && $_REQUEST["screenName"] == "salaryAddEditFormValidation") {
 			Self::salaryAddEditFormValidation();
+		} else if (isset($_REQUEST["screenName"]) && $_REQUEST["screenName"] == "salaryAddForm") {
+			Self::salaryAddForm();
+		} else if (isset($_REQUEST["screenName"]) && $_REQUEST["screenName"] == "salaryEdit") {
+			Self::salaryEdit();
+		} else if (isset($_REQUEST["screenName"]) && $_REQUEST["screenName"] == "salaryEditForm") {
+			Self::salaryEditForm();
 		}
 	}
 
@@ -125,11 +131,11 @@ class salaryController {
 	 *
 	 */
 	function salaryAdd() {
-		$salaryModel = new salaryModel();
 		$employeeId = $_REQUEST['hiddenEmployeeId'];
 		$employeeName = $_REQUEST['hiddenEmployeeName'];
 		$month = $_REQUEST['month'];
 		$year = $_REQUEST['year'];
+		$getMonth = array('' => 'Select Month','1'=>'January','2'=>'February','3'=>'March','4'=>'April','5'=>'May','6'=>'June','7'=>'July','8'=>'August','9'=>'September','10'=>'October','11'=>'November','12'=>'December');
 		$mainMenu = "salaryList";
 		require_once '../view/salary/addEdit.php';
 	}
@@ -155,14 +161,105 @@ class salaryController {
 			if (empty($_POST['esi'])) {
 				$_SESSION['errors']['esi'] = "The ESI field is required";
 			}
-			if(isset($_SESSION['errors']) && count($_SESSION['errors']) > 0) {
+			if(isset($_SESSION['errors']) && count($_SESSION['errors']) > 0){
 				if(!empty($_SERVER['HTTP_X_REQUESTED_WITH']) &&  strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest') {
 					echo json_encode($_SESSION['errors']); exit;
 				}
-			} else {
+			}else{
 				echo json_encode(true); exit;
 			}
 		}
+	}
+
+	
+	// function salaryAddEditFormValidation() {
+	// 	unset($_SESSION['errors']);
+	// 	if(isset($_POST)){
+	// 		if (empty($_POST['basicSalary'])) {
+	// 			$_SESSION['errors']['basicSalary'] = "The Basic Salary field is required";
+	// 		}
+	// 		if (empty($_POST['insentive'])) {
+	// 			$_SESSION['errors']['insentive'] = "The Insentive field is required";
+	// 		}
+	// 		if (empty($_POST['pf'])) {
+	// 			$_SESSION['errors']['pf'] = "The PF field is required";
+	// 		}
+	// 		if (empty($_POST['esi'])) {
+	// 			$_SESSION['errors']['esi'] = "The ESI field is required";
+	// 		}
+	// 		if(isset($_SESSION['errors']) && count($_SESSION['errors']) > 0){
+	// 			// if(!empty($_SERVER['HTTP_X_REQUESTED_WITH']) &&  strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest') {
+	// 				echo json_encode($_SESSION['errors']); exit;
+	// 			// }
+	// 		}else{
+	// 			echo json_encode(true); exit;
+	// 		}
+	// 	}
+	// }
+
+	/**
+	 * This salaryAddForm method are used to add the employee salary for specific month
+	 * @return to view [ salary/employeeHistory ]
+	 * @author kulasekaran.
+	 *
+	 */
+	function salaryAddForm() {
+		$salaryModel = new salaryModel();
+		$salaryAddStatus = $salaryModel->salaryAddForm();
+		$employeeId = $_REQUEST['hiddenEmployeeId'];
+		$employeeName = $_REQUEST['hiddenEmployeeName'];
+		$month = $_REQUEST['month'];
+		$year = $_REQUEST['year'];
+		if ($salaryAddStatus == 1) {
+			$_SESSION['message'] = "Salary Registered Successfully";
+			$_SESSION['status'] = "success";
+		} else {
+			$_SESSION['message'] = "Sorry, Something Went Wrong. Please Try Again Later";
+			$_SESSION['status'] = "danger";
+		}
+    	Self::salaryEmployeeHistory();
+	}
+
+	/**
+	 * This salaryEdit method are used to edit the employee salary for specific month
+	 * @return to view [ salary/addEdit ]
+	 * @author kulasekaran.
+	 *
+	 */
+	function salaryEdit() {
+		$salaryModel = new salaryModel();
+		$employeeId = $_REQUEST['hiddenEmployeeId'];
+		$employeeName = $_REQUEST['hiddenEmployeeName'];
+		$month = $_REQUEST['month'];
+		$year = $_REQUEST['year'];
+		$salaryId = $_REQUEST['hiddenSalaryId'];
+		$getMonth = array('' => 'Select Month','1'=>'January','2'=>'February','3'=>'March','4'=>'April','5'=>'May','6'=>'June','7'=>'July','8'=>'August','9'=>'September','10'=>'October','11'=>'November','12'=>'December');
+		$salaryEdit = $salaryModel->salaryEdit();
+		$mainMenu = "salaryList";
+		require_once '../view/salary/addEdit.php';
+	}
+
+	/**
+	 * This salaryEditForm method are used to edit the employee salary for specific month
+	 * @return to view [ salary/employeeHistory ]
+	 * @author kulasekaran.
+	 *
+	 */
+	function salaryEditForm() {
+		$salaryModel = new salaryModel();
+		$salaryEditStatus = $salaryModel->salaryEditForm();
+		$employeeId = $_REQUEST['hiddenEmployeeId'];
+		$employeeName = $_REQUEST['hiddenEmployeeName'];
+		$month = $_REQUEST['month'];
+		$year = $_REQUEST['year'];
+		if ($salaryEditStatus == 1) {
+			$_SESSION['message'] = "Salary Updated Successfully";
+			$_SESSION['status'] = "success";
+		} else {
+			$_SESSION['message'] = "Sorry, Something Went Wrong. Please Try Again Later";
+			$_SESSION['status'] = "danger";
+		}
+    	Self::salaryEmployeeHistory();
 	}
 
 }

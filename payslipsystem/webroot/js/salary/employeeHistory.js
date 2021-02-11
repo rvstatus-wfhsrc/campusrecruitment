@@ -43,5 +43,7 @@ function fnSalaryAddBtn() {
 
 // salary edit button process
 function fnSalaryEditBtn(salaryId) {
-	alert('This screen is an under the process');
+	$( "#hiddenSalaryId" ).val(salaryId);
+	$( "#screenName" ).val('salaryEdit');
+	$( "#employeeHistoryForm" ).submit();
 }

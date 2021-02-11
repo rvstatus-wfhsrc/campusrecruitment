@@ -10,6 +10,17 @@
 		<script type="text/javascript">
 			var dateTime = "<?php echo date('Ymdhis'); ?>";
 		</script>
+		<style>
+			/* session flash message design */
+			.fmsg {
+				font-size: 14px;
+				margin-left: 300px;
+				width: 35%;
+				margin-bottom: 0px;
+				padding-top: 1px;
+				padding-bottom: 1px;
+			}
+		</style>
 	</head>
 	<body>
 		<div class="wrapper d-flex align-items-stretch">
@@ -59,9 +70,20 @@
 					<input type="hidden" id="month" name="month" value="<?php echo $month; ?>">
 					<input type="hidden" id="year" name="year" value="<?php echo $year; ?>">
 					<input type="hidden" id="pageno" name="pageno" value="<?php echo $pageno; ?>">
+					<input type="hidden" id="hiddenSalaryId" name="hiddenSalaryId">
 					<input type="hidden" id="hiddenEmployeeId" name="hiddenEmployeeId" value="<?php echo $employeeId; ?>">
 					<input type="hidden" id="hiddenEmployeeName" name="hiddenEmployeeName" value="<?php echo $employeeName; ?>">
 					<h2 class="mb-4">Salary Employee History</h2>
+					<!-- session message -->
+					<?php if(isset($_SESSION['message'])): ?>
+					    <div class="alert alert-<?php echo $_SESSION['status']; ?> fmsg tac mb-2">
+					    	<?php echo $_SESSION['message']; ?>
+					    </div>
+					<?php
+						endif;
+						unset($_SESSION['message']);
+						unset($_SESSION['status']);
+					?>
 					<div class="mb-1">
 						<a class="btn btn-info editBtn" href="javascript:;" onclick="fnBackBtn(<?php echo $month; ?>,<?php echo $year; ?>)">
 							<i class="fa fa-chevron-left fa-btn mr-1"></i>Back

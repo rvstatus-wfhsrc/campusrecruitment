@@ -201,5 +201,89 @@ class salaryModel {
     return $row["count"];
   }
 
+  /**
+   * This salaryAddForm method are used to get the form data and inserts into emp_salary table 
+   * @return the $salaryAddStatus variable
+   * @author kulasekaran.
+   *
+   */
+  function salaryAddForm() {
+    $sql = "INSERT INTO emp_salary (
+                                      Emp_Id,
+                                      BasicSalary,
+                                      PF,
+                                      ESI,
+                                      Insentive,
+                                      Total,
+                                      Month,
+                                      Year
+                                    )
+                            VALUES (
+                                      '".$_REQUEST['hiddenEmployeeId']."',
+                                      '".$_REQUEST['basicSalary']."',
+                                      '".$_REQUEST['pf']."',
+                                      '".$_REQUEST['esi']."',
+                                      '".$_REQUEST['insentive']."',
+                                      '".$_REQUEST['totalSalary']."',
+                                      '".$_REQUEST['month']."',
+                                      '".$_REQUEST['year']."'
+                                    )";
+    $salaryAddStatus = mysql_query($sql,$this->con);
+    return $salaryAddStatus;
+  }
+
+  /**
+   * This salaryEdit method are used to get the employee salary data from database
+   * @return the $salaryEdit variable
+   * @author kulasekaran.
+   *
+   */
+  function salaryEdit() {
+    $salaryId = $_REQUEST['hiddenSalaryId'];
+    $sql = "SELECT
+              salary.id AS salaryId,
+              salary.BasicSalary,
+              salary.Insentive,
+              salary.PF,
+              salary.ESI,
+              salary.Total AS totalSalary
+              FROM emp_salary AS salary
+              WHERE salary.id = $salaryId ";
+    $result = mysql_query($sql,$this->con);
+    $getSalaryDetail = array();
+    $i = 0;
+    while($row = mysql_fetch_array($result)) {
+      $getSalaryDetail[$i]["salaryId"] = $row["salaryId"];
+      $getSalaryDetail[$i]["BasicSalary"] = $row["BasicSalary"];
+      $getSalaryDetail[$i]["Insentive"] = $row["Insentive"];
+      $getSalaryDetail[$i]["pf"] = $row["PF"];
+      $getSalaryDetail[$i]["esi"] = $row["ESI"];
+      $getSalaryDetail[$i]["totalSalary"] = $row["totalSalary"];
+      $i++;
+    }
+    return $getSalaryDetail;
+  }
+
+  /**
+   * This salaryEditForm method are used to get the form data and updates into emp_salary table 
+   * @return the $salaryEditStatus variable
+   * @author kulasekaran.
+   *
+   */
+  function salaryEditForm() {
+    $employeeId = $_REQUEST['hiddenEmployeeId'];
+    $month = $_REQUEST['month'];
+    $year = $_REQUEST['year'];
+    $sql = "UPDATE emp_salary
+                SET BasicSalary = '".$_REQUEST['basicSalary']."',
+                    Insentive = '".$_REQUEST['insentive']."',
+                    PF = '".$_REQUEST['pf']."',
+                    ESI = '".$_REQUEST['esi']."',
+                    Total = '".$_REQUEST['totalSalary']."'
+                WHERE Emp_Id = '".$employeeId."' AND Month = '".$month."' AND Year = '".$year."'";
+    $salaryEditStatus = mysql_query($sql,$this->con);
+    return $salaryEditStatus;
+  }
+
 }
 ?>

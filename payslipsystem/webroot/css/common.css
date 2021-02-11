@@ -2,6 +2,9 @@
 .autowidth {
     width: auto;
 }
+.w33 {
+    width: 33% !important;
+}
 .w43 {
     width: 43% !important;
 }
@@ -193,3 +196,11 @@
     border: revert !important;
 }
 /* border class end */
+
+/* for setting mandatory star(*) symbol in form class start */
+.required:after { 
+    content:'*'; 
+    color:red; 
+    padding-left:5px;
+}
+/* for setting mandatory star(*) symbol in form class end */

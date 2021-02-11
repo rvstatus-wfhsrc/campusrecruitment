@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en">
 	<head>
-		<title>Pay Slip | Salary Add</title>
+		<title>Pay Slip | Mail View</title>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -27,17 +27,9 @@
 					<ul class="list-unstyled components mb-5">
 						<li class="active">
 							<a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Employee</a>
-							<ul class="collapse list-unstyled show" id="homeSubmenu">
-								<li class="<?php if($mainMenu == 'employeeList') { echo('active'); } ?>">
-									<a href="javascript:;" onclick="fnEmployeeList()">List</a>
-								</li>
-							</ul>
-						</li>
-						<li class="">
-							<a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Salary</a>
-							<ul class="collapse list-unstyled <?php if($mainMenu == 'salaryList') { echo('show'); } ?>" id="homeSubmenu">
-								<li class="<?php if($mainMenu == 'salaryList') { echo('active'); } ?>">
-									<a href="javascript:;" onclick="fnSalaryList()">List</a>
+							<ul class="collapse list-unstyled <?php if($mainMenu == 'paySlipView') { echo('show'); } ?>" id="homeSubmenu">
+								<li>
+									<a class="active" href="javascript:;" onclick="fnEmployeeList()">List</a>
 								</li>
 							</ul>
 						</li>
@@ -52,47 +44,58 @@
 					</div>
 				</div>
 			</nav>
-			<!-- Page Content  -->
+			<!-- page content -->
 			<div id="content" class="p-4 p-md-5 pt-5">
-				<h2 class="mb-4">Salary Add</h2>
-				<div class="container mb-4">
-					<div class="row justify-content-center">
-						<div class="col-lg-9">
-							<div class="card shadow-lg border-0 rounded-lg mt-4">
-								<div class="card-header"><h3 class="text-center font-weight-light fs20"><?php if(isset($salaryEdit)) { echo "Salary Edit"; } else { echo "Salary Add"; } ?></h3></div>
-								<div class="card-body">
-									<?php if(isset($salaryEdit)) { ?>
-										<form action="../controller/salaryController.php?time=<?php echo(date('YmdHis')); ?>" method="POST" id="editForm" name="editForm">
-											<input type="hidden" id="screenFlag" name="screenFlag" value="2">
-									<?php } else { ?>
-										<form action="../controller/salaryController.php?time=<?php echo(date('YmdHis')); ?>" method="POST" id="addForm" name="addForm">
-											<input type="hidden" id="screenFlag" name="screenFlag" value="1">
-									<?php } ?>
-										<input type="hidden" id="screenName" name="screenName" value="salaryAddEditFormValidation">
+				<?php if(isset($salaryEdit)) { ?>
+					<form action="../controller/salaryController.php?time=<?php echo(date('YmdHis')); ?>" method="POST" id="editForm" name="editForm">
+					<input type="hidden" id="screenFlag" name="screenFlag" value="2">
+					<input type="hidden" id="hiddenSalaryId" name="hiddenSalaryId">
+				<?php } else { ?>
+					<form action="../controller/salaryController.php?time=<?php echo(date('YmdHis')); ?>" method="POST" id="addForm" name="addForm">
+					<input type="hidden" id="screenFlag" name="screenFlag" value="1">
+				<?php } ?>
+					<h2 class="mb-4">
+						<?php if(isset($salaryEdit)) {
+							echo"Salary Edit";
+						} else {
+							echo"Salary Add";
+						}?>
+					</h2>
+					<input type="hidden" id="screenName" name="screenName" value="salaryAddEditFormValidation">
+					<input type="hidden" id="hiddenEmployeeId" name="hiddenEmployeeId">
+					<input type="hidden" id="hiddenEmployeeName" name="hiddenEmployeeName">
+					<input type="hidden" id="month" name="month">
+					<input type="hidden" id="year" name="year">
+					<div class="container mb-4">
+						<div class="row justify-content-center">
+							<div class="col-lg-9">
+								<div class="card shadow-lg border-0 rounded-lg mt-4">
+									<div class="card-header"><h3 class="text-center font-weight-light fs20"><?php echo "Salary Add"; ?></h3></div>
+									<div class="card-body">
 										<!-- employee Id -->
 										<div class="form-group form-inline">
-											<label for='employeeIdLbl' class="col-md-4 control-label required">Employee Id</label>
+											<label for='employeeIdLbl' class="col-md-4 control-label">Employee Id</label>
 											<div class="col-md-4">
-												<label for='employeeId' class="form-control"><?php echo $employeeId; ?></label>
+												<label for='employeeId' class="form-control employeeUserNameClr"><?php echo $employeeId; ?></label>
 											</div>
 										</div>
 										<!-- employee name -->
 										<div class="form-group form-inline">
-											<label for='employeeNameLbl' class="col-md-4 control-label required">Employee Name</label>
+											<label for='employeeNameLbl' class="col-md-4 control-label">Employee Name</label>
 											<div class="col-md-4">
-												<label for='employeeName' class="form-control"><?php echo $employeeName; ?></label>
+												<label for='employeeName' class="form-control nameClr"><?php echo $employeeName; ?></label>
 											</div>
 										</div>
 										<!-- month -->
 										<div class="form-group form-inline">
-											<label for='monthLbl' class="col-md-4 control-label required">Month</label>
+											<label for='monthLbl' class="col-md-4 control-label">Month</label>
 											<div class="col-md-4">
-												<label for='month' class="form-control"><?php echo $month; ?></label>
+												<label for='month' class="form-control"><?php echo $getMonth[$month]; ?></label>
 											</div>
 										</div>
 										<!-- year -->
 										<div class="form-group form-inline">
-											<label for='yearLbl' class="col-md-4 control-label required">Year</label>
+											<label for='yearLbl' class="col-md-4 control-label">Year</label>
 											<div class="col-md-4">
 												<label for='year' class="form-control"><?php echo $year; ?></label>
 											</div>
@@ -100,59 +103,57 @@
 										<!-- basic salary -->
 										<div class="form-group form-inline">
 											<label for='basicSalary' class="col-md-4 control-label required">Basic Salary</label>
-											<div class="col-md-4">
-												<input id="basicSalary" type="text" class="form-control border-revert" name="basicSalary">
+											<div class="col-md-8">
+												<input id="basicSalary" name="basicSalary" type="text" class="form-control border-revert w33" placeholder="Enter Basic Salary" value="<?php if(isset($salaryEdit[0]['BasicSalary'])) { echo $salaryEdit[0]['BasicSalary']; }?>">
 											</div>
 										</div>
 										<!-- insentive -->
 										<div class="form-group form-inline">
 											<label for='insentive' class="col-md-4 control-label required">Insentive</label>
-											<div class="col-md-4">
-												<input id="insentive" type="text" class="form-control border-revert" name="insentive">
+											<div class="col-md-8">
+												<input id="insentive" name="insentive" type="text" class="form-control border-revert w33" placeholder="Enter Insentive" value="<?php if(isset($salaryEdit[0]['Insentive'])) { echo $salaryEdit[0]['Insentive']; }?>">
 											</div>
 										</div>
 										<!-- pf -->
 										<div class="form-group form-inline">
 											<label for='pf' class="col-md-4 control-label required">PF</label>
-											<div class="col-md-4">
-												<input id="pf" type="text" class="form-control border-revert" name="pf">
+											<div class="col-md-8">
+												<input id="pf" name="pf" type="text" class="form-control border-revert w33" placeholder="Enter PF" value="<?php if(isset($salaryEdit[0]['pf'])) { echo $salaryEdit[0]['pf']; }?>">
 											</div>
 										</div>
 										<!-- esi -->
 										<div class="form-group form-inline">
 											<label for='esi' class="col-md-4 control-label required">ESI</label>
-											<div class="col-md-4">
-												<input id="esi" type="text" class="form-control border-revert" name="esi">
+											<div class="col-md-8">
+												<input id="esi" name="esi" type="text" class="form-control border-revert w33" placeholder="Enter ESI" value="<?php if(isset($salaryEdit[0]['esi'])) { echo $salaryEdit[0]['esi']; }?>">
 											</div>
 										</div>
 										<!-- total salary -->
 										<div class="form-group form-inline">
 											<label for='totalSalary' class="col-md-4 control-label required">Total Salary</label>
-											<div class="col-md-4">
-												<input id="totalSalary" type="text" class="form-control border-revert" name="totalSalary">
+											<div class="col-md-8">
+												<input id="totalSalary" name="totalSalary" type="text" class="form-control border-revert w33" placeholder="Total Salary" value="<?php if(isset($salaryEdit[0]['totalSalary'])) { echo $salaryEdit[0]['totalSalary']; }?>">
 											</div>
 										</div>
 										<div class="form-group">
 											<div class="offset-md-4 col-md-6">
 												<?php if(isset($salaryEdit)) { ?>
-													<!-- edit button -->
-													<button class="btn btn-warning text-white editBtn addEditprocess" onclick="fnSalaryAddEdit()">
-														<i class="fa fa-btn fa-edit mr-1"></i>Update
-													</button>
+													<a class="btn btn-warning editBtn" href="javascript:;" onclick="fnSalaryAddEdit('<?php echo $employeeId; ?>','<?php echo $employeeName; ?>',<?php echo $month; ?>,<?php echo $year; ?>)">
+														<i class="fa fa-edit fa-btn mr-1"></i>Update
+													</a>
 												<?php } else { ?>
-													<!-- add button -->
-													<button class="btn btn-success editBtn addEditprocess" onclick="fnSalaryAddEdit()">
-														<i class="fa fa-btn fa-plus mr-1"></i>Add
-													</button>
+													<a class="btn btn-success editBtn" href="javascript:;" onclick="fnSalaryAddEdit('<?php echo $employeeId; ?>','<?php echo $employeeName; ?>',<?php echo $month; ?>,<?php echo $year; ?>)">
+														<i class="fa fa-plus fa-btn mr-1"></i>Add
+													</a>
 												<?php } ?>
 											</div>
 										</div>
-									</form>
+									</div>
 								</div>
 							</div>
 						</div>
 					</div>
-				</div>
+				</form>
 			</div>
 		</div>
 		<script type="text/javascript" src="../webroot/js/jquery.min.js" ></script>
