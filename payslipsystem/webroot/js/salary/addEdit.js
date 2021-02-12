@@ -84,12 +84,89 @@ function fnSalaryCancel(employeeId,employeeName,month,year) {
 
 $(document).ready(function() {
     // Total Salary process
+    $("#basicSalary").on('input',function() {
+    	var basicSalary = 0;
+    	var insentive = 0;
+    	var pf = 0;
+    	var esi = 0;
+    	if ($("#basicSalary").val() != '') {
+	    	var basicSalary = parseInt($("#basicSalary").val());
+	    }
+	    if ($("#insentive").val() != '') {
+	    	var insentive = parseInt($("#insentive").val());
+	    }
+	    if ($("#pf").val() != '') {
+	    	var pf = parseInt($("#pf").val());
+	    }
+	    if ($("#esi").val() != '') {
+	    	var esi = parseInt($("#esi").val());
+	    }
+        if (/^\d+$/.test($("#basicSalary").val())) {
+            totalSalary = basicSalary + insentive + pf + esi;
+        }
+        $("#totalSalary").val(totalSalary);
+    });
+    $("#insentive").on('input',function() {
+    	var basicSalary = 0;
+    	var insentive = 0;
+    	var pf = 0;
+    	var esi = 0;
+    	if ($("#basicSalary").val() != '') {
+	    	var basicSalary = parseInt($("#basicSalary").val());
+	    }
+	    if ($("#insentive").val() != '') {
+	    	var insentive = parseInt($("#insentive").val());
+	    }
+	    if ($("#pf").val() != '') {
+	    	var pf = parseInt($("#pf").val());
+	    }
+	    if ($("#esi").val() != '') {
+	    	var esi = parseInt($("#esi").val());
+	    }
+        if (/^\d+$/.test($("#insentive").val())) {
+            totalSalary = basicSalary + insentive + pf + esi;
+        }
+        $("#totalSalary").val(totalSalary);
+    });
+    $("#pf").on('input',function() {
+    	var basicSalary = 0;
+    	var insentive = 0;
+    	var pf = 0;
+    	var esi = 0;
+    	if ($("#basicSalary").val() != '') {
+	    	var basicSalary = parseInt($("#basicSalary").val());
+	    }
+	    if ($("#insentive").val() != '') {
+	    	var insentive = parseInt($("#insentive").val());
+	    }
+	    if ($("#pf").val() != '') {
+	    	var pf = parseInt($("#pf").val());
+	    }
+	    if ($("#esi").val() != '') {
+	    	var esi = parseInt($("#esi").val());
+	    }
+        if (/^\d+$/.test($("#pf").val())) {
+            totalSalary = basicSalary + insentive + pf + esi;
+        }
+        $("#totalSalary").val(totalSalary);
+    });
     $("#esi").on('input',function() {
-    	var basicSalary = parseInt($("#basicSalary").val());
-	    var insentive = parseInt($("#insentive").val());
-	    var pf = parseInt($("#pf").val());
-	    var esi = parseInt($("#esi").val());
-	    var totalSalary = 0;
+    	var basicSalary = 0;
+    	var insentive = 0;
+    	var pf = 0;
+    	var esi = 0;
+    	if ($("#basicSalary").val() != '') {
+	    	var basicSalary = parseInt($("#basicSalary").val());
+	    }
+	    if ($("#insentive").val() != '') {
+	    	var insentive = parseInt($("#insentive").val());
+	    }
+	    if ($("#pf").val() != '') {
+	    	var pf = parseInt($("#pf").val());
+	    }
+	    if ($("#esi").val() != '') {
+	    	var esi = parseInt($("#esi").val());
+	    }
         if (/^\d+$/.test($("#esi").val())) {
             totalSalary = basicSalary + insentive + pf + esi;
         }

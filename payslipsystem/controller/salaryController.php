@@ -37,6 +37,8 @@ class salaryController {
 			Self::salaryEdit();
 		} else if (isset($_REQUEST["screenName"]) && $_REQUEST["screenName"] == "salaryEditForm") {
 			Self::salaryEditForm();
+		} else {
+			Self::salaryList();
 		}
 	}
 

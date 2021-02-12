@@ -22,6 +22,7 @@ function fnSendMail(salaryId,month,year,fileName) {
 					$( "#month" ).val(month);
 					$( "#year" ).val(year);
 					$( "#hiddenFileName" ).val(fileName);
+					$("#viewForm").attr("action", "../controller/paySlipController.php?time="+dateTime);
 					$( "#viewForm" ).submit();
 					return false;
 				}
@@ -50,6 +51,7 @@ function resetErrors() {
 function downloadPaySlipOnView(fileName) {
 	$( "#hiddenFileName" ).val(fileName);
 	$( "#screenName" ).val('downloadPaySlipOnView');
+	$("#viewForm").attr("action", "../controller/paySlipController.php?time="+dateTime);
 	$( "#viewForm" ).submit();
 }
 

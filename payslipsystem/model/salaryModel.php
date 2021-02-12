@@ -158,7 +158,7 @@ class salaryModel {
               salary.Year AS year
               FROM emp_salary AS salary
               LEFT JOIN emp_mstemployees AS mstemp ON mstemp.Emp_ID = salary.Emp_Id
-              WHERE salary.Emp_Id = '".$employeeId."' LIMIT $start,$end";
+              WHERE salary.Emp_Id = '".$employeeId."' ORDER BY salary.Year DESC,salary.Month DESC LIMIT $start,$end";
     $result = mysql_query($sql,$this->con);
     $salaryEmployeeHistory = array();
     $i = 0;

@@ -37,6 +37,8 @@ class paySlipController {
 			Self::viewFormValidation();
 		} elseif (isset($_REQUEST["screenName"]) && $_REQUEST["screenName"] == "downloadPaySlipOnView") {
 			Self::downloadPaySlipOnView();
+		} else {
+			header("Location: employeeController.php?time=" . date(YmdHis));
 		}
 	}
 
