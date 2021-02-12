@@ -88,8 +88,14 @@
 						<a class="btn btn-info editBtn" href="javascript:;" onclick="fnBackBtn(<?php echo $month; ?>,<?php echo $year; ?>)">
 							<i class="fa fa-chevron-left fa-btn mr-1"></i>Back
 						</a>
-						<?php if($_REQUEST['hiddenSalaryId'] != null) { ?>
-							<a class="btn btn-warning text-white editBtn" href="javascript:;" onclick="fnSalaryEditBtn(<?php echo $_REQUEST['hiddenSalaryId']; ?>)">
+						<?php if((isset($_REQUEST['hiddenSalaryId']) && $_REQUEST['hiddenSalaryId'] != null) || (isset($salaryId) && $salaryId != null)) {
+							if (isset($_REQUEST['hiddenSalaryId'])) {
+								$employeeSalaryId = $_REQUEST['hiddenSalaryId'];
+							} else {
+								$employeeSalaryId = $salaryId;
+							} ?>
+
+							<a class="btn btn-warning text-white editBtn" href="javascript:;" onclick="fnSalaryEditBtn(<?php echo $employeeSalaryId; ?>)">
 								<i class="fa fa-edit fa-btn mr-1"></i>Edit Salary
 							</a>
 						<?php } else { ?>
@@ -113,25 +119,21 @@
 					<table class="table table-bordered table-position">
 						<colgroup>
 							<col width="1%">
-							<col width="13%">
-							<col width="12%">
-							<col width="12%">
-							<col width="12%">
-							<col width="12%">
-							<col width="12%">
-							<col width="12%">
-							<col width="14%">
+							<col width="18%">
+							<col width="17%">
+							<col width="16%">
+							<col width="16%">
+							<col width="16%">
+							<col width="16%">
 						</colgroup>
 						<thead class="thead">
 							<tr>
 								<th>S.No.</th>
+								<th>Year / Month</th>
 								<th>Basic Salary</th>
 								<th>Insentive</th>
-								<th title="Dearness Allowance">DA</th>
-								<th title="Medical Allowance">MA</th>
 								<th>PF</th>
-								<th>IT Tax</th>
-								<th>Penalty</th>
+								<th>ESI</th>
 								<th title="Total Salary">Salary</th>
 							</tr>
 						</thead>
@@ -141,16 +143,14 @@
 								<?php $class = $key % 2 === 0 ? 'odd' : 'even'; ?>
 								<tr class="<?php echo $class; ?>">
 									<td class="tac"><?php echo ($pageno - 1) * $resultsPerPage + $key + 1 ?></td>
+									<td class="tac"><?php echo $salaryEmployeeHistory[$i]["year"]; ?> / <?php echo $salaryEmployeeHistory[$i]["month"]; ?></td>
 									<td class="tac"><?php echo $salaryEmployeeHistory[$i]["BasicSalary"]; ?></td>
 									<td class="tac"><?php echo $salaryEmployeeHistory[$i]["Insentive"]; ?></td>
-									<td class="tac"><?php echo $salaryEmployeeHistory[$i]["DA"]; ?></td>
-									<td class="tac"><?php echo $salaryEmployeeHistory[$i]["MA"]; ?></td>
 									<td class="tac"><?php echo $salaryEmployeeHistory[$i]["PF"]; ?></td>
-									<td class="tac"><?php echo $salaryEmployeeHistory[$i]["itTax"]; ?></td>
-									<td class="tac"><?php echo $salaryEmployeeHistory[$i]["Penalty"]; ?></td>
+									<td class="tac"><?php echo $salaryEmployeeHistory[$i]["ESI"]; ?></td>
 									<td class="tac">
-										<?php if(isset($detailView[$i]["totalSalary"])) {
-											echo number_format($detailView[$i]["totalSalary"]); ?> &#8377;
+										<?php if(isset($salaryEmployeeHistory[$i]["totalSalary"])) {
+											echo number_format($salaryEmployeeHistory[$i]["totalSalary"]); ?> &#8377;
 										<?php } else {
 											echo ("-");
 										} ?>
@@ -160,7 +160,7 @@
 							}
 						} else { ?>
 							<tr>
-								<td colspan="9" class="tac noDataFoundClr">No data found</td>
+								<td colspan="7" class="tac noDataFoundClr">No data found</td>
 							</tr>
 						<?php } ?>
 					</table>

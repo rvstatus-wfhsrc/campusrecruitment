@@ -12,7 +12,7 @@ $(document).ready(function() {
 	});
 	$('#listForm').keydown(function (e) {
 	    if (e.keyCode == 13) {
-	    	$( "#screenName" ).val('employeeList');
+	    	$( "#screenName" ).val('salaryList');
 			$("#hiddenSearch").val($("#search").val());
 			$( "#listForm" ).submit();
 	    }
@@ -72,6 +72,8 @@ function fnPagination(pageno) {
 // employee list process
 function fnEmployeeList() {
 	$( "#pageno" ).val(1);
+	$("#search").val("");
+	$("#hiddenSearch").val("");
 	$( "#screenName" ).val('employeeList');
 	$("#listForm").attr("action", "../controller/employeeController.php?time="+dateTime);
 	$( "#listForm" ).submit();
@@ -99,6 +101,8 @@ function fnLogout() {
 // salary list process
 function fnSalaryList() {
 	$( "#pageno" ).val(1);
+	$("#search").val("");
+	$("#hiddenSearch").val("");
 	$( "#screenName" ).val('salaryList');
 	$( "#listForm" ).submit();
 }

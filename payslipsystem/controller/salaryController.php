@@ -101,6 +101,9 @@ class salaryController {
 		} else {
 			$pageno = 1;
 		}
+		if (!isset($_REQUEST['hiddenSalaryId'])) {
+			$salaryId = $salaryModel->getSalaryId();
+		}
 
 		// pagination process
 		$resultsPerPage = 5;
@@ -151,15 +154,23 @@ class salaryController {
 		if(isset($_POST)){
 			if (empty($_POST['basicSalary'])) {
 				$_SESSION['errors']['basicSalary'] = "The Basic Salary field is required";
+			} else if (!filter_var($_POST['basicSalary'], FILTER_VALIDATE_INT)) {
+				$_SESSION['errors']['basicSalary'] = "The Basic Salary field must be an integer.";
 			}
 			if (empty($_POST['insentive'])) {
 				$_SESSION['errors']['insentive'] = "The Insentive field is required";
+			} else if (!filter_var($_POST['insentive'], FILTER_VALIDATE_INT)) {
+				$_SESSION['errors']['insentive'] = "The Insentive field must be an integer.";
 			}
 			if (empty($_POST['pf'])) {
 				$_SESSION['errors']['pf'] = "The PF field is required";
+			} else if (!filter_var($_POST['pf'], FILTER_VALIDATE_INT)) {
+				$_SESSION['errors']['pf'] = "The PF field must be an integer.";
 			}
 			if (empty($_POST['esi'])) {
 				$_SESSION['errors']['esi'] = "The ESI field is required";
+			} else if (!filter_var($_POST['esi'], FILTER_VALIDATE_INT)) {
+				$_SESSION['errors']['esi'] = "The ESI field must be an integer.";
 			}
 			if(isset($_SESSION['errors']) && count($_SESSION['errors']) > 0){
 				if(!empty($_SERVER['HTTP_X_REQUESTED_WITH']) &&  strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest') {

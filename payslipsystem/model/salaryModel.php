@@ -150,12 +150,9 @@ class salaryModel {
               mstemp.LastName,
               salary.Emp_Id,
               salary.BasicSalary,
-              salary.DA,
-              salary.MA,
               salary.Insentive,
-              salary.IT_TAX AS itTax,
               salary.PF,
-              salary.Penalty,
+              salary.ESI,
               salary.Total AS totalSalary,
               salary.Month AS month,
               salary.Year AS year
@@ -170,12 +167,9 @@ class salaryModel {
       $salaryEmployeeHistory[$i]["LastName"] = $row["LastName"];
       $salaryEmployeeHistory[$i]["Emp_Id"] = $row["Emp_Id"];
       $salaryEmployeeHistory[$i]["BasicSalary"] = $row["BasicSalary"];
-      $salaryEmployeeHistory[$i]["DA"] = $row["DA"];
-      $salaryEmployeeHistory[$i]["MA"] = $row["MA"];
       $salaryEmployeeHistory[$i]["Insentive"] = $row["Insentive"];
-      $salaryEmployeeHistory[$i]["itTax"] = $row["itTax"];
       $salaryEmployeeHistory[$i]["PF"] = $row["PF"];
-      $salaryEmployeeHistory[$i]["Penalty"] = $row["Penalty"];
+      $salaryEmployeeHistory[$i]["ESI"] = $row["ESI"];
       $salaryEmployeeHistory[$i]["totalSalary"] = $row["totalSalary"];
       $salaryEmployeeHistory[$i]["month"] = $row["month"];
       $salaryEmployeeHistory[$i]["year"] = $row["year"];
@@ -283,6 +277,19 @@ class salaryModel {
                 WHERE Emp_Id = '".$employeeId."' AND Month = '".$month."' AND Year = '".$year."'";
     $salaryEditStatus = mysql_query($sql,$this->con);
     return $salaryEditStatus;
+  }
+
+  function getSalaryId() {
+    $employeeId = $_REQUEST['hiddenEmployeeId'];
+    $year = $_REQUEST['year'];
+    $month = $_REQUEST['month'];
+    $sql = "SELECT
+              salary.id AS salaryId
+              FROM emp_salary AS salary
+              WHERE salary.Emp_Id = '".$employeeId."' AND salary.Month = '".$month."' AND salary.Year = '".$year."'";
+    $salaryId = mysql_query($sql,$this->con);
+    $row = mysql_fetch_array($salaryId);
+    return $row["salaryId"];
   }
 
 }

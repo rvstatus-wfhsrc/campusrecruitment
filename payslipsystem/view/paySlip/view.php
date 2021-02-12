@@ -102,7 +102,7 @@
 								<div class="leftSide"> Attachment : </div>
 								<div class="rightSide">
 									<a href="javascript:;" title="To Download Salary Pay Slip" onclick="downloadPaySlipOnView('<?php echo "pay_slip_".$paySlipDetail[0]['Emp_ID']."_".$paySlipDetail[0]['Year'].$months.$dates.".xls"; ?>')">
-										<?php echo "pay_slip_".$paySlipDetail[0]['Emp_ID']."_".$paySlipDetail[0]['Year'].$months.$dates.".xls"; ?>
+										<?php echo "pay_slip_".$paySlipDetail[0]['Emp_ID']."_".$paySlipDetail[0]['Year']."_".$months.".xls"; ?>
 									</a>
 								</div>
 							</div>

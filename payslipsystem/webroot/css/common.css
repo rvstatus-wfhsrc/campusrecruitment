@@ -204,3 +204,9 @@
     padding-left:5px;
 }
 /* for setting mandatory star(*) symbol in form class end */
+
+/* justify content class start */
+.jcr {
+    justify-content:right !important;
+}
+/* justify content class end */

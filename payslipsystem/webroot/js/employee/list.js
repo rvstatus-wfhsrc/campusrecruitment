@@ -82,6 +82,8 @@ function fnPaySlipView(salaryId,month,year) {
 // employee list process
 function fnEmployeeList() {
 	$( "#pageno" ).val(1);
+	$("#search").val("");
+	$("#hiddenSearch").val("");
 	$( "#screenName" ).val('employeeList');
 	$( "#listForm" ).submit();
 }
@@ -108,6 +110,8 @@ function fnLogout() {
 // salary list process
 function fnSalaryList() {
 	$( "#pageno" ).val(1);
+	$("#search").val("");
+	$("#hiddenSearch").val("");
 	$( "#screenName" ).val('salaryList');
 	$("#listForm").attr("action", "../controller/salaryController.php?time="+dateTime);
 	$( "#listForm" ).submit();

@@ -65,6 +65,23 @@ function resetErrors() {
 	$('label.error').remove();
 }
 
+function fnSalaryCancel(employeeId,employeeName,month,year) {
+	var confCancelMsg = "Are You Confirm To Cancel The Salary ?";
+	if(confirm(confCancelMsg)) {
+		$( "#screenName" ).val('salaryEmployeeHistory');
+		$( "#hiddenEmployeeId" ).val(employeeId);
+		$( "#hiddenEmployeeName" ).val(employeeName);
+		$( "#month" ).val(month);
+		$( "#year" ).val(year);
+		if ($("#screenFlag").val() == '1') {
+			var formName = '#addForm';
+		} else {
+			var formName = '#editForm';
+		}
+		$( formName ).submit();
+	}
+}
+
 $(document).ready(function() {
     // Total Salary process
     $("#esi").on('input',function() {

@@ -10,6 +10,11 @@
 		<script type="text/javascript">
         	var dateTime = "<?php echo date('Ymdhis'); ?>";
     </script>
+    <style>
+	    .container {
+	    	line-height: 34px;
+	    }
+    </style>
 	</head>
 	<body class="my-login-page">
 		<section class="h-100">
