@@ -173,11 +173,13 @@
 						<?php
 							if ($employeeListArray != null) { ?>
 							<?php
+								$month = date('m');
 								if(isset($_REQUEST['month'])) {
 									$month = $_REQUEST['month'];
 								} else if (isset($month)) {
 									$month = $month;
 								}
+								$year = date('Y');
 								if(isset($_REQUEST['year'])) {
 									$year = $_REQUEST['year'];
 								} else if (isset($year)) {
@@ -194,7 +196,7 @@
 											</a>
 										</td>
 										<td class="nameClr"><?php echo $employeeListArray[$i]["FirstName"]." ".$employeeListArray[$i]["LastName"]; ?></td>
-										<td class="tac">
+										<td class="tar">
 											<?php
 												if(isset($employeeListArray[$i]["totalSalary"])) {
 													echo number_format($employeeListArray[$i]["totalSalary"]); ?> &#8377;

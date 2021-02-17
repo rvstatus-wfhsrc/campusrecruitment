@@ -48,7 +48,7 @@
 			<div id="content" class="p-4 p-md-5 pt-5">
 				<form action="../controller/paySlipController.php?time=<?php echo(date('YmdHis')); ?>" method="POST" id="viewForm" name="viewForm">
 					<h2 class="mb-4">Pay Slip Mail View</h2>
-					<input type="hidden" id="screenName" name="screenName" value="viewFormValidation">
+					<input type="hidden" id="screenName" name="screenName">
 					<input type="hidden" id="hiddenSalaryId" name="hiddenSalaryId">
 					<input type="hidden" id="hiddenFileName" name="hiddenFileName">
 					<input type="hidden" id="month" name="month">
@@ -62,7 +62,7 @@
 							<i class="fa fa-chevron-left fa-btn mr-1"></i>Back
 						</a>
 						<?php if($paySlipDetail[0]['totalSalary'] != 0) { ?>
-							<a class="btn bg-warning text-white editBtn" href="javascript:;" onclick="fnSendMail(<?php echo $paySlipDetail[0]['salaryId']; ?>,<?php echo $month; ?>,<?php echo $year; ?>,'<?php echo "pay_slip_".$paySlipDetail[0]['Emp_ID']."_".$paySlipDetail[0]['Year'].$months.$dates.".xls"; ?>')">
+							<a class="btn bg-warning text-white editBtn" href="javascript:;" onclick="fnSendMail(<?php echo $paySlipDetail[0]['salaryId']; ?>,<?php echo $month; ?>,<?php echo $year; ?>,'<?php echo "pay_slip_".$paySlipDetail[0]['Emp_ID']."_".$paySlipDetail[0]['Year']."_".$months.".xls"; ?>')">
 								<i class="fa fa-envelope fa-btn mr-1"></i>Send Mail
 							</a>
 						<?php } ?>
@@ -101,7 +101,7 @@
 							<div>
 								<div class="leftSide"> Attachment : </div>
 								<div class="rightSide">
-									<a href="javascript:;" title="To Download Salary Pay Slip" onclick="downloadPaySlipOnView('<?php echo "pay_slip_".$paySlipDetail[0]['Emp_ID']."_".$paySlipDetail[0]['Year'].$months.$dates.".xls"; ?>')">
+									<a href="javascript:;" title="To Download Salary Pay Slip" onclick="downloadPaySlipOnView('<?php echo "pay_slip_".$paySlipDetail[0]['Emp_ID']."_".$paySlipDetail[0]['Year']."_".$months.".xls"; ?>')">
 										<?php echo "pay_slip_".$paySlipDetail[0]['Emp_ID']."_".$paySlipDetail[0]['Year']."_".$months.".xls"; ?>
 									</a>
 								</div>

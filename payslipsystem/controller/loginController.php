@@ -60,9 +60,7 @@
 		 *
 		 */
 		function logoutProcess() {
-			unset($_SESSION['userName']);
-			unset($_SESSION['flag']);
-			unset($_SESSION['logged_in']);
+			session_destroy();
 			Self::index();
 		}
 	}

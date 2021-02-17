@@ -7,6 +7,7 @@ function fnSendMail(salaryId,month,year,fileName) {
 		if (v.type !== 'submit') {
 			data[v.name] = v.value;
 		}
+		$( "#screenName" ).val('viewFormValidation');
 	});
 	$.ajax({
 		dataType: 'json',

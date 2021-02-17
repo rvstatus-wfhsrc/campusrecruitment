@@ -144,11 +144,11 @@
 								<tr class="<?php echo $class; ?>">
 									<td class="tac"><?php echo ($pageno - 1) * $resultsPerPage + $key + 1 ?></td>
 									<td class="tac"><?php echo $salaryEmployeeHistory[$i]["year"]; ?> / <?php echo $salaryEmployeeHistory[$i]["month"]; ?></td>
-									<td class="tac"><?php echo $salaryEmployeeHistory[$i]["BasicSalary"]; ?></td>
-									<td class="tac"><?php echo $salaryEmployeeHistory[$i]["Insentive"]; ?></td>
-									<td class="tac"><?php echo $salaryEmployeeHistory[$i]["PF"]; ?></td>
-									<td class="tac"><?php echo $salaryEmployeeHistory[$i]["ESI"]; ?></td>
-									<td class="tac">
+									<td class="tar"><?php echo number_format($salaryEmployeeHistory[$i]["BasicSalary"]); ?> &#8377;</td>
+									<td class="tar"><?php echo number_format($salaryEmployeeHistory[$i]["Insentive"]); ?> &#8377;</td>
+									<td class="tar"><?php echo number_format($salaryEmployeeHistory[$i]["PF"]); ?> &#8377;</td>
+									<td class="tar"><?php echo number_format($salaryEmployeeHistory[$i]["ESI"]); ?> &#8377;</td>
+									<td class="tar">
 										<?php if(isset($salaryEmployeeHistory[$i]["totalSalary"])) {
 											echo number_format($salaryEmployeeHistory[$i]["totalSalary"]); ?> &#8377;
 										<?php } else {

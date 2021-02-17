@@ -101,7 +101,7 @@ class paySlipController {
 		if(!is_dir($path)) {
 			mkdir($path, 0755, true);
 		}
-		$file = 'pay_slip_'.$paySlip[0]['Emp_ID'].'_'.$paySlip[0]['Year'].$month.$date.'.xls';
+		$file = 'pay_slip_'.$paySlip[0]['Emp_ID'].'_'.$paySlip[0]['Year']."_".$month.'.xls';
 		$writerObject->save(str_replace('.php', '.xls', $path.'/'. $file));
 	}
 
@@ -135,7 +135,7 @@ class paySlipController {
 		$mail->Subject = $subject;
 		$mail->Body = $content;
 		$mail->AddCC($cc);
-		$mail->addAttachment('../webroot/download/payslip/pay_slip_'.$sendPaySlip[0]['Emp_ID'].'_'.$sendPaySlip[0]['Year'].$month.$date.'.xls');
+		$mail->addAttachment('../webroot/download/payslip/pay_slip_'.$sendPaySlip[0]['Emp_ID'].'_'.$sendPaySlip[0]['Year']."_".$month.'.xls');
 		if (!$mail->send()) {
     		echo 'Mailer Error: ' . $mail->ErrorInfo;
 		} else {

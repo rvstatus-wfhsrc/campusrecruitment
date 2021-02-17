@@ -102,7 +102,7 @@
 									<td class="vam"><?php echo $detailView[$i]["subject"]; ?></td>
 									<td><?php echo nl2br($detailView[$i]["content"]); ?></td>
 									<td class="tac vam"><?php echo $detailView[$i]["year"]." / ".$detailView[$i]["month"]; ?></td>
-									<td class="tac vam">
+									<td class="tar vam">
 										<?php if(isset($detailView[$i]["totalSalary"])) {
 											echo number_format($detailView[$i]["totalSalary"]); ?> &#8377;
 										<?php } else {

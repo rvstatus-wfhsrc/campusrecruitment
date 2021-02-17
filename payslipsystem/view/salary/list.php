@@ -184,10 +184,10 @@
 												echo '-';
 											} ?>
 										</td> -->
-										<td class="tac vam">
+										<td class="tar vam">
 											<?php if (isset($salaryList[$i]["totalSalary"])) {
-												echo $salaryList[$i]["totalSalary"];
-											} else {
+												echo number_format($salaryList[$i]["totalSalary"]); ?> &#8377;
+											<?php } else {
 												echo '-';
 											} ?>
 										</td>
