@@ -53,7 +53,7 @@
 					<input type="hidden" id="pageno" name="pageno" value="<?php echo $pageno; ?>">
 					<input type="hidden" id="hiddenEmployeeId" name="hiddenEmployeeId" value="<?php echo $detailView[0]["Emp_Id"]; ?>">
 					<input type="hidden" id="hiddenFileName" name="hiddenFileName">
-					<h2 class="mb-4">Pay Slip Employee History</h2>
+					<h2>Pay Slip Employee History</h2>
 					<div class="mb-1">
 						<a class="btn btn-info editBtn" href="javascript:;" onclick="fnBackBtn(<?php echo $month; ?>,<?php echo $year; ?>)">
 							<i class="fa fa-chevron-left fa-btn mr-1"></i>Back

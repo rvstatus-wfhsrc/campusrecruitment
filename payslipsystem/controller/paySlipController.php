@@ -192,6 +192,8 @@ class paySlipController {
 			}
 			if (empty($_POST['cc'])) {
 				$_SESSION['errors']['cc'] = "The CC field is required";
+			} elseif (!filter_var($_POST['cc'], FILTER_VALIDATE_EMAIL) && $_POST['cc'] != 'Nil') {
+				$_SESSION['errors']['cc'] = "The E-Mail Address is invalid.";
 			}
 			if (empty($_POST['subject'])) {
 				$_SESSION['errors']['subject'] = "The Subject field is required";

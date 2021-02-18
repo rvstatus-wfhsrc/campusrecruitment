@@ -54,7 +54,7 @@
 					<form action="../controller/salaryController.php?time=<?php echo(date('YmdHis')); ?>" method="POST" id="addForm" name="addForm">
 					<input type="hidden" id="screenFlag" name="screenFlag" value="1">
 				<?php } ?>
-					<h2 class="mb-4">
+					<h2>
 						<?php if(isset($salaryEdit)) {
 							echo"Salary Edit";
 						} else {

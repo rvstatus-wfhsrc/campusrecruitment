@@ -101,10 +101,12 @@ $(document).ready(function() {
 	    if ($("#esi").val() != '') {
 	    	var esi = parseInt($("#esi").val());
 	    }
-        if (/^\d+$/.test($("#basicSalary").val())) {
-            totalSalary = basicSalary + insentive + pf + esi;
+        totalSalary = basicSalary + insentive + pf + esi;
+        if(isNaN(totalSalary) || totalSalary == 0) {
+        	$("#totalSalary").val("");
+        } else {
+        	$("#totalSalary").val(totalSalary);
         }
-        $("#totalSalary").val(totalSalary);
     });
     $("#insentive").on('input',function() {
     	var basicSalary = 0;
@@ -123,10 +125,12 @@ $(document).ready(function() {
 	    if ($("#esi").val() != '') {
 	    	var esi = parseInt($("#esi").val());
 	    }
-        if (/^\d+$/.test($("#insentive").val())) {
-            totalSalary = basicSalary + insentive + pf + esi;
+        totalSalary = basicSalary + insentive + pf + esi;
+        if(isNaN(totalSalary) || totalSalary == 0) {
+        	$("#totalSalary").val("");
+        } else {
+        	$("#totalSalary").val(totalSalary);
         }
-        $("#totalSalary").val(totalSalary);
     });
     $("#pf").on('input',function() {
     	var basicSalary = 0;
@@ -145,10 +149,12 @@ $(document).ready(function() {
 	    if ($("#esi").val() != '') {
 	    	var esi = parseInt($("#esi").val());
 	    }
-        if (/^\d+$/.test($("#pf").val())) {
-            totalSalary = basicSalary + insentive + pf + esi;
+        totalSalary = basicSalary + insentive + pf + esi;
+        if(isNaN(totalSalary) || totalSalary == 0) {
+        	$("#totalSalary").val("");
+        } else {
+        	$("#totalSalary").val(totalSalary);
         }
-        $("#totalSalary").val(totalSalary);
     });
     $("#esi").on('input',function() {
     	var basicSalary = 0;
@@ -167,9 +173,35 @@ $(document).ready(function() {
 	    if ($("#esi").val() != '') {
 	    	var esi = parseInt($("#esi").val());
 	    }
-        if (/^\d+$/.test($("#esi").val())) {
-            totalSalary = basicSalary + insentive + pf + esi;
+        totalSalary = basicSalary + insentive + pf + esi;
+        if(isNaN(totalSalary) || totalSalary == 0) {
+        	$("#totalSalary").val("");
+        } else {
+        	$("#totalSalary").val(totalSalary);
         }
-        $("#totalSalary").val(totalSalary);
+    });
+    $('#basicSalary').on('input propertychange paste', function (e) {
+        var reg = /^0+/gi;
+        if (this.value.match(reg)) {
+            this.value = this.value.replace(reg, '');
+        }
+    });
+    $('#insentive').on('input propertychange paste', function (e) {
+        var reg = /^0+/gi;
+        if (this.value.match(reg)) {
+            this.value = this.value.replace(reg, '');
+        }
+    });
+    $('#pf').on('input propertychange paste', function (e) {
+        var reg = /^0+/gi;
+        if (this.value.match(reg)) {
+            this.value = this.value.replace(reg, '');
+        }
+    });
+    $('#esi').on('input propertychange paste', function (e) {
+        var reg = /^0+/gi;
+        if (this.value.match(reg)) {
+            this.value = this.value.replace(reg, '');
+        }
     });
 });

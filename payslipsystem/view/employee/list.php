@@ -14,8 +14,8 @@
 			/* session flash message design */
 			.fmsg {
 				font-size: 14px;
-				margin-left: 300px;
-				width: 35%;
+				/*margin-left: 300px;*/
+				width: 80%;
 				margin-bottom: 0px;
 				padding-top: 1px;
 				padding-bottom: 1px;
@@ -74,17 +74,21 @@
 				<input type="hidden" id="hiddenSearch" name="hiddenSearch" value="<?php if(isset($_REQUEST['search'])) { echo $_REQUEST['search']; } ?>">
 				<input type="hidden" id="pageno" name="pageno" value="<?php echo $pageno; ?>">
 				<div id="content" class="p-4 p-md-5 pt-5">
-					<h2 class="mb-4">Employee List</h2>
-					<!-- session message -->
-					<?php if(isset($_SESSION['message'])): ?>
-				     <div class="alert alert-<?php echo $_SESSION['status']; ?> fmsg tac mb-2">
-				     	<?php echo $_SESSION['message']; ?>
-				     </div>
-					<?php
-						endif;
-						unset($_SESSION['message']);
-						unset($_SESSION['status']);
-					?>
+					<div class="inb w35">
+						<h2>Employee List</h2>
+					</div>
+					<div class="inb w50">
+						<!-- session message -->
+						<?php if(isset($_SESSION['message'])): ?>
+					     <div class="alert alert-<?php echo $_SESSION['status']; ?> fmsg tac">
+					     	<?php echo $_SESSION['message']; ?>
+					     </div>
+						<?php
+							endif;
+							unset($_SESSION['message']);
+							unset($_SESSION['status']);
+						?>
+					</div>
 					<div class="inb float-left">
 						<label for="year">Year : </label>
 						<span>

@@ -47,7 +47,7 @@
 			<!-- page content -->
 			<div id="content" class="p-4 p-md-5 pt-5">
 				<form action="../controller/paySlipController.php?time=<?php echo(date('YmdHis')); ?>" method="POST" id="viewForm" name="viewForm">
-					<h2 class="mb-4">Pay Slip Mail View</h2>
+					<h2>Pay Slip Mail View</h2>
 					<input type="hidden" id="screenName" name="screenName">
 					<input type="hidden" id="hiddenSalaryId" name="hiddenSalaryId">
 					<input type="hidden" id="hiddenFileName" name="hiddenFileName">
@@ -70,36 +70,36 @@
 					<div class="box">
 						<div class="container">
 							<div>
-								<div class="leftSide"> Employee Name : </div>
+								<div class="leftSide">Employee Name</div>
 								<div class="rightSide nameClr"><?php echo $paySlipDetail[0]['FirstName']." ".$paySlipDetail[0]['LastName']; ?></div>
 							</div>
 							<div>
-								<div class="leftSide"> To : </div>
+								<div class="leftSide required">To</div>
 								<div class="rightSide">
 									<input type="text" id="toMail" name="toMail" class="w43 h34" value="<?php echo $paySlipDetail[0]['Emailpersonal']; ?>">
 								</div>
 							</div>
 							<div>
-								<div class="leftSide"> CC : </div>
+								<div class="leftSide required">CC</div>
 								<div class="rightSide">
 									<input type="text" id="cc" name="cc" class="w43 h34" value="Nil">
 								</div>
 							</div>
 							<div>
-								<div class="leftSide"> Subject : </div>
+								<div class="leftSide required">Subject</div>
 								<div class="rightSide">
 									<input type="text" id="subject" name="subject" class="w43 h34" value="<?php echo "Reg : Pay Slip ".$paySlipDetail[0]['Year']."/".$months."/".$dates; ?>">
 								</div>
 							</div>
 							<div>
-								<div class="leftSide"> Content : </div>
+								<div class="leftSide required">Content</div>
 								<?php $content = $paySlipDetail[0]['FirstName']." ".$paySlipDetail[0]['LastName'].",\n Please find attached salary slip of ".$paySlipDetail[0]['FirstName']." ".$paySlipDetail[0]['LastName']." for ".date('F',$month)."-".$paySlipDetail[0]['Year'].".\nIf you have any question,do not hesitate to contact us.\nRegards,\nHR Department,\nSathi Systems Pvt. Ltd." ?>
 								<div class="rightSide vat">
 									<textarea id="content" name="content" rows="3" cols="46" class="w43" style="min-height:0">Dear <?php echo $content ; ?></textarea>
 								</div>
 							</div>
 							<div>
-								<div class="leftSide"> Attachment : </div>
+								<div class="leftSide"> Attachment</div>
 								<div class="rightSide">
 									<a href="javascript:;" title="To Download Salary Pay Slip" onclick="downloadPaySlipOnView('<?php echo "pay_slip_".$paySlipDetail[0]['Emp_ID']."_".$paySlipDetail[0]['Year']."_".$months.".xls"; ?>')">
 										<?php echo "pay_slip_".$paySlipDetail[0]['Emp_ID']."_".$paySlipDetail[0]['Year']."_".$months.".xls"; ?>

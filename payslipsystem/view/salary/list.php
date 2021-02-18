@@ -68,7 +68,7 @@
 				<input type="hidden" id="hiddenSearch" name="hiddenSearch" value="<?php if(isset($_REQUEST['search'])) { echo $_REQUEST['search']; } ?>">
 				<input type="hidden" id="pageno" name="pageno" value="<?php echo $pageno; ?>">
 				<div id="content" class="p-4 p-md-5 pt-5">
-					<h2 class="mb-4">Salary List</h2>
+					<h2>Salary List</h2>
 					<div class="inb float-left">
 						<label for="year">Year : </label>
 						<span>
@@ -127,7 +127,7 @@
 						</div>
 						<!-- searching process -->
 						<div class="input-group searchBtn">
-							<input type="text" id="search" name="search" placeholder="Search Employee Id\Name" class="input_box form-control h34" value="<?php if(isset($_REQUEST['search'])) { echo $_REQUEST['search']; } ?>">
+							<input type="text" id="search" name="search" placeholder="Search Employee Id/Name" class="input_box form-control h34" value="<?php if(isset($_REQUEST['search'])) { echo $_REQUEST['search']; } ?>">
 							<div class="input-group-append">
 								<a class="btn btn-secondary h34" href="javascript:;" onclick="fnSearch()">
 									<i class="fa fa-search" title="Search"></i>
