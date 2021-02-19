@@ -1,0 +1,1 @@
+var mail_send_confirmation = "Are You Confirm To Send Pay Slip Mail ?";

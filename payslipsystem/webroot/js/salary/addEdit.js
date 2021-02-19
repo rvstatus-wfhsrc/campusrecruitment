@@ -205,3 +205,26 @@ $(document).ready(function() {
         }
     });
 });
+
+//employee list process
+function fnEmployeeList() {
+	$("#screenName").val('employeeList');
+	if ($("#screenFlag").val() == '1') {
+		var formName = '#addForm';
+	} else {
+		var formName = '#editForm';
+	}
+	$(formName).attr("action", "../controller/employeeController.php?time="+dateTime);
+	$(formName).submit();
+}
+
+// salary list process
+function fnSalaryList() {
+	$( "#screenName" ).val('salaryList');
+	if ($("#screenFlag").val() == '1') {
+		var formName = '#addForm';
+	} else {
+		var formName = '#editForm';
+	}
+	$(formName).submit();
+}

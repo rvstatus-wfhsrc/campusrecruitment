@@ -25,11 +25,19 @@
 						<!-- <a href="index.html" class="logo">Splash</a> -->
 					</h1>
 					<ul class="list-unstyled components mb-5">
-						<li class="active">
+						<li class="">
 							<a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Employee</a>
-							<ul class="collapse list-unstyled <?php if($mainMenu == 'paySlipView') { echo('show'); } ?>" id="homeSubmenu">
+							<ul class="collapse list-unstyled show" id="homeSubmenu">
 								<li>
 									<a class="active" href="javascript:;" onclick="fnEmployeeList()">List</a>
+								</li>
+							</ul>
+						</li>
+						<li class="active">
+							<a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Salary</a>
+							<ul class="collapse list-unstyled <?php if($mainMenu == 'salaryList') { echo('show'); } ?>" id="homeSubmenu">
+								<li class="">
+									<a href="javascript:;" onclick="fnSalaryList()">List</a>
 								</li>
 							</ul>
 						</li>
@@ -64,8 +72,8 @@
 					<input type="hidden" id="screenName" name="screenName" value="salaryAddEditFormValidation">
 					<input type="hidden" id="hiddenEmployeeId" name="hiddenEmployeeId">
 					<input type="hidden" id="hiddenEmployeeName" name="hiddenEmployeeName">
-					<input type="hidden" id="month" name="month">
-					<input type="hidden" id="year" name="year">
+					<input type="hidden" id="month" name="month" value="<?php echo $month; ?>">
+					<input type="hidden" id="year" name="year" value="<?php echo $year; ?>">
 					<div class="container mb-4">
 						<div class="row justify-content-center">
 							<div class="col-lg-9">

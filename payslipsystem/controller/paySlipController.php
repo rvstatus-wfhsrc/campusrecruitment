@@ -49,6 +49,13 @@ class paySlipController {
 	 *
 	 */
 	function paySlipView() {
+		if ($_SESSION['languages'] == "English" ) {
+			require ("../webroot/common/commonEnglish.php");
+			$languageJs = "english.js";
+		} else {
+			require ("../webroot/common/commonJapanese.php");
+			$languageJs = "japanese.js";
+		}
 		$this->downloadPaySlip();
 		$paySlipModel = new paySlipModel();
 		$paySlipDetail = $paySlipModel->paySlipDetail();
@@ -161,6 +168,13 @@ class paySlipController {
 		} else {
 			$pageno = 1;
 		}
+		if ($_SESSION['languages'] == "English" ) {
+			require ("../webroot/common/commonEnglish.php");
+			$languageJs = "english.js";
+		} else {
+			require ("../webroot/common/commonJapanese.php");
+			$languageJs = "japanese.js";
+		}
 
 		// pagination process
 		$resultsPerPage = 5;
@@ -183,23 +197,30 @@ class paySlipController {
 	}
 
 	function viewFormValidation() {
+		if ($_SESSION['languages'] == "English" ) {
+			require ("../webroot/common/commonEnglish.php");
+			$languageJs = "english.js";
+		} else {
+			require ("../webroot/common/commonJapanese.php");
+			$languageJs = "japanese.js";
+		}
 		unset($_SESSION['errors']);
 		if(isset($_POST)){
 			if (empty($_POST['toMail'])) {
-				$_SESSION['errors']['toMail'] = "The To field is required";
+				$_SESSION['errors']['toMail'] = $err_toMail_required;
 			} elseif (!filter_var($_POST['toMail'], FILTER_VALIDATE_EMAIL)) {
-				$_SESSION['errors']['toMail'] = "The E-Mail Address is invalid.";
+				$_SESSION['errors']['toMail'] = $err_email_invalid;
 			}
 			if (empty($_POST['cc'])) {
-				$_SESSION['errors']['cc'] = "The CC field is required";
+				$_SESSION['errors']['cc'] = $err_cc_required;
 			} elseif (!filter_var($_POST['cc'], FILTER_VALIDATE_EMAIL) && $_POST['cc'] != 'Nil') {
-				$_SESSION['errors']['cc'] = "The E-Mail Address is invalid.";
+				$_SESSION['errors']['cc'] = $err_email_invalid;
 			}
 			if (empty($_POST['subject'])) {
-				$_SESSION['errors']['subject'] = "The Subject field is required";
+				$_SESSION['errors']['subject'] = $err_subject_required;
 			}
 			if (empty($_POST['content'])) {
-				$_SESSION['errors']['content'] = "The Content field is required";
+				$_SESSION['errors']['content'] = $err_content_required;
 			}
 			if(isset($_SESSION['errors']) && count($_SESSION['errors']) > 0){
 				if(!empty($_SERVER['HTTP_X_REQUESTED_WITH']) &&  strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest') {

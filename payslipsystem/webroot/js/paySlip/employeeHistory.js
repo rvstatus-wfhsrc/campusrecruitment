@@ -10,6 +10,7 @@ function fnBackBtn(month,year) {
 
 //employee list process
 function fnEmployeeList() {
+	$( "#pageno" ).val(1);
 	$("#screenName").val('employeeList');
 	$("#employeeHistoryForm").attr("action", "../controller/employeeController.php?time="+dateTime);
 	$("#employeeHistoryForm").submit();
@@ -35,5 +36,13 @@ function fnPagination(pageno) {
 function fnLogout() {
 	$( "#screenName" ).val('logout');
 	$("#employeeHistoryForm").attr("action", "../controller/loginController.php?time="+dateTime);
+	$( "#employeeHistoryForm" ).submit();
+}
+
+// salary list process
+function fnSalaryList() {
+	$( "#pageno" ).val(1);
+	$( "#screenName" ).val('salaryList');
+	$("#employeeHistoryForm").attr("action", "../controller/salaryController.php?time="+dateTime);
 	$( "#employeeHistoryForm" ).submit();
 }

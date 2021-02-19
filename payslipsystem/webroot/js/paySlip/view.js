@@ -16,7 +16,7 @@ function fnSendMail(salaryId,month,year,fileName) {
 		data: $('#viewForm').serialize(),
 		success: function(resp) {
 			if (resp === true) {
-				var confRegMsg = "Are You Confirm To Send Pay Slip Mail ?";
+				var confRegMsg = mail_send_confirmation;
                 if(confirm(confRegMsg)) {
 					$( "#hiddenSalaryId" ).val(salaryId);
 					$( "#screenName" ).val('sendPaySlip');
@@ -76,5 +76,12 @@ function fnEmployeeList() {
 function fnLogout() {
 	$( "#screenName" ).val('logout');
 	$("#viewForm").attr("action", "../controller/loginController.php?time="+dateTime);
+	$( "#viewForm" ).submit();
+}
+
+// salary list process
+function fnSalaryList() {
+	$( "#screenName" ).val('salaryList');
+	$("#viewForm").attr("action", "../controller/salaryController.php?time="+dateTime);
 	$( "#viewForm" ).submit();
 }

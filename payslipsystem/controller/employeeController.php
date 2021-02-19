@@ -48,6 +48,13 @@ class employeeController {
 		if(isset($_SESSION['year'])) {
 			$year = $_SESSION['year'];
 		}
+		if ($_SESSION['languages'] == "English" ) {
+			require ("../webroot/common/commonEnglish.php");
+			$languageJs = "english.js";
+		} else {
+			require ("../webroot/common/commonJapanese.php");
+			$languageJs = "japanese.js";
+		}
 
 		// sorting process style
 		if (isset($_REQUEST["sortOptn"])) {

@@ -12,7 +12,7 @@
 		</script>
 		<style>
 		.table {
-			width: 75%;
+			width: 76%;
 		}
 		</style>
 	</head>
@@ -109,7 +109,7 @@
 							</select>
 						</span>
 					</div>
-					<div class="float-left mb5 ml13">
+					<div class="float-left mb5 ml13 w41">
 						<!-- clear search -->
 						<div  class="inb mt-1">
 							<a href="javascript:;" onclick="fnClearSearch()">
@@ -127,7 +127,7 @@
 						</div>
 						<!-- searching process -->
 						<div class="input-group searchBtn">
-							<input type="text" id="search" name="search" placeholder="Search Employee Id/Name" class="input_box form-control h34" value="<?php if(isset($_REQUEST['search'])) { echo $_REQUEST['search']; } ?>">
+							<input type="text" id="search" name="search" placeholder="Search Employee Id / Name" class="input_box form-control h34" value="<?php if(isset($_REQUEST['search'])) { echo $_REQUEST['search']; } ?>">
 							<div class="input-group-append">
 								<a class="btn btn-secondary h34" href="javascript:;" onclick="fnSearch()">
 									<i class="fa fa-search" title="Search"></i>
