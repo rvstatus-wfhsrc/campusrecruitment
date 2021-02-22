@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en">
 	<head>
-		<title>Pay Slip | Salary List</title>
+		<title><?php echo $lbl_paySlip; ?> | <?php echo $lbl_salary." ".$lbl_list; ?></title>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -31,23 +31,23 @@
 					</h1>
 					<ul class="list-unstyled components mb-5">
 						<li class="active">
-							<a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Employee</a>
+							<a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><?php echo $lbl_employee; ?></a>
 							<ul class="collapse list-unstyled show" id="homeSubmenu">
 								<li class="<?php if($mainMenu == 'employeeList') { echo('active'); } ?>">
-									<a href="javascript:;" onclick="fnEmployeeList()">List</a>
+									<a href="javascript:;" onclick="fnEmployeeList()"><?php echo $lbl_list; ?></a>
 								</li>
 							</ul>
 						</li>
 						<li class="">
-							<a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Salary</a>
+							<a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><?php echo $lbl_salary; ?></a>
 							<ul class="collapse list-unstyled <?php if($mainMenu == 'salaryList') { echo('show'); } ?>" id="homeSubmenu">
 								<li class="<?php if($mainMenu == 'salaryList') { echo('active'); } ?>">
-									<a href="javascript:;" onclick="fnSalaryList()">List</a>
+									<a href="javascript:;" onclick="fnSalaryList()"><?php echo $lbl_list; ?></a>
 								</li>
 							</ul>
 						</li>
 						<li>
-							<a href="javascript:;" onclick="fnLogout()">Logout</a>
+							<a href="javascript:;" onclick="fnLogout()"><?php echo $lbl_logout; ?></a>
 						</li>
 					</ul>
 					<div class="footer">
@@ -68,9 +68,9 @@
 				<input type="hidden" id="hiddenSearch" name="hiddenSearch" value="<?php if(isset($_REQUEST['search'])) { echo $_REQUEST['search']; } ?>">
 				<input type="hidden" id="pageno" name="pageno" value="<?php echo $pageno; ?>">
 				<div id="content" class="p-4 p-md-5 pt-5">
-					<h2>Salary List</h2>
+					<h2><?php echo $lbl_salary." ".$lbl_list; ?></h2>
 					<div class="inb float-left">
-						<label for="year">Year : </label>
+						<label for="year"><?php echo $lbl_year; ?> : </label>
 						<span>
 							<select id="year" name="year" class="form-control h34 inb autowidth">
 								<?php
@@ -90,7 +90,7 @@
 						</span>
 					</div>
 					<div class="inb ml-2 float-left">
-						<label for="month">Month : </label>
+						<label for="month"><?php echo $lbl_month; ?> : </label>
 						<span>
 							<select id="month" name="month" class="form-control h34 inb autowidth">
 								<?php
@@ -109,7 +109,7 @@
 							</select>
 						</span>
 					</div>
-					<div class="float-left mb5 ml13 w41">
+					<div class="float-right mb5 mr24 w41">
 						<!-- clear search -->
 						<div  class="inb mt-1">
 							<a href="javascript:;" onclick="fnClearSearch()">
@@ -145,11 +145,11 @@
 						</colgroup>
 						<thead class="thead">
 							<tr>
-								<th>S.No.</th>
-								<th>Employee Id</th>
-								<th>Name</th>
+								<th><?php echo $lbl_serialNumber; ?></th>
+								<th><?php echo $lbl_employee." ".$lbl_id; ?></th>
+								<th><?php echo $lbl_name; ?></th>
 								<!-- <th>Net Salary</th> -->
-								<th title="Total Salary">Salary</th>
+								<th title="Total Salary"><?php echo $lbl_salary; ?></th>
 							</tr>
 						</thead>
 						<?php

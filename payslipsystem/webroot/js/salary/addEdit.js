@@ -22,7 +22,7 @@ function fnSalaryAddEdit(employeeId,employeeName,month,year) {
 			if (resp === true) {
 				//screenFlag => 1 ----> register
 				if($("#screenFlag").val() == '1') {
-					var confRegMsg = "Are You Confirm To Add The Salary ?";
+					var confRegMsg = salary_add_confirmation;
 	                if(confirm(confRegMsg)) {
 						$( "#screenName" ).val('salaryAddForm');
 						$( "#hiddenEmployeeId" ).val(employeeId);
@@ -33,7 +33,7 @@ function fnSalaryAddEdit(employeeId,employeeName,month,year) {
 						return false;
 					}
 				} else {
-					var confUpdateMsg = "Are You Confirm To Update The Salary ?";
+					var confUpdateMsg = salary_update_confirmation;
                     if(confirm(confUpdateMsg)) {
                     	$( "#screenName" ).val('salaryEditForm');
 						$( "#hiddenEmployeeId" ).val(employeeId);
@@ -66,7 +66,7 @@ function resetErrors() {
 }
 
 function fnSalaryCancel(employeeId,employeeName,month,year) {
-	var confCancelMsg = "Are You Confirm To Cancel The Salary ?";
+	var confCancelMsg = salary_cancel_confirmation;
 	if(confirm(confCancelMsg)) {
 		$( "#screenName" ).val('salaryEmployeeHistory');
 		$( "#hiddenEmployeeId" ).val(employeeId);

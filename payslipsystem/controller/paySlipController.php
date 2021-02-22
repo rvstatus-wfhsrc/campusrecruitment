@@ -119,6 +119,13 @@ class paySlipController {
 	 *
 	 */
 	function sendPaySlip() {
+		if ($_SESSION['languages'] == "English" ) {
+			require ("../webroot/common/commonEnglish.php");
+			$languageJs = "english.js";
+		} else {
+			require ("../webroot/common/commonJapanese.php");
+			$languageJs = "japanese.js";
+		}
 		$paySlipModel = new paySlipModel();
 		$sendPaySlip = $paySlipModel->sendPaySlip();
 		$month = date('m',$sendPaySlip[0]['Month']);
@@ -147,7 +154,7 @@ class paySlipController {
     		echo 'Mailer Error: ' . $mail->ErrorInfo;
 		} else {
 			$paySlipDetailAdd = $paySlipModel->paySlipDetailAdd($sendPaySlip,$subject,$content);
-			$_SESSION['message'] = "Pay Slip Mail Send Successfully";
+			$_SESSION['message'] = $ses_mail_send;
 			$_SESSION['status'] = "success";
 			$_SESSION['month'] = $_REQUEST['month'];
 			$_SESSION['year'] = $_REQUEST['year'];

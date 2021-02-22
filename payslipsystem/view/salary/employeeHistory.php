@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en">
 	<head>
-		<title>Pay Slip | Salary Employee History</title>
+		<title><?php echo $lbl_paySlip; ?> | <?php echo $lbl_salary." ".$lbl_employee." ".$lbl_history; ?></title>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -37,23 +37,23 @@
 					</h1>
 					<ul class="list-unstyled components mb-5">
 						<li class="active">
-							<a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Employee</a>
+							<a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><?php echo $lbl_employee; ?></a>
 							<ul class="collapse list-unstyled show" id="homeSubmenu">
 								<li class="<?php if($mainMenu == 'employeeList') { echo('active'); } ?>">
-									<a href="javascript:;" onclick="fnEmployeeList()">List</a>
+									<a href="javascript:;" onclick="fnEmployeeList()"><?php echo $lbl_list; ?></a>
 								</li>
 							</ul>
 						</li>
 						<li class="">
-							<a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Salary</a>
+							<a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><?php echo $lbl_salary; ?></a>
 							<ul class="collapse list-unstyled show" id="homeSubmenu">
 								<li class="<?php if($mainMenu == 'salaryList') { echo('active'); } ?>">
-									<a href="javascript:;" onclick="fnSalaryList()">List</a>
+									<a href="javascript:;" onclick="fnSalaryList()"><?php echo $lbl_list; ?></a>
 								</li>
 							</ul>
 						</li>
 						<li>
-							<a href="javascript:;" onclick="fnLogout()">Logout</a>
+							<a href="javascript:;" onclick="fnLogout()"><?php echo $lbl_logout; ?></a>
 						</li>
 					</ul>
 					<div class="footer">
@@ -75,7 +75,7 @@
 					<input type="hidden" id="hiddenEmployeeName" name="hiddenEmployeeName" value="<?php echo $employeeName; ?>">
 					<div class="inb w40">
 						<h2>
-							Salary Employee History
+							<?php echo $lbl_salary." ".$lbl_employee." ".$lbl_history; ?>
 						</h2>
 					</div>
 					<div class="inb w50">
@@ -92,7 +92,7 @@
 					</div>
 					<div class="mb-1">
 						<a class="btn btn-info editBtn" href="javascript:;" onclick="fnBackBtn(<?php echo $month; ?>,<?php echo $year; ?>)">
-							<i class="fa fa-chevron-left fa-btn mr-1"></i>Back
+							<i class="fa fa-chevron-left fa-btn mr-1"></i><?php echo $lbl_back; ?>
 						</a>
 						<?php if((isset($_REQUEST['hiddenSalaryId']) && $_REQUEST['hiddenSalaryId'] != null) || (isset($salaryId) && $salaryId != null)) {
 							if (isset($_REQUEST['hiddenSalaryId'])) {
@@ -102,22 +102,22 @@
 							} ?>
 
 							<a class="btn btn-warning text-white editBtn" href="javascript:;" onclick="fnSalaryEditBtn(<?php echo $employeeSalaryId; ?>)">
-								<i class="fa fa-edit fa-btn mr-1"></i>Edit Salary
+								<i class="fa fa-edit fa-btn mr-1"></i><?php echo $lbl_editSalary; ?>
 							</a>
 						<?php } else { ?>
 							<a class="btn btn-success editBtn" href="javascript:;" onclick="fnSalaryAddBtn()">
-								<i class="fa fa-plus fa-btn mr-1"></i>Add Salary
+								<i class="fa fa-plus fa-btn mr-1"></i><?php echo $lbl_addSalary; ?>
 							</a>
 						<?php } ?>
 					</div>
 					<div class="inb">
-						<label> Employee Id :</label>
+						<label> <?php echo $lbl_employee." ".$lbl_id; ?> :</label>
 						<span class="employeeUserNameClr">
 							<?php echo $_REQUEST['hiddenEmployeeId']; ?>
 						</span>
 					</div>
 					<div class="inb ml-5">
-						<label> Employee Name :</label>
+						<label> <?php echo $lbl_employee." ".$lbl_name; ?> :</label>
 						<span class="nameClr">
 							<?php echo $_REQUEST['hiddenEmployeeName']; ?>
 						</span>
@@ -134,13 +134,13 @@
 						</colgroup>
 						<thead class="thead">
 							<tr>
-								<th>S.No.</th>
-								<th>Year / Month</th>
-								<th>Basic Salary</th>
-								<th>Insentive</th>
-								<th>PF</th>
-								<th>ESI</th>
-								<th title="Total Salary">Salary</th>
+								<th><?php echo $lbl_serialNumber; ?></th>
+								<th><?php echo $lbl_year." / ".$lbl_month; ?></th>
+								<th><?php echo $lbl_basicSalary; ?></th>
+								<th><?php echo $lbl_insentive; ?></th>
+								<th><?php echo $lbl_pf; ?></th>
+								<th><?php echo $lbl_esi; ?></th>
+								<th title="<?php echo $lbl_totalSalary; ?>"><?php echo $lbl_salary; ?></th>
 							</tr>
 						</thead>
 						<?php if ($salaryEmployeeHistory != null) { ?>

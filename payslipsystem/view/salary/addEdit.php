@@ -1,12 +1,13 @@
 <!doctype html>
 <html lang="en">
 	<head>
-		<title>Pay Slip | <?php if(isset($salaryEdit)) { echo"Salary Edit"; } else { echo"Salary Add"; } ?></title>
+		<title><?php echo $lbl_paySlip; ?> | <?php if(isset($salaryEdit)) { echo $lbl_salaryEdit; } else { echo $lbl_salaryAdd; } ?></title>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 		<link rel="stylesheet" href="../webroot/css/style.css">
 		<link rel="stylesheet" href="../webroot/css/common.css">
+		<script type="text/javascript" src="../webroot/common/<?php echo $languageJs; ?>" ></script>
 		<script type="text/javascript">
 			var dateTime = "<?php echo date('Ymdhis'); ?>";
 		</script>
@@ -26,23 +27,23 @@
 					</h1>
 					<ul class="list-unstyled components mb-5">
 						<li class="">
-							<a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Employee</a>
+							<a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><?php echo $lbl_employee; ?></a>
 							<ul class="collapse list-unstyled show" id="homeSubmenu">
 								<li>
-									<a class="active" href="javascript:;" onclick="fnEmployeeList()">List</a>
+									<a class="active" href="javascript:;" onclick="fnEmployeeList()"><?php echo $lbl_list; ?></a>
 								</li>
 							</ul>
 						</li>
 						<li class="active">
-							<a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Salary</a>
+							<a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><?php echo $lbl_salary; ?></a>
 							<ul class="collapse list-unstyled <?php if($mainMenu == 'salaryList') { echo('show'); } ?>" id="homeSubmenu">
 								<li class="">
-									<a href="javascript:;" onclick="fnSalaryList()">List</a>
+									<a href="javascript:;" onclick="fnSalaryList()"><?php echo $lbl_list; ?></a>
 								</li>
 							</ul>
 						</li>
 						<li>
-							<a href="javascript:;" onclick="fnLogout()">Logout</a>
+							<a href="javascript:;" onclick="fnLogout()"><?php echo $lbl_logout; ?></a>
 						</li>
 					</ul>
 					<div class="footer">
@@ -64,9 +65,9 @@
 				<?php } ?>
 					<h2>
 						<?php if(isset($salaryEdit)) {
-							echo"Salary Edit";
+							echo $lbl_salaryEdit;
 						} else {
-							echo"Salary Add";
+							echo $lbl_salaryAdd;
 						}?>
 					</h2>
 					<input type="hidden" id="screenName" name="screenName" value="salaryAddEditFormValidation">
@@ -78,67 +79,67 @@
 						<div class="row justify-content-center">
 							<div class="col-lg-9">
 								<div class="card shadow-lg border-0 rounded-lg mt-4">
-									<div class="card-header"><h3 class="text-center font-weight-light fs20"><?php echo "Salary Add"; ?></h3></div>
+									<div class="card-header"><h3 class="text-center font-weight-light fs20"><?php if(isset($salaryEdit)) { echo $lbl_salaryEdit; } else { echo $lbl_salaryAdd; } ?></h3></div>
 									<div class="card-body">
 										<!-- employee Id -->
 										<div class="form-group form-inline">
-											<label for='employeeIdLbl' class="col-md-4 control-label jcr">Employee Id</label>
+											<label for='employeeIdLbl' class="col-md-4 control-label jcr"><?php echo $lbl_employee." ".$lbl_id; ?></label>
 											<div class="col-md-4">
 												<label for='employeeId' class="form-control employeeUserNameClr"><?php echo $employeeId; ?></label>
 											</div>
 										</div>
 										<!-- employee name -->
 										<div class="form-group form-inline">
-											<label for='employeeNameLbl' class="col-md-4 control-label jcr">Employee Name</label>
+											<label for='employeeNameLbl' class="col-md-4 control-label jcr"><?php echo $lbl_employee." ".$lbl_name; ?></label>
 											<div class="col-md-4">
 												<label for='employeeName' class="form-control nameClr"><?php echo $employeeName; ?></label>
 											</div>
 										</div>
 										<!-- year -->
 										<div class="form-group form-inline">
-											<label for='yearLbl' class="col-md-4 control-label jcr">Year</label>
+											<label for='yearLbl' class="col-md-4 control-label jcr"><?php echo $lbl_year; ?></label>
 											<div class="col-md-4">
 												<label for='year' class="form-control"><?php echo $year; ?></label>
 											</div>
 										</div>
 										<!-- month -->
 										<div class="form-group form-inline">
-											<label for='monthLbl' class="col-md-4 control-label jcr">Month</label>
+											<label for='monthLbl' class="col-md-4 control-label jcr"><?php echo $lbl_month; ?></label>
 											<div class="col-md-4">
 												<label for='month' class="form-control"><?php echo $getMonth[$month]; ?></label>
 											</div>
 										</div>
 										<!-- basic salary -->
 										<div class="form-group form-inline">
-											<label for='basicSalary' class="col-md-4 control-label required jcr">Basic Salary</label>
+											<label for='basicSalary' class="col-md-4 control-label required jcr"><?php echo $lbl_basicSalary; ?></label>
 											<div class="col-md-8">
 												<input id="basicSalary" name="basicSalary" type="text" class="form-control border-revert w33" placeholder="Enter Basic Salary" value="<?php if(isset($salaryEdit[0]['BasicSalary'])) { echo $salaryEdit[0]['BasicSalary']; }?>">
 											</div>
 										</div>
 										<!-- insentive -->
 										<div class="form-group form-inline">
-											<label for='insentive' class="col-md-4 control-label required jcr">Insentive</label>
+											<label for='insentive' class="col-md-4 control-label required jcr"><?php echo $lbl_insentive; ?></label>
 											<div class="col-md-8">
 												<input id="insentive" name="insentive" type="text" class="form-control border-revert w33" placeholder="Enter Insentive" value="<?php if(isset($salaryEdit[0]['Insentive'])) { echo $salaryEdit[0]['Insentive']; }?>">
 											</div>
 										</div>
 										<!-- pf -->
 										<div class="form-group form-inline">
-											<label for='pf' class="col-md-4 control-label required jcr">PF</label>
+											<label for='pf' class="col-md-4 control-label required jcr"><?php echo $lbl_pf; ?></label>
 											<div class="col-md-8">
 												<input id="pf" name="pf" type="text" class="form-control border-revert w33" placeholder="Enter PF" value="<?php if(isset($salaryEdit[0]['pf'])) { echo $salaryEdit[0]['pf']; }?>">
 											</div>
 										</div>
 										<!-- esi -->
 										<div class="form-group form-inline">
-											<label for='esi' class="col-md-4 control-label required jcr">ESI</label>
+											<label for='esi' class="col-md-4 control-label required jcr"><?php echo $lbl_esi; ?></label>
 											<div class="col-md-8">
 												<input id="esi" name="esi" type="text" class="form-control border-revert w33" placeholder="Enter ESI" value="<?php if(isset($salaryEdit[0]['esi'])) { echo $salaryEdit[0]['esi']; }?>">
 											</div>
 										</div>
 										<!-- total salary -->
 										<div class="form-group form-inline">
-											<label for='totalSalary' class="col-md-4 control-label jcr">Total Salary</label>
+											<label for='totalSalary' class="col-md-4 control-label jcr"><?php echo $lbl_totalSalary; ?></label>
 											<div class="col-md-8">
 												<input id="totalSalary" name="totalSalary" type="text" class="form-control border-revert w33" placeholder="Total Salary" value="<?php if(isset($salaryEdit[0]['totalSalary'])) { echo $salaryEdit[0]['totalSalary']; }?>" readonly="true">
 											</div>
@@ -147,15 +148,15 @@
 											<div class="offset-md-4 col-md-6">
 												<?php if(isset($salaryEdit)) { ?>
 													<a class="btn btn-warning text-white editBtn" href="javascript:;" onclick="fnSalaryAddEdit('<?php echo $employeeId; ?>','<?php echo $employeeName; ?>',<?php echo $month; ?>,<?php echo $year; ?>)">
-														<i class="fa fa-edit fa-btn mr-1"></i>Update
+														<i class="fa fa-edit fa-btn mr-1"></i><?php echo $lbl_update; ?>
 													</a>
 												<?php } else { ?>
 													<a class="btn btn-success editBtn" href="javascript:;" onclick="fnSalaryAddEdit('<?php echo $employeeId; ?>','<?php echo $employeeName; ?>',<?php echo $month; ?>,<?php echo $year; ?>)">
-														<i class="fa fa-plus fa-btn mr-1"></i>Add
+														<i class="fa fa-plus fa-btn mr-1"></i><?php echo $lbl_add; ?>
 													</a>
 												<?php } ?>
 												<a class="btn btn-danger editBtn" href="javascript:;" onclick="fnSalaryCancel('<?php echo $employeeId; ?>','<?php echo $employeeName; ?>',<?php echo $month; ?>,<?php echo $year; ?>)">
-													<i class="fa fa-close fa-btn mr-1"></i>Cancel
+													<i class="fa fa-close fa-btn mr-1"></i><?php echo $lbl_cancel; ?>
 												</a>
 											</div>
 										</div>

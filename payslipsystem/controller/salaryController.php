@@ -64,6 +64,13 @@ class salaryController {
 	    if (isset($_REQUEST['month'])) {
 	      $month = $_REQUEST['month'];
 	    }
+	    if ($_SESSION['languages'] == "English" ) {
+			require ("../webroot/common/commonEnglish.php");
+			$languageJs = "english.js";
+		} else {
+			require ("../webroot/common/commonJapanese.php");
+			$languageJs = "japanese.js";
+		}
 
 	    // sorting process style
 		if (isset($_REQUEST["sortOptn"])) {
@@ -106,6 +113,13 @@ class salaryController {
 		if (!isset($_REQUEST['hiddenSalaryId'])) {
 			$salaryId = $salaryModel->getSalaryId();
 		}
+		if ($_SESSION['languages'] == "English" ) {
+			require ("../webroot/common/commonEnglish.php");
+			$languageJs = "english.js";
+		} else {
+			require ("../webroot/common/commonJapanese.php");
+			$languageJs = "japanese.js";
+		}
 
 		// pagination process
 		$resultsPerPage = 5;
@@ -136,6 +150,13 @@ class salaryController {
 	 *
 	 */
 	function salaryAdd() {
+		if ($_SESSION['languages'] == "English" ) {
+			require ("../webroot/common/commonEnglish.php");
+			$languageJs = "english.js";
+		} else {
+			require ("../webroot/common/commonJapanese.php");
+			$languageJs = "japanese.js";
+		}
 		$employeeId = $_REQUEST['hiddenEmployeeId'];
 		$employeeName = $_REQUEST['hiddenEmployeeName'];
 		$month = $_REQUEST['month'];
@@ -152,27 +173,34 @@ class salaryController {
 	 *
 	 */
 	function salaryAddEditFormValidation() {
+		if ($_SESSION['languages'] == "English" ) {
+			require ("../webroot/common/commonEnglish.php");
+			$languageJs = "english.js";
+		} else {
+			require ("../webroot/common/commonJapanese.php");
+			$languageJs = "japanese.js";
+		}
 		unset($_SESSION['errors']);
 		if(isset($_POST)){
 			if (empty($_POST['basicSalary'])) {
-				$_SESSION['errors']['basicSalary'] = "The Basic Salary field is required";
+				$_SESSION['errors']['basicSalary'] = $err_basicSalary_required;
 			} else if (!filter_var($_POST['basicSalary'], FILTER_VALIDATE_INT)) {
-				$_SESSION['errors']['basicSalary'] = "The Basic Salary field must be an integer.";
+				$_SESSION['errors']['basicSalary'] = $err_basicSalary_integer;
 			}
 			if (empty($_POST['insentive'])) {
-				$_SESSION['errors']['insentive'] = "The Insentive field is required";
+				$_SESSION['errors']['insentive'] = $err_insentive_required;
 			} else if (!filter_var($_POST['insentive'], FILTER_VALIDATE_INT)) {
-				$_SESSION['errors']['insentive'] = "The Insentive field must be an integer.";
+				$_SESSION['errors']['insentive'] = $err_insentive_integer;
 			}
 			if (empty($_POST['pf'])) {
-				$_SESSION['errors']['pf'] = "The PF field is required";
+				$_SESSION['errors']['pf'] = $err_pf_required;
 			} else if (!filter_var($_POST['pf'], FILTER_VALIDATE_INT)) {
-				$_SESSION['errors']['pf'] = "The PF field must be an integer.";
+				$_SESSION['errors']['pf'] = $err_pf_integer;
 			}
 			if (empty($_POST['esi'])) {
-				$_SESSION['errors']['esi'] = "The ESI field is required";
+				$_SESSION['errors']['esi'] = $err_esi_required;
 			} else if (!filter_var($_POST['esi'], FILTER_VALIDATE_INT)) {
-				$_SESSION['errors']['esi'] = "The ESI field must be an integer.";
+				$_SESSION['errors']['esi'] = $err_esi_integer;
 			}
 			if(isset($_SESSION['errors']) && count($_SESSION['errors']) > 0){
 				if(!empty($_SERVER['HTTP_X_REQUESTED_WITH']) &&  strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest') {
@@ -217,6 +245,13 @@ class salaryController {
 	 *
 	 */
 	function salaryAddForm() {
+		if ($_SESSION['languages'] == "English" ) {
+			require ("../webroot/common/commonEnglish.php");
+			$languageJs = "english.js";
+		} else {
+			require ("../webroot/common/commonJapanese.php");
+			$languageJs = "japanese.js";
+		}
 		$salaryModel = new salaryModel();
 		$salaryAddStatus = $salaryModel->salaryAddForm();
 		$employeeId = $_REQUEST['hiddenEmployeeId'];
@@ -224,10 +259,10 @@ class salaryController {
 		$month = $_REQUEST['month'];
 		$year = $_REQUEST['year'];
 		if ($salaryAddStatus == 1) {
-			$_SESSION['message'] = "Salary Registered Successfully";
+			$_SESSION['message'] = $ses_salaryAdd_success;
 			$_SESSION['status'] = "success";
 		} else {
-			$_SESSION['message'] = "Sorry, Something Went Wrong. Please Try Again Later";
+			$_SESSION['message'] = $ses_salary_fail;
 			$_SESSION['status'] = "danger";
 		}
     	Self::salaryEmployeeHistory();
@@ -240,6 +275,13 @@ class salaryController {
 	 *
 	 */
 	function salaryEdit() {
+		if ($_SESSION['languages'] == "English" ) {
+			require ("../webroot/common/commonEnglish.php");
+			$languageJs = "english.js";
+		} else {
+			require ("../webroot/common/commonJapanese.php");
+			$languageJs = "japanese.js";
+		}
 		$salaryModel = new salaryModel();
 		$employeeId = $_REQUEST['hiddenEmployeeId'];
 		$employeeName = $_REQUEST['hiddenEmployeeName'];
@@ -259,6 +301,13 @@ class salaryController {
 	 *
 	 */
 	function salaryEditForm() {
+		if ($_SESSION['languages'] == "English" ) {
+			require ("../webroot/common/commonEnglish.php");
+			$languageJs = "english.js";
+		} else {
+			require ("../webroot/common/commonJapanese.php");
+			$languageJs = "japanese.js";
+		}
 		$salaryModel = new salaryModel();
 		$salaryEditStatus = $salaryModel->salaryEditForm();
 		$employeeId = $_REQUEST['hiddenEmployeeId'];
@@ -266,10 +315,10 @@ class salaryController {
 		$month = $_REQUEST['month'];
 		$year = $_REQUEST['year'];
 		if ($salaryEditStatus == 1) {
-			$_SESSION['message'] = "Salary Updated Successfully";
+			$_SESSION['message'] = $ses_salaryUpdate_success;
 			$_SESSION['status'] = "success";
 		} else {
-			$_SESSION['message'] = "Sorry, Something Went Wrong. Please Try Again Later";
+			$_SESSION['message'] = $ses_salary_fail;
 			$_SESSION['status'] = "danger";
 		}
     	Self::salaryEmployeeHistory();
