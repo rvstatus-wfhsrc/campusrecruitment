@@ -85,3 +85,17 @@ function fnSalaryList() {
 	$("#viewForm").attr("action", "../controller/salaryController.php?time="+dateTime);
 	$( "#viewForm" ).submit();
 }
+
+// language change into english process
+function fnLanguageEnglish() {
+	$( "#hiddenLanguage" ).val('1');
+	$( "#screenName" ).val('paySlipView');
+	$( "#viewForm" ).submit();
+}
+
+// language change into japanese process
+function fnLanguageJapanese() {
+	$( "#hiddenLanguage" ).val('2');
+	$( "#screenName" ).val('paySlipView');
+	$( "#viewForm" ).submit();
+}

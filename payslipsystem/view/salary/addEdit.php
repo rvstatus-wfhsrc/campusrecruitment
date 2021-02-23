@@ -5,11 +5,11 @@
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-		<link rel="stylesheet" href="../webroot/css/style.css">
-		<link rel="stylesheet" href="../webroot/css/common.css">
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+		<link rel="stylesheet" href="../webroot/css/style.css">
+		<link rel="stylesheet" href="../webroot/css/common.css">
 		<script type="text/javascript" src="../webroot/common/<?php echo $languageJs; ?>" ></script>
 		<script type="text/javascript">
 			var dateTime = "<?php echo date('Ymdhis'); ?>";
@@ -97,7 +97,7 @@
 				</div>
 			</nav> -->
 			<!-- page content -->
-			<div id="content" class="p-4 p-md-5 pt-5 mt15">
+			<div id="content" class="p-4 p-md-5 pt-5 mt70">
 				<?php if(isset($salaryEdit)) { ?>
 					<form action="../controller/salaryController.php?time=<?php echo(date('YmdHis')); ?>" method="POST" id="editForm" name="editForm">
 					<input type="hidden" id="screenFlag" name="screenFlag" value="2">
@@ -114,10 +114,11 @@
 						}?>
 					</h2>
 					<input type="hidden" id="screenName" name="screenName" value="salaryAddEditFormValidation">
-					<input type="hidden" id="hiddenEmployeeId" name="hiddenEmployeeId">
-					<input type="hidden" id="hiddenEmployeeName" name="hiddenEmployeeName">
+					<input type="hidden" id="hiddenEmployeeId" name="hiddenEmployeeId" value="<?php echo $employeeId; ?>">
+					<input type="hidden" id="hiddenEmployeeName" name="hiddenEmployeeName" value="<?php echo $employeeName; ?>">
 					<input type="hidden" id="month" name="month" value="<?php echo $month; ?>">
 					<input type="hidden" id="year" name="year" value="<?php echo $year; ?>">
+					<input type="hidden" id="hiddenLanguage" name="hiddenLanguage">
 					<div class="container mb-4">
 						<div class="row justify-content-center">
 							<div class="col-lg-9">

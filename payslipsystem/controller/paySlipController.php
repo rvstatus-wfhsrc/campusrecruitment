@@ -49,7 +49,10 @@ class paySlipController {
 	 *
 	 */
 	function paySlipView() {
-		if ($_SESSION['languages'] == "English" ) {
+		if(isset($_REQUEST['hiddenLanguage']) && $_REQUEST['hiddenLanguage'] != null) {
+			$_SESSION['languages'] = $_REQUEST['hiddenLanguage'];
+		}
+		if ($_SESSION['languages'] == "1" ) {
 			require ("../webroot/common/commonEnglish.php");
 			$languageJs = "english.js";
 		} else {
@@ -59,8 +62,13 @@ class paySlipController {
 		$this->downloadPaySlip();
 		$paySlipModel = new paySlipModel();
 		$paySlipDetail = $paySlipModel->paySlipDetail();
-		$month = $_REQUEST['hiddenMonth'];
-		$year = $_REQUEST['hiddenYear'];
+		if(isset($_REQUEST['hiddenMonth']) && isset($_REQUEST['hiddenYear'])) {
+			$month = $_REQUEST['hiddenMonth'];
+			$year = $_REQUEST['hiddenYear'];
+		} else {
+			$month = $_REQUEST['month'];
+			$year = $_REQUEST['year'];
+		}
 		$mainMenu = "paySlipView";
 		require_once '../view/paySlip/view.php';
 	}
@@ -119,7 +127,7 @@ class paySlipController {
 	 *
 	 */
 	function sendPaySlip() {
-		if ($_SESSION['languages'] == "English" ) {
+		if ($_SESSION['languages'] == "1" ) {
 			require ("../webroot/common/commonEnglish.php");
 			$languageJs = "english.js";
 		} else {
@@ -154,7 +162,7 @@ class paySlipController {
     		echo 'Mailer Error: ' . $mail->ErrorInfo;
 		} else {
 			$paySlipDetailAdd = $paySlipModel->paySlipDetailAdd($sendPaySlip,$subject,$content);
-			$_SESSION['message'] = $ses_mail_send;
+			$_SESSION['message'] = $session_mail_send;
 			$_SESSION['status'] = "success";
 			$_SESSION['month'] = $_REQUEST['month'];
 			$_SESSION['year'] = $_REQUEST['year'];
@@ -169,13 +177,16 @@ class paySlipController {
 	 *
 	 */
 	function detailView() {
+		if(isset($_REQUEST['hiddenLanguage']) && $_REQUEST['hiddenLanguage'] != null) {
+			$_SESSION['languages'] = $_REQUEST['hiddenLanguage'];
+		}
 		$paySlipModel = new paySlipModel();
 		if (isset($_REQUEST['pageno'])) {
 			$pageno = $_REQUEST['pageno'];
 		} else {
 			$pageno = 1;
 		}
-		if ($_SESSION['languages'] == "English" ) {
+		if ($_SESSION['languages'] == "1" ) {
 			require ("../webroot/common/commonEnglish.php");
 			$languageJs = "english.js";
 		} else {
@@ -198,13 +209,15 @@ class paySlipController {
 		} else {
 			$year = $_REQUEST['year'];
 		}
+		$employeeId = $_REQUEST['hiddenEmployeeId'];
+		$employeeName = $_REQUEST['hiddenEmployeeName'];
 		$detailView = $paySlipModel->detailView($startResult,$resultsPerPage);
 		$mainMenu = "paySlipEmployeeHistory";
 		require_once '../view/paySlip/employeeHistory.php';
 	}
 
 	function viewFormValidation() {
-		if ($_SESSION['languages'] == "English" ) {
+		if ($_SESSION['languages'] == "1" ) {
 			require ("../webroot/common/commonEnglish.php");
 			$languageJs = "english.js";
 		} else {

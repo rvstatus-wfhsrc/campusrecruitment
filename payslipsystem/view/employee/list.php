@@ -5,11 +5,11 @@
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-		<link rel="stylesheet" href="../webroot/css/style.css">
-		<link rel="stylesheet" href="../webroot/css/common.css">
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+		<link rel="stylesheet" href="../webroot/css/style.css">
+		<link rel="stylesheet" href="../webroot/css/common.css">
 		<script type="text/javascript">
 			var dateTime = "<?php echo date('Ymdhis'); ?>";
 		</script>
@@ -156,9 +156,10 @@
 				<input type="hidden" id="hiddenEmployeeName" name="hiddenEmployeeName">
 				<input type="hidden" id="hiddenYear" name="hiddenYear">
 				<input type="hidden" id="hiddenMonth" name="hiddenMonth">
+				<input type="hidden" id="hiddenLanguage" name="hiddenLanguage">
 				<input type="hidden" id="hiddenSearch" name="hiddenSearch" value="<?php if(isset($_REQUEST['search'])) { echo $_REQUEST['search']; } ?>">
 				<input type="hidden" id="pageno" name="pageno" value="<?php echo $pageno; ?>">
-				<div id="content" class="p-4 p-md-5 pt-5 mt15">
+				<div id="content" class="p-4 p-md-5 pt-5 mt70">
 					<div class="inb w35">
 						<h2><?php echo $lbl_employee." ".$lbl_list; ?></h2>
 					</div>
@@ -214,7 +215,7 @@
 							</select>
 						</span>
 					</div>
-					<div class="float-right mb5">
+					<div class="float-right mb5 w50">
 						<!-- clear search -->
 						<div  class="inb mt-1">
 							<a href="javascript:;" onclick="fnClearSearch()">
@@ -249,7 +250,7 @@
 							<col width="11%">
 							<col width="11%">
 						</colgroup>
-						<thead class="thead">
+						<thead class="thead tac">
 							<tr>
 								<th><?php echo $lbl_serialNumber; ?></th>
 								<th><?php echo $lbl_employee." ".$lbl_id; ?></th>

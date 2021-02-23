@@ -47,3 +47,17 @@ function fnSalaryEditBtn(salaryId) {
 	$( "#screenName" ).val('salaryEdit');
 	$( "#employeeHistoryForm" ).submit();
 }
+
+// language change into english process
+function fnLanguageEnglish() {
+	$( "#hiddenLanguage" ).val('1');
+	$( "#screenName" ).val('salaryEmployeeHistory');
+	$( "#employeeHistoryForm" ).submit();
+}
+
+// language change into japanese process
+function fnLanguageJapanese() {
+	$( "#hiddenLanguage" ).val('2');
+	$( "#screenName" ).val('salaryEmployeeHistory');
+	$( "#employeeHistoryForm" ).submit();
+}

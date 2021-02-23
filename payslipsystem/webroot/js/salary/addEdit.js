@@ -228,3 +228,31 @@ function fnSalaryList() {
 	}
 	$(formName).submit();
 }
+
+// language change into english process
+function fnLanguageEnglish() {
+	if ($("#screenFlag").val() == '1') {
+		var formName = '#addForm';
+		var screenName = 'salaryAdd';
+	} else {
+		var formName = '#editForm';
+		var screenName = 'salaryEdit';
+	}
+	$( "#hiddenLanguage" ).val('1');
+	$( "#screenName" ).val(screenName);
+	$( formName ).submit();
+}
+
+// language change into japanese process
+function fnLanguageJapanese() {
+	if ($("#screenFlag").val() == '1') {
+		var formName = '#addForm';
+		var screenName = 'salaryAdd';
+	} else {
+		var formName = '#editForm';
+		var screenName = 'salaryEdit';
+	}
+	$( "#hiddenLanguage" ).val('2');
+	$( "#screenName" ).val(screenName);
+	$( formName ).submit();
+}

@@ -116,3 +116,17 @@ function fnSalaryList() {
 	$("#listForm").attr("action", "../controller/salaryController.php?time="+dateTime);
 	$( "#listForm" ).submit();
 }
+
+// language change into english process
+function fnLanguageEnglish() {
+	$( "#hiddenLanguage" ).val('1');
+	$( "#screenName" ).val('employeeList');
+	$( "#listForm" ).submit();
+}
+
+// language change into japanese process
+function fnLanguageJapanese() {
+	$( "#hiddenLanguage" ).val('2');
+	$( "#screenName" ).val('employeeList');
+	$( "#listForm" ).submit();
+}

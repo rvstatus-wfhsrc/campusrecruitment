@@ -68,11 +68,11 @@ $err_esi_integer = "The ESI field must be an integer.";
 
 
 // pay slip mail send session message
-$ses_mail_send = "Pay Slip Mail Send Successfully";
+$session_mail_send = "Pay Slip Mail Send Successfully";
 
 // salary add and edit session message
-$ses_salaryAdd_success = "Salary Registered Successfully";
-$ses_salaryUpdate_success = "Salary Updated Successfully";
-$ses_salary_fail = "Sorry, Something Went Wrong. Please Try Again Later";
+$session_salaryAdd_success = "Salary Registered Successfully";
+$session_salaryUpdate_success = "Salary Updated Successfully";
+$session_salary_fail = "Sorry, Something Went Wrong. Please Try Again Later";
 
 ?>

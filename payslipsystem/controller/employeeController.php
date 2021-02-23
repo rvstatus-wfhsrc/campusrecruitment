@@ -35,6 +35,9 @@ class employeeController {
 	 *
 	 */
 	function employeeList() {
+		if(isset($_REQUEST['hiddenLanguage']) && $_REQUEST['hiddenLanguage'] != null) {
+			$_SESSION['languages'] = $_REQUEST['hiddenLanguage'];
+		}
 		$employeeModel = new employeeModel();
 		$commonModel = new commonModel();
 		if (isset($_REQUEST['pageno'])) {
@@ -48,7 +51,7 @@ class employeeController {
 		if(isset($_SESSION['year'])) {
 			$year = $_SESSION['year'];
 		}
-		if ($_SESSION['languages'] == "English" ) {
+		if ($_SESSION['languages'] == "1" ) {
 			require ("../webroot/common/commonEnglish.php");
 			$languageJs = "english.js";
 		} else {

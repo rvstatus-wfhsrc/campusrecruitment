@@ -106,3 +106,17 @@ function fnSalaryList() {
 	$( "#screenName" ).val('salaryList');
 	$( "#listForm" ).submit();
 }
+
+// language change into english process
+function fnLanguageEnglish() {
+	$( "#hiddenLanguage" ).val('1');
+	$( "#screenName" ).val('salaryList');
+	$( "#listForm" ).submit();
+}
+
+// language change into japanese process
+function fnLanguageJapanese() {
+	$( "#hiddenLanguage" ).val('2');
+	$( "#screenName" ).val('salaryList');
+	$( "#listForm" ).submit();
+}

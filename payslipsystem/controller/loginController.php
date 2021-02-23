@@ -50,7 +50,7 @@
 			$_SESSION["userName"] = $_REQUEST['userName'];
 			$_SESSION["flag"] = 1;
 			$_SESSION["logged_in"] = true;
-			$_SESSION['languages'] = "English";
+			$_SESSION['languages'] = "1";
 			header("Location: employeeController.php?time=" . date(YmdHis));
 		}
 

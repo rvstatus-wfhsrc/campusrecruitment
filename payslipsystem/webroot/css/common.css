@@ -8,6 +8,12 @@
 .w35 {
     width: 35% !important;
 }
+.w36 {
+    width: 36% !important;
+}
+.w39 {
+    width: 39% !important;
+}
 .w40 {
     width: 40% !important;
 }
@@ -17,8 +23,14 @@
 .w43 {
     width: 43% !important;
 }
+.w48 {
+    width: 48% !important;
+}
 .w50 {
     width: 50% !important;
+}
+.w52 {
+    width: 52% !important;
 }
 /* width design class end */
 
@@ -114,8 +126,8 @@
 /* margin right class end */
 
 /* margin top class start */
-.mt15 {
-    margin-top: 15px !important;
+.mt70 {
+    margin-top: 70px !important;
 }
 /* margin top class end */
 

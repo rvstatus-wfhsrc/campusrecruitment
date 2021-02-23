@@ -5,11 +5,11 @@
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-		<link rel="stylesheet" href="../webroot/css/style.css">
-		<link rel="stylesheet" href="../webroot/css/common.css">
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+		<link rel="stylesheet" href="../webroot/css/style.css">
+		<link rel="stylesheet" href="../webroot/css/common.css">
 		<script type="text/javascript">
 			var dateTime = "<?php echo date('Ymdhis'); ?>";
 		</script>
@@ -91,14 +91,16 @@
 				</div>
 			</nav> -->
 			<!-- Page Content  -->
-			<div id="content" class="p-4 p-md-5 pt-5 mt15">
+			<div id="content" class="p-4 p-md-5 pt-5 mt70">
 				<form action="../controller/employeeController.php?time=<?php echo(date('YmdHis')); ?>" method="POST" id="employeeHistoryForm" name="employeeHistoryForm">
 					<input type="hidden" id="screenName" name="screenName">
 					<input type="hidden" id="month" name="month" value="<?php echo $month; ?>">
 					<input type="hidden" id="year" name="year" value="<?php echo $year; ?>">
 					<input type="hidden" id="pageno" name="pageno" value="<?php echo $pageno; ?>">
-					<input type="hidden" id="hiddenEmployeeId" name="hiddenEmployeeId" value="<?php echo $detailView[0]["Emp_Id"]; ?>">
+					<input type="hidden" id="hiddenEmployeeId" name="hiddenEmployeeId" value="<?php echo $employeeId; ?>">
+					<input type="hidden" id="hiddenEmployeeName" name="hiddenEmployeeName" value="<?php echo $employeeName; ?>">
 					<input type="hidden" id="hiddenFileName" name="hiddenFileName">
+					<input type="hidden" id="hiddenLanguage" name="hiddenLanguage">
 					<h2><?php echo $lbl_paySlip." ".$lbl_employee." ".$lbl_history; ?></h2>
 					<div class="mb-1">
 						<a class="btn btn-info editBtn" href="javascript:;" onclick="fnBackBtn(<?php echo $month; ?>,<?php echo $year; ?>)">

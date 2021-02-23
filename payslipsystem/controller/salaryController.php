@@ -49,6 +49,9 @@ class salaryController {
 	 *
 	 */
 	function salaryList() {
+		if(isset($_REQUEST['hiddenLanguage']) && $_REQUEST['hiddenLanguage'] != null) {
+			$_SESSION['languages'] = $_REQUEST['hiddenLanguage'];
+		}
 		$salaryModel = new salaryModel();
 		$commonModel = new commonModel();
 		if (isset($_REQUEST['pageno'])) {
@@ -64,7 +67,7 @@ class salaryController {
 	    if (isset($_REQUEST['month'])) {
 	      $month = $_REQUEST['month'];
 	    }
-	    if ($_SESSION['languages'] == "English" ) {
+	    if ($_SESSION['languages'] == "1" ) {
 			require ("../webroot/common/commonEnglish.php");
 			$languageJs = "english.js";
 		} else {
@@ -104,6 +107,9 @@ class salaryController {
 	 *
 	 */
 	function salaryEmployeeHistory() {
+		if(isset($_REQUEST['hiddenLanguage']) && $_REQUEST['hiddenLanguage'] != null) {
+			$_SESSION['languages'] = $_REQUEST['hiddenLanguage'];
+		}
 		$salaryModel = new salaryModel();
 		if (isset($_REQUEST['pageno'])) {
 			$pageno = $_REQUEST['pageno'];
@@ -113,7 +119,7 @@ class salaryController {
 		if (!isset($_REQUEST['hiddenSalaryId'])) {
 			$salaryId = $salaryModel->getSalaryId();
 		}
-		if ($_SESSION['languages'] == "English" ) {
+		if ($_SESSION['languages'] == "1" ) {
 			require ("../webroot/common/commonEnglish.php");
 			$languageJs = "english.js";
 		} else {
@@ -150,7 +156,10 @@ class salaryController {
 	 *
 	 */
 	function salaryAdd() {
-		if ($_SESSION['languages'] == "English" ) {
+		if(isset($_REQUEST['hiddenLanguage']) && $_REQUEST['hiddenLanguage'] != null) {
+			$_SESSION['languages'] = $_REQUEST['hiddenLanguage'];
+		}
+		if ($_SESSION['languages'] == "1" ) {
 			require ("../webroot/common/commonEnglish.php");
 			$languageJs = "english.js";
 		} else {
@@ -173,7 +182,7 @@ class salaryController {
 	 *
 	 */
 	function salaryAddEditFormValidation() {
-		if ($_SESSION['languages'] == "English" ) {
+		if ($_SESSION['languages'] == "1" ) {
 			require ("../webroot/common/commonEnglish.php");
 			$languageJs = "english.js";
 		} else {
@@ -245,7 +254,7 @@ class salaryController {
 	 *
 	 */
 	function salaryAddForm() {
-		if ($_SESSION['languages'] == "English" ) {
+		if ($_SESSION['languages'] == "1" ) {
 			require ("../webroot/common/commonEnglish.php");
 			$languageJs = "english.js";
 		} else {
@@ -259,10 +268,10 @@ class salaryController {
 		$month = $_REQUEST['month'];
 		$year = $_REQUEST['year'];
 		if ($salaryAddStatus == 1) {
-			$_SESSION['message'] = $ses_salaryAdd_success;
+			$_SESSION['message'] = $session_salaryAdd_success;
 			$_SESSION['status'] = "success";
 		} else {
-			$_SESSION['message'] = $ses_salary_fail;
+			$_SESSION['message'] = $session_salary_fail;
 			$_SESSION['status'] = "danger";
 		}
     	Self::salaryEmployeeHistory();
@@ -275,7 +284,10 @@ class salaryController {
 	 *
 	 */
 	function salaryEdit() {
-		if ($_SESSION['languages'] == "English" ) {
+		if(isset($_REQUEST['hiddenLanguage']) && $_REQUEST['hiddenLanguage'] != null) {
+			$_SESSION['languages'] = $_REQUEST['hiddenLanguage'];
+		}
+		if ($_SESSION['languages'] == "1" ) {
 			require ("../webroot/common/commonEnglish.php");
 			$languageJs = "english.js";
 		} else {
@@ -301,7 +313,7 @@ class salaryController {
 	 *
 	 */
 	function salaryEditForm() {
-		if ($_SESSION['languages'] == "English" ) {
+		if ($_SESSION['languages'] == "1" ) {
 			require ("../webroot/common/commonEnglish.php");
 			$languageJs = "english.js";
 		} else {
@@ -315,10 +327,10 @@ class salaryController {
 		$month = $_REQUEST['month'];
 		$year = $_REQUEST['year'];
 		if ($salaryEditStatus == 1) {
-			$_SESSION['message'] = $ses_salaryUpdate_success;
+			$_SESSION['message'] = $session_salaryUpdate_success;
 			$_SESSION['status'] = "success";
 		} else {
-			$_SESSION['message'] = $ses_salary_fail;
+			$_SESSION['message'] = $session_salary_fail;
 			$_SESSION['status'] = "danger";
 		}
     	Self::salaryEmployeeHistory();

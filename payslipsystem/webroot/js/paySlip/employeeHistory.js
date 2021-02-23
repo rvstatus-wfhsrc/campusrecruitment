@@ -46,3 +46,19 @@ function fnSalaryList() {
 	$("#employeeHistoryForm").attr("action", "../controller/salaryController.php?time="+dateTime);
 	$( "#employeeHistoryForm" ).submit();
 }
+
+// language change into english process
+function fnLanguageEnglish() {
+	$( "#hiddenLanguage" ).val('1');
+	$( "#screenName" ).val("paySlipEmployeeHistory");
+	$("#employeeHistoryForm").attr("action", "../controller/paySlipController.php?time="+dateTime);
+	$( "#employeeHistoryForm" ).submit();
+}
+
+// language change into japanese process
+function fnLanguageJapanese() {
+	$( "#hiddenLanguage" ).val('2');
+	$( "#screenName" ).val("paySlipEmployeeHistory");
+	$("#employeeHistoryForm").attr("action", "../controller/paySlipController.php?time="+dateTime);
+	$( "#employeeHistoryForm" ).submit();
+}
