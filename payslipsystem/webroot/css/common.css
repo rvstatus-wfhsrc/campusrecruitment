@@ -23,6 +23,9 @@
 /* width design class end */
 
 /* height class start */
+.h5 {
+    height: 5% !important;
+}
 .h34 {
     height: 34px !important;
 }
@@ -39,10 +42,10 @@
 
 /* text align design class start */
 .tac {
-    text-align: center;
+    text-align: center !important;
 }
 .tar {
-    text-align: right;
+    text-align: right !important;
 }
 /* text align design class end */
 
@@ -55,8 +58,8 @@
 /* table design start */
 /*setting table head background color and value center*/
 .thead {
-    text-align: center;
-    background: #7daedf;
+    text-align: center !important;
+    background: #7daedf !important;
 }
 /*setting the background color for odd row*/
 .odd {
@@ -109,6 +112,12 @@
     margin-right: 24% !important;
 }
 /* margin right class end */
+
+/* margin top class start */
+.mt15 {
+    margin-top: 15px !important;
+}
+/* margin top class end */
 
 /* pagination design class start */
 .pagination {
@@ -190,13 +199,13 @@
 
 /* user name color class start */
 .employeeUserNameClr {
-    color: #AC4E00;
+    color: #AC4E00 !important;
 }
 /* user name color class end */
 
 /* name color class start */
 .nameClr {
-    color: #9C0000;
+    color: #9C0000 !important;
 }
 /* name color class end */
 

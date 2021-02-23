@@ -7,6 +7,9 @@
 		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 		<link rel="stylesheet" href="../webroot/css/style.css">
 		<link rel="stylesheet" href="../webroot/css/common.css">
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 		<script type="text/javascript">
 			var dateTime = "<?php echo date('Ymdhis'); ?>";
 		</script>
@@ -24,7 +27,89 @@
 	</head>
 	<body>
 		<div class="wrapper d-flex align-items-stretch">
-			<nav id="sidebar">
+			<nav class="navbar navbar-inverse navbar-fixed-top h5 pt-0">
+				<div class="container-fluid mb-6">
+					<ul class="nav navbar-nav">
+						<li class="dropdown">
+							<a data-toggle="dropdown" href="#"><?php echo $lbl_employee; ?> <span class="caret"></span></a>
+							<ul class="dropdown-menu">
+								<li><a href="javascript:;" onclick="fnEmployeeList()"><?php echo $lbl_list; ?></a></li>
+							</ul>
+						</li>
+						<li class="dropdown">
+							<a data-toggle="dropdown" href="#"><?php echo $lbl_salary; ?> <span class="caret"></span></a>
+							<ul class="dropdown-menu">
+								<li><a href="javascript:;" onclick="fnSalaryList()"><?php echo $lbl_list; ?></a></li>
+							</ul>
+						</li>
+					</ul>
+					<ul class="nav navbar-nav navbar-right">
+						<li class="dropdown">
+							<a data-toggle="dropdown" href="#"><span class="fa fa-language"></span> <span class="caret"></span></a>
+							<ul class="dropdown-menu">
+								<li><a href="javascript:;" onclick="fnLanguageEnglish()">English</a></li>
+								<li><a href="javascript:;" onclick="fnLanguageJapanese()">Japanese</a></li>
+							</ul>
+						</li>
+					</ul>
+					<ul class="nav navbar-nav navbar-right">
+						<li class="dropdown">
+							<a data-toggle="dropdown" href="#"><span class="fa fa-user"></span> <span class="caret"></span></a>
+							<ul class="dropdown-menu">
+								<li><a href="javascript:;" onclick="fnLogout()"><?php echo $lbl_logout; ?></a></li>
+							</ul>
+						</li>
+					</ul>
+				</div>
+			</nav>
+			<!-- <nav class="navbar navbar-clean">
+			  <div class="container-fluid"> -->
+			    <!-- Brand and toggle get grouped for better mobile display -->
+			    <!-- <div class="navbar-header">
+			      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+			        <span class="sr-only">Toggle navigation</span>
+			        <span class="icon-bar"></span>
+			        <span class="icon-bar"></span>
+			        <span class="icon-bar"></span>
+			      </button>
+			      <a class="navbar-brand" href="#">App title</a>
+			    </div> -->
+
+			    <!-- Collect the nav links, forms, and other content for toggling -->
+			    <!-- <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+			      <ul class="nav navbar-nav">
+			        <li class="active"><a href="#">Link <span class="sr-only">(current)</span></a></li>
+			        <li><a href="#">Link</a></li>
+			        <li class="dropdown">
+			          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Dropdown <i class="ion-ios-arrow-down"></i></a>
+			          <ul class="dropdown-menu" role="menu">
+			            <li><a href="#">Action</a></li>
+			            <li><a href="#">Another action</a></li>
+			            <li><a href="#">Something else here</a></li>
+			            <li class="divider"></li>
+			            <li><a href="#">Separated link</a></li>
+			            <li class="divider"></li>
+			            <li><a href="#">One more separated link</a></li>
+			          </ul>
+			        </li>
+			      </ul>
+			      <ul class="nav navbar-nav navbar-right">
+			        <li><a href="#">Link</a></li>
+			        <li class="dropdown clean">
+			          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Dropdown <i class="ion-ios-arrow-down"></i></a>
+			          <ul class="dropdown-menu" role="menu">
+			            <li><a href="#">Action</a></li>
+			            <li><a href="#">Another action</a></li>
+			            <li><a href="#">Something else here</a></li>
+			            <li class="divider"></li>
+			            <li><a href="#">Separated link</a></li>
+			          </ul>
+			        </li>
+			      </ul>
+			    </div><!-- /.navbar-collapse -->
+			  <!-- </div>/.container-fluid -->
+			<!-- </nav> -->
+			<!-- <nav id="sidebar">
 				<div class="custom-menu">
 					<button type="button" id="sidebarCollapse" class="btn btn-primary">
 						<i class="fa fa-bars"></i>
@@ -32,9 +117,9 @@
 					</button>
 				</div>
 				<div class="p-4 pt-5">
-					<h1>
+					<h1> -->
 						<!-- <a href="index.html" class="logo">Splash</a> -->
-					</h1>
+					<!-- </h1>
 					<ul class="list-unstyled components mb-5">
 						<li class="active">
 							<a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><?php echo $lbl_employee; ?></a>
@@ -43,8 +128,8 @@
 									<a href="javascript:;" onclick="fnEmployeeList()"><?php echo $lbl_list; ?></a>
 								</li>
 							</ul>
-						</li>
-						<li class="">
+						</li> -->
+						<!-- <li class="">
 							<a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><?php echo $lbl_salary; ?></a>
 							<ul class="collapse list-unstyled show" id="homeSubmenu">
 								<li class="<?php if($mainMenu == 'salaryList') { echo('active'); } ?>">
@@ -55,14 +140,14 @@
 						<li>
 							<a href="javascript:;" onclick="fnLogout()"><?php echo $lbl_logout; ?></a>
 						</li>
-					</ul>
-					<div class="footer">
-						<p>
+					</ul> -->
+					<!-- <div class="footer">
+						<p> -->
 							<!-- Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | Pay Slip System -->
-						</p>
+						<!-- </p>
 					</div>
 				</div>
-			</nav>
+			</nav> -->
 			<!-- Page Content  -->
 			<form action="../controller/employeeController.php?time=<?php echo(date('YmdHis')); ?>" method="POST" id="listForm" name="listForm">
 				<input type="hidden" id="screenName" name="screenName">
@@ -73,7 +158,7 @@
 				<input type="hidden" id="hiddenMonth" name="hiddenMonth">
 				<input type="hidden" id="hiddenSearch" name="hiddenSearch" value="<?php if(isset($_REQUEST['search'])) { echo $_REQUEST['search']; } ?>">
 				<input type="hidden" id="pageno" name="pageno" value="<?php echo $pageno; ?>">
-				<div id="content" class="p-4 p-md-5 pt-5">
+				<div id="content" class="p-4 p-md-5 pt-5 mt15">
 					<div class="inb w35">
 						<h2><?php echo $lbl_employee." ".$lbl_list; ?></h2>
 					</div>

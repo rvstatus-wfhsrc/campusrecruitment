@@ -7,6 +7,9 @@
 		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 		<link rel="stylesheet" href="../webroot/css/style.css">
 		<link rel="stylesheet" href="../webroot/css/common.css">
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 		<script type="text/javascript">
 			var dateTime = "<?php echo date('Ymdhis'); ?>";
 		</script>
@@ -18,7 +21,42 @@
 	</head>
 	<body>
 		<div class="wrapper d-flex align-items-stretch">
-			<nav id="sidebar">
+			<nav class="navbar navbar-inverse navbar-fixed-top h5 pt-0">
+				<div class="container-fluid mb-6">
+					<ul class="nav navbar-nav">
+						<li class="dropdown">
+							<a data-toggle="dropdown" href="#"><?php echo $lbl_employee; ?> <span class="caret"></span></a>
+							<ul class="dropdown-menu">
+								<li><a href="javascript:;" onclick="fnEmployeeList()"><?php echo $lbl_list; ?></a></li>
+							</ul>
+						</li>
+						<li class="dropdown">
+							<a data-toggle="dropdown" href="#"><?php echo $lbl_salary; ?> <span class="caret"></span></a>
+							<ul class="dropdown-menu">
+								<li><a href="javascript:;" onclick="fnSalaryList()"><?php echo $lbl_list; ?></a></li>
+							</ul>
+						</li>
+					</ul>
+					<ul class="nav navbar-nav navbar-right">
+						<li class="dropdown">
+							<a data-toggle="dropdown" href="#"><span class="fa fa-language"></span> <span class="caret"></span></a>
+							<ul class="dropdown-menu">
+								<li><a href="javascript:;" onclick="fnLanguageEnglish()">English</a></li>
+								<li><a href="javascript:;" onclick="fnLanguageJapanese()">Japanese</a></li>
+							</ul>
+						</li>
+					</ul>
+					<ul class="nav navbar-nav navbar-right">
+						<li class="dropdown">
+							<a data-toggle="dropdown" href="#"><span class="fa fa-user"></span> <span class="caret"></span></a>
+							<ul class="dropdown-menu">
+								<li><a href="javascript:;" onclick="fnLogout()"><?php echo $lbl_logout; ?></a></li>
+							</ul>
+						</li>
+					</ul>
+				</div>
+			</nav>
+			<!-- <nav id="sidebar">
 				<div class="custom-menu">
 					<button type="button" id="sidebarCollapse" class="btn btn-primary">
 						<i class="fa fa-bars"></i>
@@ -26,9 +64,9 @@
 					</button>
 				</div>
 				<div class="p-4 pt-5">
-					<h1>
+					<h1> -->
 						<!-- <a href="index.html" class="logo">Splash</a> -->
-					</h1>
+					<!-- </h1>
 					<ul class="list-unstyled components mb-5">
 						<li class="active">
 							<a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><?php echo $lbl_employee; ?></a>
@@ -51,12 +89,12 @@
 						</li>
 					</ul>
 					<div class="footer">
-						<p>
+						<p> -->
 							<!-- Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | Pay Slip System -->
-						</p>
+						<!-- </p>
 					</div>
 				</div>
-			</nav>
+			</nav> -->
 			<!-- Page Content  -->
 			<form action="../controller/salaryController.php?time=<?php echo(date('YmdHis')); ?>" method="POST" id="listForm" name="listForm">
 				<input type="hidden" id="screenName" name="screenName">
@@ -67,7 +105,7 @@
 				<input type="hidden" id="hiddenSalaryId" name="hiddenSalaryId">
 				<input type="hidden" id="hiddenSearch" name="hiddenSearch" value="<?php if(isset($_REQUEST['search'])) { echo $_REQUEST['search']; } ?>">
 				<input type="hidden" id="pageno" name="pageno" value="<?php echo $pageno; ?>">
-				<div id="content" class="p-4 p-md-5 pt-5">
+				<div id="content" class="p-4 p-md-5 pt-5 mt15">
 					<h2><?php echo $lbl_salary." ".$lbl_list; ?></h2>
 					<div class="inb float-left">
 						<label for="year"><?php echo $lbl_year; ?> : </label>

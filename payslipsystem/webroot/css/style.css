@@ -3353,7 +3353,7 @@ input[type="button"].btn-block {
       -o-transition: none;
       transition: none; } }
 
-.nav {
+/*.nav {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -3765,7 +3765,7 @@ input[type="button"].btn-block {
   .navbar-dark .navbar-text a {
     color: #fff; }
     .navbar-dark .navbar-text a:hover, .navbar-dark .navbar-text a:focus {
-      color: #fff; }
+      color: #fff; }*/
 
 .card {
   position: relative;
@@ -8109,8 +8109,8 @@ a.text-dark:hover, a.text-dark:focus {
     min-width: 992px !important; }
   .container {
     min-width: 992px !important; }
-  .navbar {
-    display: none; }
+  /*.navbar {
+    display: none; }*/
   .badge {
     border: 1px solid #000; }
   .table {
@@ -8203,10 +8203,10 @@ h1, h2, h3, h4, h5,
   outline: none !important;
   border: none; }
 
-.wrapper {
-  width: 100%; }
+/*.wrapper {
+  width: 100%; }*/
 
-#sidebar {
+/*#sidebar {
   min-width: 250px;
   max-width: 250px;
   background: #866ec7;
@@ -8214,9 +8214,9 @@ h1, h2, h3, h4, h5,
   -webkit-transition: all 0.3s;
   -o-transition: all 0.3s;
   transition: all 0.3s;
-  position: relative; }
+  position: relative; }*/
   /*height: 654px; }*/
-  #sidebar .h6 {
+  /*#sidebar .h6 {
     color: #fff; }
   #sidebar.active {
     margin-left: -250px; }
@@ -8276,23 +8276,23 @@ h1, h2, h3, h4, h5,
         border-color: #6749b9; }
         #sidebar .custom-menu .btn.btn-primary:hover, #sidebar .custom-menu .btn.btn-primary:focus {
           background: #6749b9 !important;
-          border-color: #6749b9 !important; }
+          border-color: #6749b9 !important; }*/
 
-a[data-toggle="collapse"] {
-  position: relative; }
+/*a[data-toggle="collapse"] {
+  position: relative; }*/
 
-.dropdown-toggle::after {
+/*.dropdown-toggle::after {
   display: block;
   position: absolute;
   top: 50%;
   right: 0;
   -webkit-transform: translateY(-50%);
   -ms-transform: translateY(-50%);
-  transform: translateY(-50%); }
+  transform: translateY(-50%); }*/
 
-@media (max-width: 991.98px) {
+/*@media (max-width: 991.98px) {
   #sidebarCollapse span {
-    display: none; } }
+    display: none; } }*/
 
 #content {
   width: 100%;
@@ -8313,7 +8313,7 @@ a[data-toggle="collapse"] {
   color: rgba(255, 255, 255, 0.5); }
 
 .form-control {
-  height: 40px !important;
+  /*height: 40px !important;*/
   background: #fff;
   color: #000;
   font-size: 13px;
