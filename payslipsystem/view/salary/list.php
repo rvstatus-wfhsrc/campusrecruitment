@@ -30,10 +30,10 @@
 								<li><a href="javascript:;" onclick="fnEmployeeList()"><?php echo $lbl_list; ?></a></li>
 							</ul>
 						</li>
-						<li class="dropdown">
+						<li class="dropdown active">
 							<a data-toggle="dropdown" href="#"><?php echo $lbl_salary; ?> <span class="caret"></span></a>
 							<ul class="dropdown-menu">
-								<li><a href="javascript:;" onclick="fnSalaryList()"><?php echo $lbl_list; ?></a></li>
+								<li><a href="javascript:;" onclick="fnSalaryList()" class="<?php if($mainMenu == "salaryList") { echo 'nav-selected'; } ?>"><?php echo $lbl_list; ?></a></li>
 							</ul>
 						</li>
 					</ul>
@@ -41,8 +41,8 @@
 						<li class="dropdown">
 							<a data-toggle="dropdown" href="#"><span class="fa fa-language"></span> <span class="caret"></span></a>
 							<ul class="dropdown-menu">
-								<li><a href="javascript:;" onclick="fnLanguageEnglish()">English</a></li>
-								<li><a href="javascript:;" onclick="fnLanguageJapanese()">Japanese</a></li>
+								<li><a href="javascript:;" onclick="fnLanguageEnglish()" class="<?php if($_SESSION['languages'] == "1") { echo 'nav-selected'; } ?>">English</a></li>
+								<li><a href="javascript:;" onclick="fnLanguageJapanese()" class="<?php if($_SESSION['languages'] == "2") { echo 'nav-selected'; } ?>">Japanese</a></li>
 							</ul>
 						</li>
 					</ul>

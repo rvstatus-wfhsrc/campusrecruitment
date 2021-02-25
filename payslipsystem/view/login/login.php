@@ -31,13 +31,13 @@
 									<input type="hidden" id="screenName" name="screenName">
 									<!-- username -->
 									<div class="form-group">
-										<label for="userName">Username</label>
+										<label for="userName" class="required">Username</label>
 										<input id="userName" type="text" class="form-control" name="userName" pattern=".{0}|.{5}" value="" required autofocus>
 										<p class="error" id="userNameValidationMsg"></p>
 									</div>
 									<!-- password -->
 									<div class="form-group">
-										<label for="password">Password</label>
+										<label for="password" class="required">Password</label>
 										<input id="password" type="password" class="form-control" name="password" pattern=".{0}|.{5}" required data-eye>
 										<p class="error" id="passwordValidationMsg"></p>
 									</div>

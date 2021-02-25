@@ -47,17 +47,17 @@ $lbl_cancel = "Cancel";
 
 
 // pay slip mail view validation message
-$err_toMail_required = "The To field is required";
-$err_cc_required = "The CC field is required";
-$err_subject_required = "The Subject field is required";
-$err_content_required = "The Content field is required";
+$err_toMail_required = "The To field is required.";
+$err_cc_required = "The CC field is required.";
+$err_subject_required = "The Subject field is required.";
+$err_content_required = "The Content field is required.";
 $err_email_invalid = "The E-Mail Address is invalid.";
 
 // salary add and edit validation message
-$err_basicSalary_required = "The Basic Salary field is required";
-$err_insentive_required = "The Insentive field is required";
-$err_pf_required = "The PF field is required";
-$err_esi_required = "The ESI field is required";
+$err_basicSalary_required = "The Basic Salary field is required.";
+$err_insentive_required = "The Insentive field is required.";
+$err_pf_required = "The PF field is required.";
+$err_esi_required = "The ESI field is required.";
 $err_basicSalary_integer = "The Basic Salary field must be an integer.";
 $err_insentive_integer = "The Insentive field must be an integer.";
 $err_pf_integer = "The PF field must be an integer.";

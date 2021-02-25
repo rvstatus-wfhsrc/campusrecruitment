@@ -249,3 +249,10 @@
     justify-content:right !important;
 }
 /* justify content class end */
+
+/* navigation bar selected class start */
+.nav-selected {
+    color:white !important;
+    background-color:grey !important;
+}
+/* navigation bar selected class end */
