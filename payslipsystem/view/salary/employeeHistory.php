@@ -1,3 +1,4 @@
+<?php require_once "../model/commonModel.php"; ?>
 <!doctype html>
 <html lang="en">
 	<head>
@@ -149,9 +150,13 @@
 							</a>
 						<?php } ?>
 					</div>
+					<?php
+						$commonModel = new commonModel();
+						$empIDColor = $commonModel->getEmpIDColor($_REQUEST['hiddenEmployeeId']);
+					?>
 					<div class="inb">
 						<label> <?php echo $lbl_employee." ".$lbl_id; ?> :</label>
-						<span class="employeeUserNameClr">
+						<span style="color:<?php echo $empIDColor; ?>">
 							<?php echo $_REQUEST['hiddenEmployeeId']; ?>
 						</span>
 					</div>
@@ -193,7 +198,7 @@
 									<td class="tar"><?php echo number_format($salaryEmployeeHistory[$i]["Insentive"]); ?> &#8377;</td>
 									<td class="tar"><?php echo number_format($salaryEmployeeHistory[$i]["PF"]); ?> &#8377;</td>
 									<td class="tar"><?php echo number_format($salaryEmployeeHistory[$i]["ESI"]); ?> &#8377;</td>
-									<td class="tar">
+									<td class="<?php if (isset($salaryEmployeeHistory[$i]["totalSalary"])) { echo "tar"; } else { echo "tac"; } ?>">
 										<?php if(isset($salaryEmployeeHistory[$i]["totalSalary"])) {
 											echo number_format($salaryEmployeeHistory[$i]["totalSalary"]); ?> &#8377;
 										<?php } else {

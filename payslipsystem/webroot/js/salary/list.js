@@ -74,6 +74,8 @@ function fnEmployeeList() {
 	$( "#pageno" ).val(1);
 	$("#search").val("");
 	$("#hiddenSearch").val("");
+	$("#sortVal").val("");
+	$("#sortOptn").val("");
 	$( "#screenName" ).val('employeeList');
 	$("#listForm").attr("action", "../controller/employeeController.php?time="+dateTime);
 	$( "#listForm" ).submit();
@@ -103,6 +105,8 @@ function fnSalaryList() {
 	$( "#pageno" ).val(1);
 	$("#search").val("");
 	$("#hiddenSearch").val("");
+	$("#sortVal").val("");
+	$("#sortOptn").val("");
 	$( "#screenName" ).val('salaryList');
 	$( "#listForm" ).submit();
 }

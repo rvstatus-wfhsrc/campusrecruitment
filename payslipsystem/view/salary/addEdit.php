@@ -1,3 +1,4 @@
+<?php require_once "../model/commonModel.php"; ?>
 <!doctype html>
 <html lang="en">
 	<head>
@@ -126,10 +127,14 @@
 									<div class="card-header"><h3 class="text-center font-weight-light fs20"><?php if(isset($salaryEdit)) { echo $lbl_salaryEdit; } else { echo $lbl_salaryAdd; } ?></h3></div>
 									<div class="card-body">
 										<!-- employee Id -->
+										<?php
+											$commonModel = new commonModel();
+											$empIDColor = $commonModel->getEmpIDColor($_REQUEST['hiddenEmployeeId']);
+										?>
 										<div class="form-group form-inline">
 											<label for='employeeIdLbl' class="col-md-4 control-label jcr"><?php echo $lbl_employee." ".$lbl_id; ?></label>
 											<div class="col-md-4">
-												<label for='employeeId' class="form-control employeeUserNameClr"><?php echo $employeeId; ?></label>
+												<label for='employeeId' class="form-control" style="color:<?php echo $empIDColor; ?>"><?php echo $employeeId; ?></label>
 											</div>
 										</div>
 										<!-- employee name -->

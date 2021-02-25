@@ -1,3 +1,4 @@
+<?php require_once "../model/commonModel.php"; ?>
 <!doctype html>
 <html lang="en">
 	<head>
@@ -13,11 +14,6 @@
 		<script type="text/javascript">
 			var dateTime = "<?php echo date('Ymdhis'); ?>";
 		</script>
-		<style>
-		.table {
-			width: 76%;
-		}
-		</style>
 	</head>
 	<body>
 		<div class="wrapper d-flex align-items-stretch">
@@ -107,7 +103,11 @@
 				<input type="hidden" id="hiddenSearch" name="hiddenSearch" value="<?php if(isset($_REQUEST['search'])) { echo $_REQUEST['search']; } ?>">
 				<input type="hidden" id="pageno" name="pageno" value="<?php echo $pageno; ?>">
 				<div id="content" class="p-4 p-md-5 pt-5 mt70">
-					<h2><?php echo $lbl_salary." ".$lbl_list; ?></h2>
+					<div class="inb w100">
+						<h2>
+							<?php echo $lbl_salary." ".$lbl_list; ?>
+						</h2>
+					</div>
 					<div class="inb float-left">
 						<label for="year"><?php echo $lbl_year; ?> : </label>
 						<span>
@@ -148,7 +148,7 @@
 							</select>
 						</span>
 					</div>
-					<div class="float-right mb5 mr24 w39">
+					<div class="float-right mb5 w50">
 						<!-- clear search -->
 						<div  class="inb mt-1">
 							<a href="javascript:;" onclick="fnClearSearch()">
@@ -205,12 +205,14 @@
 									$year = $year;
 								}
 								$i = 0;
+								$commonModel = new commonModel();
 								foreach ($salaryList as $key => $list) { ?>
 									<?php $class = $key % 2 === 0 ? 'odd' : 'even'; ?>
 									<tr class="<?php echo $class; ?>">
 										<td class="tac"><?php echo ($pageno - 1) * $resultsPerPage + $key + 1 ?></td>
+										<?php $empIDColor = $commonModel->getEmpIDColor($salaryList[$i]['Emp_ID']); ?>
 										<td class="tac">
-											<a href="javascript:;" onclick="fnSalaryEmployeeHistory('<?php echo $salaryList[$i]['Emp_ID']; ?>','<?php echo $salaryList[$i]['FirstName']." ".$salaryList[$i]['LastName']; ?>',<?php echo $month; ?>,<?php echo $year; ?>,<?php echo $salaryList[$i]["salaryId"]; ?>)" class="employeeUserNameClr">
+											<a href="javascript:;" onclick="fnSalaryEmployeeHistory('<?php echo $salaryList[$i]['Emp_ID']; ?>','<?php echo $salaryList[$i]['FirstName']." ".$salaryList[$i]['LastName']; ?>',<?php echo $month; ?>,<?php echo $year; ?>,<?php echo $salaryList[$i]["salaryId"]; ?>)" style="color:<?php echo $empIDColor; ?>">
 												<?php echo $salaryList[$i]["Emp_ID"]; ?>
 											</a>
 										</td>
@@ -223,7 +225,7 @@
 												echo '-';
 											} ?>
 										</td> -->
-										<td class="tar vam">
+										<td class="<?php if (isset($salaryList[$i]["totalSalary"])) { echo "tar"; } else { echo "tac"; } ?> vam">
 											<?php if (isset($salaryList[$i]["totalSalary"])) {
 												echo number_format($salaryList[$i]["totalSalary"]); ?> &#8377;
 											<?php } else {

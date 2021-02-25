@@ -1,3 +1,4 @@
+<?php require_once "../model/commonModel.php"; ?>
 <!doctype html>
 <html lang="en">
 	<head>
@@ -276,17 +277,19 @@
 									$year = $year;
 								}
 								$i = 0;
+								$commonModel = new commonModel();
 								foreach ($employeeListArray as $key => $employeeList) { ?>
 									<?php $class = $key % 2 === 0 ? 'odd' : 'even'; ?>
 									<tr class="<?php echo $class; ?>">
 										<td class="tac"><?php echo ($pageno - 1) * $resultsPerPage + $key + 1 ?></td>
+										<?php $empIDColor = $commonModel->getEmpIDColor($employeeListArray[$i]["Emp_ID"]); ?>
 										<td class="tac">
-											<a href="javascript:;" onclick="fnPaySlipEmployeeHistory('<?php echo $employeeListArray[$i]['Emp_ID']; ?>','<?php echo $employeeListArray[$i]['FirstName']." ".$employeeListArray[$i]['LastName']; ?>',<?php echo $month; ?>,<?php echo $year; ?>)" class="employeeUserNameClr">
+											<a href="javascript:;" onclick="fnPaySlipEmployeeHistory('<?php echo $employeeListArray[$i]['Emp_ID']; ?>','<?php echo $employeeListArray[$i]['FirstName']." ".$employeeListArray[$i]['LastName']; ?>',<?php echo $month; ?>,<?php echo $year; ?>,<?php echo $employeeListArray[$i]['salaryId']; ?>)" style="color:<?php echo $empIDColor; ?>">
 												<?php echo $employeeListArray[$i]["Emp_ID"]; ?>
 											</a>
 										</td>
 										<td class="nameClr"><?php echo $employeeListArray[$i]["FirstName"]." ".$employeeListArray[$i]["LastName"]; ?></td>
-										<td class="tar">
+										<td class="<?php if (isset($employeeListArray[$i]["totalSalary"])) { echo "tar"; } else { echo "tac"; } ?>">
 											<?php
 												if(isset($employeeListArray[$i]["totalSalary"])) {
 													echo number_format($employeeListArray[$i]["totalSalary"]); ?> &#8377;

@@ -87,7 +87,7 @@ class paySlipController {
 		date_default_timezone_set('Asia/Calcutta');
 		$currentDate = date("Y/m/d");
 		date_default_timezone_set($getDefaultTimeZone);
-		$month = date('m',$paySlipDetail[0]['Month']);
+		$month = date('m',mktime(0, 0, 0, $paySlip[0]['Month'], 10));
 		$date = date('d');
 		$totalAddition = $paySlip[0]['BasicSalary'] + $paySlip[0]['Insentive'] + $paySlip[0]['DA'] + $paySlip[0]['MA'];
 		$totalDeduction = $paySlip[0]['IT_TAX'] + $paySlip[0]['PF'] + $paySlip[0]['Penalty'];
@@ -136,7 +136,7 @@ class paySlipController {
 		}
 		$paySlipModel = new paySlipModel();
 		$sendPaySlip = $paySlipModel->sendPaySlip();
-		$month = date('m',$sendPaySlip[0]['Month']);
+		$month = date('m',mktime(0, 0, 0, $paySlipDetail[0]['Month'], 10));
 		$date = date('d');
 		$subject = $_REQUEST['subject'];
 		$content = $_REQUEST['content'];

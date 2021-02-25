@@ -102,7 +102,7 @@
 					<input type="hidden" id="month" name="month" value="<?php echo $paySlipDetail[0]['Month']; ?>">
 					<input type="hidden" id="year" name="year" value="<?php echo $paySlipDetail[0]['Year']; ?>">
 					<?php
-						$months = date('m',$paySlipDetail[0]['Month']);
+						$months = date("m", mktime(0, 0, 0, $paySlipDetail[0]['Month'], 10));
 						$dates = date('d');
 					?>
 					<div class="mb-1">
@@ -141,7 +141,7 @@
 							</div>
 							<div>
 								<div class="leftSide required"><?php echo $lbl_content; ?></div>
-								<?php $content = $paySlipDetail[0]['FirstName']." ".$paySlipDetail[0]['LastName'].",\n Please find attached salary slip of ".$paySlipDetail[0]['FirstName']." ".$paySlipDetail[0]['LastName']." for ".date('F',$month)."-".$paySlipDetail[0]['Year'].".\nIf you have any question,do not hesitate to contact us.\nRegards,\nHR Department,\nSathi Systems Pvt. Ltd." ?>
+								<?php $content = $paySlipDetail[0]['FirstName']." ".$paySlipDetail[0]['LastName'].",\n Please find attached salary slip of ".$paySlipDetail[0]['FirstName']." ".$paySlipDetail[0]['LastName']." for ".date('F',mktime(0, 0, 0, $months, 10))."-".$paySlipDetail[0]['Year'].".\nIf you have any question,do not hesitate to contact us.\nRegards,\nHR Department,\nSathi Systems Pvt. Ltd." ?>
 								<div class="rightSide vat">
 									<textarea id="content" name="content" rows="3" cols="46" class="w43" style="min-height:0">Dear <?php echo $content ; ?></textarea>
 								</div>

@@ -183,6 +183,7 @@ class paySlipModel {
     $database = new database();
     $this->con = $database->databaseConnection();
     $employeeId = $_REQUEST['hiddenEmployeeId'];
+    $salaryId = $_REQUEST['hiddenSalaryId'];
     $sql = "SELECT
               mstemp.FirstName,
               mstemp.LastName,
@@ -196,9 +197,9 @@ class paySlipModel {
               psdetails.month,
               psdetails.fileName
               FROM pay_payslip_details AS psdetails
+              LEFT JOIN emp_salary AS salary ON salary.Emp_Id = psdetails.Emp_Id AND salary.id = $salaryId
               LEFT JOIN emp_mstemployees AS mstemp ON mstemp.Emp_ID = psdetails.Emp_Id
-              LEFT JOIN emp_salary AS salary ON salary.Emp_Id = psdetails.Emp_Id
-              WHERE psdetails.delFlag = 0 AND psdetails.Emp_Id = '".$employeeId."' LIMIT $start,$end";
+              WHERE psdetails.delFlag = 0 AND psdetails.salaryId = $salaryId AND psdetails.Emp_Id = '".$employeeId."' LIMIT $start,$end";
     $result = mysql_query($sql,$this->con);
     $detailViewArray = array();
     $i = 0;

@@ -24,5 +24,23 @@ class commonModel {
 		return $yearArray;
 	}
 
+	/**
+	 * This getEmpIDColor method are used to apply the color for employee id
+	 * @param it contains the employee id
+	 * @return the color
+	 * @author kulasekaran.
+	 *
+	 */
+	public function getEmpIDColor($empID) {
+        $empsub=substr($empID,0,2);
+        if($empsub=="MB"){
+            return "#0000FF";
+        } elseif($empsub=="AD"){
+            return "#04B404";
+        }else{
+            return "#AC4E00";
+        }
+    }
+
 }
 ?>

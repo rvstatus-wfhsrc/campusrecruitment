@@ -84,14 +84,17 @@ function fnEmployeeList() {
 	$( "#pageno" ).val(1);
 	$("#search").val("");
 	$("#hiddenSearch").val("");
+	$("#sortVal").val("");
+	$("#sortOptn").val("");
 	$( "#screenName" ).val('employeeList');
 	$( "#listForm" ).submit();
 }
 
 // pay slip employee history process
-function fnPaySlipEmployeeHistory(employeeId,employeeName,month,year) {
+function fnPaySlipEmployeeHistory(employeeId,employeeName,month,year,salaryId) {
 	$( "#pageno" ).val(1);
 	$( "#screenName" ).val('paySlipEmployeeHistory');
+	$( "#hiddenSalaryId" ).val(salaryId);
 	$( "#hiddenEmployeeId" ).val(employeeId);
 	$( "#hiddenEmployeeName" ).val(employeeName);
 	$( "#hiddenMonth" ).val(month);
@@ -112,6 +115,8 @@ function fnSalaryList() {
 	$( "#pageno" ).val(1);
 	$("#search").val("");
 	$("#hiddenSearch").val("");
+	$("#sortVal").val("");
+	$("#sortOptn").val("");
 	$( "#screenName" ).val('salaryList');
 	$("#listForm").attr("action", "../controller/salaryController.php?time="+dateTime);
 	$( "#listForm" ).submit();
