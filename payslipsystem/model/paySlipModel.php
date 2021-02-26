@@ -16,7 +16,7 @@ class paySlipModel {
    * @author kulasekaran.
    *
    */
-	function paySlipDetail() {
+  function paySlipDetail() {
     $database = new database();
     $this->con = $database->databaseConnection();
     $salaryId = $_REQUEST['hiddenSalaryId'];
@@ -32,7 +32,7 @@ class paySlipModel {
               FROM emp_salary AS salary
               LEFT JOIN emp_mstemployees AS mstemp ON mstemp.Emp_ID = salary.Emp_ID
               WHERE mstemp.delFlg = 0 AND salary.id = ".$salaryId;
-		$result = mysql_query($sql,$this->con);
+    $result = mysql_query($sql,$this->con);
     $getPaySlip = array();
     $i = 0;
     while($row = mysql_fetch_array($result)) {
@@ -47,7 +47,7 @@ class paySlipModel {
       $i++;
     }
     return $getPaySlip;
-	}
+  }
 
   /**
    * This downloadPaySlip method are used to retreives the data from database related to pay slip

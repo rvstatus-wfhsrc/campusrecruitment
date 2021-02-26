@@ -167,9 +167,9 @@
 					<div class="inb w50">
 						<!-- session message -->
 						<?php if(isset($_SESSION['message'])): ?>
-					     <div class="alert alert-<?php echo $_SESSION['status']; ?> fmsg tac">
-					     	<?php echo $_SESSION['message']; ?>
-					     </div>
+						<div class="alert alert-<?php echo $_SESSION['status']; ?> fmsg tac">
+							<?php echo $_SESSION['message']; ?>
+						</div>
 						<?php
 							endif;
 							unset($_SESSION['message']);

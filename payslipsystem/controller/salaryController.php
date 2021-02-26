@@ -60,14 +60,14 @@ class salaryController {
 			$pageno = 1;
 		}
 		$year = date('Y');
-	    if (isset($_REQUEST['year'])) {
-	      $year = $_REQUEST['year'];
-	    }
-	    $month = date('m');
-	    if (isset($_REQUEST['month'])) {
-	      $month = $_REQUEST['month'];
-	    }
-	    if ($_SESSION['languages'] == "1" ) {
+		if (isset($_REQUEST['year'])) {
+			$year = $_REQUEST['year'];
+		}
+		$month = date('m');
+		if (isset($_REQUEST['month'])) {
+			$month = $_REQUEST['month'];
+		}
+		if ($_SESSION['languages'] == "1" ) {
 			require ("../webroot/common/commonEnglish.php");
 			$languageJs = "english.js";
 		} else {
@@ -75,7 +75,7 @@ class salaryController {
 			$languageJs = "japanese.js";
 		}
 
-	    // sorting process style
+		// sorting process style
 		if (isset($_REQUEST["sortOptn"])) {
 			$sortOptn = $_REQUEST["sortOptn"];
 		} else {
@@ -274,7 +274,7 @@ class salaryController {
 			$_SESSION['message'] = $session_salary_fail;
 			$_SESSION['status'] = "danger";
 		}
-    	Self::salaryEmployeeHistory();
+		Self::salaryEmployeeHistory();
 	}
 
 	/**
@@ -333,7 +333,7 @@ class salaryController {
 			$_SESSION['message'] = $session_salary_fail;
 			$_SESSION['status'] = "danger";
 		}
-    	Self::salaryEmployeeHistory();
+		Self::salaryEmployeeHistory();
 	}
 
 }

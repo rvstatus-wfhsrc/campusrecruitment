@@ -159,14 +159,14 @@ class paySlipController {
 		$mail->AddCC($cc);
 		$mail->addAttachment('../webroot/download/payslip/pay_slip_'.$sendPaySlip[0]['Emp_ID'].'_'.$sendPaySlip[0]['Year']."_".$month.'.xls');
 		if (!$mail->send()) {
-    		echo 'Mailer Error: ' . $mail->ErrorInfo;
+			echo 'Mailer Error: ' . $mail->ErrorInfo;
 		} else {
 			$paySlipDetailAdd = $paySlipModel->paySlipDetailAdd($sendPaySlip,$subject,$content);
 			$_SESSION['message'] = $session_mail_send;
 			$_SESSION['status'] = "success";
 			$_SESSION['month'] = $_REQUEST['month'];
 			$_SESSION['year'] = $_REQUEST['year'];
-    		header("Location: employeeController.php?time=" . date(YmdHis));
+			header("Location: employeeController.php?time=" . date(YmdHis));
 		}
 	}
 
@@ -216,6 +216,12 @@ class paySlipController {
 		require_once '../view/paySlip/employeeHistory.php';
 	}
 
+	/**
+	 * This viewFormValidation method are used to validate the fields of pay slip mail view screen
+	 * @return a json value to js in paySlip/view.js
+	 * @author kulasekaran.
+	 *
+	 */
 	function viewFormValidation() {
 		if ($_SESSION['languages'] == "1" ) {
 			require ("../webroot/common/commonEnglish.php");

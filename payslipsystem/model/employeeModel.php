@@ -30,7 +30,7 @@ class employeeModel {
    * @author kulasekaran.
    *
    */
-	function employeeList($start,$end) {
+  function employeeList($start,$end) {
     // search process
     $search = "";
     if (isset($_REQUEST['hiddenSearch'])) {
@@ -86,18 +86,18 @@ class employeeModel {
               LEFT JOIN emp_salary AS salary ON salary.Emp_ID = mstemp.Emp_ID
               LEFT JOIN pay_payslip_details AS psdetails ON psdetails.salaryId = salary.id
               WHERE mstemp.delFlg = 0 ".$searchSqlQuery.$yearSqlQuery.$monthSqlQuery." ORDER BY ".$sort." LIMIT $start,$end";
-		$result = mysql_query($sql,$this->con);
+    $result = mysql_query($sql,$this->con);
     $getEmployee = array();
     $i = 0;
     while($row = mysql_fetch_array($result)) {
-  		$getEmployee[$i]["Emp_ID"] = $row["Emp_ID"];
-  		$getEmployee[$i]["FirstName"] = $row["FirstName"];
-    	$getEmployee[$i]["LastName"] = $row["LastName"];
+      $getEmployee[$i]["Emp_ID"] = $row["Emp_ID"];
+      $getEmployee[$i]["FirstName"] = $row["FirstName"];
+      $getEmployee[$i]["LastName"] = $row["LastName"];
       $getEmployee[$i]["Emailpersonal"] = $row["Emailpersonal"];
       $getEmployee[$i]["salaryId"] = $row["salaryId"];
       $getEmployee[$i]["totalSalary"] = $row["totalSalary"];
       $getEmployee[$i]["paySlipId"] = $row["paySlipId"];
-  		$i++;
+      $i++;
     }
     return $getEmployee;
   }
@@ -108,7 +108,7 @@ class employeeModel {
    * @author kulasekaran.
    *
    */
-	function fnGetCount() {
+  function fnGetCount() {
     // search process
     $search = "";
     if (isset($_REQUEST['hiddenSearch'])) {
@@ -155,10 +155,10 @@ class employeeModel {
               FROM emp_mstemployees AS mstemp
               LEFT JOIN emp_salary AS salary ON salary.Emp_ID = mstemp.Emp_ID
               WHERE mstemp.delFlg = 0 ".$searchSqlQuery.$yearSqlQuery.$monthSqlQuery." ORDER BY ".$sort;
-		$count = mysql_query($sql,$this->con);
-		$row = mysql_fetch_array($count);
-		return $row["count"];
-	}
+    $count = mysql_query($sql,$this->con);
+    $row = mysql_fetch_array($count);
+    return $row["count"];
+  }
 
 }
 ?>

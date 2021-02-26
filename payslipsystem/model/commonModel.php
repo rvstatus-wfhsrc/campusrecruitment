@@ -32,15 +32,15 @@ class commonModel {
 	 *
 	 */
 	public function getEmpIDColor($empID) {
-        $empsub=substr($empID,0,2);
-        if($empsub=="MB"){
-            return "#0000FF";
-        } elseif($empsub=="AD"){
-            return "#04B404";
-        }else{
-            return "#AC4E00";
-        }
-    }
+		$empsub=substr($empID,0,2);
+		if($empsub=="MB"){
+			return "#0000FF";
+		} elseif($empsub=="AD"){
+			return "#04B404";
+		}else{
+			return "#AC4E00";
+		}
+	}
 
 }
 ?>

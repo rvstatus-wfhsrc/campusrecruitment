@@ -30,7 +30,7 @@ class salaryModel {
    * @author kulasekaran.
    *
    */
-	function salaryList($start,$end) {
+  function salaryList($start,$end) {
     // search process
     $search = "";
     if (isset($_REQUEST['hiddenSearch'])) {
@@ -82,17 +82,17 @@ class salaryModel {
               FROM emp_mstemployees AS mstemp
               LEFT JOIN emp_salary AS salary ON salary.Emp_ID = mstemp.Emp_ID AND salary.Month = $month AND salary.Year = $year
               WHERE mstemp.delFlg = 0 ".$searchSqlQuery." ORDER BY ".$sort." LIMIT $start,$end";
-		$result = mysql_query($sql,$this->con);
+    $result = mysql_query($sql,$this->con);
     $getSalary = array();
     $i = 0;
     while($row = mysql_fetch_array($result)) {
-  		$getSalary[$i]["Emp_ID"] = $row["Emp_ID"];
-  		$getSalary[$i]["FirstName"] = $row["FirstName"];
-    	$getSalary[$i]["LastName"] = $row["LastName"];
+      $getSalary[$i]["Emp_ID"] = $row["Emp_ID"];
+      $getSalary[$i]["FirstName"] = $row["FirstName"];
+      $getSalary[$i]["LastName"] = $row["LastName"];
       $getSalary[$i]["salaryId"] = $row["salaryId"];
       $getSalary[$i]["netSalary"] = $row["netSalary"];
       $getSalary[$i]["totalSalary"] = $row["totalSalary"];
-  		$i++;
+      $i++;
     }
     return $getSalary;
   }
@@ -103,7 +103,7 @@ class salaryModel {
    * @author kulasekaran.
    *
    */
-	function recordCountForSalaryList() {
+  function recordCountForSalaryList() {
     // search process
     $search = "";
     if (isset($_REQUEST['hiddenSearch'])) {
@@ -132,10 +132,10 @@ class salaryModel {
               count(mstemp.Emp_ID) AS count
               FROM emp_mstemployees AS mstemp
               WHERE mstemp.delFlg = 0 ".$searchSqlQuery." ORDER BY ".$sort;
-		$count = mysql_query($sql,$this->con);
-		$row = mysql_fetch_array($count);
-		return $row["count"];
-	}
+    $count = mysql_query($sql,$this->con);
+    $row = mysql_fetch_array($count);
+    return $row["count"];
+  }
 
   /**
    * This salaryEmployeeHistory method are used to retreives the data from database related to individual employee salary detail 
